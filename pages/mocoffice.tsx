@@ -47,7 +47,7 @@ export default function MocOfficePage() {
         <IntroSection>
           <IntroContent>
             <LogoWrapper>
-              <LogoIcon>📄</LogoIcon>
+              <LogoImage src="/mocoffice-logo.png" alt="MOC Office Logo" />
             </LogoWrapper>
             <OverTitle>Android PDF Suite</OverTitle>
             <Title>Your Documents. Your Device. Your Rules.</Title>
@@ -313,9 +313,18 @@ const LogoWrapper = styled.div`
   margin-bottom: 3rem;
 `;
 
-const LogoIcon = styled.span`
-  font-size: 8rem;
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+const LogoImage = styled.img`
+  width: 14rem;
+  height: 14rem;
+  object-fit: cover;
+  border-radius: 2.8rem;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 0 30px rgba(var(--primary), 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.6), 0 0 40px rgba(var(--primary), 0.2);
+  }
 `;
 
 const Title = styled.h1`
