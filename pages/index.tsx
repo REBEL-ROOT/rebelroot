@@ -22,15 +22,15 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         <title>{EnvVars.SITE_NAME} | Open-Source &amp; Privacy-First Digital Tools</title>
         <meta
           name="description"
-          content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and Ved Astra."
+          content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office."
         />
-        <meta name="keywords" content="RebelRoot, open source collective, Omni Browser, MOCNovel, CampCart, Ved Astra, privacy mobile browser, secure reading app, student marketplace, edge computing, decentralized apps, Gemini AI" />
+        <meta name="keywords" content="RebelRoot, open source collective, Omni Browser, MOCNovel, CampCart, Ved Astra, MOC Office, PDF reader Android, privacy mobile browser, secure reading app, student marketplace, edge computing, decentralized apps, Gemini AI" />
         <link rel="canonical" href="https://rebelroot.xyz" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="RebelRoot | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta property="og:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and Ved Astra." />
+        <meta property="og:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office." />
         <meta property="og:url" content="https://rebelroot.xyz" />
         <meta property="og:site_name" content="RebelRoot" />
         <meta property="og:image" content="https://rebelroot.xyz/ic_omni_logo.webp" />
@@ -38,7 +38,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="RebelRoot | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta name="twitter:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and Ved Astra." />
+        <meta name="twitter:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office." />
         <meta name="twitter:image" content="https://rebelroot.xyz/ic_omni_logo.webp" />
 
         {/* Search Engine Directives */}
@@ -54,7 +54,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               "name": "RebelRoot",
               "url": "https://rebelroot.xyz",
               "logo": "https://rebelroot.xyz/ic_omni_logo.webp",
-              "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and Ved Astra.",
+              "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office.",
               "sameAs": [
                 "https://github.com/rebelroot"
               ]
@@ -151,6 +151,21 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
                 Launch App <span>&rarr;</span>
               </Button>
             </ButtonGroup>
+          </BasicSection>
+          <BasicSection imageUrl="/grid-icons/asset-6.svg" title="MOC Office: The Private, Powerful Android PDF Suite" overTitle="OFFLINE PDF READER &amp; EDITOR">
+            <p>
+              MOC Office is a feature-rich, 100% offline PDF reader and editing suite for Android. Powered by Mozilla&apos;s PDF.js, it delivers 12 professional-grade document tools — merge, split, compress, lock, convert — with zero tracking and zero cloud dependency.
+            </p>
+            <ul>
+              <li>12 built-in PDF tools — all processed locally on-device</li>
+              <li>AMOLED black theme and Material You dynamic color support</li>
+              <li>Full-text search, bookmarks, auto-scroll, and table of contents</li>
+            </ul>
+            <NextLink href="/mocoffice" passHref>
+              <Button style={{ marginTop: '2.5rem' }}>
+                Explore MOC Office <span>&rarr;</span>
+              </Button>
+            </NextLink>
           </BasicSection>
         </WhiteBackgroundContainer>
         <DarkerBackgroundContainer>

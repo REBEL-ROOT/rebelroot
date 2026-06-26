@@ -25,6 +25,7 @@ const footerItems: FooterItems = [
       { title: 'MOCNovel', href: '/mocnovel' },
       { title: 'CampCart', href: '/campcart' },
       { title: 'Ved Astra', href: '/vedastra' },
+      { title: 'MOC Office', href: '/mocoffice' },
     ],
   },
   {
