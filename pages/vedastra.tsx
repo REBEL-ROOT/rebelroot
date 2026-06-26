@@ -75,8 +75,11 @@ npm run dev`;
             </Subtitle>
 
             <CTAWrapper>
-              <Button href="https://github.com/rebelroot" target="_blank" rel="noopener noreferrer">
-                Explore Openved GitHub <span>&rarr;</span>
+              <Button href="https://vedastra.pages.dev" target="_blank" rel="noopener noreferrer">
+                Visit vedastra.pages.dev <span>&rarr;</span>
+              </Button>
+              <Button href="https://github.com/rebelroot" target="_blank" rel="noopener noreferrer" transparent>
+                Explore GitHub <span>&rarr;</span>
               </Button>
             </CTAWrapper>
           </IntroContent>

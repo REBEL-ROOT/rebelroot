@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 import styled from 'styled-components';
 import BasicSection from 'components/BasicSection';
 import Button from 'components/Button';
+import ButtonGroup from 'components/ButtonGroup';
 import { EnvVars } from 'env';
 import { getAllPosts } from 'utils/postsFetcher';
 import Cta from 'views/HomePage/Cta';
@@ -120,11 +121,16 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>Secure escrow payments integrated via Stripe and Juspay SDK</li>
               <li>Interactive campus safety maps with designated meeting zones</li>
             </ul>
-            <NextLink href="/campcart" passHref>
-              <Button style={{ marginTop: '2.5rem' }}>
-                Explore CampCart <span>&rarr;</span>
+            <ButtonGroup style={{ marginTop: '2.5rem' }}>
+              <NextLink href="/campcart" passHref>
+                <Button>
+                  Explore Details <span>&rarr;</span>
+                </Button>
+              </NextLink>
+              <Button href="https://campcart.online" target="_blank" rel="noopener noreferrer" transparent>
+                Launch Platform <span>&rarr;</span>
               </Button>
-            </NextLink>
+            </ButtonGroup>
           </BasicSection>
           <BasicSection imageUrl="/demo-illustration-4.png" title="Ved Astra: Vedic Wisdom Powered by Modern Edge AI" overTitle="COSMIC AI NAVIGATOR" reversed>
             <p>
@@ -135,11 +141,16 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>Interactive custom canvas for drawing Kundli charts</li>
               <li>On-device AI astrology chat via RAG-augmented Gemini models</li>
             </ul>
-            <NextLink href="/vedastra" passHref>
-              <Button style={{ marginTop: '2.5rem' }}>
-                Explore Ved Astra <span>&rarr;</span>
+            <ButtonGroup style={{ marginTop: '2.5rem' }}>
+              <NextLink href="/vedastra" passHref>
+                <Button>
+                  Explore Details <span>&rarr;</span>
+                </Button>
+              </NextLink>
+              <Button href="https://vedastra.pages.dev/" target="_blank" rel="noopener noreferrer" transparent>
+                Launch App <span>&rarr;</span>
               </Button>
-            </NextLink>
+            </ButtonGroup>
           </BasicSection>
         </WhiteBackgroundContainer>
         <DarkerBackgroundContainer>
