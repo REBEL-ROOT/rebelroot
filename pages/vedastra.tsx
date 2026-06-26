@@ -46,7 +46,7 @@ export default function VedAstraPage() {
         <IntroSection>
           <IntroContent>
             <LogoWrapper>
-              <LogoIcon>🌌</LogoIcon>
+              <LogoImage src="/vedastra-logo.png" alt="Ved Astra Logo" />
             </LogoWrapper>
             <OverTitle>Cosmic AI Navigator</OverTitle>
             <Title>Vedic Wisdom Powered by Modern Edge AI</Title>
@@ -340,8 +340,11 @@ const LogoWrapper = styled.div`
   margin-bottom: 3rem;
 `;
 
-const LogoIcon = styled.span`
-  font-size: 6rem;
+const LogoImage = styled.img`
+  width: 10rem;
+  height: 10rem;
+  object-fit: contain;
+  border-radius: 1.5rem;
 `;
 
 const Title = styled.h1`

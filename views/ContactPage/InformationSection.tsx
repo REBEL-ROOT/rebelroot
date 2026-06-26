@@ -5,7 +5,8 @@ export default function InformationSection() {
     <Wrapper>
       <h3>Contact Info</h3>
       <p>
-        <span>Email:</span> contact@rebelroot.org
+        <span>Email:</span>{' '}
+        <a href="mailto:rebelroot.ltd@gmail.com">rebelroot.ltd@gmail.com</a>
       </p>
     </Wrapper>
   );
@@ -30,5 +31,14 @@ const Wrapper = styled.div`
   span {
     opacity: 1;
     color: rgba(var(--text), 1);
+  }
+
+  a {
+    color: rgb(var(--primary));
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
