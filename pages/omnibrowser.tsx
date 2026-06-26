@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import Page from 'components/Page';
-import Container from 'components/Container';
-import SectionTitle from 'components/SectionTitle';
 import Button from 'components/Button';
-import OverTitle from 'components/OverTitle';
 import Code from 'components/Code';
+import Container from 'components/Container';
+import OverTitle from 'components/OverTitle';
+import Page from 'components/Page';
+import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
 export default function OmniBrowserPage() {
@@ -121,7 +121,7 @@ cd omni-browser`;
                 <CardIconWrapper>🔌</CardIconWrapper>
                 <CardTitle>Extensions Manager</CardTitle>
                 <CardDescription>
-                  Desktop-Class Web Extensions Manager powered by GeckoView. Full mobile support for desktop add-ons, pre-bundled with <strong>uBlock Origin</strong>, <strong>Universal Text Copy</strong>, and <strong>Aggressive Media Grabber</strong>, complete with a dynamic "Syncing" toggle UI.
+                  Desktop-Class Web Extensions Manager powered by GeckoView. Full mobile support for desktop add-ons, pre-bundled with <strong>uBlock Origin</strong>, <strong>Universal Text Copy</strong>, and <strong>Aggressive Media Grabber</strong>, complete with a dynamic &quot;Syncing&quot; toggle UI.
                 </CardDescription>
               </FeatureCard>
 
@@ -185,7 +185,7 @@ cd omni-browser`;
                 <CardIconWrapper>📝</CardIconWrapper>
                 <CardTitle>Interactive Page Editor</CardTitle>
                 <CardDescription>
-                  "Edit Site" utility turns any loaded webpage into an interactive edit workspace. Tap and modify text in-place for presentation mockups and layout adjustments.
+                  &quot;Edit Site&quot; utility turns any loaded webpage into an interactive edit workspace. Tap and modify text in-place for presentation mockups and layout adjustments.
                 </CardDescription>
               </FeatureCard>
 
@@ -193,7 +193,7 @@ cd omni-browser`;
                 <CardIconWrapper>🖨️</CardIconWrapper>
                 <CardTitle>Clean PDF Maker</CardTitle>
                 <CardDescription>
-                  "Save PDF" feature captures and prints clean PDF copies of webpages, automatically stripping header banners, footer bars, and margins.
+                  &quot;Save PDF&quot; feature captures and prints clean PDF copies of webpages, automatically stripping header banners, footer bars, and margins.
                 </CardDescription>
               </FeatureCard>
 
@@ -209,7 +209,7 @@ cd omni-browser`;
                 <CardIconWrapper>📌</CardIconWrapper>
                 <CardTitle>Instant Web App Pinning</CardTitle>
                 <CardDescription>
-                  "Pin Web App" generates shortcut icons on your Android home launcher screen to launch websites in dedicated, sandboxed WebApp containers.
+                  &quot;Pin Web App&quot; generates shortcut icons on your Android home launcher screen to launch websites in dedicated, sandboxed WebApp containers.
                 </CardDescription>
               </FeatureCard>
             </FeaturesGrid>

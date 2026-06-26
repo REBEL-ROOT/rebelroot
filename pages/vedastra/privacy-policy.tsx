@@ -73,7 +73,7 @@ export default function VedAstraPrivacyPolicyPage() {
               <strong>VedAstro Engine / API:</strong> Used to compute high-accuracy planetary coordinates and Nakshatra placements. The API takes date, time, and coordinates of birth and returns planetary positions. No user-identifiable data (such as name or email) is sent to this engine.
             </li>
             <li>
-              <strong>Google Gemini API:</strong> Powers the AI Astrologer chat feature. Input context (including generated chart properties and user queries) is sent to Google's API to generate conversational astrology responses.
+              <strong>Google Gemini API:</strong> Powers the AI Astrologer chat feature. Input context (including generated chart properties and user queries) is sent to Google&apos;s API to generate conversational astrology responses.
             </li>
           </ul>
 

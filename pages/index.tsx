@@ -1,8 +1,9 @@
 import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
+import NextLink from 'next/link';
 import styled from 'styled-components';
 import BasicSection from 'components/BasicSection';
-import Link from 'components/Link';
+import Button from 'components/Button';
 import { EnvVars } from 'env';
 import { getAllPosts } from 'utils/postsFetcher';
 import Cta from 'views/HomePage/Cta';
@@ -84,6 +85,16 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
             <p>
               Omni Browser is our flagship open-source browser built for speed, safety, and ultimate user control. Designed with a highly optimized codebase, it protects your personal data by default, blocks intrusive trackers, and keeps your system resource usage to an absolute minimum.
             </p>
+            <ul>
+              <li>Built-in extensions manager supporting desktop add-ons</li>
+              <li>100% offline, on-device translation in 14 languages</li>
+              <li>Secure private vault with hardware-backed AES-256 encryption</li>
+            </ul>
+            <NextLink href="/omnibrowser" passHref>
+              <Button style={{ marginTop: '2.5rem' }}>
+                Explore Omni Browser <span>&rarr;</span>
+              </Button>
+            </NextLink>
           </BasicSection>
           <BasicSection imageUrl="/demo-illustration-2.svg" title="MOCNovel: Read and Write Without Restrictive Borders" overTitle="DECENTRALIZED PUBLISHING & READING" reversed>
             <p>
@@ -94,6 +105,41 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>Robust offline reading with decentralized library synchronization</li>
               <li>Markdown-friendly publishing workspace for independent writers</li>
             </ul>
+            <NextLink href="/mocnovel" passHref>
+              <Button style={{ marginTop: '2.5rem' }}>
+                Explore MOCNovel <span>&rarr;</span>
+              </Button>
+            </NextLink>
+          </BasicSection>
+          <BasicSection imageUrl="/demo-illustration-3.png" title="CampCart: Trade Textbooks and Dorm Essentials Safely" overTitle="PEER-TO-PEER CAMPUS MARKETPLACE">
+            <p>
+              CampCart is a decentralized peer-to-peer campus exchange marketplace built specifically for college students. Trade textbooks, electronics, and dorm gear safely inside a verified student-only network.
+            </p>
+            <ul>
+              <li>Restricted to verified (.edu) college email domains</li>
+              <li>Secure escrow payments integrated via Stripe and Juspay SDK</li>
+              <li>Interactive campus safety maps with designated meeting zones</li>
+            </ul>
+            <NextLink href="/campcart" passHref>
+              <Button style={{ marginTop: '2.5rem' }}>
+                Explore CampCart <span>&rarr;</span>
+              </Button>
+            </NextLink>
+          </BasicSection>
+          <BasicSection imageUrl="/demo-illustration-4.png" title="Ved Astra: Vedic Wisdom Powered by Modern Edge AI" overTitle="COSMIC AI NAVIGATOR" reversed>
+            <p>
+              Ved Astra combines the mathematical precision of astrological computations with the reasoning power of Google Gemini. Get personalized Kundli insights, 36-point compatibility checks, and transit readings on a secure, local-first interface.
+            </p>
+            <ul>
+              <li>High-accuracy planetary coordinates using the VedAstro engine</li>
+              <li>Interactive custom canvas for drawing Kundli charts</li>
+              <li>On-device AI astrology chat via RAG-augmented Gemini models</li>
+            </ul>
+            <NextLink href="/vedastra" passHref>
+              <Button style={{ marginTop: '2.5rem' }}>
+                Explore Ved Astra <span>&rarr;</span>
+              </Button>
+            </NextLink>
           </BasicSection>
         </WhiteBackgroundContainer>
         <DarkerBackgroundContainer>

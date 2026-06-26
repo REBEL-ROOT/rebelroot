@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import Page from 'components/Page';
-import Container from 'components/Container';
-import SectionTitle from 'components/SectionTitle';
 import Button from 'components/Button';
-import OverTitle from 'components/OverTitle';
 import Code from 'components/Code';
+import Container from 'components/Container';
+import OverTitle from 'components/OverTitle';
+import Page from 'components/Page';
+import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
 export default function VedAstraPage() {
@@ -168,7 +168,7 @@ npm run dev`;
                 <CardIcon>💬</CardIcon>
                 <CardTitle>On-Device AI Astrologer</CardTitle>
                 <CardList>
-                  <li><strong>RAG Knowledge Base:</strong> Feeds local markdown Vedic guidelines directly into Gemini's context window.</li>
+                  <li><strong>RAG Knowledge Base:</strong> Feeds local markdown Vedic guidelines directly into Gemini&apos;s context window.</li>
                   <li><strong>Zero Data Storage:</strong> No personal logs are stored. Chart data is analyzed in memory.</li>
                   <li><strong>Lal Kitab Remedies:</strong> Provides customized, actionable remedies for karmic imbalances.</li>
                   <li><strong>Natural Q&A:</strong> Ask complex questions about career, compatibility, and health in simple language.</li>

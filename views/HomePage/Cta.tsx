@@ -6,9 +6,12 @@ import ButtonGroup from 'components/ButtonGroup';
 import Container from 'components/Container';
 import OverTitle from 'components/OverTitle';
 import SectionTitle from 'components/SectionTitle';
+import { useNewsletterModalContext } from 'contexts/newsletter-modal.context';
 import { media } from 'utils/media';
 
 export default function Cta() {
+  const { setIsModalOpened } = useNewsletterModalContext();
+
   return (
     <CtaWrapper>
       <Container>
@@ -19,12 +22,10 @@ export default function Cta() {
             RebelRoot is an independent, developer-led collective dedicated to building tools that put users back in control of their digital lives. Join our community to receive updates on our flagship projects and future releases.
           </Description>
           <ButtonGroup>
-            <NextLink href="#early-access" passHref>
-              <Button>
-                Subscribe to the newsletter <span>&rarr;</span>
-              </Button>
-            </NextLink>
-            <NextLink href="#whitepaper" passHref>
+            <Button onClick={() => setIsModalOpened(true)}>
+              Subscribe to the newsletter <span>&rarr;</span>
+            </Button>
+            <NextLink href="/features" passHref>
               <OutlinedButton transparent>
                 Features <span>&rarr;</span>
               </OutlinedButton>
