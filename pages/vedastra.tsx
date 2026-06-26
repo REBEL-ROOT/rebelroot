@@ -328,23 +328,21 @@ const IntroContent = styled(Container)`
 `;
 
 const LogoWrapper = styled.div`
-  width: 12rem;
-  height: 12rem;
-  background: rgb(var(--secondBackground));
-  border-radius: 2.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(var(--text), 0.05);
   margin-bottom: 3rem;
 `;
 
 const LogoImage = styled.img`
-  width: 10rem;
-  height: 10rem;
-  object-fit: contain;
-  border-radius: 1.5rem;
+  width: 14rem;
+  height: 14rem;
+  object-fit: cover;
+  border-radius: 2.8rem;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 0 30px rgba(var(--primary), 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.6), 0 0 40px rgba(var(--primary), 0.2);
+  }
 `;
 
 const Title = styled.h1`
