@@ -132,7 +132,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               </Button>
             </ButtonGroup>
           </BasicSection>
-          <BasicSection imageUrl="/demo-illustration-4.png" title="Ved Astra: Vedic Wisdom Powered by Modern Edge AI" overTitle="COSMIC AI NAVIGATOR" reversed>
+          <BasicSection imageUrl="/vedastra-screenshot.png" title="Ved Astra: Vedic Wisdom Powered by Modern Edge AI" overTitle="COSMIC AI NAVIGATOR" reversed>
             <p>
               Ved Astra combines the mathematical precision of astrological computations with the reasoning power of Google Gemini. Get personalized Kundli insights, 36-point compatibility checks, and transit readings on a secure, local-first interface.
             </p>

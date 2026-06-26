@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import Button from 'components/Button';
-import Code from 'components/Code';
 import Container from 'components/Container';
 import OverTitle from 'components/OverTitle';
 import Page from 'components/Page';
@@ -9,16 +8,6 @@ import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
 export default function VedAstraPage() {
-  const cloneCode = `git clone https://github.com/rebelroot/Openved.git
-cd Openved`;
-
-  const runBackend = `cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload --host 0.0.0.0 --port 8000`;
-
-  const runFrontend = `cd frontend
-npm install
-npm run dev`;
 
   return (
     <Page
@@ -283,64 +272,7 @@ npm run dev`;
           </Container>
         </HighlightsSection>
 
-        {/* Repository Structure Visualizer */}
-        <RepoSection>
-          <Container>
-            <SectionTitle>Repository Hierarchy</SectionTitle>
-            <RepoContainer>
-              <RepoNode>
-                <RepoFolder>📁 Openved/</RepoFolder>
-                <RepoTree>
-                  <RepoNode>
-                    <RepoFolder>📁 android/ &mdash; Jetpack Compose Native App</RepoFolder>
-                    <RepoTree>
-                      <RepoFile>📂 app/ &mdash; Dependency injection, NavGraph, and main entry</RepoFile>
-                      <RepoFile>📂 core/ &mdash; Shared components, typography, Retrofit clients</RepoFile>
-                      <RepoFile>📂 feature/ &mdash; Onboarding, Home dashboard, Kundli canvas, Gemini chat</RepoFile>
-                    </RepoTree>
-                  </RepoNode>
-                  <RepoNode>
-                    <RepoFolder>📁 backend/ &mdash; FastAPI API Gateway</RepoFolder>
-                    <RepoTree>
-                      <RepoFile>📄 main.py &mdash; Ashtakoota matching, Sade Sati & Lal Kitab calculation logic</RepoFile>
-                      <RepoFile>📄 requirements.txt &mdash; FastAPI, google-generativeai, and vedastro deps</RepoFile>
-                    </RepoTree>
-                  </RepoNode>
-                  <RepoNode>
-                    <RepoFolder>📁 frontend/ &mdash; React Web Application</RepoFolder>
-                    <RepoTree>
-                      <RepoFile>📂 src/ &mdash; App.jsx dashboard view, index.css styling, and assets</RepoFile>
-                      <RepoFile>📄 package.json &mdash; React 19, Vite, and build settings</RepoFile>
-                    </RepoTree>
-                  </RepoNode>
-                </RepoTree>
-              </RepoNode>
-            </RepoContainer>
-          </Container>
-        </RepoSection>
 
-        {/* Build & Compile Instructions */}
-        <BuildSection>
-          <Container>
-            <SectionTitle>Building & Running From Source</SectionTitle>
-            <BuildContainer>
-              <BuildStepBlock>
-                <h4>1. Setup Repository</h4>
-                <Code code={cloneCode} language="bash" />
-              </BuildStepBlock>
-              <BuildStepBlock>
-                <h4>2. Run Python Backend API</h4>
-                <Code code={runBackend} language="bash" />
-                <p>The FastAPI backend server will spin up locally on <code>http://localhost:8000/</code>.</p>
-              </BuildStepBlock>
-              <BuildStepBlock>
-                <h4>3. Run React Frontend Webpage</h4>
-                <Code code={runFrontend} language="bash" />
-                <p>Open <code>http://localhost:5173/</code> in your browser to view the web dashboard.</p>
-              </BuildStepBlock>
-            </BuildContainer>
-          </Container>
-        </BuildSection>
 
         {/* Bottom Call To Action */}
         <BottomCTASection>
@@ -685,83 +617,7 @@ const HighlightItem = styled.div`
   }
 `;
 
-const RepoSection = styled.section`
-  background: rgb(var(--secondBackground));
-  border-top: 1px solid rgba(var(--text), 0.05);
-  border-bottom: 1px solid rgba(var(--text), 0.05);
-`;
 
-const RepoContainer = styled.div`
-  background: rgb(var(--background));
-  border: 1px solid rgba(var(--text), 0.05);
-  border-radius: 1rem;
-  padding: 4rem;
-  margin-top: 5rem;
-  font-family: monospace;
-  font-size: 1.5rem;
-  box-shadow: var(--shadow-md);
-  overflow-x: auto;
-
-  ${media('<=tablet')} {
-    padding: 2.5rem;
-    font-size: 1.3rem;
-  }
-`;
-
-const RepoNode = styled.div`
-  margin-left: 2rem;
-
-  ${media('<=tablet')} {
-    margin-left: 1rem;
-  }
-`;
-
-const RepoFolder = styled.div`
-  color: rgb(var(--primary));
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-`;
-
-const RepoFile = styled.div`
-  color: rgb(var(--text));
-  opacity: 0.8;
-  margin-bottom: 0.5rem;
-`;
-
-const RepoTree = styled.div`
-  border-left: 1px dashed rgba(var(--text), 0.2);
-  margin-left: 1rem;
-  padding-left: 1rem;
-
-  ${media('<=tablet')} {
-    margin-left: 0.5rem;
-    padding-left: 0.5rem;
-  }
-`;
-
-const BuildSection = styled.section``;
-
-const BuildContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  margin-top: 5rem;
-`;
-
-const BuildStepBlock = styled.div`
-  h4 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    color: rgb(var(--text));
-  }
-
-  p {
-    margin-top: 1.5rem;
-    font-size: 1.4rem;
-    opacity: 0.7;
-  }
-`;
 
 const BottomCTASection = styled.section`
   background: rgb(var(--background));

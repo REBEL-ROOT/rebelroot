@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 import Button from 'components/Button';
-import Code from 'components/Code';
 import Container from 'components/Container';
 import OverTitle from 'components/OverTitle';
 import Page from 'components/Page';
@@ -9,11 +8,6 @@ import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
 export default function OmniBrowserPage() {
-  const cloneCode = `git clone https://github.com/rebelroot/omni-browser.git
-cd omni-browser`;
-
-  const buildCode = `./gradlew compileDebugKotlin
-./gradlew assembleDebug`;
 
   return (
     <Page
@@ -336,64 +330,7 @@ cd omni-browser`;
           </Container>
         </ComparisonSection>
 
-        {/* Repository Structure Visualizer */}
-        <RepoSection>
-          <Container>
-            <SectionTitle>Repository Hierarchy</SectionTitle>
-            <RepoContainer>
-              <RepoNode>
-                <RepoFolder>📁 omni-browser/</RepoFolder>
-                <RepoTree>
-                  <RepoNode>
-                    <RepoFolder>📁 app/</RepoFolder>
-                    <RepoTree>
-                      <RepoNode>
-                        <RepoFolder>📁 src/main/</RepoFolder>
-                        <RepoTree>
-                          <RepoNode>
-                            <RepoFolder>📁 assets/</RepoFolder>
-                            <RepoFile>&emsp;📄 Pre-bundled WebExtensions (uBlock Origin, Sniffer)</RepoFile>
-                          </RepoNode>
-                          <RepoNode>
-                            <RepoFolder>📁 java/com/rebelroot/omni/</RepoFolder>
-                            <RepoTree>
-                              <RepoFile>📂 browser/ &mdash; Compose Layouts & ViewModels</RepoFile>
-                              <RepoFile>📂 history/ &mdash; Local JSON-based History Store</RepoFile>
-                              <RepoFile>📂 media/ &mdash; ExoPlayer Playback & Interceptor Engine</RepoFile>
-                              <RepoFile>📂 privacy/ &mdash; Encryption Lockers & Session Incineration</RepoFile>
-                              <RepoFile>📂 tools/ &mdash; ML Kit Local Translation & Scan Helpers</RepoFile>
-                              <RepoFile>📂 vpn/ &mdash; WireGuard Tunnel Integration Settings</RepoFile>
-                            </RepoTree>
-                          </RepoNode>
-                        </RepoTree>
-                      </RepoNode>
-                      <RepoFile>📄 proguard-rules.pro &mdash; Optimization, obfuscation & shrinking rules</RepoFile>
-                      <RepoFile>📄 build.gradle.kts &mdash; Build dependencies & target configurations</RepoFile>
-                    </RepoTree>
-                  </RepoNode>
-                </RepoTree>
-              </RepoNode>
-            </RepoContainer>
-          </Container>
-        </RepoSection>
 
-        {/* Build & Compile Instructions */}
-        <BuildSection>
-          <Container>
-            <SectionTitle>Building From Source</SectionTitle>
-            <BuildContainer>
-              <BuildStepBlock>
-                <h4>1. Setup Repository</h4>
-                <Code code={cloneCode} language="bash" />
-              </BuildStepBlock>
-              <BuildStepBlock>
-                <h4>2. Compile Kotlin & Assemble APK</h4>
-                <Code code={buildCode} language="bash" />
-                <p>The compiled debug APK package will be generated at <code>app/build/outputs/apk/debug/app-debug.apk</code>.</p>
-              </BuildStepBlock>
-            </BuildContainer>
-          </Container>
-        </BuildSection>
 
         {/* Bottom Call To Action */}
         <BottomCTASection>
@@ -648,83 +585,7 @@ const CardDescription = styled.p`
   }
 `;
 
-const RepoSection = styled.section`
-  background: rgb(var(--secondBackground));
-  border-top: 1px solid rgba(var(--text), 0.05);
-  border-bottom: 1px solid rgba(var(--text), 0.05);
-`;
 
-const RepoContainer = styled.div`
-  background: rgb(var(--background));
-  border: 1px solid rgba(var(--text), 0.05);
-  border-radius: 1rem;
-  padding: 4rem;
-  margin-top: 5rem;
-  font-family: monospace;
-  font-size: 1.5rem;
-  box-shadow: var(--shadow-md);
-  overflow-x: auto;
-
-  ${media('<=tablet')} {
-    padding: 2.5rem;
-    font-size: 1.3rem;
-  }
-`;
-
-const RepoNode = styled.div`
-  margin-left: 2rem;
-
-  ${media('<=tablet')} {
-    margin-left: 1rem;
-  }
-`;
-
-const RepoFolder = styled.div`
-  color: rgb(var(--primary));
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-`;
-
-const RepoFile = styled.div`
-  color: rgb(var(--text));
-  opacity: 0.8;
-  margin-bottom: 0.5rem;
-`;
-
-const RepoTree = styled.div`
-  border-left: 1px dashed rgba(var(--text), 0.2);
-  margin-left: 1rem;
-  padding-left: 1rem;
-
-  ${media('<=tablet')} {
-    margin-left: 0.5rem;
-    padding-left: 0.5rem;
-  }
-`;
-
-const BuildSection = styled.section``;
-
-const BuildContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  margin-top: 5rem;
-`;
-
-const BuildStepBlock = styled.div`
-  h4 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    color: rgb(var(--text));
-  }
-
-  p {
-    margin-top: 1.5rem;
-    font-size: 1.4rem;
-    opacity: 0.7;
-  }
-`;
 
 const BottomCTASection = styled.section`
   background: rgb(var(--background));
