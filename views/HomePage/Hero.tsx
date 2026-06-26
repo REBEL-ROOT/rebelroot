@@ -17,7 +17,7 @@ export default function Hero() {
         <CustomOverTitle>Independent &amp; Open Source Collective</CustomOverTitle>
         <Heading>Software Built for Rebels. By Rebels.</Heading>
         <Description>
-          We are a parent group of independent developers building high-quality, privacy-focused, and fully auditable applications to solve the root problems of digital sovereignty. Powering products like Omni Browser, MOCNovel, and CampCart.
+          We are a parent group of independent developers building high-quality, privacy-focused, and fully auditable applications to solve the root problems of digital sovereignty. Powering products like Omni Browser, MOCNovel, CampCart, and Ved Astra.
         </Description>
         <CustomButtonGroup>
           <NextLink href="/features" passHref>

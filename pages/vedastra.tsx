@@ -71,6 +71,10 @@ export default function VedAstraPage() {
                 Explore GitHub <span>&rarr;</span>
               </Button>
             </CTAWrapper>
+
+            <ScreenshotWrapper>
+              <ScreenshotImage src="/vedastra-screenshot.png" alt="Ved Astra Web Application Dashboard Interface" />
+            </ScreenshotWrapper>
           </IntroContent>
         </IntroSection>
 
@@ -383,6 +387,34 @@ const Subtitle = styled.p`
 const CTAWrapper = styled.div`
   display: flex;
   gap: 2rem;
+`;
+
+const ScreenshotWrapper = styled.div`
+  margin-top: 6rem;
+  width: 100%;
+  max-width: 95rem;
+  display: flex;
+  justify-content: center;
+  perspective: 1200px;
+
+  ${media('<=desktop')} {
+    max-width: 100%;
+    padding: 0 2rem;
+  }
+`;
+
+const ScreenshotImage = styled.img`
+  width: 100%;
+  border-radius: 1.2rem;
+  border: 8px solid rgb(var(--secondBackground));
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 0 0 40px rgba(var(--primary), 0.15);
+  transform: rotateX(6deg) rotateY(-2deg) rotateZ(0.5deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+
+  &:hover {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.03);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8), 0 0 60px rgba(var(--primary), 0.25);
+  }
 `;
 
 const ButtonGroup = styled.div`
