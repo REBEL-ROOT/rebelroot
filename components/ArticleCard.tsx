@@ -8,9 +8,17 @@ export interface ArticleCardProps {
   slug: string;
   imageUrl: string;
   description: string;
+  date?: string;
+  tags?: string;
 }
 
-export default function ArticleCard({ title, slug, imageUrl, description }: ArticleCardProps) {
+export default function ArticleCard({ title, slug, imageUrl, description, date, tags }: ArticleCardProps) {
+  const formattedDate = date ? new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }) : '';
+
   return (
     <NextLink href={'/blog/' + slug} passHref>
       <ArticleCardWrapper className="article-card-wrapper">
@@ -19,7 +27,13 @@ export default function ArticleCard({ title, slug, imageUrl, description }: Arti
             <NextImage src={imageUrl} layout="fill" objectFit="cover" alt={title} />
           </ImageContainer>
           <Content>
-            <Title>{title}</Title>
+            {date && (
+              <MetaRow>
+                <DateText>{formattedDate}</DateText>
+                {tags && <CategoryTag>{tags.split(',')[0].toUpperCase()}</CategoryTag>}
+              </MetaRow>
+            )}
+            <Title style={{ marginTop: date ? '1rem' : '2rem' }}>{title}</Title>
             <Description>{description}</Description>
           </Content>
         </HoverEffectContainer>
@@ -105,3 +119,25 @@ const Description = styled.p`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
 `;
+
+const MetaRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const DateText = styled.span`
+  font-size: 1.2rem;
+  opacity: 0.5;
+`;
+
+const CategoryTag = styled.span`
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(var(--primary));
+  letter-spacing: 0.05em;
+  background: rgba(var(--primary), 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.4rem;
+`;
+

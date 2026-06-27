@@ -1,0 +1,50 @@
+---
+title: "Self-Hosting RebelRoot Services: A Hands-On Guide"
+description: "Learn how to easily deploy and run self-hosted instances of RebelRoot sync services using Docker and lightweight environment variables."
+date: '2026-05-10'
+tags: self-hosting,docker,devops,sysadmin
+imageUrl: '/posts/self-hosting-docker.png'
+---
+
+## Reclaiming Your Infrastructure
+
+Trusting third-party SaaS providers with your critical sync metadata defeats the purpose of privacy. True sovereignty requires running your own infrastructure. RebelRoot services are built from the ground up to be self-hostable, ensuring your databases stay behind your own firewalls.
+
+<Quote
+  content="Sovereignty isn't just about refusing telemetry; it's about owning the machines where your records live."
+  author="RebelRoot Infrastructure Group"
+  cite="https://rebelroot.org"
+/>
+
+## Setting Up Your Self-Hosted Sync Node
+
+Our synchronization backend is package-agnostic and runs easily inside standard containerized environments. Below is a minimal configuration to launch a local sync daemon using Docker Compose:
+
+<Code
+  code="
+version: '3.8'
+services:
+  sync-node:
+    image: rebelroot/sync-node:latest
+    container_name: rebelroot-sync
+    environment:
+      - PORT=8080
+      - DB_PATH=/data/sync.db
+      - JWT_SECRET=change-this-to-a-secure-random-key
+      - ENCRYPTION_ENFORCED=true
+    volumes:
+      - ./data:/data
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+"
+  language="yaml"
+/>
+
+## Best Practices for Deploying Securely
+
+When exposing your self-hosted sync node to the web, we recommend applying several security layers:
+
+1. **Enforce SSL/TLS**: Always place your node behind a reverse proxy (like Nginx or Caddy) to handle TLS handshakes.
+2. **Setup Rate Limiting**: Limit API requests to block automated brute-force attacks.
+3. **Automated Encrypted Backups**: Back up the SQLite database file (`sync.db`) daily to an offsite secure storage location using tools like Restic.

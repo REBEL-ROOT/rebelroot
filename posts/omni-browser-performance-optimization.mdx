@@ -1,0 +1,43 @@
+---
+title: "Building Omni Browser: Resolving Mobile Performance Bottlenecks"
+description: "A technical deep dive into compiler optimizations, dependency stripping, and asset shrinking techniques we used to minimize browser footprint."
+date: '2026-04-15'
+tags: android,performance,optimization,compilers
+imageUrl: '/posts/omni-performance.png'
+---
+
+## Shrinking the Footprint
+
+Mobile web browsers are notoriously resource-intensive. Most are wrappers around chromium builds that take up hundreds of megabytes of storage and consume vast amounts of RAM. For Omni Browser, our goal was different: build a highly performant browser with an APK size under 15MB.
+
+Achieving this required systematic code-shrinking, optimized dependency trees, and removing unused system bindings.
+
+<Quote
+  content="High performance on mobile isn't just about fast CPU cycles; it's about minimizing the memory footprint so low-end devices can load sites without page-crashes."
+  author="RebelRoot Android Lead"
+  cite="https://rebelroot.org"
+/>
+
+## Strip Unused System Classes
+
+Standard Android builds bundle extensive diagnostic and tracking libraries by default. We systematically stripped out dependencies like Firebase Analytics, Play Services, and secondary telemetry layers. 
+
+We then optimized our ProGuard/R8 configurations to aggressively prune unreachable code execution branches during build cycles.
+
+## Native Render Optimizations
+
+Instead of shipping a bundled Chromium rendering engine (Blink), we optimized Omni Browser to leverage the system's pre-installed WebKit libraries. By interface-binding directly via native Android wrappers and custom Javascript filters, we achieved high-fidelity rendering without the file size overhead.
+
+<Code
+  code="
+// Custom WebView Settings optimization for rapid page loading
+webView.settings.apply {
+    javaScriptEnabled = true
+    domStorageEnabled = true
+    databaseEnabled = true
+    cacheMode = WebSettings.LOAD_DEFAULT
+    mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
+}
+"
+  language="kotlin"
+/>

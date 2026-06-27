@@ -1,0 +1,48 @@
+---
+title: "Designing CampCart: A Lightweight, Offline-First Commerce Widget"
+description: "A deep dive into the architecture of CampCart, a zero-dependency e-commerce cart built to run client-side on static websites and blogs."
+date: '2026-05-20'
+tags: campcart,javascript,ecommerce,performance
+imageUrl: '/posts/campcart-commerce.png'
+---
+
+## Simplifying Independent E-commerce
+
+Adding e-commerce to a static website usually requires loading heavy, tracking-laden third-party widgets or maintaining a complex backend database. These solutions introduce security vulnerabilities, drag down performance, and profile visitors.
+
+CampCart provides an alternative: a zero-dependency, secure shopping cart widget running purely in the browser.
+
+<Quote
+  content="We wanted to prove that you can build a complete, highly-responsive shopping cart experience using purely static files and client-side cryptography."
+  author="RebelRoot Front-End Developers"
+  cite="https://rebelroot.org"
+/>
+
+## Under the Hood: Pure Client-Side State
+
+CampCart relies on a robust JavaScript state machine that manages product entries, quantities, and price calculations on the client. It persists cart items in `localStorage` securely to preserve the shopping state across page reloads.
+
+- **Zero API Calls for Browse & Cart Management**: Keeps your site loading instantly.
+- **Privacy-Enhancing Design**: No user data is sent to RebelRoot or third parties during shopping.
+- **Highly Customisable UI**: Built with vanilla Web Components, allowing seamless integrations into any Hugo, Jekyll, Next.js, or HTML static page.
+
+## Secure Checkouts
+
+Checkout payloads are cryptographically signed on the client side before redirecting to payment aggregators. This prevents price-tampering attacks without needing a database to cross-reference prices:
+
+<Code
+  code="
+// Simple cryptographic payload signing to verify order integrity
+async function signOrderPayload(payload, privateKeyPem) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(JSON.stringify(payload));
+  const signature = await window.crypto.subtle.sign(
+    { name: 'RSASSA-PKCS1-v1_5' },
+    privateKeyPem,
+    data
+  );
+  return btoa(String.fromCharCode(...new Uint8Array(signature)));
+}
+"
+  language="javascript"
+/>

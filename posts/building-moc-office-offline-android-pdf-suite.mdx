@@ -1,0 +1,49 @@
+---
+title: "Building MOC Office: An Offline Android PDF Suite"
+description: "How we leveraged Mozilla's PDF.js WebKit integration and iText Core to build a fast, 100% offline document viewer and editor in Kotlin."
+date: '2026-03-12'
+tags: mocoffice,android,performance,opensource
+imageUrl: '/posts/mocoffice-pdf.png'
+---
+
+## Re-Engineering PDF Operations for Mobile
+
+Most PDF editors on Android are heavy wrappers around web services that upload your personal files to distant servers to perform basic actions like merging, splitting, or watermarking. 
+
+For MOC Office, we built an offline-first architecture where every action is processed locally, keeping your files safe from data profiling.
+
+<Quote
+  content="Document manipulation is a prime target for privacy leaks. Users should never have to upload a bank statement or a passport scan to merge two pages."
+  author="MOC Office Development Lead"
+  cite="https://rebelroot.org"
+/>
+
+## Under the Hood: Hybrid Rendering
+
+Rather than shipping a heavy native C++ PDF engine that bloated our app size by 40MB, MOC Office utilizes a custom WebKit-based implementation of Mozilla's PDF.js. This allowed us to offer seamless pinch-to-zoom, horizontal page scrubbers, and full-text document searches in a lightweight container.
+
+- **Offline Processing Layer**: Powered by local iText Core and Bouncy Castle cryptographic libraries.
+- **DataStore Encrypted Preferences**: Securely store passwords locally to automatically unlock documents on next access.
+- **Jetpack Compose UI**: Built with a modern declarative interface that respects dynamic system coloring.
+
+## Merging Documents Safely
+
+Below is a technical look at how the app combines multiple local PDF inputs safely using scoped content URIs and iText's native writer:
+
+<Code
+  code="
+// Native Kotlin method to merge multiple local PDF inputs offline
+fun mergePdfFiles(inputStreams: List<InputStream>, outputStream: OutputStream) {
+    val pdfDoc = PdfDocument(PdfWriter(outputStream))
+    val merger = PdfMerger(pdfDoc)
+    
+    inputStreams.forEach { stream ->
+        val readerDoc = PdfDocument(PdfReader(stream))
+        merger.merge(readerDoc, 1, readerDoc.numberOfPages)
+        readerDoc.close()
+    }
+    pdfDoc.close()
+}
+"
+  language="kotlin"
+/>
