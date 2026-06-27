@@ -16,26 +16,56 @@ Modern web browsers have become bloated operating systems of their own, consumin
   cite="https://rebelroot.org"
 />
 
-## Performance & APK Size Optimization
+## Technical Architecture: Hybrid Native Core
 
-For mobile environments, size and efficiency are critical. We applied rigorous optimization techniques to strip unused libraries, optimize assets, and leverage ProGuard rules:
+Instead of packing a full Chromium rendering engine (Blink) which would bloat the download size by 80MB+, Omni Browser is built on a customized native Android WebKit integration. This hybrid architecture pairs the rendering efficiency of native system libraries with custom middleware hooks written in Kotlin.
 
-- **Minimal APK Footprint**: Reduced download overhead for network accessibility.
-- **Low Memory Overhead**: Runs smoothly on low-end hardware.
-- **Extended Battery Life**: By blocking energy-draining trackers and ad scripts before they execute.
+By decoupling the layout renderer from networking and session persistence, we are able to intercept data leaks before they are committed to local databases or sent over the network.
 
-## Zero Telemetry Policy
+## Intercepting Storage & Fingerprinting Attempts
 
-Unlike other mainstream browsers, Omni Browser has absolutely zero tracking. There are no crash reporting toolkits that share device specs, no analytics pings, and no telemetry. Your browsing history is yours alone, stored locally with optional end-to-end encrypted synchronization.
+Traditional WebViews allow pages to read device metrics (fingerprinting) and set tracking cookies unimpeded. Omni Browser introduces a secure sandbox model that intercepts and overrides standard Web storage APIs. We inject a custom JavascriptInterface at page initialization to monitor storage mutations:
 
 <Code
   code="
-// Proguard optimization snippet for Omni Browser compilation
--keepclassmembers class * {
-    @android.webkit.JavascriptInterface <methods>;
+package com.rebelroot.omnibrowser.security
+
+import android.webkit.JavascriptInterface
+import android.webkit.WebView
+import org.json.JSONObject
+
+class SecureStorageBridge(private val webView: WebView) {
+
+    // Overrides window.localStorage.setItem and window.sessionStorage.setItem
+    @JavascriptInterface
+    fun onStorageWrite(type: String, key: String, value: String): Boolean {
+        // Evaluate key against known tracking payloads or entropy markers
+        if (isPotentialTrackerKey(key) || value.length > 512) {
+            logBlockedAttempt(key, type)
+            return false // Block write operation
+        }
+        return true // Allow write
+    }
+
+    private fun isPotentialTrackerKey(key: String): Boolean {
+        val pattern = Regex(&quot;(?:_utm|_ga|_fbp|fingerprint|device_id|uid|visitor_id)&quot;, RegexOption.IGNORE_CASE)
+        return pattern.containsMatchIn(key)
+    }
+
+    private fun logBlockedAttempt(key: String, type: String) {
+        // Native logging and UI shield indicator update
+        System.out.println(&quot;Blocked suspected tracking write to &quot; + type + &quot;: &quot; + key)
+    }
 }
--keep class com.rebelroot.omnibrowser.models.** { *; }
--dontwarn okhttp3.**
 "
-  language="java"
+  language="kotlin"
 />
+
+## Granular Cookie Isolation Policy
+
+To prevent cross-site tracking, Omni Browser isolates cookies at the domain level. Standard browsers share cookie jars globally, making it easy for tracking scripts to stitch user sessions across different domains. 
+
+Omni Browser partitions storage using strict sandbox policies, so cookies created by third-party widgets are scoped solely to their originating iframe and never leaked to the host page document:
+
+- **Third-Party Partitioning**: If a social share button attempts to read cookies, it receives a sandboxed, ephemeral jar containing zero reference data.
+- **Local Persistence Controls**: All session cookies are automatically cleared from the local database upon tab termination unless explicitly whitelisted by the user.

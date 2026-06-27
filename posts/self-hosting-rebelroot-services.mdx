@@ -16,35 +16,115 @@ Trusting third-party SaaS providers with your critical sync metadata defeats the
   cite="https://rebelroot.org"
 />
 
-## Setting Up Your Self-Hosted Sync Node
+## Containerized Deployment: Docker Compose Stack
 
-Our synchronization backend is package-agnostic and runs easily inside standard containerized environments. Below is a minimal configuration to launch a local sync daemon using Docker Compose:
+Our sync service uses a Docker structure optimized to consume minimum system resources. We recommend placing the container behind **Caddy** to automatically handle SSL/TLS certificate registration:
 
 <Code
   code="
 version: '3.8'
+
 services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy-proxy
+    restart: unless-stopped
+    ports:
+      - &quot;80:80&quot;
+      - &quot;443:443&quot;
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
   sync-node:
     image: rebelroot/sync-node:latest
     container_name: rebelroot-sync
+    restart: unless-stopped
     environment:
       - PORT=8080
       - DB_PATH=/data/sync.db
-      - JWT_SECRET=change-this-to-a-secure-random-key
+      - JWT_SECRET=replace-with-a-secure-64-character-hex-string
       - ENCRYPTION_ENFORCED=true
     volumes:
       - ./data:/data
-    ports:
-      - '8080:8080'
-    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
 "
   language="yaml"
 />
 
-## Best Practices for Deploying Securely
+Create a `Caddyfile` next to the compose configuration to configure reverse proxy mapping and secure headers:
 
-When exposing your self-hosted sync node to the web, we recommend applying several security layers:
+<Code
+  code="
+sync.yourdomain.com {
+    reverse_proxy sync-node:8080
 
-1. **Enforce SSL/TLS**: Always place your node behind a reverse proxy (like Nginx or Caddy) to handle TLS handshakes.
-2. **Setup Rate Limiting**: Limit API requests to block automated brute-force attacks.
-3. **Automated Encrypted Backups**: Back up the SQLite database file (`sync.db`) daily to an offsite secure storage location using tools like Restic.
+    header {
+        Strict-Transport-Security &quot;max-age=63072000; includeSubDomains; preload&quot;
+        X-Content-Type-Options &quot;nosniff&quot;
+        X-Frame-Options &quot;DENY&quot;
+        Referrer-Policy &quot;no-referrer&quot;
+    }
+}
+"
+  language="caddy"
+/>
+
+---
+
+## SQLite Performance Tuning: Enabling WAL Mode
+
+By default, SQLite uses a rollback journal for transactions, which locks the entire database file during writes. To support simultaneous read and write actions (e.g. multi-device sync), we configure the SQLite connection pools with Write-Ahead Logging (WAL) and busy timeout retries:
+
+```sql
+-- Run database configurations at startup to enable WAL mode
+PRAGMA journal_mode = WAL;
+PRAGMA synchronous = NORMAL;
+PRAGMA temp_store = MEMORY;
+PRAGMA busy_timeout = 5000; -- Wait up to 5 seconds if database is locked
+```
+
+WAL mode speeds up write operations significantly while keeping memory footprint under 20MB.
+
+---
+
+## Automating Secure Daily Backups
+
+Because self-hosting places data responsibility on you, automated backup scripts are critical. Below is a shell script to safely snapshot the SQLite database using SQLite's online backup API (to prevent database corruption) and push the compressed result to an offsite secure storage bucket:
+
+<Code
+  code="
+#!/bin/bash
+# Backup daemon script for self-hosted SQLite DB
+
+DB_FILE=&quot;./data/sync.db&quot;
+BACKUP_DIR=&quot;./backups&quot;
+TIMESTAMP=$(date +&quot;%Y%m%d_%H%M%S&quot;)
+TEMP_BACKUP=&quot;$BACKUP_DIR/sync_temp.db&quot;
+FINAL_ZIP=&quot;$BACKUP_DIR/sync_backup_$TIMESTAMP.zip&quot;
+
+mkdir -p &quot;$BACKUP_DIR&quot;
+
+# 1. Safely snapshot SQLite without locking writes
+sqlite3 &quot;$DB_FILE&quot; &quot;.backup '$TEMP_BACKUP'&quot;
+
+# 2. Compress the snapshot file
+zip -j &quot;$FINAL_ZIP&quot; &quot;$TEMP_BACKUP&quot;
+
+# 3. Clean up the temp uncompressed file
+rm &quot;$TEMP_BACKUP&quot;
+
+# 4. Upload to remote backup storage (example using AWS CLI / MinIO)
+# aws s3 cp &quot;$FINAL_ZIP&quot; s3://your-secure-bucket/sync/
+
+# 5. Clean up local backups older than 14 days
+find &quot;$BACKUP_DIR&quot; -name &quot;sync_backup_*.zip&quot; -mtime +14 -exec rm {} \;
+
+echo &quot;Backup completed: $FINAL_ZIP&quot;
+"
+  language="bash"
+/>

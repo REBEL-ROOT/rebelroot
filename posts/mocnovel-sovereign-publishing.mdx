@@ -18,16 +18,61 @@ MOCNovel restores digital sovereignty. Built on local-first principles, it acts 
   cite="https://rebelroot.org"
 />
 
-## Local-First Architecture
+## Technical Architecture: Local-First Parsing Engine
 
-MOCNovel loads EPUB and PDF books instantly from your device's filesystem. There are no cloud logins required to access your library, and your reading progress, annotations, and bookmarks are stored in an encrypted database directly on your hardware.
+EPUB files are essentially zipped archives containing HTML files, CSS sheets, and XML metadata files. Most reading applications rely on remote cloud renderers or server-side parser daemons to display book chapters. This architecture centralizes reading history and metadata.
 
-If you choose to sync your bookshelf across devices, MOCNovel leverages decentralized sync nodes with end-to-end encryption. Your encryption key is generated locally on your device, ensuring that we never see your data.
+MOCNovel is built to decompress and parse books entirely on the client-side. We utilize browser-native ZIP decompression (via WebAssembly-backed compression libraries) and native DOMParsers to extract XML paths dynamically.
 
-## Empowering Authors
+## Decrypting and Parsing EPUB Packages
 
-For creators, MOCNovel offers an integrated compilation suite:
+When a user imports an ebook into MOCNovel, the engine performs the following processing pipeline in the browser:
 
-- **Clean Typography Configurations**: Generate standardized formats that scale seamlessly from small mobile screens to tablets.
-- **Zero-Middleman Distribution**: Export fully verified, auditable book bundles ready for P2P distribution networks.
-- **Auditable Licensing**: Retain absolute ownership over your source files and creative decisions.
+1. **Locate the Package Entry Document**: Read `META-INF/container.xml` to find the path to the `.opf` package file.
+2. **Extract Metadata & Manifest**: Parse the `.opf` file to discover book details (title, author, rights) and index the locations of all HTML chapters.
+3. **Resolve Spine Order**: Sequence the HTML pages according to the spine declaration so the reader can scroll sequentially.
+
+Here is how the parsing engine resolves the package path without sending the file to any server:
+
+<Code
+  code="
+// Client-side extraction of EPUB manifest OPF path using native DOMParser
+async function getOPFFilePath(zipArchive) {
+  // Read container.xml from the zipped package
+  const containerFile = await zipArchive.file(&quot;META-INF/container.xml&quot;).async(&quot;string&quot;);
+  
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(containerFile, &quot;text/xml&quot;);
+  
+  // Find the rootfile element containing the full-path attribute
+  const rootfile = xmlDoc.getElementsByTagName(&quot;rootfile&quot;)[0];
+  if (!rootfile) {
+    throw new Error(&quot;Malformed EPUB container: OPF file path not found&quot;);
+  }
+  
+  const opfPath = rootfile.getAttribute(&quot;full-path&quot;);
+  return opfPath; // Returns e.g. 'OEBPS/content.opf'
+}
+"
+  language="javascript"
+/>
+
+## Offline Annotation & Progress Synchronization
+
+MOCNovel uses an offline-first database (using IndexedDB wrappers or native SQLite bindings) to cache reading positions, bookmark offsets, and custom page highlights.
+
+The database structure maps annotations using standard EPUB canonical fragment identifiers (EpubCFI) rather than character offsets. This ensures annotations remain perfectly aligned even if the user resizes text dimensions or changes page styling:
+
+```sql
+CREATE TABLE annotations (
+  id TEXT PRIMARY KEY,
+  book_hash TEXT NOT NULL,
+  cfi_range TEXT NOT NULL,
+  highlight_color TEXT,
+  note_content TEXT,
+  created_at INTEGER NOT NULL,
+  FOREIGN KEY(book_hash) REFERENCES books(hash)
+);
+```
+
+By storing bookmarks local-first, readers retain absolute custody over their reading notes and habits, with optional peer-to-peer sync options using end-to-end encrypted tunnels.

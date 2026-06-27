@@ -22,28 +22,64 @@ For MOC Office, we built an offline-first architecture where every action is pro
 
 Rather than shipping a heavy native C++ PDF engine that bloated our app size by 40MB, MOC Office utilizes a custom WebKit-based implementation of Mozilla's PDF.js. This allowed us to offer seamless pinch-to-zoom, horizontal page scrubbers, and full-text document searches in a lightweight container.
 
-- **Offline Processing Layer**: Powered by local iText Core and Bouncy Castle cryptographic libraries.
-- **DataStore Encrypted Preferences**: Securely store passwords locally to automatically unlock documents on next access.
-- **Jetpack Compose UI**: Built with a modern declarative interface that respects dynamic system coloring.
+However, rendering large PDFs (>100MB) inside a mobile WebView introduces memory limits. WebKit processes run in isolated memory spaces, and loading extensive arrays of high-resolution page canvas elements can trigger Out-Of-Memory (OOM) app crashes.
 
-## Merging Documents Safely
+To solve this:
+- **Viewport rendering**: We intercept canvas creation and only render pages currently inside the active viewport + 1 buffer page.
+- **Dynamic Downscaling**: If device RAM metrics indicate high usage, canvas drawing resolutions are scaled down by 25%.
 
-Below is a technical look at how the app combines multiple local PDF inputs safely using scoped content URIs and iText's native writer:
+---
+
+## Safe Scoped Storage File Editing
+
+On Android 11+ (API 30+), apps must respect scoped storage constraints. They cannot write files directly using absolute paths. Instead, they must obtain a `ParcelFileDescriptor` to write to shared directories.
+
+MOC Office uses iText Core to parse and modify files locally via stream descriptors. Below is the Kotlin method we use to unlock password-protected PDF files, decrypting the payload using Bouncy Castle cryptographic providers and writing the results back to the user's selected location:
 
 <Code
   code="
-// Native Kotlin method to merge multiple local PDF inputs offline
-fun mergePdfFiles(inputStreams: List<InputStream>, outputStream: OutputStream) {
-    val pdfDoc = PdfDocument(PdfWriter(outputStream))
-    val merger = PdfMerger(pdfDoc)
-    
-    inputStreams.forEach { stream ->
-        val readerDoc = PdfDocument(PdfReader(stream))
-        merger.merge(readerDoc, 1, readerDoc.numberOfPages)
-        readerDoc.close()
+package com.rebelroot.mocoffice.pdf
+
+import android.content.Context
+import android.net.Uri
+import com.itextpdf.kernel.pdf.PdfDocument
+import com.itextpdf.kernel.pdf.PdfReader
+import com.itextpdf.kernel.pdf.PdfWriter
+import com.itextpdf.kernel.pdf.ReaderProperties
+import java.io.InputStream
+import java.io.OutputStream
+
+class SecurePdfEngine(private val context: Context) {
+
+    fun decryptPdfFile(inputUri: Uri, outputUri: Uri, passwordBytes: ByteArray) {
+        var inputStream: InputStream? = null
+        var outputStream: OutputStream? = null
+        
+        try {
+            inputStream = context.contentResolver.openInputStream(inputUri)
+            outputStream = context.contentResolver.openOutputStream(outputUri)
+
+            // Setup iText properties with user's decryption password
+            val properties = ReaderProperties().setReaderPassword(passwordBytes)
+            val reader = PdfReader(inputStream, properties)
+            
+            // Open the document and write it decrypted to the output stream
+            val pdfDoc = PdfDocument(reader, PdfWriter(outputStream))
+            
+            // Closing commits modifications and writes file descriptor headers
+            pdfDoc.close()
+        } finally {
+            inputStream?.close()
+            outputStream?.close()
+        }
     }
-    pdfDoc.close()
 }
 "
   language="kotlin"
 />
+
+## Dynamic Theming with Jetpack Compose & Material You
+
+MOC Office integrates a Material Design 3 UI layer. We map system colors to the reader theme, enabling support for dynamic background adaptation (adapt-to-wallpaper) on Android 12+ devices. 
+
+Furthermore, we configure custom CSS style rules on our WebView layout to match the app theme, providing a unified appearance (light, dark, or AMOLED true-black) across both native pages and webview canvas components.

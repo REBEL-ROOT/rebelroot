@@ -18,33 +18,65 @@ Ved Astra was built to solve this privacy gap by running all astronomical planet
   cite="https://rebelroot.org"
 />
 
-## Pure Client-Side Math Engines
+## Celestial Mathematics: The Julian Date
 
-To compute astrological coordinate maps (Kundalis) and planetary positions, Ved Astra utilizes custom implementations of planetary ephemeris formulas. By compiling celestial motion coefficients directly into standard client-side modules, we calculate relative planetary positions for any date from 1800 to 2100 with millisecond precision.
+To calculate precise planetary coordinates, the engine must first convert standard Gregorian calendar dates and times (in UTC) into a continuous astronomical scale known as the **Julian Date (JD)**.
 
-- **Offline Chart Plotting**: Once loaded, the engine functions fully offline.
-- **Dynamic SVG Rendering**: Charts are generated as custom vector assets, ensuring clean scaling on all display types.
-- **Zero Query Latency**: Generating charts takes less than 20ms on standard mobile hardware.
+The Julian Date represents the number of days elapsed since January 1, 4713 BC. Below is the mathematical calculation algorithm implemented in Ved Astra to compute the Julian Date:
 
-## Generating Coordinates Dynamically
+Given year *Y*, month *M*, day *D*, and fractional hour *H*:
 
-We use native trigonometric calculations to compute the relative houses (bhavas) and ascendant lines without requesting remote calculations:
+1. If *M* is less than or equal to 2, set *Y = Y - 1* and *M = M + 12*.
+2. Calculate the century adjustment factor *A*:
+   *A = Math.floor(Y / 100)*
+   *B = 2 - A + Math.floor(A / 4)*
+3. Calculate the Julian Day number:
+   *JD = Math.floor(365.25 * (Y + 4716)) + Math.floor(30.6001 * (M + 1)) + D + B - 1524.5 + (H / 24)*
+
+Here is our clean TypeScript implementation of this calculation:
 
 <Code
   code="
-// Simple calculation helper to compute celestial longitude coordinate offsets
-function computeLongitudeOffset(rightAscension, declination, localSiderealTime) {
-  const raRad = (rightAscension * Math.PI) / 180;
-  const decRad = (declination * Math.PI) / 180;
-  const lstRad = (localSiderealTime * Math.PI) / 180;
+// Calculate Julian Date from UTC calendar values
+export function getJulianDate(year: number, month: number, day: number, hoursUtc: number): number {
+  let Y = year;
+  let M = month;
   
-  const hourAngleRad = lstRad - raRad;
-  const altitude = Math.asin(
-    Math.sin(decRad) * Math.sin(0.707) +
-    Math.cos(decRad) * Math.cos(0.707) * Math.cos(hourAngleRad)
-  );
-  return altitude * (180 / Math.PI);
+  if (M <= 2) {
+    Y = Y - 1;
+    M = M + 12;
+  }
+  
+  const A = Math.floor(Y / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  
+  const julianDay = Math.floor(365.25 * (Y + 4716)) + 
+                    Math.floor(30.6001 * (M + 1)) + 
+                    day + B - 1524.5 + (hoursUtc / 24);
+                    
+  return julianDay;
 }
 "
-  language="javascript"
+  language="typescript"
 />
+
+---
+
+## Calculating the Ascendant & House Cusps
+
+Once the Julian Date is computed, the engine calculates the **Local Sidereal Time (LST)** using the user's local longitude. LST represents the orientation of the local meridian relative to distant stars.
+
+Using the LST and the local latitude (lat), we calculate the Ascendant coordinate (the point of the ecliptic rising on the eastern horizon) using spherical trigonometry:
+
+Let *e* be the obliquity of the ecliptic (approximately 23.44 degrees):
+*Ascendant = Math.atan(Math.sin(LST) / (Math.cos(LST) * Math.cos(e) - Math.tan(lat) * Math.sin(e)))*
+
+Ved Astra supports both the **Equal House System** (where each house is exactly 30 degrees wide starting from the Ascendant coordinate) and the **Placidus House System** (which divides the sky based on time periods of celestial ascent). By keeping the math in the client, these conversions run instantaneously.
+
+---
+
+## Vector Layout Drawing: Dynamic SVG Renderers
+
+To render the charts (e.g. North Indian or South Indian styles) on mobile and desktop screens, Ved Astra parses coordinates directly into vector graphics.
+
+Instead of downloading heavy static images or loading canvas pixels, our layout engines translate the raw house degrees directly into inline SVG polygons. This layout method keeps the DOM footprint small and guarantees crisp charts at any screen magnification.
