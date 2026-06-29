@@ -25,7 +25,7 @@ export default function SupportPage() {
   const { register, handleSubmit, formState } = useForm();
   const { isSubmitting, errors } = formState;
 
-  const upiId = 'rebelroot.ltd@okaxis';
+  const upiId = 'warrior4root@ptyes';
   const upiUrl = `upi://pay?pa=${upiId}&pn=RebelRoot&cu=INR&tn=Support%20RebelRoot`;
   const qrCodeApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
