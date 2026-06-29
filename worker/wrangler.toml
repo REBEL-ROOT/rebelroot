@@ -1,0 +1,10 @@
+name = "rebelroot-backend"
+main = "src/index.ts"
+compatibility_date = "2026-06-29"
+
+[vars]
+CONTACT_SENDER_EMAIL = "rebelroot.ltd@gmail.com"
+CONTACT_RECIPIENT_EMAIL = "rebelroot.ltd@gmail.com"
+
+# Sensitive variables like SENDGRID_API_KEY must be stored securely using wrangler secrets:
+# $ wrangler secret put SENDGRID_API_KEY
