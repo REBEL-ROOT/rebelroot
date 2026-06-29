@@ -195,15 +195,19 @@ export default function SupportPage() {
               <DonateBadge>International Support</DonateBadge>
               <CardTitle>Global Creators Support</CardTitle>
               <CardDescription>
-                Help cover our domain maintenance and edge hosting costs.
+                Help cover our domain maintenance and edge hosting costs via QR scan or direct checkout links.
               </CardDescription>
+
+              <QrContainer>
+                <QrCodeImage src="/paypal-qr.png" alt="PayPal Payment QR Code" />
+              </QrContainer>
 
               <SupportButtonsGroup>
                 <KofiButton href="https://ko-fi.com/rebelroot" target="_blank" rel="noopener noreferrer">
                   <KofiIcon>☕</KofiIcon> Buy us a Ko-fi
                 </KofiButton>
 
-                <PayPalButton href="https://paypal.me/EnLightBro" target="_blank" rel="noopener noreferrer">
+                <PayPalButton href="https://www.paypal.com/ncp/payment/A867TKRQ8EKRE" target="_blank" rel="noopener noreferrer">
                   <PayPalIcon>💳</PayPalIcon> Support on PayPal
                 </PayPalButton>
               </SupportButtonsGroup>
@@ -248,7 +252,7 @@ const ContentGrid = styled.div`
 
 const Card = styled.div`
   background: rgb(var(--cardBackground));
-  border: 1px solid rgba(var(--text), 0.06);
+  border: 1px solid rgba(var(--text), 0.15);
   border-radius: 1.6rem;
   padding: 4rem;
   box-shadow: 0 10px 35px -10px rgba(0, 0, 0, 0.15);

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Input = styled.input`
-  border: 1px solid rgb(var(--inputBackground));
+  border: 1px solid rgba(var(--text), 0.15);
   background: rgb(var(--inputBackground));
   border-radius: 0.6rem;
   font-size: 1.6rem;
@@ -10,8 +10,7 @@ const Input = styled.input`
   color: rgb(var(--text));
 
   &::placeholder {
-    color: rgb(var(--textSecondary));
-    opacity: 0.6;
+    color: rgba(var(--text), 0.5);
   }
 
   &:focus {
