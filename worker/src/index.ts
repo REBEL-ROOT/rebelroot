@@ -1,26 +1,26 @@
 export interface Env {
-  SENDGRID_API_KEY?: string;
-  CONTACT_SENDER_EMAIL?: string;
-  CONTACT_RECIPIENT_EMAIL?: string;
+  TELEGRAM_BOT_TOKEN?: string;
+  TELEGRAM_CHAT_ID?: string;
+  DISCORD_WEBHOOK_URL?: string;
 }
 
 export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    const url = new URL(request.url);
-
+  async fetch(request: Request, env: Env): Promise<Response> {
     // 1. CORS Preflight Handling
     if (request.method === "OPTIONS") {
       return handleCors();
     }
 
+    const url = new URL(request.url);
+
     // 2. Routing Handlers
     try {
       if (url.pathname === "/api/send-email" && request.method === "POST") {
-        return await handleSendEmail(request, env);
+        return await handleContactSubmission(request, env);
       }
 
       if (url.pathname === "/api/feedback" && request.method === "POST") {
-        return await handleFeedback(request, env);
+        return await handleFeedbackSubmission(request, env);
       }
 
       // Fallback 404
@@ -39,14 +39,7 @@ export default {
 
 /* ─── Route Handlers ─── */
 
-async function handleSendEmail(request: Request, env: Env): Promise<Response> {
-  if (!env.SENDGRID_API_KEY) {
-    return new Response(JSON.stringify({ error: "SendGrid API key not configured on serverless environment" }), {
-      status: 500,
-      headers: getCorsHeaders({ "Content-Type": "application/json" }),
-    });
-  }
-
+async function handleContactSubmission(request: Request, env: Env): Promise<Response> {
   const payload: any = await request.json();
   const { name, email, description, subject } = payload;
 
@@ -57,43 +50,26 @@ async function handleSendEmail(request: Request, env: Env): Promise<Response> {
     });
   }
 
-  const sender = env.CONTACT_SENDER_EMAIL || "rebelroot.ltd@gmail.com";
-  const recipient = env.CONTACT_RECIPIENT_EMAIL || "rebelroot.ltd@gmail.com";
+  // Format content for notifications
+  const telegramText = `<b>📬 New Contact Submission</b>\n\n` +
+                       `<b>Subject:</b> ${subject || "Contact Form Inquiry"}\n` +
+                       `<b>Name:</b> ${name}\n` +
+                       `<b>Email:</b> ${email}\n\n` +
+                       `<b>Message:</b>\n${description}`;
 
-  // Build SendGrid mail payload
-  const sendgridPayload = {
-    personalizations: [
-      {
-        to: [{ email: recipient }],
-        subject: subject || "Contact Form Submission",
-      },
+  const discordEmbed = {
+    title: "📬 New Contact Submission",
+    color: 3447003, // Hex #3498db (Blue)
+    fields: [
+      { name: "Subject", value: subject || "Contact Form Inquiry", inline: false },
+      { name: "Name", value: name, inline: true },
+      { name: "Email", value: email, inline: true },
+      { name: "Message", value: description, inline: false },
     ],
-    from: { email: sender },
-    reply_to: { email: email, name: name },
-    content: [
-      {
-        type: "text/plain",
-        value: `Name: ${name}\nEmail: ${email}\nMessage:\n${description}`,
-      },
-    ],
+    timestamp: new Date().toISOString(),
   };
 
-  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.SENDGRID_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(sendgridPayload),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    return new Response(JSON.stringify({ error: `SendGrid error forwarding: ${errorText}` }), {
-      status: response.status,
-      headers: getCorsHeaders({ "Content-Type": "application/json" }),
-    });
-  }
+  await sendNotification(env, telegramText, discordEmbed);
 
   return new Response(null, {
     status: 204,
@@ -101,14 +77,7 @@ async function handleSendEmail(request: Request, env: Env): Promise<Response> {
   });
 }
 
-async function handleFeedback(request: Request, env: Env): Promise<Response> {
-  if (!env.SENDGRID_API_KEY) {
-    return new Response(JSON.stringify({ error: "SendGrid API key not configured on serverless environment" }), {
-      status: 500,
-      headers: getCorsHeaders({ "Content-Type": "application/json" }),
-    });
-  }
-
+async function handleFeedbackSubmission(request: Request, env: Env): Promise<Response> {
   const payload: any = await request.json();
   const { name, email, rating, product, message } = payload;
 
@@ -119,55 +88,84 @@ async function handleFeedback(request: Request, env: Env): Promise<Response> {
     });
   }
 
-  const sender = env.CONTACT_SENDER_EMAIL || "rebelroot.ltd@gmail.com";
-  const recipient = env.CONTACT_RECIPIENT_EMAIL || "rebelroot.ltd@gmail.com";
+  const numericRating = parseInt(rating);
+  const starRating = "⭐".repeat(Math.min(5, Math.max(1, numericRating)));
 
-  // Create star rating string representation
-  const starRating = "⭐".repeat(Math.min(5, Math.max(1, parseInt(rating))));
+  // Format content for notifications
+  const telegramText = `<b>⭐️ New Product Feedback</b>\n\n` +
+                       `<b>Product:</b> ${product}\n` +
+                       `<b>Rating:</b> ${starRating} (${numericRating}/5)\n` +
+                       `<b>User:</b> ${name} (${email})\n\n` +
+                       `<b>Comment:</b>\n${message}`;
 
-  const feedbackPayload = {
-    personalizations: [
-      {
-        to: [{ email: recipient }],
-        subject: `[RebelRoot Feedback] - ${product} (${rating}/5 Stars)`,
-      },
+  // Color embed based on user rating (Green for high, Yellow for medium, Red for low)
+  const discordColor = numericRating >= 4 ? 3066993 : numericRating <= 2 ? 15158332 : 15844367;
+
+  const discordEmbed = {
+    title: `⭐️ New Product Feedback: ${product}`,
+    color: discordColor,
+    fields: [
+      { name: "Rating", value: `${starRating} (${numericRating}/5)`, inline: true },
+      { name: "User Name", value: name, inline: true },
+      { name: "User Email", value: email, inline: true },
+      { name: "Feedback Comment", value: message, inline: false },
     ],
-    from: { email: sender },
-    reply_to: { email: email, name: name },
-    content: [
-      {
-        type: "text/plain",
-        value: `Feedback Received for RebelRoot Project:\n\n` +
-               `Product: ${product}\n` +
-               `Rating: ${starRating} (${rating}/5)\n` +
-               `Submitter Name: ${name}\n` +
-               `Submitter Email: ${email}\n\n` +
-               `Feedback Message:\n${message}`,
-      },
-    ],
+    timestamp: new Date().toISOString(),
   };
 
-  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.SENDGRID_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(feedbackPayload),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    return new Response(JSON.stringify({ error: `SendGrid error forwarding: ${errorText}` }), {
-      status: response.status,
-      headers: getCorsHeaders({ "Content-Type": "application/json" }),
-    });
-  }
+  await sendNotification(env, telegramText, discordEmbed);
 
   return new Response(null, {
     status: 204,
     headers: getCorsHeaders(),
   });
+}
+
+/* ─── Notification Dispatcher ─── */
+
+async function sendNotification(env: Env, telegramText: string, discordEmbed: any) {
+  const promises: Promise<any>[] = [];
+
+  // Send to Telegram if configured
+  if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
+    const telegramUrl = `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`;
+    const promise = fetch(telegramUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: env.TELEGRAM_CHAT_ID,
+        text: telegramText,
+        parse_mode: "HTML",
+      }),
+    }).then(async (res) => {
+      if (!res.ok) {
+        console.error("Telegram API Error:", await res.text());
+      }
+    });
+    promises.push(promise);
+  }
+
+  // Send to Discord if configured
+  if (env.DISCORD_WEBHOOK_URL) {
+    const promise = fetch(env.DISCORD_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        embeds: [discordEmbed],
+      }),
+    }).then(async (res) => {
+      if (!res.ok) {
+        console.error("Discord Webhook Error:", await res.text());
+      }
+    });
+    promises.push(promise);
+  }
+
+  if (promises.length === 0) {
+    console.warn("No notification channels (Telegram or Discord) are configured in the environment.");
+  } else {
+    await Promise.all(promises);
+  }
 }
 
 /* ─── CORS Helpers ─── */

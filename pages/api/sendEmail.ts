@@ -1,12 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const sgMail = require('@sendgrid/mail');
-
 export default async function SendEmail(req: NextApiRequest, res: NextApiResponse) {
   const { subject, description, email, name } = req.body;
   const referer = req.headers.referer;
 
-  // Delegate to Cloudflare Worker if configured
+  // 1. Delegate to Cloudflare Worker if configured
   const workerUrl = process.env.CLOUDFLARE_WORKER_URL;
   if (workerUrl) {
     try {
@@ -30,26 +28,65 @@ export default async function SendEmail(req: NextApiRequest, res: NextApiRespons
     }
   }
 
-  // Fallback to local SendGrid integration
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  // 2. Direct Fallback to Telegram/Discord in Next.js Serverless runtime
+  const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+  const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+  const discordWebhook = process.env.DISCORD_WEBHOOK_URL;
 
-  const content = {
-    to: ['rebelroot.ltd@gmail.com'],
-    from: 'rebelroot.ltd@gmail.com',
-    subject: subject,
-    text: description,
-    html: `<div>
-    <h1>Name: ${name}</h1>
-    <h1>E-mail: ${email}</h1>
-    <p>${description}</p>
-    <p>Sent from: ${referer || 'Not specified or hidden'}`,
+  const telegramText = `<b>📬 New Contact Submission (Local Backend)</b>\n\n` +
+                       `<b>Subject:</b> ${subject || "Contact Form Inquiry"}\n` +
+                       `<b>Name:</b> ${name}\n` +
+                       `<b>Email:</b> ${email}\n\n` +
+                       `<b>Message:</b>\n${description}`;
+
+  const discordEmbed = {
+    title: "📬 New Contact Submission (Local Backend)",
+    color: 3447003,
+    fields: [
+      { name: "Subject", value: subject || "Contact Form Inquiry", inline: false },
+      { name: "Name", value: name, inline: true },
+      { name: "Email", value: email, inline: true },
+      { name: "Message", value: description, inline: false },
+    ],
+    timestamp: new Date().toISOString(),
   };
 
-  try {
-    await sgMail.send(content);
-    res.status(204).end();
-  } catch (error) {
-    console.log('ERROR', error);
-    res.status(400).send({ message: error });
+  const promises: Promise<any>[] = [];
+
+  if (telegramToken && telegramChatId) {
+    promises.push(
+      fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: telegramText,
+          parse_mode: 'HTML',
+        }),
+      })
+    );
   }
+
+  if (discordWebhook) {
+    promises.push(
+      fetch(discordWebhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [discordEmbed],
+        }),
+      })
+    );
+  }
+
+  if (promises.length > 0) {
+    try {
+      await Promise.all(promises);
+      return res.status(204).end();
+    } catch (err: any) {
+      return res.status(500).send({ message: `Notification dispatch failed: ${err.message}` });
+    }
+  }
+
+  return res.status(500).send({ message: 'No notification channels (Cloudflare Worker, Telegram, or Discord) are configured.' });
 }
