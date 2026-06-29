@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function SendFeedback(req: NextApiRequest, res: NextApiResponse) {
   const { name, email, rating, product, message } = req.body;
 
-  // 1. Delegate to Cloudflare Worker if configured
-  const workerUrl = process.env.CLOUDFLARE_WORKER_URL;
+  // 1. Delegate to Cloudflare Worker
+  const workerUrl = process.env.CLOUDFLARE_WORKER_URL || 'https://rebelroot-backend.parasdevprojects.workers.dev';
   if (workerUrl) {
     try {
       const response = await fetch(`${workerUrl.replace(/\/$/, '')}/api/feedback`, {

@@ -4,8 +4,8 @@ export default async function SendEmail(req: NextApiRequest, res: NextApiRespons
   const { subject, description, email, name } = req.body;
   const referer = req.headers.referer;
 
-  // 1. Delegate to Cloudflare Worker if configured
-  const workerUrl = process.env.CLOUDFLARE_WORKER_URL;
+  // 1. Delegate to Cloudflare Worker
+  const workerUrl = process.env.CLOUDFLARE_WORKER_URL || 'https://rebelroot-backend.parasdevprojects.workers.dev';
   if (workerUrl) {
     try {
       const response = await fetch(`${workerUrl.replace(/\/$/, '')}/api/send-email`, {
