@@ -203,7 +203,7 @@ export default function SupportPage() {
                   <KofiIcon>☕</KofiIcon> Buy us a Ko-fi
                 </KofiButton>
 
-                <PayPalButton href="https://paypal.me/rebelroot" target="_blank" rel="noopener noreferrer">
+                <PayPalButton href="https://paypal.me/EnLightBro" target="_blank" rel="noopener noreferrer">
                   <PayPalIcon>💳</PayPalIcon> Support on PayPal
                 </PayPalButton>
               </SupportButtonsGroup>
