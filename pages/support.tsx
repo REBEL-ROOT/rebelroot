@@ -427,6 +427,11 @@ const Select = styled.select`
   &:focus {
     border-color: rgb(var(--primary));
   }
+
+  option {
+    background: rgb(var(--secondBackground));
+    color: rgb(var(--text));
+  }
 `;
 
 const Textarea = styled(Input)`

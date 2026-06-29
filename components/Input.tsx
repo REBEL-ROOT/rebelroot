@@ -7,11 +7,17 @@ const Input = styled.input`
   font-size: 1.6rem;
   padding: 1.8rem;
   box-shadow: var(--shadow-md);
-  /* color: rgb(var(--textSecondary)); */
+  color: rgb(var(--text));
+
+  &::placeholder {
+    color: rgb(var(--textSecondary));
+    opacity: 0.6;
+  }
 
   &:focus {
     outline: none;
     box-shadow: var(--shadow-lg);
+    border-color: rgb(var(--primary));
   }
 `;
 
