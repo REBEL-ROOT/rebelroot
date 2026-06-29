@@ -41,7 +41,7 @@ const footerItems: FooterItems = [
     items: [
       { title: 'GitHub Organization', href: 'https://github.com/rebelroot' },
       { title: 'LinkedIn', href: 'https://www.linkedin.com/company/rebelroot/' },
-      { title: 'Support & Sponsors', href: '/pricing' },
+      { title: 'Support & Feedback', href: '/support' },
     ],
   },
 ];
