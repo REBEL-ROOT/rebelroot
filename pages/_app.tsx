@@ -22,9 +22,9 @@ import { NavItems } from 'types';
 const navItems: NavItems = [
   { title: 'Products', href: '/features' },
   { title: 'About', href: '/about' },
-  { title: 'Sponsorship', href: '/pricing' },
+  { title: 'Support & Feedback', href: '/support' },
   { title: 'Contact', href: '/contact' },
-  { title: 'Contribute', href: '/pricing', outlined: true },
+  { title: 'Contribute', href: '/support', outlined: true },
 ];
 
 const TinaCMS = dynamic(() => import('tinacms'), { ssr: false });
