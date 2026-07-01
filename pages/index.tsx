@@ -22,15 +22,15 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         <title>{EnvVars.SITE_NAME} | Open-Source &amp; Privacy-First Digital Tools</title>
         <meta
           name="description"
-          content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office."
+          content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office."
         />
-        <meta name="keywords" content="RebelRoot, open source collective, Omni Browser, MOCNovel, CampCart, Ved Astra, MOC Office, PDF reader Android, privacy mobile browser, secure reading app, student marketplace, edge computing, decentralized apps, Gemini AI" />
+        <meta name="keywords" content="RebelRoot, open source collective, Omni Browser, MOCNovel, CampCart, Openved, MOC Office, PDF reader Android, privacy mobile browser, secure reading app, student marketplace, edge computing, decentralized apps, Gemini AI" />
         <link rel="canonical" href="https://rebelroot.xyz" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="RebelRoot | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta property="og:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office." />
+        <meta property="og:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office." />
         <meta property="og:url" content="https://rebelroot.xyz" />
         <meta property="og:site_name" content="RebelRoot" />
         <meta property="og:image" content="https://rebelroot.xyz/ic_omni_logo.webp" />
@@ -38,7 +38,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="RebelRoot | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta name="twitter:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office." />
+        <meta name="twitter:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office." />
         <meta name="twitter:image" content="https://rebelroot.xyz/ic_omni_logo.webp" />
 
         {/* Search Engine Directives */}
@@ -54,7 +54,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               "name": "RebelRoot",
               "url": "https://rebelroot.xyz",
               "logo": "https://rebelroot.xyz/ic_omni_logo.webp",
-              "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Ved Astra, and MOC Office.",
+              "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office.",
               "sameAs": [
                 "https://github.com/rebelroot"
               ]
@@ -97,7 +97,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               </Button>
             </NextLink>
           </BasicSection>
-          <BasicSection imageUrl="/demo-illustration-2.svg" title="MOCNovel: Read and Write Without Restrictive Borders" overTitle="DECENTRALIZED PUBLISHING & READING" reversed>
+          <BasicSection imageUrl="/demo-illustration-2.svg" title="MOCNovel: Read and Write Without Restrictive Borders" overTitle="DECENTRALIZED PUBLISHING & READING — BETA" reversed>
             <p>
               MOCNovel brings independent authors and readers together in a modern, ad-free publishing ecosystem. Take full control of your digital library, customize your reader layout, and sync your reading state across all of your devices.
             </p>
@@ -106,8 +106,11 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>Robust offline reading with decentralized library synchronization</li>
               <li>Markdown-friendly publishing workspace for independent writers</li>
             </ul>
+            <div style={{ display: 'inline-block', background: 'rgba(255,165,0,0.12)', border: '1px solid rgba(255,165,0,0.45)', borderRadius: '2rem', padding: '0.4rem 1.4rem', marginTop: '1.5rem', marginBottom: '0.5rem', fontSize: '1.3rem', fontWeight: 700, color: '#FFA500' }}>
+              🚧 Beta Under Development — MocNovel.com
+            </div>
             <NextLink href="/mocnovel" passHref>
-              <Button style={{ marginTop: '2.5rem' }}>
+              <Button style={{ marginTop: '1.5rem' }}>
                 Explore MOCNovel <span>&rarr;</span>
               </Button>
             </NextLink>
@@ -132,9 +135,9 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               </Button>
             </ButtonGroup>
           </BasicSection>
-          <BasicSection imageUrl="/vedastra-screenshot.png" title="Ved Astra: Vedic Wisdom Powered by Modern Edge AI" overTitle="COSMIC AI NAVIGATOR" reversed>
+          <BasicSection imageUrl="/vedastra-screenshot.png" title="Openved: Vedic Wisdom Powered by Modern Edge AI" overTitle="COSMIC AI NAVIGATOR" reversed>
             <p>
-              Ved Astra combines the mathematical precision of astrological computations with the reasoning power of Google Gemini. Get personalized Kundli insights, 36-point compatibility checks, and transit readings on a secure, local-first interface.
+              Openved combines the mathematical precision of astrological computations with the reasoning power of Google Gemini. Get personalized Kundli insights, 36-point compatibility checks, and transit readings on a secure, local-first interface.
             </p>
             <ul>
               <li>High-accuracy planetary coordinates using the VedAstro engine</li>
@@ -147,8 +150,8 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
                   Explore Details <span>&rarr;</span>
                 </Button>
               </NextLink>
-              <Button href="https://vedastra.pages.dev/" target="_blank" rel="noopener noreferrer" transparent>
-                Launch App <span>&rarr;</span>
+              <Button href="https://openved.com" target="_blank" rel="noopener noreferrer" transparent>
+                Visit Openved.com <span>&rarr;</span>
               </Button>
             </ButtonGroup>
           </BasicSection>
@@ -161,8 +164,11 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>AMOLED black theme and Material You dynamic color support</li>
               <li>Full-text search, bookmarks, auto-scroll, and table of contents</li>
             </ul>
+            <div style={{ display: 'inline-block', background: 'rgba(255,100,100,0.1)', border: '1px solid rgba(255,100,100,0.4)', borderRadius: '2rem', padding: '0.4rem 1.4rem', marginTop: '1.5rem', marginBottom: '0.5rem', fontSize: '1.3rem', fontWeight: 700, color: '#FF6464' }}>
+              🛠️ In Development — Release: 18 August
+            </div>
             <NextLink href="/mocoffice" passHref>
-              <Button style={{ marginTop: '2.5rem' }}>
+              <Button style={{ marginTop: '1.5rem' }}>
                 Explore MOC Office <span>&rarr;</span>
               </Button>
             </NextLink>

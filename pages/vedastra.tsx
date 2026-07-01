@@ -11,7 +11,7 @@ export default function VedAstraPage() {
 
   return (
     <Page
-      title="Ved Astra"
+      title="Openved"
       description="A premium, open-source Vedic astrology platform combining classical Kundli &amp; Panchang computation with Google Gemini&apos;s reasoning. Built with Jetpack Compose, FastAPI, and Gemini AI."
     >
       <Head>
@@ -22,7 +22,7 @@ export default function VedAstraPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "Ved Astra",
+              "name": "Openved",
               "operatingSystem": "Android, Web",
               "applicationCategory": "LifestyleApplication",
               "offers": {
@@ -64,8 +64,8 @@ export default function VedAstraPage() {
             </Subtitle>
 
             <CTAWrapper>
-              <Button href="https://vedastra.pages.dev" target="_blank" rel="noopener noreferrer">
-                Visit vedastra.pages.dev <span>&rarr;</span>
+              <Button href="https://openved.com" target="_blank" rel="noopener noreferrer">
+                Visit Openved.com <span>&rarr;</span>
               </Button>
               <Button href="https://github.com/rebelroot" target="_blank" rel="noopener noreferrer" transparent>
                 Explore GitHub <span>&rarr;</span>
@@ -282,10 +282,13 @@ export default function VedAstraPage() {
         <BottomCTASection>
           <Container>
             <CTAInner>
-              <h3>Contribute to Ved Astra</h3>
+              <h3>Contribute to Openved</h3>
               <p>We welcome code audits, additional Astro-remedy formulations, translation updates, and mobile layout fixes.</p>
               <ButtonGroup>
-                <Button href="https://github.com/rebelroot" target="_blank" rel="noopener noreferrer">
+                <Button href="https://openved.com" target="_blank" rel="noopener noreferrer">
+                  Visit Openved.com <span>&rarr;</span>
+                </Button>
+                <Button href="https://github.com/rebelroot" target="_blank" rel="noopener noreferrer" transparent>
                   Explore Repository <span>&rarr;</span>
                 </Button>
                 <Button href="/vedastra/privacy-policy">

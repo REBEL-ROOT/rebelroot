@@ -15,7 +15,7 @@ const footerItems: FooterItems = [
       { title: 'Privacy Policy', href: '/privacy-policy' },
       { title: 'Cookies Policy', href: '/cookies-policy' },
       { title: 'Omni Privacy Policy', href: '/omnibrowser/privacy-policy' },
-      { title: 'Ved Astra Privacy Policy', href: '/vedastra/privacy-policy' },
+      { title: 'Openved Privacy Policy', href: '/vedastra/privacy-policy' },
     ],
   },
   {
@@ -24,7 +24,7 @@ const footerItems: FooterItems = [
       { title: 'Omni Browser', href: '/omnibrowser' },
       { title: 'MOCNovel', href: '/mocnovel' },
       { title: 'CampCart', href: '/campcart' },
-      { title: 'Ved Astra', href: '/vedastra' },
+      { title: 'Openved', href: '/vedastra' },
       { title: 'MOC Office', href: '/mocoffice' },
     ],
   },

@@ -52,6 +52,11 @@ export default function MocOfficePage() {
             <OverTitle>Android PDF Suite</OverTitle>
             <Title>Your Documents. Your Device. Your Rules.</Title>
 
+            {/* Status Badge */}
+            <div style={{ display: 'inline-block', background: 'rgba(255,100,100,0.12)', border: '1px solid rgba(255,100,100,0.45)', borderRadius: '2rem', padding: '0.5rem 1.6rem', marginBottom: '2rem', fontSize: '1.4rem', fontWeight: 700, color: '#FF6464', letterSpacing: '0.04em' }}>
+              🛠️ In Development — Release Date: 18 August
+            </div>
+
             {/* Tech Badges */}
             <BadgeContainer>
               <Badge color="#4F73E6">Kotlin 100%</Badge>

@@ -49,6 +49,9 @@ export default function MocNovelPage() {
             <Subtitle>
               MOC Novel is a modern, zero-telemetry, zero-ad publishing platform designed to connect independent authors directly with their audience. Empowered by modern LLMs and real-time synchronization.
             </Subtitle>
+            <div style={{ display: 'inline-block', background: 'rgba(255,165,0,0.15)', border: '1px solid rgba(255,165,0,0.5)', borderRadius: '2rem', padding: '0.5rem 1.6rem', marginBottom: '2rem', fontSize: '1.4rem', fontWeight: 700, color: '#FFA500', letterSpacing: '0.04em' }}>
+              🚧 Beta Under Development — MocNovel.com
+            </div>
             <CTAWrapper>
               <Button href="https://mocnovel.com" target="_blank" rel="noopener noreferrer">
                 Visit mocnovel.com <span>&rarr;</span>
@@ -278,7 +281,7 @@ export default function MocNovelPage() {
           <Container>
             <CTAContainer>
               <h3>Experience MOC Novel Live</h3>
-              <p>Explore the reading catalog, try out the conversational AI advisor, and see the platform in action.</p>
+              <p>Explore the reading catalog, try out the conversational AI advisor, and see the platform in action. Currently in beta — more features shipping soon.</p>
               <Button href="https://mocnovel.com" target="_blank" rel="noopener noreferrer">
                 Launch Platform <span>&rarr;</span>
               </Button>

@@ -15,9 +15,9 @@ const FEATURES = [
   },
   {
     imageUrl: '/grid-icons/asset-2.svg',
-    title: 'MOCNovel',
+    title: 'MOCNovel — Beta Under Development',
     description:
-      'A decentralized publishing and immersive reading platform for independent authors and readers. Zero ads, tracking, or fees.',
+      'A decentralized publishing and immersive reading platform for independent authors and readers. Zero ads, tracking, or fees. Currently in beta at MocNovel.com.',
     href: '/mocnovel',
   },
   {
@@ -29,14 +29,14 @@ const FEATURES = [
   },
   {
     imageUrl: '/grid-icons/asset-5.svg',
-    title: 'Ved Astra',
+    title: 'Openved',
     description:
-      'A premium, open-source Vedic astrology app built with Jetpack Compose, FastAPI, and Gemini AI for precise Kundli, Panchang, and compatibility matching.',
+      'A premium, open-source Vedic astrology app built with Jetpack Compose, FastAPI, and Gemini AI for precise Kundli, Panchang, and compatibility matching. Available at Openved.com.',
     href: '/vedastra',
   },
   {
     imageUrl: '/grid-icons/asset-6.svg',
-    title: 'MOC Office',
+    title: 'MOC Office — In Development (Release: 18 August)',
     description:
       'A modern, privacy-first PDF reader and editing suite for Android. 12 built-in tools including merge, split, compress, lock/unlock — 100% offline, zero trackers.',
     href: '/mocoffice',
