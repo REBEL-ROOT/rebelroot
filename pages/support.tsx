@@ -230,6 +230,10 @@ const HeaderContainer = styled.div`
   text-align: center;
   max-width: 80rem;
   margin: 0 auto 6rem auto;
+
+  ${media('<=phone')} {
+    margin-bottom: 3rem;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -237,6 +241,11 @@ const Subtitle = styled.p`
   line-height: 1.6;
   opacity: 0.8;
   margin-top: 2rem;
+
+  ${media('<=phone')} {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+  }
 `;
 
 const ContentGrid = styled.div`
@@ -247,6 +256,11 @@ const ContentGrid = styled.div`
 
   ${media('<=desktop')} {
     grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  ${media('<=phone')} {
+    gap: 2rem;
   }
 `;
 
@@ -259,6 +273,10 @@ const Card = styled.div`
 
   ${media('<=tablet')} {
     padding: 3rem;
+  }
+
+  ${media('<=phone')} {
+    padding: 2rem;
   }
 `;
 
@@ -285,6 +303,8 @@ const RightColumn = styled.div`
 const DonateCard = styled(Card)`
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 const DonateBadge = styled.span`
@@ -299,6 +319,13 @@ const DonateBadge = styled.span`
   border-radius: 2rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+
+  ${media('<=tablet')} {
+    position: static;
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const QrContainer = styled.div`
@@ -317,6 +344,8 @@ const QrContainer = styled.div`
 const QrCodeImage = styled.img`
   width: 20rem;
   height: 20rem;
+  max-width: 100%;
+  height: auto;
   display: block;
 `;
 
@@ -329,6 +358,13 @@ const UpiDetails = styled.div`
   padding: 1.2rem 2rem;
   border-radius: 0.8rem;
   border: 1px dashed rgba(var(--text), 0.1);
+
+  ${media('<=phone')} {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.2rem 1.5rem;
+    gap: 0.4rem;
+  }
 `;
 
 const VpaLabel = styled.span`
