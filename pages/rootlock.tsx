@@ -281,9 +281,7 @@ const Title = styled.h1`
   line-height: 1.2;
   margin: 1.5rem 0 2rem;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, rgb(var(--text)) 0%, rgba(var(--text), 0.7) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: rgb(var(--text));
 
   ${media('<=tablet')} {
     font-size: 3.6rem;
