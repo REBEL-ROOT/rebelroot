@@ -204,6 +204,29 @@ export default function OmniBrowserPage() {
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
+
+              {/* Feature 6: Unified Quick Tools */}
+              <ShowcaseBlock reverse>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/quick_tools.png" alt="Quick Tools Drawer" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>Utility Suite</ShowcaseTag>
+                  <ShowcaseTitle>Unified Quick Tools Panel</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    Access translators, scanners, code consoles, page style injectors, and auto-scrollers in a single bottom sheet.
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>🚀 **One-Tap Access:** Swipe up or tap the header menu to display the tool sheet.</li>
+                    <li>🎛️ **Drag-to-Reorder:** Hold and drag tiles to personalize your layout grid based on your daily workflow.</li>
+                    <li>🧩 **12+ Native Tools:** Pre-bundled with offline tools like a JavaScript dev console, PWA pinners, and code generator.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
             </ShowcaseGrid>
           </Container>
         </ShowcaseSection>
