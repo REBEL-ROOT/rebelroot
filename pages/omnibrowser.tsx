@@ -90,31 +90,54 @@ export default function OmniBrowserPage() {
             </ShowcaseDescription>
 
             <ShowcaseGrid>
-              {/* Feature 1: Notepad & Vault */}
+              {/* Feature 1: Safe Locker */}
               <ShowcaseBlock>
                 <ShowcaseImageSide>
                   <PhoneFrame>
                     <PhoneBezel />
                     <PhoneNotch />
-                    <ScreenshotImage src="/omni/safe_locker.png" alt="Notepad and Vault Feature" />
+                    <ScreenshotImage src="/omni/safe_locker.png" alt="Safe Locker Feature" />
                   </PhoneFrame>
                 </ShowcaseImageSide>
                 <ShowcaseTextSide>
-                  <ShowcaseTag>Privacy Vault</ShowcaseTag>
-                  <ShowcaseTitle>Notepad &amp; Vault (Safe Locker)</ShowcaseTitle>
+                  <ShowcaseTag>Privacy Sandbox</ShowcaseTag>
+                  <ShowcaseTitle>Safe Locker (Vault)</ShowcaseTitle>
                   <ShowcaseParagraph>
-                    Omni features a secure, local-first database and file sandbox isolated from standard Android storage directories. 
+                    Omni features a dedicated, hardware-secured directory sandbox that isolates and encrypts private files away from standard Android shared storage.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>🔒 **Hardware Encrypted:** Secured with AES-256 GCM (`EncryptedFile`) backed by Android KeyStore.</li>
-                    <li>🔑 **Biometric Integration:** Open your vault and notes securely with fingerprint authentication or lock pattern.</li>
-                    <li>📝 **Structured Storage:** Organize sensitive notes, passwords, API keys, or dynamic codes in distinct filterable chips.</li>
+                    <li>🔒 **Hardware Encrypted:** Secured with AES-256 GCM (`EncryptedFile`) backed by KeyStore keys.</li>
+                    <li>🔑 **Biometric Integration:** Open your vault folders securely using fingerprint verification or system PIN code.</li>
+                    <li>📂 **Category Folders:** Instantly organizes your private downloads into Docs, Videos, Images, Epub, and Txt directories.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
 
-              {/* Feature 2: GeckoView Extensions Engine */}
+              {/* Feature 2: Notepad & Vault (DevNotes) */}
               <ShowcaseBlock reverse>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/notepad_vault.png" alt="Notepad and Vault Feature" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>Developer Tools</ShowcaseTag>
+                  <ShowcaseTitle>Notepad &amp; Vault (DevNotes)</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    A secure offline notepad and scratchpad custom-tailored for saving sensitive texts, API keys, developer snippets, and login secrets.
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>📝 **Filterable Chips:** Switch categories instantly using tab selectors: All, Notes, Codes, and Keys.</li>
+                    <li>🔍 **Fuzzy Local Search:** Scan and find your stored codes and developer notes using indexed search.</li>
+                    <li>🎙️ **Voice Scratchpad:** Capture concepts hands-free using local, on-device audio transcription.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
+
+              {/* Feature 3: GeckoView Extensions Engine */}
+              <ShowcaseBlock>
                 <ShowcaseImageSide>
                   <PhoneFrame>
                     <PhoneBezel />
@@ -136,8 +159,8 @@ export default function OmniBrowserPage() {
                 </ShowcaseTextSide>
               </ShowcaseBlock>
 
-              {/* Feature 3: Custom Site Style Engine */}
-              <ShowcaseBlock>
+              {/* Feature 4: Custom Site Style Engine */}
+              <ShowcaseBlock reverse>
                 <ShowcaseImageSide>
                   <PhoneFrame>
                     <PhoneBezel />
@@ -159,8 +182,8 @@ export default function OmniBrowserPage() {
                 </ShowcaseTextSide>
               </ShowcaseBlock>
 
-              {/* Feature 4: ExoPlayer Native Video */}
-              <ShowcaseBlock reverse>
+              {/* Feature 5: ExoPlayer Native Video */}
+              <ShowcaseBlock>
                 <ShowcaseImageSide>
                   <PhoneFrame>
                     <PhoneBezel />
