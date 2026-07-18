@@ -8,10 +8,9 @@ import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
 export default function OmniBrowserPage() {
-
   return (
     <Page
-      title="Omni Browser"
+      title="Omni Browser | RebelRoot"
       description="A premium, privacy-first mobile web browser for Android built with Jetpack Compose & GeckoView engine."
     >
       <Head>
@@ -53,30 +52,194 @@ export default function OmniBrowserPage() {
             
             {/* Tech Badges */}
             <BadgeContainer>
-              <Badge color="#4F73E6">Kotlin 1.9.24</Badge>
+              <Badge color="#4F73E6">Kotlin 1.9</Badge>
               <Badge color="#4CAF50">Compose Material 3</Badge>
               <Badge color="#FF9800">GeckoView v145</Badge>
-              <Badge color="#9C27B0">MIT License</Badge>
+              <Badge color="#9C27B0">GPLv3 License</Badge>
             </BadgeContainer>
 
             <Subtitle>
-              Omni Browser is a state-of-the-art mobile browser developed by the RebelRoot collective. Powered by Mozilla&apos;s GeckoView engine, it provides built-in ad blocking, Firefox extensions, offline ML translation, and secure sandbox mechanics.
+              Omni Browser is a state-of-the-art mobile browser developed by the RebelRoot collective. Powered by Mozilla&apos;s GeckoView engine, it provides built-in ad blocking, native Firefox extensions, offline ML translation, and hardware-secured sandbox vault mechanics.
             </Subtitle>
 
             <CTAWrapper>
-              <Button href="https://play.google.com/store/apps/details?id=com.rebelroot.omni" target="_blank" rel="noopener noreferrer">
-                Download on Google Play <span>&rarr;</span>
+              <Button href="https://github.com/REBEL-ROOT/omni-browser/releases/latest" target="_blank" rel="noopener noreferrer">
+                Download APK Release <span>&rarr;</span>
               </Button>
               <Button href="https://github.com/rebelroot/omni-browser" target="_blank" rel="noopener noreferrer" transparent>
                 View Source on GitHub <span>&rarr;</span>
               </Button>
             </CTAWrapper>
 
-            <ScreenshotWrapper>
-              <ScreenshotImage src="/omni-browser-screenshot.png" alt="Omni Browser Mobile User Interface" />
-            </ScreenshotWrapper>
+            <HeroFrameWrapper>
+              <PhoneFrame>
+                <PhoneBezel />
+                <PhoneNotch />
+                <ScreenshotImage src="/omni/home.png" alt="Omni Browser Home Screen" />
+              </PhoneFrame>
+            </HeroFrameWrapper>
           </IntroContent>
         </IntroSection>
+
+        {/* Core Product Showcases */}
+        <ShowcaseSection>
+          <Container>
+            <SectionTitle>Product Showcases</SectionTitle>
+            <ShowcaseDescription>
+              Explore the advanced offline tools, privacy containers, and visual customizers packed inside Omni.
+            </ShowcaseDescription>
+
+            <ShowcaseGrid>
+              {/* Feature 1: Notepad & Vault */}
+              <ShowcaseBlock>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/notepad_vault.png" alt="Notepad and Vault Feature" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>Privacy Vault</ShowcaseTag>
+                  <ShowcaseTitle>Notepad &amp; Vault (Safe Locker)</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    Omni features a secure, local-first database and file sandbox isolated from standard Android storage directories. 
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>🔒 **Hardware Encrypted:** Secured with AES-256 GCM (`EncryptedFile`) backed by Android KeyStore.</li>
+                    <li>🔑 **Biometric Integration:** Open your vault and notes securely with fingerprint authentication or lock pattern.</li>
+                    <li>📝 **Structured Storage:** Organize sensitive notes, passwords, API keys, or dynamic codes in distinct filterable chips.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
+
+              {/* Feature 2: GeckoView Extensions Engine */}
+              <ShowcaseBlock reverse>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/extensions_menu.png" alt="Extensions Manager Screen" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>Extensibility</ShowcaseTag>
+                  <ShowcaseTitle>GeckoView WebExtensions Engine</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    Unlike standard WebViews that block add-ons, Omni features full integration with Mozilla&apos;s WebExtension controller to run desktop-grade plugins.
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>🔌 **Install .xpi Add-ons:** Install extensions directly from addons.mozilla.org (AMO) or local files.</li>
+                    <li>🛡️ **Pre-bundled Shields:** Comes with uBlock Origin pre-configured to block ads, trackers, and miners instantly.</li>
+                    <li>👾 **User Script Injectors:** Leverage Violentmonkey integration to load custom userscripts and CSS overlays.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
+
+              {/* Feature 3: Custom Site Style Engine */}
+              <ShowcaseBlock>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/customize_style.png" alt="Customize Site Style Dashboard" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>User Experience</ShowcaseTag>
+                  <ShowcaseTitle>Customize Site Style Engine</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    Tailor any website to your reading comfort with Omni&apos;s advanced real-time custom stylesheet injection utility.
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>🎨 **Theme Presets:** One-tap switching between Original, Dark, Sepia, Forest, and high-contrast OLED black themes.</li>
+                    <li>📏 **Spacing Adjustments:** Fine-tune line-height, letter-spacing, and font sizes dynamically.</li>
+                    <li>👓 **Accessibility Filters:** Enable Grayscale, Night Light (amber eye protection), or hide web images to save mobile data.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
+
+              {/* Feature 4: ExoPlayer Native Video */}
+              <ShowcaseBlock reverse>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/native_player.png" alt="Native Media Player Screen" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>Media Engine</ShowcaseTag>
+                  <ShowcaseTitle>Advanced Video Player (PiP)</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    Omni overrides default web video elements with an embedded hardware ExoPlayer container, capturing background audio and multi-tasking layouts.
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>📺 **Picture-in-Picture:** Swipe out of the app to overlay floating windows on your Android home screen.</li>
+                    <li>🎛️ **Gesture Controls:** Control brightness (left margin) and volume (right margin) with vertical swipe gestures.</li>
+                    <li>📥 **Stream Sniffer:** Automatically intercepts HLS (m3u8), DASH (mpd), and MSE segments for native play or download.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
+            </ShowcaseGrid>
+          </Container>
+        </ShowcaseSection>
+
+        {/* Feature Highlights Grid */}
+        <FeaturesSection>
+          <Container>
+            <SectionTitle>Engineered Utilities</SectionTitle>
+            <FeaturesGrid>
+              <FeatureCard>
+                <CardIconWrapper>🧠</CardIconWrapper>
+                <CardTitle>On-Device ML Translator</CardTitle>
+                <CardDescription>
+                  Translate entire web pages offline. Omni bundles <strong>Google ML Kit</strong> local translation packages to translate across 14 languages without hitting cloud servers.
+                </CardDescription>
+              </FeatureCard>
+
+              <FeatureCard>
+                <CardIconWrapper>📄</CardIconWrapper>
+                <CardTitle>Doc Scanner (ML Edge)</CardTitle>
+                <CardDescription>
+                  Zero-permission document scanner powered by Google Play Services ML. Automatically detects document edges, crop-aligns, and sharpens text completely offline.
+                </CardDescription>
+              </FeatureCard>
+
+              <FeatureCard>
+                <CardIconWrapper>📋</CardIconWrapper>
+                <CardTitle>Universal Text Copy</CardTitle>
+                <CardDescription>
+                  Bypasses annoying website copy blockages (such as <code>user-select: none</code> style overrides or context-menu locks) to force text selection.
+                </CardDescription>
+              </FeatureCard>
+
+              <FeatureCard>
+                <CardIconWrapper>🖨️</CardIconWrapper>
+                <CardTitle>Clean PDF Printer</CardTitle>
+                <CardDescription>
+                  Generates clean PDF prints of web articles, automatically stripping floating header banners, cookies pop-ups, and advertisements.
+                </CardDescription>
+              </FeatureCard>
+
+              <FeatureCard>
+                <CardIconWrapper>📌</CardIconWrapper>
+                <CardTitle>Instant Web App Pinning</CardTitle>
+                <CardDescription>
+                  Pin websites directly to your Android home launcher screen as dedicated, isolated PWA-style sandbox containers.
+                </CardDescription>
+              </FeatureCard>
+
+              <FeatureCard>
+                <CardIconWrapper>🔍</CardIconWrapper>
+                <CardTitle>QR Scanner &amp; Generator</CardTitle>
+                <CardDescription>
+                  Scan QR codes and barcodes using the built-in scanner, or convert URLs and text blocks into shareable QR codes instantly.
+                </CardDescription>
+              </FeatureCard>
+            </FeaturesGrid>
+          </Container>
+        </FeaturesSection>
 
         {/* Unidirectional Architecture Flow */}
         <ArchitectureSection>
@@ -85,130 +248,26 @@ export default function OmniBrowserPage() {
             <ArchFlow>
               <ArchNode>
                 <h5>Jetpack Compose UI</h5>
-                <p>Observe state, dispatch interactions</p>
+                <p>Observe state, dispatch user interactions</p>
               </ArchNode>
               <ArchConnector>&rarr;</ArchConnector>
               <ArchNode>
                 <h5>BrowserViewModel</h5>
-                <p>State repository & command handler</p>
+                <p>UDF State repository & command controller</p>
               </ArchNode>
               <ArchConnector>&rarr;</ArchConnector>
               <ArchNode>
                 <h5>GeckoSession</h5>
-                <p>Direct hook into GeckoView rendering</p>
+                <p>Direct hook into GeckoView rendering engine</p>
               </ArchNode>
               <ArchConnector>&rarr;</ArchConnector>
               <ArchNode>
                 <h5>MediaInterceptor</h5>
-                <p>ExoPlayer hardware stream interception</p>
+                <p>ExoPlayer hardware stream interceptor</p>
               </ArchNode>
             </ArchFlow>
           </Container>
         </ArchitectureSection>
-
-        {/* Feature Highlights Grid */}
-        <FeaturesSection>
-          <Container>
-            <SectionTitle>Engineered Features</SectionTitle>
-            <FeaturesGrid>
-              <FeatureCard>
-                <CardIconWrapper>🔌</CardIconWrapper>
-                <CardTitle>Extensions Manager</CardTitle>
-                <CardDescription>
-                  Desktop-Class Web Extensions Manager powered by GeckoView. Full mobile support for desktop add-ons, pre-bundled with <strong>uBlock Origin</strong>, <strong>Universal Text Copy</strong>, and <strong>Aggressive Media Grabber</strong>, complete with a dynamic &quot;Syncing&quot; toggle UI.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>🧠</CardIconWrapper>
-                <CardTitle>On-Device ML Translator</CardTitle>
-                <CardDescription>
-                  Translate entire web pages via proxies or process private, 100% offline text translation across 14 languages utilizing local <strong>Google ML Kit</strong> models.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>🔐</CardIconWrapper>
-                <CardTitle>Safe Locker Vault</CardTitle>
-                <CardDescription>
-                  A secure, biometric-protected private vault. A sandboxed directory that uses hardware-backed <strong>AES-256 encryption (EncryptedFile)</strong> and fingerprint/PIN credentials to safeguard sensitive files.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>📄</CardIconWrapper>
-                <CardTitle>Doc Scanner (ML Edge)</CardTitle>
-                <CardDescription>
-                  Zero-permission document scanner powered by Google Play Services ML Kit. Automatically detects document edges, straightens, crops, and optimizes scans completely offline.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>🔍</CardIconWrapper>
-                <CardTitle>QR Tools Suite</CardTitle>
-                <CardDescription>
-                  Built-in QR code scanner that requires zero camera permissions, paired with a custom QR code generator for instant URL and text sharing.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>📋</CardIconWrapper>
-                <CardTitle>Universal Text Copy</CardTitle>
-                <CardDescription>
-                  Overrides annoying website copy protections (such as <code>user-select: none</code> or custom copy-blocker scripts) to force-enable text selection.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>📥</CardIconWrapper>
-                <CardTitle>Aggressive Media Grabber</CardTitle>
-                <CardDescription>
-                  Automatically sniffs and intercepts background network streams (including HLS/m3u8, DASH, and video blobs) for offline play, routed directly to the native player.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>🛠️</CardIconWrapper>
-                <CardTitle>Unified Quick Tools</CardTitle>
-                <CardDescription>
-                  A one-tap bottom sheet housing scanners, translators, lockers, bookmarks, configuration settings, and browsing history in a clean, unified drawer.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>📝</CardIconWrapper>
-                <CardTitle>Interactive Page Editor</CardTitle>
-                <CardDescription>
-                  &quot;Edit Site&quot; utility turns any loaded webpage into an interactive edit workspace. Tap and modify text in-place for presentation mockups and layout adjustments.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>🖨️</CardIconWrapper>
-                <CardTitle>Clean PDF Maker</CardTitle>
-                <CardDescription>
-                  &quot;Save PDF&quot; feature captures and prints clean PDF copies of webpages, automatically stripping header banners, footer bars, and margins.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>🎥</CardIconWrapper>
-                <CardTitle>Advanced Video Player</CardTitle>
-                <CardDescription>
-                  Native ExoPlayer with swipe gesture controls for brightness (left margin) and volume (right margin), background audio play, and floating Picture-in-Picture (PiP) window overlay.
-                </CardDescription>
-              </FeatureCard>
-
-              <FeatureCard>
-                <CardIconWrapper>📌</CardIconWrapper>
-                <CardTitle>Instant Web App Pinning</CardTitle>
-                <CardDescription>
-                  &quot;Pin Web App&quot; generates shortcut icons on your Android home launcher screen to launch websites in dedicated, sandboxed WebApp containers.
-                </CardDescription>
-              </FeatureCard>
-            </FeaturesGrid>
-          </Container>
-        </FeaturesSection>
 
         {/* Browser Comparison Table */}
         <ComparisonSection>
@@ -330,17 +389,47 @@ export default function OmniBrowserPage() {
           </Container>
         </ComparisonSection>
 
-
+        {/* Roadmap Section */}
+        <RoadmapSectionWrapper>
+          <Container>
+            <SectionTitle>Development Roadmap</SectionTitle>
+            <RoadmapGrid>
+              <RoadmapColumn>
+                <h4>✅ Completed (v1.0 – v1.2.2)</h4>
+                <RoadmapList>
+                  <li>**GeckoView Engine:** Core multi-tab browsing & private modes.</li>
+                  <li>**WebExtension Integration:** Pre-packaged uBlock, Universal Copy, Media Grabber, and AI Blocker.</li>
+                  <li>**Notepad &amp; Vault:** Biometric AES-256 secure offline credentials keeper.</li>
+                  <li>**Omni Player:** Background audio ExoPlayer with swipe gesture volume/brightness.</li>
+                  <li>**ML Translator:** Offline Google ML translation packs.</li>
+                  <li>**QR Suite:** Camera barcode scanning, generator, and in-page scanner.</li>
+                  <li>**UX Enhancements:** Android 15 Edge-to-Edge UI & custom site style presets.</li>
+                </RoadmapList>
+              </RoadmapColumn>
+              <RoadmapColumn>
+                <h4>🔜 Planned (v1.3+)</h4>
+                <RoadmapList>
+                  <li>**Collapsible Tab Groups:** Group and collapse open tabs by custom folders.</li>
+                  <li>**Distraction-Free Reader Mode:** Dedicated page styling overrides for clean text reading.</li>
+                  <li>**Password Manager:** Local biometric credentials vault integration.</li>
+                  <li>**dApp Support:** Web3 client integration for MetaMask-compatible services.</li>
+                  <li>**Local CSS Injection:** Custom user stylesheet rules per domain.</li>
+                  <li>**Encrypted Sync:** Encrypted cloud backup for bookmarks and history.</li>
+                </RoadmapList>
+              </RoadmapColumn>
+            </RoadmapGrid>
+          </Container>
+        </RoadmapSectionWrapper>
 
         {/* Bottom Call To Action */}
         <BottomCTASection>
           <Container>
             <CTAInner>
               <h3>Contribute to Omni Browser</h3>
-              <p>We welcome code audits, battery optimizations, adblock list updates, and localization translations.</p>
+              <p>Omni Browser is free, ad-free, and open source under the GPLv3 license. We welcome code contributions, localization packages, and layout bug reports.</p>
               <ButtonGroup>
-                <Button href="https://play.google.com/store/apps/details?id=com.rebelroot.omni" target="_blank" rel="noopener noreferrer">
-                  Get it on Google Play <span>&rarr;</span>
+                <Button href="https://github.com/REBEL-ROOT/omni-browser/releases/latest" target="_blank" rel="noopener noreferrer">
+                  Download APK <span>&rarr;</span>
                 </Button>
                 <Button href="https://github.com/rebelroot/omni-browser" target="_blank" rel="noopener noreferrer" transparent>
                   GitHub Repository <span>&rarr;</span>
@@ -356,6 +445,8 @@ export default function OmniBrowserPage() {
     </Page>
   );
 }
+
+/* ─── Styled Components ─── */
 
 const MainWrapper = styled.div`
   display: flex;
@@ -384,27 +475,75 @@ const IntroContent = styled(Container)`
   max-width: 80rem;
 `;
 
-const ScreenshotWrapper = styled.div`
-  margin-top: 5rem;
+const HeroFrameWrapper = styled.div`
+  margin-top: 6rem;
+  perspective: 1000px;
   width: 100%;
-  max-width: 32rem;
   display: flex;
   justify-content: center;
-  perspective: 1000px;
+`;
+
+/* Device Frame Mockup */
+const PhoneFrame = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 29rem;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 3.6rem;
+  background: #09090b;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(var(--primary), 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: rotateX(5deg) rotateY(-5deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+
+  &:hover {
+    transform: rotateX(0deg) rotateY(0deg) scale(1.03);
+    box-shadow: 0 35px 80px -10px rgba(0, 0, 0, 0.9), 0 0 50px rgba(var(--primary), 0.25);
+  }
+`;
+
+const PhoneBezel = styled.div`
+  position: absolute;
+  inset: 0.6rem;
+  border: 8px solid #18181b;
+  border-radius: 3rem;
+  pointer-events: none;
+  z-index: 5;
+`;
+
+const PhoneNotch = styled.div`
+  position: absolute;
+  top: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.8rem;
+  height: 1.8rem;
+  background: #18181b;
+  border-radius: 50%;
+  z-index: 10;
+  border: 2px solid #09090b;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.6rem;
+    height: 0.6rem;
+    background: #042f56;
+    border-radius: 50%;
+  }
 `;
 
 const ScreenshotImage = styled.img`
   width: 100%;
-  border-radius: 3rem;
-  border: 10px solid rgb(var(--secondBackground));
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(var(--primary), 0.1);
-  transform: rotateX(5deg);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-
-  &:hover {
-    transform: rotateX(0deg) scale(1.02);
-    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.6), 0 0 50px rgba(var(--primary), 0.2);
-  }
+  height: 100%;
+  object-fit: cover;
+  display: block;
 `;
 
 const BrowserLogoWrapper = styled.div`
@@ -465,9 +604,113 @@ const Subtitle = styled.p`
   font-weight: 400;
 `;
 
-const ArchitectureSection = styled.section`
+/* Alternate Feature Showcase styling */
+const ShowcaseSection = styled.section`
   background: rgb(var(--secondBackground));
   border-top: 1px solid rgba(var(--text), 0.05);
+  border-bottom: 1px solid rgba(var(--text), 0.05);
+`;
+
+const ShowcaseDescription = styled.p`
+  text-align: center;
+  font-size: 1.8rem;
+  max-width: 65rem;
+  margin: 1.5rem auto 6rem auto;
+  opacity: 0.75;
+`;
+
+const ShowcaseGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12rem;
+  margin-top: 6rem;
+
+  ${media('<=tablet')} {
+    gap: 8rem;
+  }
+`;
+
+const ShowcaseBlock = styled.div<{ reverse?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8rem;
+  flex-direction: ${(props) => (props.reverse ? 'row-reverse' : 'row')};
+
+  ${media('<=desktop')} {
+    gap: 4rem;
+  }
+
+  ${media('<=tablet')} {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+  }
+`;
+
+const ShowcaseImageSide = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+`;
+
+const ShowcaseTextSide = styled.div`
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const ShowcaseTag = styled.span`
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgb(var(--primary));
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+`;
+
+const ShowcaseTitle = styled.h3`
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+
+  ${media('<=tablet')} {
+    font-size: 2.6rem;
+  }
+`;
+
+const ShowcaseParagraph = styled.p`
+  font-size: 1.7rem;
+  line-height: 1.6;
+  opacity: 0.8;
+`;
+
+const ShowcaseList = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+
+  li {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 2.5rem;
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: rgb(var(--primary));
+      font-weight: bold;
+    }
+  }
+`;
+
+/* Architecture diagram styling */
+const ArchitectureSection = styled.section`
   border-bottom: 1px solid rgba(var(--text), 0.05);
 `;
 
@@ -486,7 +729,7 @@ const ArchFlow = styled.div`
 `;
 
 const ArchNode = styled.div`
-  background: rgb(var(--background));
+  background: rgb(var(--secondBackground));
   padding: 2.5rem;
   border-radius: 0.8rem;
   border: 1px solid rgba(var(--text), 0.08);
@@ -495,6 +738,11 @@ const ArchNode = styled.div`
   max-width: 24rem;
   box-shadow: var(--shadow-md);
   text-align: center;
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: rgb(var(--primary));
+  }
 
   h5 {
     font-size: 1.7rem;
@@ -521,7 +769,10 @@ const ArchConnector = styled.div`
   }
 `;
 
-const FeaturesSection = styled.section``;
+/* Feature list grid */
+const FeaturesSection = styled.section`
+  background: rgb(var(--background));
+`;
 
 const FeaturesGrid = styled.div`
   display: grid;
@@ -585,65 +836,8 @@ const CardDescription = styled.p`
   }
 `;
 
-
-
-const BottomCTASection = styled.section`
-  background: rgb(var(--background));
-`;
-
-const CTAInner = styled.div`
-  background: linear-gradient(135deg, rgba(var(--primary), 0.1) 0%, rgba(var(--secondary), 0.1) 100%);
-  border: 1px solid rgba(var(--primary), 0.2);
-  border-radius: 1.5rem;
-  padding: 6rem;
-  text-align: center;
-  max-width: 90rem;
-  margin: 0 auto;
-  box-shadow: var(--shadow-lg);
-
-  h3 {
-    font-size: 3.2rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-
-  p {
-    font-size: 1.8rem;
-    opacity: 0.8;
-    margin-bottom: 3.5rem;
-    max-width: 60rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-
-  ${media('<=tablet')} {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-`;
-
-const CTAWrapper = styled.div`
-  display: flex;
-  gap: 2rem;
-  margin-top: 4rem;
-
-  ${media('<=tablet')} {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-`;
-
 const ComparisonSection = styled.section`
-  background: rgb(var(--background));
+  background: rgb(var(--secondBackground));
 `;
 
 const TableWrapper = styled.div`
@@ -704,3 +898,118 @@ const ComparisonTable = styled.table`
   }
 `;
 
+/* Roadmap Styles */
+const RoadmapSectionWrapper = styled.section`
+  background: rgb(var(--background));
+  border-top: 1px solid rgba(var(--text), 0.05);
+`;
+
+const RoadmapGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 5rem;
+
+  ${media('<=tablet')} {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+`;
+
+const RoadmapColumn = styled.div`
+  background: rgb(var(--secondBackground));
+  border: 1px solid rgba(var(--text), 0.06);
+  border-radius: 1.6rem;
+  padding: 4rem;
+  box-shadow: var(--shadow-sm);
+
+  h4 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    color: rgb(var(--text));
+    border-bottom: 2px solid rgba(var(--text), 0.05);
+    padding-bottom: 1.5rem;
+  }
+`;
+
+const RoadmapList = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  li {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 2.5rem;
+
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: rgb(var(--primary));
+      font-size: 2.4rem;
+      line-height: 1;
+      top: -0.2rem;
+    }
+  }
+`;
+
+const BottomCTASection = styled.section`
+  background: rgb(var(--secondBackground));
+  border-top: 1px solid rgba(var(--text), 0.05);
+`;
+
+const CTAInner = styled.div`
+  background: linear-gradient(135deg, rgba(var(--primary), 0.1) 0%, rgba(var(--secondary), 0.1) 100%);
+  border: 1px solid rgba(var(--primary), 0.2);
+  border-radius: 1.5rem;
+  padding: 6rem;
+  text-align: center;
+  max-width: 90rem;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+
+  h3 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    font-size: 1.8rem;
+    opacity: 0.8;
+    margin-bottom: 3.5rem;
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+
+  ${media('<=tablet')} {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+`;
+
+const CTAWrapper = styled.div`
+  display: flex;
+  gap: 2rem;
+  margin-top: 4rem;
+
+  ${media('<=tablet')} {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+`;
