@@ -96,7 +96,7 @@ export default function OmniBrowserPage() {
                   <PhoneFrame>
                     <PhoneBezel />
                     <PhoneNotch />
-                    <ScreenshotImage src="/omni/notepad_vault.png" alt="Notepad and Vault Feature" />
+                    <ScreenshotImage src="/omni/safe_locker.png" alt="Notepad and Vault Feature" />
                   </PhoneFrame>
                 </ShowcaseImageSide>
                 <ShowcaseTextSide>
