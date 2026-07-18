@@ -151,7 +151,7 @@ const NavItemWrapper = styled.li<Partial<SingleNavItem>>`
 
   a {
     display: flex;
-    color: ${(p) => (p.outlined ? 'rgb(var(--textSecondary))' : 'rgb(var(--text), 0.75)')};
+    color: ${(p) => (p.outlined ? '#ffffff' : 'rgb(var(--text), 0.75)')};
     letter-spacing: 0.025em;
     text-decoration: none;
     padding: 0.5rem 1.2rem;
