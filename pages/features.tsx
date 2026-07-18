@@ -43,6 +43,13 @@ const FEATURES = [
   },
   {
     imageUrl: '/grid-icons/asset-4.svg',
+    title: 'RootLock',
+    description:
+      'A premium, privacy-first per-app locker for Android. Secure individual apps with separate credentials backed by a hardened C++17 native security engine.',
+    href: '/rootlock',
+  },
+  {
+    imageUrl: '/grid-icons/asset-7.svg',
     title: 'More Projects Incoming',
     description:
       'We are constantly prototyping new utility toolkits for secure messaging, local sync engines, and developer utilities.',

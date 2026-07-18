@@ -173,6 +173,21 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               </Button>
             </NextLink>
           </BasicSection>
+          <BasicSection imageUrl="/grid-icons/asset-4.svg" title="RootLock: Hardware-Hardened Per-App Privacy Locker" overTitle="NATIVE SECURITY ENCLAVE" reversed>
+            <p>
+              RootLock protects your personal and financial applications with separate, isolated credentials. Powered by an offline native C++ PBKDF2 cryptography core, it secures app launches against intrusions without exposing master secrets to memory or cloud storage.
+            </p>
+            <ul>
+              <li>Hardened native C++ security core with JNI bindings</li>
+              <li>Graduated cooldown timers that scale up during repeat failed attempts</li>
+              <li>Modern glassmorphic locking screens featuring smooth spring animations</li>
+            </ul>
+            <NextLink href="/rootlock" passHref>
+              <Button style={{ marginTop: '2.5rem' }}>
+                Explore RootLock <span>&rarr;</span>
+              </Button>
+            </NextLink>
+          </BasicSection>
         </WhiteBackgroundContainer>
         <DarkerBackgroundContainer>
           <Cta />

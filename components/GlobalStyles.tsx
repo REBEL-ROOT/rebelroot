@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   --background: 248,250,252;
   --secondBackground: 255,255,255;
   --text: 15,23,42;
-  --textSecondary: 255,255,255;
+  --textSecondary: 100,116,139;
   --primary: 239,68,68; 
   --secondary: 15,23,42;
   --tertiary: 241,245,249;
@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
   --background: 9,9,11;
   --secondBackground: 20,20,23;
   --text: 244,244,245;
-  --textSecondary: 255,255,255;
+  --textSecondary: 161,161,170;
   --primary: 239,68,68; 
   --secondary: 24,24,27;
   --tertiary: 39,39,42;
@@ -44,10 +44,10 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 :root {
-  --font: 'Poppins', sans-serif;
+  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   
-  --shadow-md: 0 2px 4px 0 rgb(12 0 46 / 4%);
-  --shadow-lg: 0 10px 14px 0 rgb(12 0 46 / 6%);
+  --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.12), 0 0 50px rgba(var(--primary), 0.03);
 
   --z-sticky: 7777;
   --z-navbar: 8888;

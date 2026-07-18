@@ -26,6 +26,7 @@ const footerItems: FooterItems = [
       { title: 'CampCart', href: '/campcart' },
       { title: 'Openved', href: '/vedastra' },
       { title: 'MOC Office', href: '/mocoffice' },
+      { title: 'RootLock', href: '/rootlock' },
     ],
   },
   {
