@@ -28,7 +28,7 @@ export default function RootLockPage() {
   return (
     <Page
       title="RootLock (Root Lock) by RebelRoot | Hardware-Hardened Android App Locker"
-      description="RootLock (Root Lock / Rebel Root RootLock) is a premium, privacy-first per-app locker for Android. Each app gets its own credential (PIN/biometric) protected by a native C++ PBKDF2 security core. By RebelRoot."
+      description="RootLock by RebelRoot is a hardware-hardened per-app locker for Android. Protect apps with unique credentials powered by a native C++ security core."
       keywords="RootLock, Root Lock, rootlock, root lock, ROOTLOCK, ROOT LOCK, RebelRoot RootLock, Rebel Root RootLock, app locker Android, privacy app lock, biometric app lock, C++ security, PBKDF2 Android, per-app locker, RebelRoot, Rebel Root, rebelroot"
       hideHeader={true}
     >

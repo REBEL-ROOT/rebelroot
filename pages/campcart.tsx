@@ -28,7 +28,7 @@ export default function CampCartPage() {
   return (
     <Page
       title="CampCart (Camp Cart) by RebelRoot | Secure Campus Student Exchange Marketplace"
-      description="CampCart (Camp Cart / Rebel Root CampCart) is a secure peer-to-peer campus exchange marketplace for students. Buy, sell & rent textbooks, dorm items, and campus essentials safely."
+      description="CampCart by RebelRoot is a secure peer-to-peer campus marketplace for students to buy, sell, and rent textbooks and dorm essentials safely."
       keywords="CampCart, Camp Cart, campcart, camp cart, CAMPCART, CAMP CART, RebelRoot CampCart, Rebel Root CampCart, campus marketplace, student exchange, college buy sell, student marketplace, textbook exchange, campus classifieds, RebelRoot, Rebel Root, rebelroot"
       hideHeader={true}
     >

@@ -29,7 +29,7 @@ export default function VedAstraPage() {
   return (
     <Page
       title="Openved (VedAstra) by RebelRoot | AI-Powered Vedic Astrology & Kundli Platform"
-      description="Openved (VedAstra / Rebel Root VedAstra) is a premium, open-source Vedic astrology platform with Kundli charts, Panchang, Guna matchmaking, and Google Gemini AI reasoning. Built by RebelRoot."
+      description="Openved (VedAstra) by RebelRoot is an open-source Vedic astrology platform featuring Kundli charts, Panchang, and Google Gemini AI reasoning."
       keywords="Openved, VedAstra, Ved Astra, openved, vedastra, ved astra, OPENVED, VEDASTRA, RebelRoot VedAstra, Rebel Root VedAstra, Vedic astrology app, Kundli chart, Panchang calculation, Gemini AI astrology, horoscope app, RebelRoot, Rebel Root, rebelroot"
       ogImage="/vedastra-logo.png"
       hideHeader={true}

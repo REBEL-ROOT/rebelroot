@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <Page
       title="About RebelRoot (Rebel Root) | Privacy-First Open-Source Collective"
-      description="RebelRoot (Rebel Root) is an independent, developer-led open-source collective building privacy-first, zero-surveillance digital tools including Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock."
+      description="RebelRoot is an independent, developer-led open-source collective building privacy-first digital tools like Omni Browser, MOCNovel, and RootLock."
       keywords="About RebelRoot, About Rebel Root, RebelRoot team, RebelRoot founder, Rebel Root collective, open source privacy software, RebelRoot mission, rebelroot.xyz, Paras Agarwal RebelRoot"
     >
       <Head>

@@ -28,7 +28,7 @@ export default function MocNovelPage() {
   return (
     <Page
       title="MOCNovel (MOC Novel) by RebelRoot | Open-Source Ad-Free Reading & Publishing Platform"
-      description="MOCNovel (MOC Novel / Rebel Root MOCNovel) is a modern, zero-telemetry, ad-free web novel reading and publishing platform by RebelRoot. Connect authors with readers without trackers or paywalls."
+      description="MOCNovel by RebelRoot is a modern, zero-telemetry, ad-free web novel reading and publishing platform connecting independent authors directly with readers."
       keywords="MOCNovel, MOC Novel, mocnovel, moc novel, MOCNOVEL, MOC NOVEL, RebelRoot MOCNovel, Rebel Root MOC Novel, novel reading app, web novel platform, open source publishing, independent authors, ad-free reading, RebelRoot, Rebel Root, rebelroot"
       hideHeader={true}
     >

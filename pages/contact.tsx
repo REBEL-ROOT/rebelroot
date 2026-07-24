@@ -6,7 +6,7 @@ import InformationSection from 'views/ContactPage/InformationSection';
 
 export default function ContactPage() {
   return (
-    <Page title="Contact" description="Minim sint aliquip nostrud excepteur cupidatat amet do laborum exercitation cupidatat ea proident.">
+    <Page title="Contact RebelRoot" description="Get in touch with the RebelRoot team for project inquiries, open-source security reports, partnership proposals, and technical support.">
       <ContactContainer>
         <InformationSection />
         <FormSection />

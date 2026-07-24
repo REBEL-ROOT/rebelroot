@@ -8,6 +8,8 @@ export default function HeroIllustration() {
       width="1113.8"
       height="425.71"
       viewBox="0 0 1113.8 825.71"
+      role="img"
+      aria-label="RebelRoot Open Source Collective Software Illustration"
     >
       <defs>
         <linearGradient

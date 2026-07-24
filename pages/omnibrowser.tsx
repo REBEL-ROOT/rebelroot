@@ -46,7 +46,7 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
   return (
     <Page
       title="Omni Browser (OmniBrowser) by RebelRoot | Fast & Private Android Web Browser"
-      description="Omni Browser (OmniBrowser / Rebel Root Omni Browser) is a fast, privacy-first mobile web browser for Android with built-in uBlock Origin, Firefox WebExtensions, offline ML translation, and hardware safe locker."
+      description="Omni Browser is a fast, privacy-first Android web browser by RebelRoot with built-in uBlock Origin, Firefox WebExtensions, and offline ML translation."
       keywords="Omni Browser, OmniBrowser, omni browser, omnibrowser, OMNI BROWSER, OMNIBROWSER, Omni Browser APK, Omni Browser Android, Omni Browser RebelRoot, RebelRoot Omni Browser, Rebel Root Omni Browser, GeckoView browser, uBlock Origin mobile, mobile webextensions, private browser Android, RebelRoot, Rebel Root, rebelroot, rebel root"
       ogImage="/ic_omni_logo.webp"
       hideHeader={true}

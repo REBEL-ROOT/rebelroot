@@ -4,7 +4,7 @@ import RichText from 'components/RichText';
 
 export default function PrivacyPolicyPage() {
   return (
-    <Page title="Privacy Policy">
+    <Page title="Privacy Policy" description="Read the official RebelRoot Privacy Policy. Learn how our zero-telemetry and local-first architecture protects your personal data across all products.">
       <PrivacyPolicyContainer>
         <RichText>
           <h2>Our Commitment to Privacy</h2>

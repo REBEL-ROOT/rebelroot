@@ -28,7 +28,7 @@ export default function MocOfficePage() {
   return (
     <Page
       title="MOC Office (MOCOffice) by RebelRoot | Offline PDF Reader & Editor for Android"
-      description="MOC Office (MOCOffice / Rebel Root MOC Office) is a modern, privacy-first offline PDF reader and editing suite for Android. 12 built-in PDF tools, 100% offline, zero trackers — built with Jetpack Compose."
+      description="MOC Office by RebelRoot is a privacy-first offline PDF reader and editing suite for Android with 12 built-in tools and zero data tracking."
       keywords="MOC Office, MOCOffice, moc office, mocoffice, MOC OFFICE, MOCOFFICE, RebelRoot MOC Office, Rebel Root MOCOffice, PDF reader Android, PDF editor offline, offline PDF tools, merge split PDF, Android PDF suite, RebelRoot, Rebel Root, rebelroot"
       ogImage="/mocoffice-logo.png"
       hideHeader={true}

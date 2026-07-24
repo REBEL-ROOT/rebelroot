@@ -43,7 +43,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         <title>RebelRoot (Rebel Root) | Open-Source &amp; Privacy-First Digital Tools</title>
         <meta
           name="description"
-          content="RebelRoot (Rebel Root) is an independent open-source collective designing secure, privacy-first digital tools: Omni Browser (OmniBrowser), MOCNovel, CampCart, Openved, MOC Office & RootLock."
+          content="RebelRoot is an independent open-source collective designing secure, privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and RootLock."
         />
         <meta name="keywords" content="RebelRoot, Rebel Root, rebelroot, rebel root, rebelroot.xyz, REBELROOT, REBEL ROOT, RebelRoot collective, open source collective, Omni Browser, OmniBrowser, omni browser, omnibrowser, MOCNovel, MOC Novel, mocnovel, moc novel, CampCart, Camp Cart, campcart, camp cart, Openved, Ved Astra, VedAstra, openved, vedastra, MOC Office, MOCOffice, moc office, RootLock, Root Lock, rootlock, root lock, privacy Android apps, open source software" />
         <link rel="canonical" href="https://www.rebelroot.xyz" />
@@ -51,7 +51,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="RebelRoot (Rebel Root) | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta property="og:description" content="RebelRoot (Rebel Root) is an independent open-source collective designing secure, privacy-first digital tools: Omni Browser (OmniBrowser), MOCNovel, CampCart, Openved, MOC Office & RootLock." />
+        <meta property="og:description" content="RebelRoot is an independent open-source collective designing secure, privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and RootLock." />
         <meta property="og:url" content="https://www.rebelroot.xyz" />
         <meta property="og:site_name" content="RebelRoot (Rebel Root)" />
         <meta property="og:image" content="https://www.rebelroot.xyz/ic_omni_logo.webp" />
@@ -59,7 +59,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="RebelRoot (Rebel Root) | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta name="twitter:description" content="RebelRoot (Rebel Root) is an independent open-source collective designing secure, privacy-first digital tools: Omni Browser (OmniBrowser), MOCNovel, CampCart, Openved, MOC Office & RootLock." />
+        <meta name="twitter:description" content="RebelRoot is an independent open-source collective designing secure, privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and RootLock." />
         <meta name="twitter:image" content="https://www.rebelroot.xyz/ic_omni_logo.webp" />
 
         {/* Search Engine Directives */}

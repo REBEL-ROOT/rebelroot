@@ -5,7 +5,7 @@ import PricingTablesSection from 'views/PricingPage/PricingTablesSection';
 
 export default function PricingPage() {
   return (
-    <Page title="Pricing" description="Cupidatat et reprehenderit ullamco aute ullamco anim tempor.">
+    <Page title="Support RebelRoot | Open-Source Collective" description="RebelRoot products are 100% free and open source. Learn how you can support our independent development, infrastructure costs, and privacy research.">
       <Wrapper>
         <PricingTablesSection />
         <FaqSection />

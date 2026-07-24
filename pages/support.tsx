@@ -56,7 +56,7 @@ export default function SupportPage() {
   return (
     <Page
       title="Support &amp; Feedback | RebelRoot"
-      description="Help support RebelRoot open source collective via UPI, Ko-fi, or send us direct product feedback."
+      description="Support the RebelRoot open-source collective via UPI or PayPal, or submit direct product feedback to help keep our applications free and ad-free."
     >
       <Head>
         <meta name="keywords" content="Support RebelRoot, RebelRoot donation, donate UPI, Ko-fi RebelRoot, send feedback, open source support" />

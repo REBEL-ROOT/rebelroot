@@ -58,7 +58,7 @@ const FEATURES = [
 
 export default function FeaturesPage() {
   return (
-    <Page title="Products" description="Explore RebelRoot's open-source suite of privacy-preserving and highly optimized applications.">
+    <Page title="Products" description="Explore RebelRoot's open-source product suite of privacy-preserving digital tools, including Omni Browser, MOCNovel, CampCart, Openved, and RootLock.">
       <Wrapper>
         <SectionTitle>Our Product Suite</SectionTitle>
         <CustomAutofitGrid>

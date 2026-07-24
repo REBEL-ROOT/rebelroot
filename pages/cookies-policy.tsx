@@ -4,7 +4,7 @@ import RichText from 'components/RichText';
 
 export default function CookiesPolicyPage() {
   return (
-    <Page title="Cookies Policy">
+    <Page title="Cookies Policy" description="Read the official RebelRoot Cookies Policy. We use zero tracking or advertising cookies and rely only on local preferences for dark mode.">
       <CookiesPolicyContainer>
         <RichText>
           <h2>Our Policy on Cookies</h2>
