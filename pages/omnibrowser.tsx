@@ -1,4 +1,6 @@
+import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
 import Container from 'components/Container';
@@ -28,7 +30,19 @@ const omniFaqs = [
   }
 ];
 
-export default function OmniBrowserPage() {
+export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [stars, setStars] = useState(githubStars);
+
+  // Client-side live refresh on mount for instant up-to-date count
+  useEffect(() => {
+    fetch('https://api.github.com/repos/REBEL-ROOT/omni-browser')
+      .then((r) => r.json())
+      .then((d) => {
+        if (typeof d.stargazers_count === 'number') setStars(d.stargazers_count);
+      })
+      .catch(() => {/* silently keep server value */});
+  }, []);
+
   return (
     <Page
       title="Omni Browser (OmniBrowser) by RebelRoot | Fast & Private Android Web Browser"
@@ -144,6 +158,15 @@ export default function OmniBrowserPage() {
             <Subtitle>
               Omni Browser is a state-of-the-art mobile browser developed by the RebelRoot collective. Powered by Mozilla&apos;s GeckoView engine, it provides built-in ad blocking, native Firefox extensions, offline ML translation, and hardware-secured sandbox vault mechanics.
             </Subtitle>
+
+            {/* Live GitHub Stars Badge */}
+            <GitHubStarsRow>
+              <StarsBadge href="https://github.com/REBEL-ROOT/omni-browser/stargazers" target="_blank" rel="noopener noreferrer">
+                <StarIcon>⭐</StarIcon>
+                <StarsLabel>GitHub Stars</StarsLabel>
+                <StarsCount>{stars !== null ? stars.toLocaleString() : '—'}</StarsCount>
+              </StarsBadge>
+            </GitHubStarsRow>
 
             <CTAWrapper>
               <Button href="https://github.com/REBEL-ROOT/omni-browser/releases/latest" target="_blank" rel="noopener noreferrer">
@@ -1148,3 +1171,78 @@ const CTAWrapper = styled.div`
     gap: 1.5rem;
   }
 `;
+
+const GitHubStarsRow = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+`;
+
+const StarsBadge = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(var(--text), 0.06);
+  border: 1px solid rgba(var(--text), 0.12);
+  border-radius: 10rem;
+  padding: 0.9rem 2rem;
+  text-decoration: none;
+  color: rgb(var(--text));
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(var(--primary), 0.12);
+    border-color: rgba(var(--primary), 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(var(--primary), 0.15);
+  }
+`;
+
+const StarIcon = styled.span`
+  font-size: 1.6rem;
+  line-height: 1;
+`;
+
+const StarsLabel = styled.span`
+  font-size: 1.3rem;
+  font-weight: 600;
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+`;
+
+const StarsCount = styled.span`
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: rgb(var(--primary));
+  letter-spacing: -0.01em;
+  min-width: 3rem;
+  text-align: center;
+`;
+
+// Fetch live GitHub stars at build time; ISR refreshes every 3600 seconds (1 hour)
+export async function getStaticProps() {
+  let githubStars: number | null = null;
+  try {
+    const res = await fetch('https://api.github.com/repos/REBEL-ROOT/omni-browser', {
+      headers: {
+        Accept: 'application/vnd.github.v3+json',
+        'User-Agent': 'rebelroot-website',
+      },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (typeof data.stargazers_count === 'number') {
+        githubStars = data.stargazers_count;
+      }
+    }
+  } catch {
+    // Fallback: keep null, UI shows '—'
+  }
+  return {
+    props: { githubStars },
+    revalidate: 3600, // Re-fetch from GitHub API every 1 hour
+  };
+}
