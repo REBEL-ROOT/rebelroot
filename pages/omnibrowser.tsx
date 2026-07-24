@@ -79,7 +79,7 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                 "@type": "Organization",
                 "name": "RebelRoot",
                 "alternateName": ["Rebel Root", "rebelroot.xyz"],
-                "url": "https://rebelroot.xyz"
+                "url": "https://www.rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/REBEL-ROOT/omni-browser/releases/latest",
               "description": "A premium, privacy-first mobile web browser for Android built with Jetpack Compose & GeckoView engine. Features built-in uBlock Origin, offline ML translation, safe locker vault, and document scanner."
@@ -99,19 +99,19 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                   "@type": "ListItem",
                   "position": 1,
                   "name": "Home",
-                  "item": "https://rebelroot.xyz"
+                  "item": "https://www.rebelroot.xyz"
                 },
                 {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Products",
-                  "item": "https://rebelroot.xyz/features"
+                  "item": "https://www.rebelroot.xyz/features"
                 },
                 {
                   "@type": "ListItem",
                   "position": 3,
                   "name": "Omni Browser",
-                  "item": "https://rebelroot.xyz/omnibrowser"
+                  "item": "https://www.rebelroot.xyz/omnibrowser"
                 }
               ]
             })

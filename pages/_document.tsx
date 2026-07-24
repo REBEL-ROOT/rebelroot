@@ -55,7 +55,7 @@ export default class MyDocument extends Document {
           {/* ── Global SEO signals ── */}
           <meta name="theme-color" content="#ef4444" />
           <meta name="color-scheme" content="dark light" />
-          <link rel="author" href="https://rebelroot.xyz" />
+          <link rel="author" href="https://www.rebelroot.xyz" />
 
         </Head>
         <body className="next-light-theme">

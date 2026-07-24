@@ -54,7 +54,7 @@ export default function MocOfficePage() {
                 '@type': 'Organization',
                 name: 'RebelRoot',
                 alternateName: ['Rebel Root', 'rebelroot.xyz'],
-                url: 'https://rebelroot.xyz',
+                url: 'https://www.rebelroot.xyz',
               },
               downloadUrl: 'https://github.com/rebelroot/MocOffice',
               description: 'A modern, privacy-first PDF reader and editing suite for Android. 12 built-in PDF tools, 100% offline processing, zero trackers — built with Jetpack Compose and Material Design 3.',
@@ -69,9 +69,9 @@ export default function MocOfficePage() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
-                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
-                { "@type": "ListItem", "position": 3, "name": "MOC Office", "item": "https://rebelroot.xyz/mocoffice" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "MOC Office", "item": "https://www.rebelroot.xyz/mocoffice" }
               ]
             })
           }}

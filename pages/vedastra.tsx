@@ -55,7 +55,7 @@ export default function VedAstraPage() {
                 "@type": "Organization",
                 "name": "RebelRoot",
                 "alternateName": ["Rebel Root", "rebelroot.xyz"],
-                "url": "https://rebelroot.xyz"
+                "url": "https://www.rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/rebelroot/Openved",
               "description": "A premium, open-source Vedic astrology platform combining classical Kundli & Panchang computation with Google Gemini's reasoning. Built with Jetpack Compose, FastAPI, and Gemini AI."
@@ -70,9 +70,9 @@ export default function VedAstraPage() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
-                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
-                { "@type": "ListItem", "position": 3, "name": "Openved (VedAstra)", "item": "https://rebelroot.xyz/vedastra" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "Openved (VedAstra)", "item": "https://www.rebelroot.xyz/vedastra" }
               ]
             })
           }}

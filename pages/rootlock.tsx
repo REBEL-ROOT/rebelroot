@@ -53,7 +53,7 @@ export default function RootLockPage() {
                 "@type": "Organization",
                 "name": "RebelRoot",
                 "alternateName": ["Rebel Root", "rebelroot.xyz"],
-                "url": "https://rebelroot.xyz"
+                "url": "https://www.rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/rebelroot",
               "description": "A premium, privacy-first per-app locker for Android. Each app gets its own separate credential (PIN, password, pattern, biometric) protected by a hardened native C++ security core."
@@ -68,9 +68,9 @@ export default function RootLockPage() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
-                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
-                { "@type": "ListItem", "position": 3, "name": "RootLock", "item": "https://rebelroot.xyz/rootlock" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "RootLock", "item": "https://www.rebelroot.xyz/rootlock" }
               ]
             })
           }}

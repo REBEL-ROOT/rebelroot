@@ -15,7 +15,7 @@ export default function AboutPage() {
       keywords="About RebelRoot, About Rebel Root, RebelRoot team, RebelRoot founder, Rebel Root collective, open source privacy software, RebelRoot mission, rebelroot.xyz, Paras Agarwal RebelRoot"
     >
       <Head>
-        <link rel="canonical" href="https://rebelroot.xyz/about" />
+        <link rel="canonical" href="https://www.rebelroot.xyz/about" />
         {/* Organization + Person schema for Google entity recognition */}
         <script
           type="application/ld+json"
@@ -25,11 +25,11 @@ export default function AboutPage() {
               "@graph": [
                 {
                   "@type": "Organization",
-                  "@id": "https://rebelroot.xyz/#organization",
+                  "@id": "https://www.rebelroot.xyz/#organization",
                   "name": "RebelRoot",
                   "alternateName": ["Rebel Root", "RebelRoot Collective", "REBELROOT"],
-                  "url": "https://rebelroot.xyz",
-                  "logo": "https://rebelroot.xyz/ic_omni_logo.webp",
+                  "url": "https://www.rebelroot.xyz",
+                  "logo": "https://www.rebelroot.xyz/ic_omni_logo.webp",
                   "foundingDate": "2023",
                   "description": "An independent developer-led collective building secure, privacy-first, open-source digital tools.",
                   "sameAs": [
@@ -42,8 +42,8 @@ export default function AboutPage() {
                   "@type": "Person",
                   "name": "Paras Agarwal",
                   "jobTitle": "Founder & Lead Developer",
-                  "worksFor": { "@id": "https://rebelroot.xyz/#organization" },
-                  "url": "https://rebelroot.xyz/about",
+                  "worksFor": { "@id": "https://www.rebelroot.xyz/#organization" },
+                  "url": "https://www.rebelroot.xyz/about",
                   "sameAs": [
                     "https://github.com/ParasxAgarwal",
                     "https://www.linkedin.com/company/rebelroot/"
@@ -51,16 +51,16 @@ export default function AboutPage() {
                 },
                 {
                   "@type": "WebPage",
-                  "@id": "https://rebelroot.xyz/about",
-                  "url": "https://rebelroot.xyz/about",
+                  "@id": "https://www.rebelroot.xyz/about",
+                  "url": "https://www.rebelroot.xyz/about",
                   "name": "About RebelRoot",
                   "description": "Learn about the RebelRoot collective, our privacy-first mindset, and the founder building the next generation of software.",
-                  "publisher": { "@id": "https://rebelroot.xyz/#organization" },
+                  "publisher": { "@id": "https://www.rebelroot.xyz/#organization" },
                   "breadcrumb": {
                     "@type": "BreadcrumbList",
                     "itemListElement": [
-                      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
-                      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://rebelroot.xyz/about" }
+                      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rebelroot.xyz" },
+                      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.rebelroot.xyz/about" }
                     ]
                   }
                 }

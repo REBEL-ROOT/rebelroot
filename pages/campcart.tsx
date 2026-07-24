@@ -53,7 +53,7 @@ export default function CampCartPage() {
                 "@type": "Organization",
                 "name": "RebelRoot",
                 "alternateName": ["Rebel Root", "rebelroot.xyz"],
-                "url": "https://rebelroot.xyz"
+                "url": "https://www.rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/RebelRoot/CAMPCART",
               "description": "A secure peer-to-peer campus exchange marketplace for colleges and universities built with React, Cloudflare Workers, and Stripe/Juspay payments."
@@ -68,9 +68,9 @@ export default function CampCartPage() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
-                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
-                { "@type": "ListItem", "position": 3, "name": "CampCart", "item": "https://rebelroot.xyz/campcart" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "CampCart", "item": "https://www.rebelroot.xyz/campcart" }
               ]
             })
           }}

@@ -53,7 +53,7 @@ export default function MocNovelPage() {
                 "@type": "Organization",
                 "name": "RebelRoot",
                 "alternateName": ["Rebel Root", "rebelroot.xyz"],
-                "url": "https://rebelroot.xyz"
+                "url": "https://www.rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/rebelroot",
               "description": "A next-generation open-source web novel platform featuring conversational AI recommendations, real-time community tools, and unified edge deployment."
@@ -68,9 +68,9 @@ export default function MocNovelPage() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
-                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
-                { "@type": "ListItem", "position": 3, "name": "MOCNovel", "item": "https://rebelroot.xyz/mocnovel" }
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "MOCNovel", "item": "https://www.rebelroot.xyz/mocnovel" }
               ]
             })
           }}
