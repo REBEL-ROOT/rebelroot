@@ -7,14 +7,33 @@ import Button from 'components/Button';
 import OverTitle from 'components/OverTitle';
 import { media } from 'utils/media';
 
+import FaqSection from 'components/FaqSection';
+
+const campcartFaqs = [
+  {
+    question: "What is CampCart (Camp Cart) by RebelRoot?",
+    answer: "CampCart (also known as Camp Cart or RebelRoot CampCart) is a secure, peer-to-peer campus exchange marketplace built for college and university students by the RebelRoot collective. It enables students to buy, sell, and rent textbooks, dorm items, and campus essentials within a trusted campus-only network."
+  },
+  {
+    question: "Is CampCart free to use for students?",
+    answer: "Yes, CampCart is 100% free for students to list and discover products. There are no listing fees or hidden charges for basic transactions."
+  },
+  {
+    question: "How does CampCart ensure safe transactions on campus?",
+    answer: "CampCart uses campus-verified identity gates, integrated Stripe/Juspay payment rails, peer review systems, and Cloudflare Workers for secure edge computing to ensure all transactions between students are safe and trustworthy."
+  }
+];
+
 export default function CampCartPage() {
   return (
     <Page
-      title="CampCart"
-      description="A secure peer-to-peer campus exchange marketplace for colleges and universities built with React, Cloudflare Workers, and Stripe/Juspay payments."
+      title="CampCart (Camp Cart) by RebelRoot | Secure Campus Student Exchange Marketplace"
+      description="CampCart (Camp Cart / Rebel Root CampCart) is a secure peer-to-peer campus exchange marketplace for students. Buy, sell & rent textbooks, dorm items, and campus essentials safely."
+      keywords="CampCart, Camp Cart, campcart, camp cart, CAMPCART, CAMP CART, RebelRoot CampCart, Rebel Root CampCart, campus marketplace, student exchange, college buy sell, student marketplace, textbook exchange, campus classifieds, RebelRoot, Rebel Root, rebelroot"
+      hideHeader={true}
     >
       <Head>
-        <meta name="keywords" content="CampCart, RebelRoot, campus marketplace, student exchange, textbook exchange, buy sell college, campus classifieds, student e-commerce, Cloudflare Workers marketplace" />
+        {/* SoftwareApplication Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -22,6 +41,7 @@ export default function CampCartPage() {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "CampCart",
+              "alternateName": ["Camp Cart", "Rebel Root CampCart", "RebelRoot Camp Cart", "CAMPCART", "camp cart"],
               "operatingSystem": "Web",
               "applicationCategory": "BusinessApplication",
               "offers": {
@@ -32,10 +52,41 @@ export default function CampCartPage() {
               "publisher": {
                 "@type": "Organization",
                 "name": "RebelRoot",
+                "alternateName": ["Rebel Root", "rebelroot.xyz"],
                 "url": "https://rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/RebelRoot/CAMPCART",
               "description": "A secure peer-to-peer campus exchange marketplace for colleges and universities built with React, Cloudflare Workers, and Stripe/Juspay payments."
+            })
+          }}
+        />
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "CampCart", "item": "https://rebelroot.xyz/campcart" }
+              ]
+            })
+          }}
+        />
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": campcartFaqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+              }))
             })
           }}
         />
@@ -268,6 +319,7 @@ export default function CampCartPage() {
             </CTAContainer>
           </Container>
         </BottomCTA>
+        <FaqSection title="CampCart — Frequently Asked Questions" faqs={campcartFaqs} />
       </MainWrapper>
     </Page>
   );

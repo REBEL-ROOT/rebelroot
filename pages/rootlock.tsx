@@ -7,14 +7,33 @@ import Page from 'components/Page';
 import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
+import FaqSection from 'components/FaqSection';
+
+const rootlockFaqs = [
+  {
+    question: "What is RootLock (Root Lock) by RebelRoot?",
+    answer: "RootLock (also known as Root Lock or RebelRoot RootLock) is a premium, privacy-first per-app locker for Android developed by RebelRoot. Unlike standard app lockers, each app gets its own isolated credential (PIN, password, pattern, or biometric) protected by a hardened native C++ PBKDF2 security core."
+  },
+  {
+    question: "How is RootLock different from other Android app lockers?",
+    answer: "RootLock uses a native C++ JNI security bridge with offline PBKDF2 key derivation — meaning credentials are never sent to the cloud or stored in plain text. Each app has its own separate unlock credential with graduated cooldown timers for repeat failed attempts."
+  },
+  {
+    question: "Is RootLock free and open source?",
+    answer: "Yes, RootLock is completely free and open source. There are no in-app purchases, ads, or subscription fees. All security operations run offline on your Android device."
+  }
+];
+
 export default function RootLockPage() {
   return (
     <Page
-      title="RootLock"
-      description="A premium, privacy-first per-app locker for Android. Each app gets its own separate credential (PIN, password, pattern, biometric) protected by a hardened native C++ security core."
+      title="RootLock (Root Lock) by RebelRoot | Hardware-Hardened Android App Locker"
+      description="RootLock (Root Lock / Rebel Root RootLock) is a premium, privacy-first per-app locker for Android. Each app gets its own credential (PIN/biometric) protected by a native C++ PBKDF2 security core. By RebelRoot."
+      keywords="RootLock, Root Lock, rootlock, root lock, ROOTLOCK, ROOT LOCK, RebelRoot RootLock, Rebel Root RootLock, app locker Android, privacy app lock, biometric app lock, C++ security, PBKDF2 Android, per-app locker, RebelRoot, Rebel Root, rebelroot"
+      hideHeader={true}
     >
       <Head>
-        <meta name="keywords" content="RootLock, app locker Android, privacy app lock, biometric lock, secure credentials, PBKDF2, Android 16 app locker, C++ native security, local cryptography" />
+        {/* SoftwareApplication Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -22,6 +41,7 @@ export default function RootLockPage() {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "RootLock",
+              "alternateName": ["Root Lock", "Rebel Root RootLock", "RebelRoot Root Lock", "ROOTLOCK", "ROOT LOCK", "rootlock", "root lock"],
               "operatingSystem": "Android",
               "applicationCategory": "SecurityApplication",
               "offers": {
@@ -32,10 +52,41 @@ export default function RootLockPage() {
               "publisher": {
                 "@type": "Organization",
                 "name": "RebelRoot",
+                "alternateName": ["Rebel Root", "rebelroot.xyz"],
                 "url": "https://rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/rebelroot",
               "description": "A premium, privacy-first per-app locker for Android. Each app gets its own separate credential (PIN, password, pattern, biometric) protected by a hardened native C++ security core."
+            })
+          }}
+        />
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "RootLock", "item": "https://rebelroot.xyz/rootlock" }
+              ]
+            })
+          }}
+        />
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": rootlockFaqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+              }))
             })
           }}
         />
@@ -231,6 +282,7 @@ export default function RootLockPage() {
             </TechGrids>
           </Container>
         </TechStackSection>
+        <FaqSection title="RootLock — Frequently Asked Questions" faqs={rootlockFaqs} />
       </MainWrapper>
     </Page>
   );

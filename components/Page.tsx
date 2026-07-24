@@ -10,18 +10,24 @@ import SectionTitle from './SectionTitle';
 export interface PageProps {
   title: string;
   description?: string;
+  keywords?: string;
+  ogImage?: string;
+  hideHeader?: boolean;
 }
 
-export default function Page({ title, description, children }: PropsWithChildren<PageProps>) {
+export default function Page({ title, description, keywords, ogImage, hideHeader = false, children }: PropsWithChildren<PageProps>) {
   const router = useRouter();
   const canonicalUrl = `${EnvVars.URL.replace(/\/$/, '')}${router.asPath.split('?')[0]}`;
-  const fullTitle = `${title} | ${EnvVars.SITE_NAME}`;
+  const siteName = EnvVars.SITE_NAME;
+  const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+  const imageSrc = ogImage ? (ogImage.startsWith('http') ? ogImage : `${EnvVars.URL.replace(/\/$/, '')}${ogImage}`) : `${EnvVars.URL.replace(/\/$/, '')}/ic_omni_logo.webp`;
 
   return (
     <>
       <Head>
         <title>{fullTitle}</title>
-        <meta name="description" content={description} />
+        {description && <meta name="description" content={description} />}
+        {keywords && <meta name="keywords" content={keywords} />}
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Open Graph / Facebook */}
@@ -29,28 +35,34 @@ export default function Page({ title, description, children }: PropsWithChildren
         <meta property="og:title" content={fullTitle} />
         {description && <meta property="og:description" content={description} />}
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:site_name" content={EnvVars.SITE_NAME} />
-        <meta property="og:image" content={`${EnvVars.URL}ic_omni_logo.webp`} />
+        <meta property="og:site_name" content="RebelRoot (Rebel Root)" />
+        <meta property="og:image" content={imageSrc} />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={fullTitle} />
         {description && <meta name="twitter:description" content={description} />}
-        <meta name="twitter:image" content={`${EnvVars.URL}ic_omni_logo.webp`} />
+        <meta name="twitter:image" content={imageSrc} />
         
         {/* Search Engine Directives */}
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       </Head>
       <Wrapper>
-        <HeaderContainer>
+        {!hideHeader && (
+          <HeaderContainer>
+            <Container>
+              <Title>{title}</Title>
+              {description && <Description>{description}</Description>}
+            </Container>
+          </HeaderContainer>
+        )}
+        {hideHeader ? (
+          children
+        ) : (
           <Container>
-            <Title>{title}</Title>
-            {description && <Description>{description}</Description>}
+            <ChildrenWrapper>{children}</ChildrenWrapper>
           </Container>
-        </HeaderContainer>
-        <Container>
-          <ChildrenWrapper>{children}</ChildrenWrapper>
-        </Container>
+        )}
       </Wrapper>
     </>
   );

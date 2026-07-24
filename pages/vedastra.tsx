@@ -7,15 +7,35 @@ import Page from 'components/Page';
 import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
+import FaqSection from 'components/FaqSection';
+
+const vedastraFaqs = [
+  {
+    question: "What is Openved (VedAstra / Ved Astra) by RebelRoot?",
+    answer: "Openved (also known as VedAstra, Ved Astra, or RebelRoot VedAstra) is a premium, open-source Vedic astrology platform developed by RebelRoot. It combines classical Kundli chart generation and Panchang calculation with Google Gemini AI reasoning for modern, intelligent Vedic guidance."
+  },
+  {
+    question: "What Vedic astrology features does Openved offer?",
+    answer: "Openved supports full Kundli (birth chart) generation, Guna matchmaking, Panchang computation, Lal Kitab Rin analysis, Sade Sati transit tracking, Manglik Dosha evaluation, and AI-powered planetary remedies via Google Gemini."
+  },
+  {
+    question: "Is Openved free and privacy-first?",
+    answer: "Yes, Openved is 100% free and open source. All astrological computations run locally or on private FastAPI servers — with zero cloud surveillance or data sharing."
+  }
+];
+
 export default function VedAstraPage() {
 
   return (
     <Page
-      title="Openved"
-      description="A premium, open-source Vedic astrology platform combining classical Kundli &amp; Panchang computation with Google Gemini&apos;s reasoning. Built with Jetpack Compose, FastAPI, and Gemini AI."
+      title="Openved (VedAstra) by RebelRoot | AI-Powered Vedic Astrology & Kundli Platform"
+      description="Openved (VedAstra / Rebel Root VedAstra) is a premium, open-source Vedic astrology platform with Kundli charts, Panchang, Guna matchmaking, and Google Gemini AI reasoning. Built by RebelRoot."
+      keywords="Openved, VedAstra, Ved Astra, openved, vedastra, ved astra, OPENVED, VEDASTRA, RebelRoot VedAstra, Rebel Root VedAstra, Vedic astrology app, Kundli chart, Panchang calculation, Gemini AI astrology, horoscope app, RebelRoot, Rebel Root, rebelroot"
+      ogImage="/vedastra-logo.png"
+      hideHeader={true}
     >
       <Head>
-        <meta name="keywords" content="Ved Astra, Openved, RebelRoot, Vedic astrology, Kundli matchmaking, Panchang calculation, Lal Kitab Rin, Sade Sati transit, Manglik Dosha, Google Gemini AI astrology" />
+        {/* SoftwareApplication Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -23,6 +43,7 @@ export default function VedAstraPage() {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "Openved",
+              "alternateName": ["VedAstra", "Ved Astra", "Rebel Root VedAstra", "RebelRoot VedAstra", "OPENVED", "VEDASTRA", "openved", "vedastra"],
               "operatingSystem": "Android, Web",
               "applicationCategory": "LifestyleApplication",
               "offers": {
@@ -33,10 +54,41 @@ export default function VedAstraPage() {
               "publisher": {
                 "@type": "Organization",
                 "name": "RebelRoot",
+                "alternateName": ["Rebel Root", "rebelroot.xyz"],
                 "url": "https://rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/rebelroot/Openved",
               "description": "A premium, open-source Vedic astrology platform combining classical Kundli & Panchang computation with Google Gemini's reasoning. Built with Jetpack Compose, FastAPI, and Gemini AI."
+            })
+          }}
+        />
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "Openved (VedAstra)", "item": "https://rebelroot.xyz/vedastra" }
+              ]
+            })
+          }}
+        />
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": vedastraFaqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+              }))
             })
           }}
         />
@@ -298,6 +350,7 @@ export default function VedAstraPage() {
             </CTAInner>
           </Container>
         </BottomCTASection>
+        <FaqSection title="Openved (VedAstra) — Frequently Asked Questions" faqs={vedastraFaqs} />
       </MainWrapper>
     </Page>
   );

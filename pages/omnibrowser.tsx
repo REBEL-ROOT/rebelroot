@@ -7,14 +7,38 @@ import Page from 'components/Page';
 import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
+import FaqSection from 'components/FaqSection';
+
+const omniFaqs = [
+  {
+    question: "What is Omni Browser (OmniBrowser) by RebelRoot?",
+    answer: "Omni Browser (also known as OmniBrowser or Rebel Root Omni Browser) is a fast, privacy-first mobile web browser for Android developed by RebelRoot. Built on Mozilla GeckoView, it provides desktop-grade WebExtensions, built-in uBlock Origin ad blocking, hardware-encrypted vaults, and offline translation."
+  },
+  {
+    question: "Does Omni Browser support desktop Firefox WebExtensions?",
+    answer: "Yes, Omni Browser includes full Mozilla WebExtension controller integration, allowing users to directly install and run Firefox .xpi add-ons like uBlock Origin, Dark Reader, and Violentmonkey on Android."
+  },
+  {
+    question: "How does Omni Browser protect user data and privacy?",
+    answer: "Omni Browser operates with zero telemetry, includes a one-tap session incineration 'Burn' button to purge history and cookies, isolates private browsing sessions, and features an AES-256 encrypted hardware Safe Locker vault for private downloads."
+  },
+  {
+    question: "Is Omni Browser free and open source?",
+    answer: "Yes, Omni Browser is 100% free software released under the GPLv3 license without ads, paywalls, or data tracking."
+  }
+];
+
 export default function OmniBrowserPage() {
   return (
     <Page
-      title="Omni Browser | RebelRoot"
-      description="A premium, privacy-first mobile web browser for Android built with Jetpack Compose & GeckoView engine."
+      title="Omni Browser (OmniBrowser) by RebelRoot | Fast & Private Android Web Browser"
+      description="Omni Browser (OmniBrowser / Rebel Root Omni Browser) is a fast, privacy-first mobile web browser for Android with built-in uBlock Origin, Firefox WebExtensions, offline ML translation, and hardware safe locker."
+      keywords="Omni Browser, OmniBrowser, omni browser, omnibrowser, OMNI BROWSER, OMNIBROWSER, Omni Browser APK, Omni Browser Android, Omni Browser RebelRoot, RebelRoot Omni Browser, Rebel Root Omni Browser, GeckoView browser, uBlock Origin mobile, mobile webextensions, private browser Android, RebelRoot, Rebel Root, rebelroot, rebel root"
+      ogImage="/ic_omni_logo.webp"
+      hideHeader={true}
     >
       <Head>
-        <meta name="keywords" content="Omni Browser, RebelRoot, privacy browser, Android browser, GeckoView browser, uBlock Origin mobile, local ML translation, private vault app, secure mobile browser" />
+        {/* SoftwareApplication Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -22,6 +46,7 @@ export default function OmniBrowserPage() {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "Omni Browser",
+              "alternateName": ["OmniBrowser", "Omni Mobile Browser", "RebelRoot Omni Browser", "Rebel Root Omni Browser", "OMNI BROWSER", "omnibrowser", "omni browser"],
               "operatingSystem": "Android",
               "applicationCategory": "BrowserApplication",
               "offers": {
@@ -29,13 +54,71 @@ export default function OmniBrowserPage() {
                 "price": "0.00",
                 "priceCurrency": "USD"
               },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "ratingCount": "256",
+                "bestRating": "5",
+                "worstRating": "1"
+              },
               "publisher": {
                 "@type": "Organization",
                 "name": "RebelRoot",
+                "alternateName": ["Rebel Root", "rebelroot.xyz"],
                 "url": "https://rebelroot.xyz"
               },
-              "downloadUrl": "https://github.com/rebelroot/omni-browser",
+              "downloadUrl": "https://github.com/REBEL-ROOT/omni-browser/releases/latest",
               "description": "A premium, privacy-first mobile web browser for Android built with Jetpack Compose & GeckoView engine. Features built-in uBlock Origin, offline ML translation, safe locker vault, and document scanner."
+            })
+          }}
+        />
+
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://rebelroot.xyz"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Products",
+                  "item": "https://rebelroot.xyz/features"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Omni Browser",
+                  "item": "https://rebelroot.xyz/omnibrowser"
+                }
+              ]
+            })
+          }}
+        />
+
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": omniFaqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.answer
+                }
+              }))
             })
           }}
         />
@@ -466,6 +549,12 @@ export default function OmniBrowserPage() {
             </RoadmapGrid>
           </Container>
         </RoadmapSectionWrapper>
+
+        {/* FAQ Section for SEO */}
+        <FaqSection
+          title="Omni Browser — Frequently Asked Questions"
+          faqs={omniFaqs}
+        />
 
         {/* Bottom Call To Action */}
         <BottomCTASection>

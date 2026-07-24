@@ -15,36 +15,57 @@ import Partners from 'views/HomePage/Partners';
 import ScrollableBlogPosts from 'views/HomePage/ScrollableBlogPosts';
 import Testimonials from 'views/HomePage/Testimonials';
 
+import FaqSection from 'components/FaqSection';
+
+const homepageFaqs = [
+  {
+    question: "What is RebelRoot (Rebel Root)?",
+    answer: "RebelRoot (also known as Rebel Root) is an independent, developer-led open-source collective dedicated to building privacy-first, zero-surveillance digital software tools and applications including Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock."
+  },
+  {
+    question: "What software products are developed by RebelRoot?",
+    answer: "RebelRoot develops Omni Browser (OmniBrowser - privacy mobile web browser for Android), MOCNovel (MOC Novel - ad-free decentralized reading & publishing), CampCart (Camp Cart - student campus exchange marketplace), Openved (Ved Astra - Vedic astrology AI), MOC Office (100% offline Android PDF editor), and RootLock (Root Lock - hardware-hardened C++ app locker)."
+  },
+  {
+    question: "Are RebelRoot software applications free and open source?",
+    answer: "Yes, all RebelRoot applications, software tools, and platforms are 100% free, privacy-preserving, and open-source under permissive licenses."
+  },
+  {
+    question: "How does RebelRoot guarantee user privacy?",
+    answer: "RebelRoot software is engineered with a strict local-first, zero-telemetry architecture. Your personal data is stored and processed locally on your physical hardware, shielded from external tracking and surveillance."
+  }
+];
+
 export default function Homepage({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
-        <title>{EnvVars.SITE_NAME} | Open-Source &amp; Privacy-First Digital Tools</title>
+        <title>RebelRoot (Rebel Root) | Open-Source &amp; Privacy-First Digital Tools</title>
         <meta
           name="description"
-          content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office."
+          content="RebelRoot (Rebel Root) is an independent open-source collective designing secure, privacy-first digital tools: Omni Browser (OmniBrowser), MOCNovel, CampCart, Openved, MOC Office & RootLock."
         />
-        <meta name="keywords" content="RebelRoot, open source collective, Omni Browser, MOCNovel, CampCart, Openved, MOC Office, PDF reader Android, privacy mobile browser, secure reading app, student marketplace, edge computing, decentralized apps, Gemini AI" />
+        <meta name="keywords" content="RebelRoot, Rebel Root, rebelroot, rebel root, rebelroot.xyz, REBELROOT, REBEL ROOT, RebelRoot collective, open source collective, Omni Browser, OmniBrowser, omni browser, omnibrowser, MOCNovel, MOC Novel, mocnovel, moc novel, CampCart, Camp Cart, campcart, camp cart, Openved, Ved Astra, VedAstra, openved, vedastra, MOC Office, MOCOffice, moc office, RootLock, Root Lock, rootlock, root lock, privacy Android apps, open source software" />
         <link rel="canonical" href="https://rebelroot.xyz" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="RebelRoot | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta property="og:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office." />
+        <meta property="og:title" content="RebelRoot (Rebel Root) | Open-Source &amp; Privacy-First Digital Tools" />
+        <meta property="og:description" content="RebelRoot (Rebel Root) is an independent open-source collective designing secure, privacy-first digital tools: Omni Browser (OmniBrowser), MOCNovel, CampCart, Openved, MOC Office & RootLock." />
         <meta property="og:url" content="https://rebelroot.xyz" />
-        <meta property="og:site_name" content="RebelRoot" />
+        <meta property="og:site_name" content="RebelRoot (Rebel Root)" />
         <meta property="og:image" content="https://rebelroot.xyz/ic_omni_logo.webp" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="RebelRoot | Open-Source &amp; Privacy-First Digital Tools" />
-        <meta name="twitter:description" content="RebelRoot is an independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office." />
+        <meta name="twitter:title" content="RebelRoot (Rebel Root) | Open-Source &amp; Privacy-First Digital Tools" />
+        <meta name="twitter:description" content="RebelRoot (Rebel Root) is an independent open-source collective designing secure, privacy-first digital tools: Omni Browser (OmniBrowser), MOCNovel, CampCart, Openved, MOC Office & RootLock." />
         <meta name="twitter:image" content="https://rebelroot.xyz/ic_omni_logo.webp" />
 
         {/* Search Engine Directives */}
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-        {/* Structured Schema Data */}
+        {/* Organization Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -52,15 +73,30 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "RebelRoot",
+              "alternateName": ["Rebel Root", "RebelRoot Collective", "Rebel-Root", "REBELROOT", "rebelroot.xyz"],
               "url": "https://rebelroot.xyz",
               "logo": "https://rebelroot.xyz/ic_omni_logo.webp",
-              "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, and MOC Office.",
+              "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock.",
               "sameAs": [
-                "https://github.com/rebelroot"
+                "https://github.com/rebelroot",
+                "https://www.linkedin.com/company/rebelroot/"
+              ],
+              "knowsAbout": [
+                "Omni Browser",
+                "MOCNovel",
+                "CampCart",
+                "Openved",
+                "MOC Office",
+                "RootLock",
+                "Mobile Web Browsers",
+                "Android Security",
+                "Privacy Software"
               ]
             })
           }}
         />
+        
+        {/* WebSite Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -68,12 +104,32 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "RebelRoot",
+              "alternateName": ["Rebel Root", "rebelroot.xyz", "REBELROOT"],
               "url": "https://rebelroot.xyz",
               "potentialAction": {
                 "@type": "SearchAction",
                 "target": "https://rebelroot.xyz/blog?q={search_term_string}",
                 "query-input": "required name=search_term_string"
               }
+            })
+          }}
+        />
+
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": homepageFaqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.answer
+                }
+              }))
             })
           }}
         />
@@ -188,6 +244,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               </Button>
             </NextLink>
           </BasicSection>
+          <FaqSection title="RebelRoot (Rebel Root) Overview & FAQ" faqs={homepageFaqs} />
         </WhiteBackgroundContainer>
         <DarkerBackgroundContainer>
           <Cta />

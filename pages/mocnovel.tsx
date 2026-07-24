@@ -7,21 +7,41 @@ import Button from 'components/Button';
 import OverTitle from 'components/OverTitle';
 import { media } from 'utils/media';
 
+import FaqSection from 'components/FaqSection';
+
+const mocnovelFaqs = [
+  {
+    question: "What is MOCNovel (MOC Novel) by RebelRoot?",
+    answer: "MOCNovel (also called MOC Novel or Rebel Root MOCNovel) is a modern, zero-telemetry, ad-free novel publishing and reading platform built by the RebelRoot collective. It connects independent authors directly with readers without trackers, paywalls, or censorship."
+  },
+  {
+    question: "Is MOCNovel free to read and publish?",
+    answer: "Yes, MOCNovel is a completely free platform for both readers and authors. There are no subscription fees, no advertisements, and no hidden paywalls."
+  },
+  {
+    question: "What reading and publishing features does MOCNovel offer?",
+    answer: "MOCNovel offers conversational AI-based book recommendations, real-time community tools, a markdown-based chapter editor for authors, and edge deployment for minimal latency worldwide."
+  }
+];
+
 export default function MocNovelPage() {
   return (
     <Page
-      title="MOC Novel"
-      description="A next-generation open-source web novel platform featuring conversational AI recommendations, real-time community tools, and unified edge deployment."
+      title="MOCNovel (MOC Novel) by RebelRoot | Open-Source Ad-Free Reading & Publishing Platform"
+      description="MOCNovel (MOC Novel / Rebel Root MOCNovel) is a modern, zero-telemetry, ad-free web novel reading and publishing platform by RebelRoot. Connect authors with readers without trackers or paywalls."
+      keywords="MOCNovel, MOC Novel, mocnovel, moc novel, MOCNOVEL, MOC NOVEL, RebelRoot MOCNovel, Rebel Root MOC Novel, novel reading app, web novel platform, open source publishing, independent authors, ad-free reading, RebelRoot, Rebel Root, rebelroot"
+      hideHeader={true}
     >
       <Head>
-        <meta name="keywords" content="MOC Novel, RebelRoot, web novel, web novels, reading platform, open source publishing, markdown editor authors, independent publishing, ad-free reader" />
+        {/* SoftwareApplication Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "MOC Novel",
+              "name": "MOCNovel",
+              "alternateName": ["MOC Novel", "Rebel Root MOCNovel", "RebelRoot MOC Novel", "MOCNOVEL", "moc novel"],
               "operatingSystem": "Web, Android, iOS",
               "applicationCategory": "BooksApplication",
               "offers": {
@@ -32,10 +52,41 @@ export default function MocNovelPage() {
               "publisher": {
                 "@type": "Organization",
                 "name": "RebelRoot",
+                "alternateName": ["Rebel Root", "rebelroot.xyz"],
                 "url": "https://rebelroot.xyz"
               },
               "downloadUrl": "https://github.com/rebelroot",
               "description": "A next-generation open-source web novel platform featuring conversational AI recommendations, real-time community tools, and unified edge deployment."
+            })
+          }}
+        />
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "MOCNovel", "item": "https://rebelroot.xyz/mocnovel" }
+              ]
+            })
+          }}
+        />
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": mocnovelFaqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+              }))
             })
           }}
         />
@@ -288,6 +339,7 @@ export default function MocNovelPage() {
             </CTAContainer>
           </Container>
         </BottomCTA>
+        <FaqSection title="MOCNovel — Frequently Asked Questions" faqs={mocnovelFaqs} />
       </MainWrapper>
     </Page>
   );

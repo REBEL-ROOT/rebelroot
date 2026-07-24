@@ -7,14 +7,34 @@ import Page from 'components/Page';
 import SectionTitle from 'components/SectionTitle';
 import { media } from 'utils/media';
 
+import FaqSection from 'components/FaqSection';
+
+const mocofficeFaqs = [
+  {
+    question: "What is MOC Office (MOCOffice) by RebelRoot?",
+    answer: "MOC Office (also known as MOCOffice or Rebel Root MOC Office) is a modern, privacy-first offline PDF reader and editor for Android developed by RebelRoot. It provides 12 built-in PDF tools — including merge, split, compress, watermark, and OCR — all processing 100% locally on your device without any trackers."
+  },
+  {
+    question: "Does MOC Office require internet to process PDF files?",
+    answer: "No. MOC Office is 100% offline. All PDF operations including merge, split, compress, and OCR run entirely on your Android device without any internet connection or cloud processing."
+  },
+  {
+    question: "Is MOC Office free and open source?",
+    answer: "Yes, MOC Office is completely free, ad-free, and open source. It uses PDF.js and Jetpack Compose built to Material Design 3 standards — without any third-party trackers or analytics."
+  }
+];
+
 export default function MocOfficePage() {
   return (
     <Page
-      title="MOC Office"
-      description="A modern, privacy-first PDF reader and editor for Android. 12 built-in tools, 100% offline, zero trackers — built with Jetpack Compose and Material Design 3."
+      title="MOC Office (MOCOffice) by RebelRoot | Offline PDF Reader & Editor for Android"
+      description="MOC Office (MOCOffice / Rebel Root MOC Office) is a modern, privacy-first offline PDF reader and editing suite for Android. 12 built-in PDF tools, 100% offline, zero trackers — built with Jetpack Compose."
+      keywords="MOC Office, MOCOffice, moc office, mocoffice, MOC OFFICE, MOCOFFICE, RebelRoot MOC Office, Rebel Root MOCOffice, PDF reader Android, PDF editor offline, offline PDF tools, merge split PDF, Android PDF suite, RebelRoot, Rebel Root, rebelroot"
+      ogImage="/mocoffice-logo.png"
+      hideHeader={true}
     >
       <Head>
-        <meta name="keywords" content="MOC Office, PDF reader Android, PDF editor offline, MyPDF, RebelRoot, Jetpack Compose PDF, merge split PDF, PDF tools, PDF.js Android, Material Design 3 PDF" />
+        {/* SoftwareApplication Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -22,6 +42,7 @@ export default function MocOfficePage() {
               '@context': 'https://schema.org',
               '@type': 'SoftwareApplication',
               name: 'MOC Office',
+              alternateName: ['MOCOffice', 'Rebel Root MOC Office', 'RebelRoot MOCOffice', 'MOC OFFICE', 'mocoffice', 'moc office'],
               operatingSystem: 'Android',
               applicationCategory: 'UtilitiesApplication',
               offers: {
@@ -32,12 +53,42 @@ export default function MocOfficePage() {
               publisher: {
                 '@type': 'Organization',
                 name: 'RebelRoot',
+                alternateName: ['Rebel Root', 'rebelroot.xyz'],
                 url: 'https://rebelroot.xyz',
               },
               downloadUrl: 'https://github.com/rebelroot/MocOffice',
-              description:
-                'A modern, privacy-first PDF reader and editing suite for Android. 12 built-in PDF tools, 100% offline processing, zero trackers — built with Jetpack Compose and Material Design 3.',
+              description: 'A modern, privacy-first PDF reader and editing suite for Android. 12 built-in PDF tools, 100% offline processing, zero trackers — built with Jetpack Compose and Material Design 3.',
             }),
+          }}
+        />
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rebelroot.xyz/features" },
+                { "@type": "ListItem", "position": 3, "name": "MOC Office", "item": "https://rebelroot.xyz/mocoffice" }
+              ]
+            })
+          }}
+        />
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": mocofficeFaqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+              }))
+            })
           }}
         />
       </Head>
@@ -288,6 +339,7 @@ export default function MocOfficePage() {
             </CTAInner>
           </Container>
         </BottomCTASection>
+        <FaqSection title="MOC Office — Frequently Asked Questions" faqs={mocofficeFaqs} />
       </MainWrapper>
     </Page>
   );
