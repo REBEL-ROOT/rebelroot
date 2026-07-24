@@ -65,37 +65,62 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         {/* Search Engine Directives */}
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-        {/* Organization Schema */}
+        {/* Organization Schema — expanded for Google Knowledge Panel eligibility */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
+              "@id": "https://rebelroot.xyz/#organization",
               "name": "RebelRoot",
-              "alternateName": ["Rebel Root", "RebelRoot Collective", "Rebel-Root", "REBELROOT", "rebelroot.xyz"],
+              "alternateName": ["Rebel Root", "RebelRoot Collective", "Rebel-Root", "REBELROOT", "rebelroot.xyz", "Rebel Root Collective"],
               "url": "https://rebelroot.xyz",
-              "logo": "https://rebelroot.xyz/ic_omni_logo.webp",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://rebelroot.xyz/ic_omni_logo.webp",
+                "width": 512,
+                "height": 512
+              },
               "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock.",
+              "foundingDate": "2023",
+              "numberOfEmployees": { "@type": "QuantitativeValue", "value": 5 },
               "sameAs": [
+                "https://github.com/REBEL-ROOT",
                 "https://github.com/rebelroot",
-                "https://www.linkedin.com/company/rebelroot/"
+                "https://github.com/ParasxAgarwal",
+                "https://www.linkedin.com/company/rebelroot/",
+                "https://twitter.com/rebelrootxyz"
               ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer support",
+                "url": "https://rebelroot.xyz/support",
+                "email": "support@rebelroot.xyz"
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "RebelRoot Open-Source Products",
+                "itemListElement": [
+                  { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Omni Browser", "url": "https://rebelroot.xyz/omnibrowser" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "MOCNovel", "url": "https://rebelroot.xyz/mocnovel" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "CampCart", "url": "https://rebelroot.xyz/campcart" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Openved", "url": "https://rebelroot.xyz/vedastra" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "MOC Office", "url": "https://rebelroot.xyz/mocoffice" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "RootLock", "url": "https://rebelroot.xyz/rootlock" } }
+                ]
+              },
               "knowsAbout": [
-                "Omni Browser",
-                "MOCNovel",
-                "CampCart",
-                "Openved",
-                "MOC Office",
-                "RootLock",
-                "Mobile Web Browsers",
-                "Android Security",
-                "Privacy Software"
+                "Omni Browser", "OmniBrowser", "MOCNovel", "MOC Novel",
+                "CampCart", "Camp Cart", "Openved", "VedAstra", "Ved Astra",
+                "MOC Office", "MOCOffice", "RootLock", "Root Lock",
+                "Mobile Web Browsers", "Android Security", "Privacy Software",
+                "Open Source Software", "Privacy-First Applications"
               ]
             })
           }}
         />
-        
+
         {/* WebSite Schema */}
         <script
           type="application/ld+json"
@@ -103,12 +128,17 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
+              "@id": "https://rebelroot.xyz/#website",
               "name": "RebelRoot",
-              "alternateName": ["Rebel Root", "rebelroot.xyz", "REBELROOT"],
+              "alternateName": ["Rebel Root", "rebelroot.xyz", "REBELROOT", "Rebel Root Collective"],
               "url": "https://rebelroot.xyz",
+              "publisher": { "@id": "https://rebelroot.xyz/#organization" },
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://rebelroot.xyz/blog?q={search_term_string}",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://rebelroot.xyz/blog?q={search_term_string}"
+                },
                 "query-input": "required name=search_term_string"
               }
             })

@@ -32,7 +32,31 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* ── Preconnect for performance ── */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+          {/* ── Search Engine Verification ── */}
+          {/* Replace the content values below with your actual verification tokens from each platform */}
+          {/* Google Search Console: https://search.google.com/search-console */}
+          {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && (
+            <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
+          )}
+          {/* Bing Webmaster Tools: https://www.bing.com/webmasters */}
+          {process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION && (
+            <meta name="msvalidate.01" content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION} />
+          )}
+          {/* Yandex Webmaster: https://webmaster.yandex.com */}
+          {process.env.NEXT_PUBLIC_YANDEX_SITE_VERIFICATION && (
+            <meta name="yandex-verification" content={process.env.NEXT_PUBLIC_YANDEX_SITE_VERIFICATION} />
+          )}
+
+          {/* ── Global SEO signals ── */}
+          <meta name="theme-color" content="#ef4444" />
+          <meta name="color-scheme" content="dark light" />
+          <link rel="author" href="https://rebelroot.xyz" />
+
         </Head>
         <body className="next-light-theme">
           <Main />
