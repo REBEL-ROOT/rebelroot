@@ -12,15 +12,15 @@ import FaqSection from 'components/FaqSection';
 const vedastraFaqs = [
   {
     question: "What is Openved (VedAstra / Ved Astra) by RebelRoot?",
-    answer: "Openved (also known as VedAstra, Ved Astra, or RebelRoot VedAstra) is a premium, open-source Vedic astrology platform developed by RebelRoot. It combines classical Kundli chart generation and Panchang calculation with Google Gemini AI reasoning for modern, intelligent Vedic guidance."
+    answer: "Openved (also known as VedAstra, Ved Astra, or RebelRoot VedAstra) is a premium, privacy-first Vedic astrology platform developed by RebelRoot. It combines classical Kundli chart generation and Panchang calculation with Google Gemini AI reasoning for modern, intelligent Vedic guidance."
   },
   {
     question: "What Vedic astrology features does Openved offer?",
     answer: "Openved supports full Kundli (birth chart) generation, Guna matchmaking, Panchang computation, Lal Kitab Rin analysis, Sade Sati transit tracking, Manglik Dosha evaluation, and AI-powered planetary remedies via Google Gemini."
   },
   {
-    question: "Is Openved free and privacy-first?",
-    answer: "Yes, Openved is 100% free and open source. All astrological computations run locally or on private FastAPI servers — with zero cloud surveillance or data sharing."
+    question: "Is Openved free to use?",
+    answer: "Yes, Openved is 100% free to use with zero advertisements. All astrological computations run on private servers — with zero cloud surveillance or data tracking."
   }
 ];
 
@@ -29,7 +29,7 @@ export default function VedAstraPage() {
   return (
     <Page
       title="Openved (VedAstra) by RebelRoot | AI-Powered Vedic Astrology & Kundli Platform"
-      description="Openved (VedAstra) by RebelRoot is an open-source Vedic astrology platform featuring Kundli charts, Panchang, and Google Gemini AI reasoning."
+      description="Openved (VedAstra) by RebelRoot is a privacy-first Vedic astrology platform featuring Kundli charts, Panchang, and Google Gemini AI reasoning."
       keywords="Openved, VedAstra, Ved Astra, openved, vedastra, ved astra, OPENVED, VEDASTRA, RebelRoot VedAstra, Rebel Root VedAstra, Vedic astrology app, Kundli chart, Panchang calculation, Gemini AI astrology, horoscope app, RebelRoot, Rebel Root, rebelroot"
       ogImage="/vedastra-logo.png"
       hideHeader={true}
@@ -57,8 +57,8 @@ export default function VedAstraPage() {
                 "alternateName": ["Rebel Root", "rebelroot.xyz"],
                 "url": "https://www.rebelroot.xyz"
               },
-              "downloadUrl": "https://github.com/rebelroot/Openved",
-              "description": "A premium, open-source Vedic astrology platform combining classical Kundli & Panchang computation with Google Gemini's reasoning. Built with Jetpack Compose, FastAPI, and Gemini AI."
+              "downloadUrl": "https://openved.com",
+              "description": "A premium Vedic astrology platform combining classical Kundli & Panchang computation with Google Gemini's reasoning. Built with Jetpack Compose, FastAPI, and Gemini AI."
             })
           }}
         />

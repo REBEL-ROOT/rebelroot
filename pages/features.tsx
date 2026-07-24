@@ -31,7 +31,7 @@ const FEATURES = [
     imageUrl: '/grid-icons/asset-5.svg',
     title: 'Openved',
     description:
-      'A premium, open-source Vedic astrology app built with Jetpack Compose, FastAPI, and Gemini AI for precise Kundli, Panchang, and compatibility matching. Available at Openved.com.',
+      'A premium Vedic astrology app built with Jetpack Compose, FastAPI, and Gemini AI for precise Kundli, Panchang, and compatibility matching. Available at Openved.com.',
     href: '/vedastra',
   },
   {

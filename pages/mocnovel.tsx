@@ -27,9 +27,9 @@ const mocnovelFaqs = [
 export default function MocNovelPage() {
   return (
     <Page
-      title="MOCNovel (MOC Novel) by RebelRoot | Open-Source Ad-Free Reading & Publishing Platform"
+      title="MOCNovel (MOC Novel) by RebelRoot | Ad-Free Reading & Publishing Platform"
       description="MOCNovel by RebelRoot is a modern, zero-telemetry, ad-free web novel reading and publishing platform connecting independent authors directly with readers."
-      keywords="MOCNovel, MOC Novel, mocnovel, moc novel, MOCNOVEL, MOC NOVEL, RebelRoot MOCNovel, Rebel Root MOC Novel, novel reading app, web novel platform, open source publishing, independent authors, ad-free reading, RebelRoot, Rebel Root, rebelroot"
+      keywords="MOCNovel, MOC Novel, mocnovel, moc novel, MOCNOVEL, MOC NOVEL, RebelRoot MOCNovel, Rebel Root MOC Novel, novel reading app, web novel platform, independent authors, ad-free reading, RebelRoot, Rebel Root, rebelroot"
       hideHeader={true}
     >
       <Head>
@@ -55,8 +55,8 @@ export default function MocNovelPage() {
                 "alternateName": ["Rebel Root", "rebelroot.xyz"],
                 "url": "https://www.rebelroot.xyz"
               },
-              "downloadUrl": "https://github.com/rebelroot",
-              "description": "A next-generation open-source web novel platform featuring conversational AI recommendations, real-time community tools, and unified edge deployment."
+              "downloadUrl": "https://mocnovel.com",
+              "description": "A next-generation web novel platform featuring conversational AI recommendations, real-time community tools, and unified edge deployment."
             })
           }}
         />

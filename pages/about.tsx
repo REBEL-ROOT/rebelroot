@@ -10,9 +10,9 @@ import { media } from 'utils/media';
 export default function AboutPage() {
   return (
     <Page
-      title="About RebelRoot (Rebel Root) | Privacy-First Open-Source Collective"
-      description="RebelRoot is an independent, developer-led open-source collective building privacy-first digital tools like Omni Browser, MOCNovel, and RootLock."
-      keywords="About RebelRoot, About Rebel Root, RebelRoot team, RebelRoot founder, Rebel Root collective, open source privacy software, RebelRoot mission, rebelroot.xyz, Paras Agarwal RebelRoot"
+      title="About RebelRoot (Rebel Root) | Privacy-First Digital Collective"
+      description="RebelRoot is an independent, developer-led collective building privacy-first digital tools like Omni Browser, MOCNovel, and RootLock."
+      keywords="About RebelRoot, About Rebel Root, RebelRoot team, RebelRoot founder, Rebel Root collective, privacy software, RebelRoot mission, rebelroot.xyz, Paras Agarwal RebelRoot"
     >
       <Head>
         <link rel="canonical" href="https://www.rebelroot.xyz/about" />
@@ -31,7 +31,7 @@ export default function AboutPage() {
                   "url": "https://www.rebelroot.xyz",
                   "logo": "https://www.rebelroot.xyz/ic_omni_logo.webp",
                   "foundingDate": "2023",
-                  "description": "An independent developer-led collective building secure, privacy-first, open-source digital tools.",
+                  "description": "An independent developer-led collective building secure, privacy-first digital tools.",
                   "sameAs": [
                     "https://github.com/REBEL-ROOT",
                     "https://github.com/rebelroot",
@@ -100,9 +100,9 @@ export default function AboutPage() {
 
               <PhilosophyCard>
                 <CardIcon>📂</CardIcon>
-                <CardTitle>Verified Open Source</CardTitle>
+                <CardTitle>Auditable &amp; Open Software</CardTitle>
                 <p>
-                  All of our codebases are open-source. Anyone can audit our compile scripts, inspect network behavior, and compile our apps directly from source.
+                  Our client projects are open-source and transparent. Anyone can inspect network behavior, audit compile scripts, or host their own services.
                 </p>
               </PhilosophyCard>
             </PhilosophyGrid>

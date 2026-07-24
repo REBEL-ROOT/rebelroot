@@ -20,15 +20,15 @@ import FaqSection from 'components/FaqSection';
 const homepageFaqs = [
   {
     question: "What is RebelRoot (Rebel Root)?",
-    answer: "RebelRoot (also known as Rebel Root) is an independent, developer-led open-source collective dedicated to building privacy-first, zero-surveillance digital software tools and applications including Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock."
+    answer: "RebelRoot (also known as Rebel Root) is an independent, developer-led collective dedicated to building privacy-first, zero-surveillance digital software tools and applications including Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock."
   },
   {
     question: "What software products are developed by RebelRoot?",
-    answer: "RebelRoot develops Omni Browser (OmniBrowser - privacy mobile web browser for Android), MOCNovel (MOC Novel - ad-free decentralized reading & publishing), CampCart (Camp Cart - student campus exchange marketplace), Openved (Ved Astra - Vedic astrology AI), MOC Office (100% offline Android PDF editor), and RootLock (Root Lock - hardware-hardened C++ app locker)."
+    answer: "RebelRoot develops Omni Browser (OmniBrowser - privacy mobile web browser for Android), MOCNovel (MOC Novel - ad-free reading & publishing), CampCart (Camp Cart - student campus exchange marketplace), Openved (Ved Astra - Vedic astrology AI), MOC Office (100% offline Android PDF editor), and RootLock (Root Lock - hardware-hardened C++ app locker)."
   },
   {
-    question: "Are RebelRoot software applications free and open source?",
-    answer: "Yes, all RebelRoot applications, software tools, and platforms are 100% free, privacy-preserving, and open-source under permissive licenses."
+    question: "Are RebelRoot software applications free?",
+    answer: "Yes, all RebelRoot applications, software tools, and platforms are 100% free to use and privacy-preserving without intrusive ads or tracking."
   },
   {
     question: "How does RebelRoot guarantee user privacy?",
@@ -82,7 +82,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
                 "width": 512,
                 "height": 512
               },
-              "description": "An independent, developer-led collective designing secure, open-source, and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock.",
+              "description": "An independent, developer-led collective designing secure and privacy-first digital tools like Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock.",
               "foundingDate": "2023",
               "numberOfEmployees": { "@type": "QuantitativeValue", "value": 5 },
               "sameAs": [
@@ -100,7 +100,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               },
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "RebelRoot Open-Source Products",
+                "name": "RebelRoot Products",
                 "itemListElement": [
                   { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Omni Browser", "url": "https://www.rebelroot.xyz/omnibrowser" } },
                   { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "MOCNovel", "url": "https://www.rebelroot.xyz/mocnovel" } },

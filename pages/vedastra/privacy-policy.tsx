@@ -99,9 +99,9 @@ export default function VedAstraPrivacyPolicyPage() {
             All network communication between the Android application, the FastAPI backend gateway, and third-party APIs (VedAstro and Google Gemini) is encrypted using industry-standard HTTPS (TLS 1.2/1.3) protocols.
           </p>
 
-          <h3>2.3 Open Source Transparency</h3>
+          <h3>2.3 Privacy & Transparency</h3>
           <p>
-            Ved Astra (Openved) is fully open-source. Anyone can audit the backend API gateway code and the Jetpack Compose Android client repository to verify the absence of telemetry or data-harvesting mechanisms.
+            Ved Astra (Openved) operates with strict transparency and zero user tracking. You can review our full privacy and data safety declarations to verify the absence of telemetry or data-harvesting mechanisms.
           </p>
         </RichText>
       </PrivacyPolicyContainer>
