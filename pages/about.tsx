@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import styled from 'styled-components';
 import Page from 'components/Page';
 import Container from 'components/Container';
@@ -9,9 +10,65 @@ import { media } from 'utils/media';
 export default function AboutPage() {
   return (
     <Page
-      title="About RebelRoot"
-      description="Learn about the RebelRoot collective, our privacy-first mindset, and the founder building the next generation of software."
+      title="About RebelRoot (Rebel Root) | Privacy-First Open-Source Collective"
+      description="RebelRoot (Rebel Root) is an independent, developer-led open-source collective building privacy-first, zero-surveillance digital tools including Omni Browser, MOCNovel, CampCart, Openved, MOC Office, and RootLock."
+      keywords="About RebelRoot, About Rebel Root, RebelRoot team, RebelRoot founder, Rebel Root collective, open source privacy software, RebelRoot mission, rebelroot.xyz, Paras Agarwal RebelRoot"
     >
+      <Head>
+        <link rel="canonical" href="https://rebelroot.xyz/about" />
+        {/* Organization + Person schema for Google entity recognition */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://rebelroot.xyz/#organization",
+                  "name": "RebelRoot",
+                  "alternateName": ["Rebel Root", "RebelRoot Collective", "REBELROOT"],
+                  "url": "https://rebelroot.xyz",
+                  "logo": "https://rebelroot.xyz/ic_omni_logo.webp",
+                  "foundingDate": "2023",
+                  "description": "An independent developer-led collective building secure, privacy-first, open-source digital tools.",
+                  "sameAs": [
+                    "https://github.com/REBEL-ROOT",
+                    "https://github.com/rebelroot",
+                    "https://www.linkedin.com/company/rebelroot/"
+                  ]
+                },
+                {
+                  "@type": "Person",
+                  "name": "Paras Agarwal",
+                  "jobTitle": "Founder & Lead Developer",
+                  "worksFor": { "@id": "https://rebelroot.xyz/#organization" },
+                  "url": "https://rebelroot.xyz/about",
+                  "sameAs": [
+                    "https://github.com/ParasxAgarwal",
+                    "https://www.linkedin.com/company/rebelroot/"
+                  ]
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": "https://rebelroot.xyz/about",
+                  "url": "https://rebelroot.xyz/about",
+                  "name": "About RebelRoot",
+                  "description": "Learn about the RebelRoot collective, our privacy-first mindset, and the founder building the next generation of software.",
+                  "publisher": { "@id": "https://rebelroot.xyz/#organization" },
+                  "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rebelroot.xyz" },
+                      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://rebelroot.xyz/about" }
+                    ]
+                  }
+                }
+              ]
+            })
+          }}
+        />
+      </Head>
       <AboutWrapper>
         {/* Mission / Mindset Section */}
         <Section>
