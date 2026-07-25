@@ -32,6 +32,11 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* ── Site Favicon & Icons ── */}
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+          <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+          <link rel="apple-touch-icon" href="/rebelroot-logo.png" />
+
           {/* ── Preconnect for performance ── */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

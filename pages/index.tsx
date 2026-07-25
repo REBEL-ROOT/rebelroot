@@ -54,13 +54,13 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
         <meta property="og:description" content="RebelRoot is an independent open-source collective designing secure, privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and RootLock." />
         <meta property="og:url" content="https://www.rebelroot.xyz" />
         <meta property="og:site_name" content="RebelRoot (Rebel Root)" />
-        <meta property="og:image" content="https://www.rebelroot.xyz/ic_omni_logo.webp" />
+        <meta property="og:image" content="https://www.rebelroot.xyz/rebelroot-logo.png" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="RebelRoot (Rebel Root) | Open-Source &amp; Privacy-First Digital Tools" />
         <meta name="twitter:description" content="RebelRoot is an independent open-source collective designing secure, privacy-first digital tools like Omni Browser, MOCNovel, CampCart, and RootLock." />
-        <meta name="twitter:image" content="https://www.rebelroot.xyz/ic_omni_logo.webp" />
+        <meta name="twitter:image" content="https://www.rebelroot.xyz/rebelroot-logo.png" />
 
         {/* Search Engine Directives */}
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -78,7 +78,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               "url": "https://www.rebelroot.xyz",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.rebelroot.xyz/ic_omni_logo.webp",
+                "url": "https://www.rebelroot.xyz/rebelroot-logo.png",
                 "width": 512,
                 "height": 512
               },

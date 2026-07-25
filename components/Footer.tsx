@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Container from 'components/Container';
 import { media } from 'utils/media';
 
+import Logo from 'components/Logo';
+
 type SingleFooterListItem = { title: string; href: string };
 type FooterListItems = SingleFooterListItem[];
 type SingleFooterList = { title: string; items: FooterListItems };
@@ -51,6 +53,17 @@ export default function Footer() {
   return (
     <FooterWrapper>
       <Container>
+        <FooterBrandSection>
+          <NextLink href="/" passHref>
+            <a>
+              <Logo height={52} />
+            </a>
+          </NextLink>
+          <FooterBrandText>
+            Independent, developer-led collective dedicated to privacy-first, zero-surveillance digital software tools.
+          </FooterBrandText>
+        </FooterBrandSection>
+
         <ListContainer>
           {footerItems.map((singleItem) => (
             <FooterList key={singleItem.title} {...singleItem} />
@@ -167,4 +180,23 @@ const BottomBar = styled.div`
   ${media('<=tablet')} {
     flex-direction: column;
   }
+`;
+
+const FooterBrandSection = styled.div`
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  a {
+    text-decoration: none;
+  }
+`;
+
+const FooterBrandText = styled.p`
+  font-size: 1.5rem;
+  max-width: 50rem;
+  color: rgba(var(--textSecondary), 0.7);
+  line-height: 1.6;
 `;

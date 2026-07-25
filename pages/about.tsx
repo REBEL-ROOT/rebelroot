@@ -29,7 +29,7 @@ export default function AboutPage() {
                   "name": "RebelRoot",
                   "alternateName": ["Rebel Root", "RebelRoot Collective", "REBELROOT"],
                   "url": "https://www.rebelroot.xyz",
-                  "logo": "https://www.rebelroot.xyz/ic_omni_logo.webp",
+                  "logo": "https://www.rebelroot.xyz/rebelroot-logo.png",
                   "foundingDate": "2023",
                   "description": "An independent developer-led collective building secure, privacy-first digital tools.",
                   "sameAs": [

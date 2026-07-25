@@ -20,7 +20,7 @@ export default function Page({ title, description, keywords, ogImage, hideHeader
   const canonicalUrl = `${EnvVars.URL.replace(/\/$/, '')}${router.asPath.split('?')[0]}`;
   const siteName = EnvVars.SITE_NAME;
   const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
-  const imageSrc = ogImage ? (ogImage.startsWith('http') ? ogImage : `${EnvVars.URL.replace(/\/$/, '')}${ogImage}`) : `${EnvVars.URL.replace(/\/$/, '')}/ic_omni_logo.webp`;
+  const imageSrc = ogImage ? (ogImage.startsWith('http') ? ogImage : `${EnvVars.URL.replace(/\/$/, '')}${ogImage}`) : `${EnvVars.URL.replace(/\/$/, '')}/rebelroot-logo.png`;
 
   return (
     <>
