@@ -8,9 +8,28 @@ interface LogoProps {
 }
 
 export default function Logo({ className, height = 48, variant = 'auto' }: LogoProps) {
+  if (variant === 'light') {
+    return (
+      <LogoWrapper className={className} style={{ height: `${height}px` }}>
+        <AlwaysLightLogo src="/rebelroot-logo-transparent.png" alt="REBELROOT Logo" />
+      </LogoWrapper>
+    );
+  }
+
+  if (variant === 'dark') {
+    return (
+      <LogoWrapper className={className} style={{ height: `${height}px` }}>
+        <AlwaysDarkLogo src="/rebelroot-logo-dark-transparent.png" alt="REBELROOT Logo" />
+      </LogoWrapper>
+    );
+  }
+
   return (
     <LogoWrapper className={className} style={{ height: `${height}px` }}>
-      <LogoImg src="/rebelroot-logo-transparent.png" alt="REBELROOT Logo" $variant={variant} />
+      {/* Black logo for light mode */}
+      <LightModeLogo src="/rebelroot-logo-dark-transparent.png" alt="REBELROOT Logo" />
+      {/* Silver/white logo for dark mode */}
+      <DarkModeLogo src="/rebelroot-logo-transparent.png" alt="REBELROOT Logo" />
     </LogoWrapper>
   );
 }
@@ -21,26 +40,55 @@ const LogoWrapper = styled.div`
   user-select: none;
 `;
 
-const LogoImg = styled.img<{ $variant: 'auto' | 'light' | 'dark' }>`
+const AlwaysLightLogo = styled.img`
   height: 100%;
   width: auto;
   object-fit: contain;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  transition: transform 0.25s ease;
 
-  ${(p) =>
-    p.$variant === 'dark'
-      ? `filter: brightness(0.12) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));`
-      : p.$variant === 'light'
-      ? `filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));`
-      : `
-        .next-light-theme & {
-          filter: brightness(0.12) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-        }
+  &:hover {
+    transform: scale(1.03);
+  }
+`;
 
-        .next-dark-theme & {
-          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
-        }
-      `}
+const AlwaysDarkLogo = styled.img`
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+`;
+
+const LightModeLogo = styled.img`
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: none;
+  transition: transform 0.25s ease;
+
+  .next-light-theme & {
+    display: block;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+  }
+`;
+
+const DarkModeLogo = styled.img`
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.25s ease;
+
+  .next-light-theme & {
+    display: none;
+  }
 
   &:hover {
     transform: scale(1.03);
