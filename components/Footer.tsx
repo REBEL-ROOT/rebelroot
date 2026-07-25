@@ -56,7 +56,7 @@ export default function Footer() {
         <FooterBrandSection>
           <NextLink href="/" passHref>
             <a>
-              <Logo height={52} />
+              <Logo height={52} variant="light" />
             </a>
           </NextLink>
           <FooterBrandText>
