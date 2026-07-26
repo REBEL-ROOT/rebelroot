@@ -161,7 +161,7 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
 
             {/* Live GitHub Stars Badge */}
             <GitHubStarsRow>
-              <StarsBadge href="https://github.com/REBEL-ROOT/omni-browser/stargazers" target="_blank" rel="noopener noreferrer">
+              <StarsBadge href="https://github.com/REBEL-ROOT/omni-browser" target="_blank" rel="noopener noreferrer">
                 <StarIcon>⭐</StarIcon>
                 <StarsLabel>GitHub Stars</StarsLabel>
                 <StarsCount>{stars !== null ? stars.toLocaleString() : '—'}</StarsCount>
