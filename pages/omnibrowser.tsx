@@ -329,7 +329,53 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                   <ShowcaseList>
                     <li>🚀 **One-Tap Access:** Swipe up or tap the header menu to display the tool sheet.</li>
                     <li>🎛️ **Drag-to-Reorder:** Hold and drag tiles to personalize your layout grid based on your daily workflow.</li>
-                    <li>🧩 **12+ Native Tools:** Pre-bundled with offline tools like a JavaScript dev console, PWA pinners, and code generator.</li>
+                    <li>🧩 **14+ Native Tools:** Pre-bundled with offline tools like Manga Grabber, VPN, Page Inspector, Force Zoom, and Dev Console.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
+
+              {/* Feature 7: Manga / Image Grabber */}
+              <ShowcaseBlock>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/manga_grabber.png" alt="Manga and Image Grabber Screen" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>Manga &amp; Extraction</ShowcaseTag>
+                  <ShowcaseTitle>Manga &amp; Image Grabber</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    Extract entire chapters, webtoon panels, and manhua images directly from web pages into a clean, organized gallery grid.
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>🖼️ **Bulk Chapter Extraction:** Automatically parses and extracts hundreds of high-res chapter pages (e.g. 200+ images) in one tap.</li>
+                    <li>🗑️ **Interactive Page Selector:** Interactively remove unwanted images, ads, or duplicate panels before saving.</li>
+                    <li>📦 **Images &amp; PDF Batch Export:** Download all extracted pages at once or export the complete chapter directly into a formatted PDF document.</li>
+                  </ShowcaseList>
+                </ShowcaseTextSide>
+              </ShowcaseBlock>
+
+              {/* Feature 8: Fullscreen Manga Reader */}
+              <ShowcaseBlock reverse>
+                <ShowcaseImageSide>
+                  <PhoneFrame>
+                    <PhoneBezel />
+                    <PhoneNotch />
+                    <ScreenshotImage src="/omni/manga_reader.png" alt="Fullscreen Manga Reader Screen" />
+                  </PhoneFrame>
+                </ShowcaseImageSide>
+                <ShowcaseTextSide>
+                  <ShowcaseTag>Reading Experience</ShowcaseTag>
+                  <ShowcaseTitle>Fullscreen Manga &amp; Webtoon Reader</ShowcaseTitle>
+                  <ShowcaseParagraph>
+                    Enjoy distraction-free reading of webtoons, manga, and graphic novels in an edge-to-edge full-screen reader.
+                  </ShowcaseParagraph>
+                  <ShowcaseList>
+                    <li>📚 **Distraction-Free Immersion:** Hides web chrome, floating banners, and sticky navigation for uninterrupted reading.</li>
+                    <li>📊 **Live Page Tracking:** Floating bottom pill toolbar displays active reading progress (e.g. Page 1 of 29).</li>
+                    <li>📥 **Quick Download &amp; PDF Export:** One-tap floating download button (📥) and PDF export (📄) built directly into the reader toolbar.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -375,18 +421,34 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
               </FeatureCard>
 
               <FeatureCard>
-                <CardIconWrapper>📌</CardIconWrapper>
-                <CardTitle>Instant Web App Pinning</CardTitle>
+                <CardIconWrapper>🖼️</CardIconWrapper>
+                <CardTitle>Manga / Image Grabber</CardTitle>
                 <CardDescription>
-                  Pin websites directly to your Android home launcher screen as dedicated, isolated PWA-style sandbox containers.
+                  Extracts full chapters, webtoon panels, and manhua pages into a clean grid view. Filter unwanted panels and batch-export as images or clean PDFs.
+                </CardDescription>
+              </FeatureCard>
+
+              <FeatureCard>
+                <CardIconWrapper>📖</CardIconWrapper>
+                <CardTitle>Fullscreen Manga Reader</CardTitle>
+                <CardDescription>
+                  Read webtoons &amp; manga in a distraction-free edge-to-edge canvas with active page tracking, quick image downloads, and instant PDF export.
+                </CardDescription>
+              </FeatureCard>
+
+              <FeatureCard>
+                <CardIconWrapper>🔑</CardIconWrapper>
+                <CardTitle>Integrated WireGuard VPN</CardTitle>
+                <CardDescription>
+                  Built-in local WireGuard VPN tunnel controller providing encrypted network traffic routing directly from the Quick Tools panel.
                 </CardDescription>
               </FeatureCard>
 
               <FeatureCard>
                 <CardIconWrapper>🔍</CardIconWrapper>
-                <CardTitle>QR Scanner &amp; Generator</CardTitle>
+                <CardTitle>Page Inspector &amp; Force Zoom</CardTitle>
                 <CardDescription>
-                  Scan QR codes and barcodes using the built-in scanner, or convert URLs and text blocks into shareable QR codes instantly.
+                  Inspect live DOM elements with the built-in developer console (<code>&lt;&gt;</code>) and bypass zoom-disabled websites with Force Zoom (<code>+</code>).
                 </CardDescription>
               </FeatureCard>
             </FeaturesGrid>
@@ -534,6 +596,27 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     <td>Yes (Standard PWA)</td>
                     <td>Yes (Standard PWA)</td>
                     <td>Limited</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Manga / Image Grabber &amp; PDF Export</strong></td>
+                    <td>Yes (Extracted grid &amp; PDF)</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Fullscreen Manga Reader</strong></td>
+                    <td>Yes (Distraction-free canvas)</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td><strong>DOM Inspector &amp; Force Zoom</strong></td>
+                    <td>Yes (Built-in Quick Tools)</td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>No</td>
                   </tr>
                 </tbody>
               </ComparisonTable>
