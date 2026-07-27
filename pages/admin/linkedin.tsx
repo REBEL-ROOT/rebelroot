@@ -19,6 +19,11 @@ export default function LinkedInAdminPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [publishResult, setPublishResult] = useState<{ success: boolean; message: string; postUrl?: string } | null>(null);
 
+  /* Comment Reply State */
+  const [incomingComment, setIncomingComment] = useState('Is Omni Browser fully open source on GitHub?');
+  const [aiReplyText, setAiReplyText] = useState('');
+  const [isAnalyzingComment, setIsAnalyzingComment] = useState(false);
+
   const handleGeneratePreset = async (presetKey: string) => {
     setIsGenerating(true);
     setPublishResult(null);
@@ -39,6 +44,26 @@ export default function LinkedInAdminPage() {
       console.error(err);
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const handleAnalyzeComment = async () => {
+    setIsAnalyzingComment(true);
+    setReplyStatus(null);
+    try {
+      const res = await fetch('/api/linkedin/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'generate', commentText: incomingComment }),
+      });
+      const data = await res.json();
+      if (data.success && data.suggestedReply) {
+        setAiReplyText(data.suggestedReply);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsAnalyzingComment(false);
     }
   };
 
@@ -87,11 +112,11 @@ export default function LinkedInAdminPage() {
   return (
     <Page
       title="LinkedIn Automation Dashboard"
-      description="Automate posts, announcements, and release updates for the REBELROOT LinkedIn Company Page."
+      description="Automate posts, announcements, and AI comment replies for the REBELROOT LinkedIn Company Page."
       hideHeader={true}
     >
       <Head>
-        <title>LinkedIn Post Automation | REBELROOT Admin</title>
+        <title>LinkedIn Post &amp; Comment Automation | REBELROOT Admin</title>
       </Head>
 
       <AdminWrapper>
@@ -206,7 +231,7 @@ export default function LinkedInAdminPage() {
                       type="text"
                       value={organizationId}
                       onChange={(e) => setOrganizationId(e.target.value)}
-                      placeholder="e.g. 12345678 or urn:li:organization:12345678"
+                      placeholder="e.g. 104928374 or urn:li:organization:104928374"
                     />
                   </FormGroup>
 
@@ -216,7 +241,7 @@ export default function LinkedInAdminPage() {
                       type="password"
                       value={accessToken}
                       onChange={(e) => setAccessToken(e.target.value)}
-                      placeholder="Bearer token with w_organization_social scope..."
+                      placeholder="Bearer token starting with AQV..."
                     />
                   </FormGroup>
 
@@ -237,6 +262,40 @@ export default function LinkedInAdminPage() {
                     </Button>
                   </SubmitRow>
                 </Form>
+              </Card>
+
+              {/* AI Comment Understanding & Reply Studio */}
+              <Card>
+                <CardTitle>🤖 AI Comment Reply Studio</CardTitle>
+                <CardSub>Paste visitor comments on your LinkedIn posts to understand questions &amp; auto-generate official REBELROOT replies:</CardSub>
+                <FormGroup>
+                  <Label>Visitor Comment on Post</Label>
+                  <Input
+                    type="text"
+                    value={incomingComment}
+                    onChange={(e) => setIncomingComment(e.target.value)}
+                    placeholder="e.g., Is Omni Browser open source on GitHub?"
+                  />
+                </FormGroup>
+
+                <PresetBtn
+                  style={{ marginTop: '1.2rem', background: 'rgba(var(--primary), 0.15)', color: 'rgb(var(--primary))' }}
+                  onClick={handleAnalyzeComment}
+                  disabled={isAnalyzingComment}
+                >
+                  {isAnalyzingComment ? 'Analyzing Comment...' : '🤖 AI Understand & Generate Reply'}
+                </PresetBtn>
+
+                {aiReplyText && (
+                  <FormGroup style={{ marginTop: '2rem' }}>
+                    <Label>Generated Official Reply</Label>
+                    <TextArea
+                      rows={4}
+                      value={aiReplyText}
+                      onChange={(e) => setAiReplyText(e.target.value)}
+                    />
+                  </FormGroup>
+                )}
               </Card>
             </LeftColumn>
 
