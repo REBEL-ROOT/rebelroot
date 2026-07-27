@@ -74,7 +74,7 @@ export default function Navbar({ items }: NavbarProps) {
         </NextLink>
         <NavItemList>
           {items.map((singleItem) => (
-            <NavItem key={singleItem.href} {...singleItem} />
+            <NavItem key={`${singleItem.title}-${singleItem.href}`} {...singleItem} />
           ))}
         </NavItemList>
         <ColorSwitcherContainer>
