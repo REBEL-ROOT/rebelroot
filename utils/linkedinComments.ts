@@ -22,7 +22,7 @@ export interface CommentReplyRequest {
 export async function generateAICommentReply(commentText: string, apiKey?: string): Promise<string> {
   const groqRes = await generateGroqCompletion({
     prompt: `A user commented on our LinkedIn post: "${commentText}". Write a polite, helpful, official REBELROOT reply answering their question, providing context, and sharing relevant links if appropriate. Keep it concise (1-3 sentences).`,
-    model: 'qwen/qwen3.6-27b',
+    model: 'llama-3.3-70b-versatile',
     apiKey,
   });
 

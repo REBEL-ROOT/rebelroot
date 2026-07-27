@@ -26,13 +26,24 @@ Writing Style:
 - CRITICAL: Output ONLY the final response text. Do NOT output any <think> tags, internal monologues, or thinking process.`;
 
 /**
- * Clean reasoning tags (e.g. <think>...</think>) from Groq model outputs.
+ * Clean reasoning tags (e.g. <think>...</think>) and metadata from Groq model outputs.
  */
 function cleanModelOutput(text: string): string {
   if (!text) return '';
-  return text
-    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+  let cleaned = text;
+
+  // 1. If </think> tag is present, extract everything AFTER the last </think>
+  if (cleaned.includes('</think>')) {
+    cleaned = cleaned.split('</think>').pop() || '';
+  }
+  // 2. If <think> tag is present without </think> (truncated inside thinking mode), strip <think> and everything following
+  else if (cleaned.includes('<think>')) {
+    cleaned = cleaned.split('<think>')[0] || '';
+  }
+
+  return cleaned
     .replace(/^Thinking Process:[\s\S]*?\n\n/gi, '')
+    .replace(/^Here's a thinking process:[\s\S]*?\n\n/gi, '')
     .trim();
 }
 

@@ -104,11 +104,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { presetKey, customPrompt, groqApiKey } = req.body;
 
-  // Custom Groq AI Generation using Qwen 3.6 27B
+  // Custom Groq AI Generation using Llama 3.3 70B
   if (customPrompt) {
     const groqResult = await generateGroqCompletion({
       prompt: `Write a high-converting, professional LinkedIn post update about: ${customPrompt}. Include punchy headline hook, clean bullet points with emojis, call to action link (https://www.rebelroot.xyz), and relevant developer hashtags.`,
-      model: 'qwen/qwen3.6-27b',
+      model: 'llama-3.3-70b-versatile',
+      maxTokens: 2048,
       apiKey: groqApiKey || process.env.GROQ_API_KEY,
     });
 
