@@ -451,7 +451,7 @@ export default function UnifiedAdminPage() {
 
                 <SectionDivider style={{ marginTop: '2.5rem' }}>🤖 Groq AI Custom Post Generator</SectionDivider>
                 <FormGroup style={{ marginTop: '1rem' }}>
-                  <Label>Prompt / Topic for Groq AI (Model: <code>qwen/qwen3.6-27b</code>)</Label>
+                  <Label>Prompt / Topic for Groq AI (Model: <code>llama-3.3-70b-versatile</code>)</Label>
                   <Input
                     type="text"
                     value={customPrompt}

@@ -7,8 +7,8 @@ export interface GroqCompletionParams {
   maxTokens?: number;
 }
 
-const DEFAULT_MODEL = 'qwen/qwen3.6-27b';
-const FALLBACK_MODELS = ['qwen/qwen3.6-27b', 'qwen-2.5-32b', 'llama-3.3-70b-versatile'];
+const DEFAULT_MODEL = 'llama-3.3-70b-versatile';
+const FALLBACK_MODELS = ['llama-3.3-70b-versatile', 'qwen-2.5-32b', 'deepseek-r1-distill-llama-70b'];
 
 const REBELROOT_SYSTEM_PROMPT = `You are the official AI Social Media & Communications Director for REBELROOT (https://www.rebelroot.xyz).
 REBELROOT is an independent, privacy-first, developer-led open-source collective building software for digital sovereignty.
@@ -22,7 +22,19 @@ Our core products:
 Writing Style:
 - Tone: Rebellious, bold, professional, developer-first, clear.
 - Include punchy hooks, clean bullet points with emojis, relevant hashtags, and call-to-actions.
-- Never write robotic corporate speak; write like an innovative developer team.`;
+- Never write robotic corporate speak; write like an innovative developer team.
+- CRITICAL: Output ONLY the final response text. Do NOT output any <think> tags, internal monologues, or thinking process.`;
+
+/**
+ * Clean reasoning tags (e.g. <think>...</think>) from Groq model outputs.
+ */
+function cleanModelOutput(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+    .replace(/^Thinking Process:[\s\S]*?\n\n/gi, '')
+    .trim();
+}
 
 /**
  * Call Groq Cloud API using OpenAI-compatible chat completion endpoint.
@@ -33,48 +45,64 @@ export async function generateGroqCompletion(params: GroqCompletionParams): Prom
   if (!apiKey) {
     return {
       success: false,
-      error: 'Missing Groq API Key. Please provide GROQ_API_KEY in environment variables or configuration.',
+      error: 'Missing Groq API Key. Please set GROQ_API_KEY in .env.local or enter your key in the dashboard.',
     };
   }
 
-  const model = params.model || process.env.GROQ_MODEL || DEFAULT_MODEL;
   const systemPrompt = params.systemPrompt || REBELROOT_SYSTEM_PROMPT;
+  const modelsToTry = [
+    params.model || process.env.GROQ_MODEL || DEFAULT_MODEL,
+    ...FALLBACK_MODELS,
+  ];
 
-  try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey.trim()}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: params.prompt },
-        ],
-        temperature: params.temperature ?? 0.7,
-        max_tokens: params.maxTokens ?? 1024,
-      }),
-    });
+  // Filter unique model names
+  const uniqueModels = Array.from(new Set(modelsToTry));
 
-    if (response.ok) {
-      const data = await response.json();
-      const content = data.choices?.[0]?.message?.content;
-      if (content) {
-        return { success: true, text: content };
+  let lastError = '';
+
+  for (const modelCandidate of uniqueModels) {
+    try {
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey.trim()}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: modelCandidate,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: params.prompt },
+          ],
+          temperature: params.temperature ?? 0.7,
+          max_tokens: params.maxTokens ?? 1024,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        let content = data.choices?.[0]?.message?.content;
+        if (content) {
+          content = cleanModelOutput(content);
+          return { success: true, text: content };
+        }
       }
-    }
 
-    const errText = await response.text();
-    return {
-      success: false,
-      error: `Groq API Error (${response.status}): ${errText}`,
-    };
-  } catch (err: any) {
-    return {
-      success: false,
-      error: err.message || 'Failed to connect to Groq API.',
-    };
+      const errText = await response.text();
+      lastError = `Groq API Error (${response.status}): ${errText}`;
+      // If error is 404 (model not found), loop to next fallback model
+      if (response.status === 404 || errText.includes('model_not_found')) {
+        continue;
+      } else {
+        break;
+      }
+    } catch (err: any) {
+      lastError = err.message || 'Failed to connect to Groq API.';
+    }
   }
+
+  return {
+    success: false,
+    error: lastError || 'Groq AI generation failed.',
+  };
 }
