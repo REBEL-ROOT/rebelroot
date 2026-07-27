@@ -6,14 +6,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { action, commentText, organizationId, accessToken, postId, commentId, replyText } = req.body;
+  const { action, commentText, organizationId, accessToken, postId, commentId, replyText, groqApiKey } = req.body;
 
-  // Action 1: AI Understand & Generate Reply
+  // Action 1: AI Understand & Generate Reply using Groq Qwen 3.6 27B
   if (action === 'generate') {
     if (!commentText) {
       return res.status(400).json({ error: 'Comment text is required for AI analysis.' });
     }
-    const suggestedReply = generateAICommentReply(commentText);
+    const suggestedReply = await generateAICommentReply(commentText, groqApiKey || process.env.GROQ_API_KEY);
     return res.status(200).json({ success: true, suggestedReply });
   }
 

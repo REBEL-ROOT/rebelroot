@@ -1,3 +1,5 @@
+import { generateGroqCompletion } from './groqClient';
+
 export interface LinkedInComment {
   id: string;
   authorName: string;
@@ -15,9 +17,20 @@ export interface CommentReplyRequest {
 }
 
 /**
- * AI-generates an official contextual reply to a LinkedIn post comment.
+ * AI-generates an official contextual reply to a LinkedIn post comment using Groq Qwen 3.6 27B model.
  */
-export function generateAICommentReply(commentText: string, productContext?: string): string {
+export async function generateAICommentReply(commentText: string, apiKey?: string): Promise<string> {
+  const groqRes = await generateGroqCompletion({
+    prompt: `A user commented on our LinkedIn post: "${commentText}". Write a polite, helpful, official REBELROOT reply answering their question, providing context, and sharing relevant links if appropriate. Keep it concise (1-3 sentences).`,
+    model: 'qwen/qwen3.6-27b',
+    apiKey,
+  });
+
+  if (groqRes.success && groqRes.text) {
+    return groqRes.text;
+  }
+
+  // Fallback rule-based responses if Groq API Key is not configured
   const text = commentText.toLowerCase();
 
   if (text.includes('open source') || text.includes('github') || text.includes('gpl')) {
@@ -32,15 +45,6 @@ export function generateAICommentReply(commentText: string, productContext?: str
     return 'Hello! You can download the latest official APK release directly from our release page: https://github.com/REBEL-ROOT/omni-browser/releases/latest or visit our portal at https://www.rebelroot.xyz/omnibrowser 🌐';
   }
 
-  if (text.includes('privacy') || text.includes('track') || text.includes('ad') || text.includes('data')) {
-    return 'Great question! RebelRoot operates on a strict digital sovereignty model: zero remote telemetry, built-in uBlock Origin adblock, hardware AES-256 encrypted vaults, and on-device processing. Everything stays on your phone! 🛡️';
-  }
-
-  if (text.includes('great') || text.includes('awesome') || text.includes('love') || text.includes('good') || text.includes('nice')) {
-    return 'Thank you so much for the support! Software built for rebels, by rebels. Let us know if you have any feature requests or feedback! ✊✨';
-  }
-
-  // Default contextual reply
   return `Thank you for your comment! At RebelRoot, we build privacy-first, auditable open-source applications. Feel free to check out our documentation and features at https://www.rebelroot.xyz 🌐`;
 }
 

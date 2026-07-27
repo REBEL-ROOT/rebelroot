@@ -15,6 +15,8 @@ export default function LinkedInAdminPage() {
   
   const [organizationId, setOrganizationId] = useState('');
   const [accessToken, setAccessToken] = useState('');
+  const [groqApiKey, setGroqApiKey] = useState('');
+  const [customPrompt, setCustomPrompt] = useState('');
   const [isPublishing, setIsPublishing] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [publishResult, setPublishResult] = useState<{ success: boolean; message: string; postUrl?: string } | null>(null);
@@ -47,14 +49,39 @@ export default function LinkedInAdminPage() {
     }
   };
 
+  const handleGenerateGroqPost = async () => {
+    if (!customPrompt.trim()) return;
+    setIsGenerating(true);
+    setPublishResult(null);
+    try {
+      const res = await fetch('/api/linkedin/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ customPrompt, groqApiKey }),
+      });
+      const data = await res.json();
+      if (data.success && data.post) {
+        setCommentary(data.post.commentary);
+        setArticleUrl(data.post.link);
+        setArticleTitle(data.post.title);
+        setArticleDescription(data.post.description);
+      } else {
+        alert(data.error || 'Groq AI generation failed.');
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   const handleAnalyzeComment = async () => {
     setIsAnalyzingComment(true);
-    setReplyStatus(null);
     try {
       const res = await fetch('/api/linkedin/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'generate', commentText: incomingComment }),
+        body: JSON.stringify({ action: 'generate', commentText: incomingComment, groqApiKey }),
       });
       const data = await res.json();
       if (data.success && data.suggestedReply) {
@@ -129,6 +156,7 @@ export default function LinkedInAdminPage() {
                 <CompanyTitleRow>
                   <h2>REBELROOT</h2>
                   <Badge>Company Page</Badge>
+                  <ModelBadge>⚡ Groq AI (Qwen 3.6 27B)</ModelBadge>
                 </CompanyTitleRow>
                 <CompanyMeta>
                   <span>👥 253 followers</span> • <span>Software Built for Rebels. By Rebels.</span>
@@ -168,6 +196,24 @@ export default function LinkedInAdminPage() {
                     🔐 RootLock
                   </PresetBtn>
                 </PresetGroup>
+
+                <SectionDivider style={{ marginTop: '2.5rem' }}>🤖 Groq AI Custom Post Generator</SectionDivider>
+                <FormGroup style={{ marginTop: '1rem' }}>
+                  <Label>Prompt / Topic for Groq AI (Model: <code>qwen/qwen3.6-27b</code>)</Label>
+                  <Input
+                    type="text"
+                    value={customPrompt}
+                    onChange={(e) => setCustomPrompt(e.target.value)}
+                    placeholder="e.g. Announce Omni Browser v1.3 with tab grouping and offline mode"
+                  />
+                  <PresetBtn
+                    style={{ marginTop: '1rem', background: 'rgb(var(--primary))', color: '#fff' }}
+                    onClick={handleGenerateGroqPost}
+                    disabled={isGenerating || !customPrompt.trim()}
+                  >
+                    {isGenerating ? 'Generating with Groq...' : '⚡ Generate Post with Qwen 3.6 27B'}
+                  </PresetBtn>
+                </FormGroup>
               </Card>
 
               {/* Post Editor Studio */}
@@ -220,9 +266,9 @@ export default function LinkedInAdminPage() {
                     />
                   </FormGroup>
 
-                  <SectionDivider>LinkedIn OAuth Credentials</SectionDivider>
+                  <SectionDivider>API &amp; AI Credentials Configuration</SectionDivider>
                   <ConfigNote>
-                    Leave blank to use environment variables (<code>LINKEDIN_ORGANIZATION_ID</code> &amp; <code>LINKEDIN_ACCESS_TOKEN</code>).
+                    Leave blank to use environment variables (<code>LINKEDIN_ORGANIZATION_ID</code>, <code>LINKEDIN_ACCESS_TOKEN</code>, &amp; <code>GROQ_API_KEY</code>).
                   </ConfigNote>
 
                   <FormGroup>
@@ -231,7 +277,7 @@ export default function LinkedInAdminPage() {
                       type="text"
                       value={organizationId}
                       onChange={(e) => setOrganizationId(e.target.value)}
-                      placeholder="e.g. 104928374 or urn:li:organization:104928374"
+                      placeholder="e.g. 133454483"
                     />
                   </FormGroup>
 
@@ -242,6 +288,16 @@ export default function LinkedInAdminPage() {
                       value={accessToken}
                       onChange={(e) => setAccessToken(e.target.value)}
                       placeholder="Bearer token starting with AQV..."
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label>Groq API Key (Optional)</Label>
+                    <Input
+                      type="password"
+                      value={groqApiKey}
+                      onChange={(e) => setGroqApiKey(e.target.value)}
+                      placeholder="gsk_..."
                     />
                   </FormGroup>
 
@@ -266,7 +322,7 @@ export default function LinkedInAdminPage() {
 
               {/* AI Comment Understanding & Reply Studio */}
               <Card>
-                <CardTitle>🤖 AI Comment Reply Studio</CardTitle>
+                <CardTitle>🤖 AI Comment Reply Studio (Groq Qwen 3.6 27B)</CardTitle>
                 <CardSub>Paste visitor comments on your LinkedIn posts to understand questions &amp; auto-generate official REBELROOT replies:</CardSub>
                 <FormGroup>
                   <Label>Visitor Comment on Post</Label>
@@ -283,7 +339,7 @@ export default function LinkedInAdminPage() {
                   onClick={handleAnalyzeComment}
                   disabled={isAnalyzingComment}
                 >
-                  {isAnalyzingComment ? 'Analyzing Comment...' : '🤖 AI Understand & Generate Reply'}
+                  {isAnalyzingComment ? 'Analyzing with Qwen 3.6 27B...' : '🤖 AI Understand & Generate Reply'}
                 </PresetBtn>
 
                 {aiReplyText && (
@@ -412,6 +468,7 @@ const CompanyTitleRow = styled.div`
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  flex-wrap: wrap;
 
   h2 {
     font-size: 2.8rem;
@@ -429,6 +486,16 @@ const Badge = styled.span`
   border-radius: 2rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+`;
+
+const ModelBadge = styled.span`
+  background: rgba(138, 43, 226, 0.15);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
 `;
 
 const CompanyMeta = styled.div`

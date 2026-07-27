@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { generateGroqCompletion } from 'utils/groqClient';
 
 const REBELROOT_PRESETS: Record<string, { title: string; link: string; description: string; commentary: string }> = {
   omnibrowser: {
@@ -91,16 +92,39 @@ Digital sovereignty starts on your home screen.
   },
 };
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { presetKey } = req.body;
+  const { presetKey, customPrompt, groqApiKey } = req.body;
+
+  // Custom Groq AI Generation using Qwen 3.6 27B
+  if (customPrompt) {
+    const groqResult = await generateGroqCompletion({
+      prompt: `Write a high-converting, professional LinkedIn post update about: ${customPrompt}. Include punchy headline hook, clean bullet points with emojis, call to action link (https://www.rebelroot.xyz), and relevant developer hashtags.`,
+      model: 'qwen/qwen3.6-27b',
+      apiKey: groqApiKey || process.env.GROQ_API_KEY,
+    });
+
+    if (groqResult.success && groqResult.text) {
+      return res.status(200).json({
+        success: true,
+        post: {
+          title: 'REBELROOT Announcement',
+          link: 'https://www.rebelroot.xyz',
+          description: 'Official REBELROOT Update',
+          commentary: groqResult.text,
+        },
+      });
+    } else {
+      return res.status(500).json({ error: groqResult.error || 'Groq AI generation failed.' });
+    }
+  }
 
   if (presetKey && REBELROOT_PRESETS[presetKey]) {
     return res.status(200).json({ success: true, post: REBELROOT_PRESETS[presetKey] });
   }
 
-  return res.status(400).json({ error: 'Invalid or missing preset key' });
+  return res.status(400).json({ error: 'Invalid or missing preset key or prompt' });
 }
