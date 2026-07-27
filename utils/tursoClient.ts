@@ -2,21 +2,14 @@ import { createClient, Client } from '@libsql/client';
 
 let tursoClientInstance: Client | null = null;
 
+const DEFAULT_TURSO_URL = 'libsql://rrdb-rebelroot.aws-ap-south-1.turso.io';
+const DEFAULT_TURSO_TOKEN = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODUxODQwODIsImlkIjoiMDE5ZmE1NDItYzkwMS03NTljLThkYTItYTNiMjg1ODgyOTM4Iiwia2lkIjoiamU3RzlGTEJaWUVvbXJibzdmcE9tbUJwNmM4SFNQRWJydGhwSnlpV25icyIsInJpZCI6ImViMzNmN2VlLWFkZTMtNDA0Yy04NjZkLWU4ODdiYjliYjRjYiJ9.wPTfGrrTEztNvc2IbVMCC48T-wdh0hPS9d73fHEjnJwqryGtmDQ8XPv_3BKlJ4HQlbDEQzYELW_nDHgDfTMeAA';
+
 export function getTursoClient(): Client | null {
   if (tursoClientInstance) return tursoClientInstance;
 
-  const url = process.env.TURSO_DATABASE_URL;
-  const authToken = process.env.TURSO_AUTH_TOKEN;
-
-  if (!url) {
-    console.warn('TURSO_DATABASE_URL is not configured. Falling back to local memory database.');
-    try {
-      tursoClientInstance = createClient({ url: 'file::memory:' });
-      return tursoClientInstance;
-    } catch (e) {
-      return null;
-    }
-  }
+  const url = process.env.TURSO_DATABASE_URL || DEFAULT_TURSO_URL;
+  const authToken = process.env.TURSO_AUTH_TOKEN || DEFAULT_TURSO_TOKEN;
 
   try {
     tursoClientInstance = createClient({
@@ -31,7 +24,7 @@ export function getTursoClient(): Client | null {
 }
 
 /**
- * Initializes required Turso DB tables for REBELROOT site & LinkedIn automation.
+ * Initializes required Turso DB tables and seeds default admin user into Turso DB.
  */
 export async function initTursoSchema(): Promise<{ success: boolean; error?: string }> {
   const client = getTursoClient();
@@ -48,6 +41,12 @@ export async function initTursoSchema(): Promise<{ success: boolean; error?: str
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
     `);
+
+    // Seed default admin user into Turso DB if not exists
+    await client.execute({
+      sql: `INSERT OR IGNORE INTO admin_users (id, username, password_hash, role) VALUES (?, ?, ?, ?)`,
+      args: ['usr_rebelroot', 'rebelroot', '75057', 'superadmin'],
+    });
 
     // 2. Automation Articles & LinkedIn Posts Vault Table
     await client.execute(`
