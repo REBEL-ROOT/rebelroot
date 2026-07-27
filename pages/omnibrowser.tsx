@@ -212,9 +212,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     Omni features a dedicated, hardware-secured directory sandbox that isolates and encrypts private files away from standard Android shared storage.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>🔒 **Hardware Encrypted:** Secured with AES-256 GCM (`EncryptedFile`) backed by KeyStore keys.</li>
-                    <li>🔑 **Biometric Integration:** Open your vault folders securely using fingerprint verification or system PIN code.</li>
-                    <li>📂 **Category Folders:** Instantly organizes your private downloads into Docs, Videos, Images, Epub, and Txt directories.</li>
+                    <li>🔒 <strong>Hardware Encrypted:</strong> Secured with AES-256 GCM (<code>EncryptedFile</code>) backed by KeyStore keys.</li>
+                    <li>🔑 <strong>Biometric Integration:</strong> Open your vault folders securely using fingerprint verification or system PIN code.</li>
+                    <li>📂 <strong>Category Folders:</strong> Instantly organizes your private downloads into Docs, Videos, Images, Epub, and Txt directories.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -235,9 +235,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     A secure offline notepad and scratchpad custom-tailored for saving sensitive texts, API keys, developer snippets, and login secrets.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>📝 **Filterable Chips:** Switch categories instantly using tab selectors: All, Notes, Codes, and Keys.</li>
-                    <li>🔍 **Fuzzy Local Search:** Scan and find your stored codes and developer notes using indexed search.</li>
-                    <li>🎙️ **Voice Scratchpad:** Capture concepts hands-free using local, on-device audio transcription.</li>
+                    <li>📝 <strong>Filterable Chips:</strong> Switch categories instantly using tab selectors: All, Notes, Codes, and Keys.</li>
+                    <li>🔍 <strong>Fuzzy Local Search:</strong> Scan and find your stored codes and developer notes using indexed search.</li>
+                    <li>🎙️ <strong>Voice Scratchpad:</strong> Capture concepts hands-free using local, on-device audio transcription.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -258,9 +258,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     Unlike standard WebViews that block add-ons, Omni features full integration with Mozilla&apos;s WebExtension controller to run desktop-grade plugins.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>🔌 **Install .xpi Add-ons:** Install extensions directly from addons.mozilla.org (AMO) or local files.</li>
-                    <li>🛡️ **Pre-bundled Shields:** Comes with uBlock Origin pre-configured to block ads, trackers, and miners instantly.</li>
-                    <li>👾 **User Script Injectors:** Leverage Violentmonkey integration to load custom userscripts and CSS overlays.</li>
+                    <li>🔌 <strong>Install .xpi Add-ons:</strong> Install extensions directly from addons.mozilla.org (AMO) or local files.</li>
+                    <li>🛡️ <strong>Pre-bundled Shields:</strong> Comes with uBlock Origin pre-configured to block ads, trackers, and miners instantly.</li>
+                    <li>👾 <strong>User Script Injectors:</strong> Leverage Violentmonkey integration to load custom userscripts and CSS overlays.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -281,9 +281,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     Tailor any website to your reading comfort with Omni&apos;s advanced real-time custom stylesheet injection utility.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>🎨 **Theme Presets:** One-tap switching between Original, Dark, Sepia, Forest, and high-contrast OLED black themes.</li>
-                    <li>📏 **Spacing Adjustments:** Fine-tune line-height, letter-spacing, and font sizes dynamically.</li>
-                    <li>👓 **Accessibility Filters:** Enable Grayscale, Night Light (amber eye protection), or hide web images to save mobile data.</li>
+                    <li>🎨 <strong>Theme Presets:</strong> One-tap switching between Original, Dark, Sepia, Forest, and high-contrast OLED black themes.</li>
+                    <li>📏 <strong>Spacing Adjustments:</strong> Fine-tune line-height, letter-spacing, and font sizes dynamically.</li>
+                    <li>👓 <strong>Accessibility Filters:</strong> Enable Grayscale, Night Light (amber eye protection), or hide web images to save mobile data.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -304,9 +304,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     Omni overrides default web video elements with an embedded hardware ExoPlayer container, capturing background audio and multi-tasking layouts.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>📺 **Picture-in-Picture:** Swipe out of the app to overlay floating windows on your Android home screen.</li>
-                    <li>🎛️ **Gesture Controls:** Control brightness (left margin) and volume (right margin) with vertical swipe gestures.</li>
-                    <li>📥 **Stream Sniffer:** Automatically intercepts HLS (m3u8), DASH (mpd), and MSE segments for native play or download.</li>
+                    <li>📺 <strong>Picture-in-Picture:</strong> Swipe out of the app to overlay floating windows on your Android home screen.</li>
+                    <li>🎛️ <strong>Gesture Controls:</strong> Control brightness (left margin) and volume (right margin) with vertical swipe gestures.</li>
+                    <li>📥 <strong>Stream Sniffer:</strong> Automatically intercepts HLS (m3u8), DASH (mpd), and MSE segments for native play or download.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -327,9 +327,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     Access translators, scanners, code consoles, page style injectors, and auto-scrollers in a single bottom sheet.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>🚀 **One-Tap Access:** Swipe up or tap the header menu to display the tool sheet.</li>
-                    <li>🎛️ **Drag-to-Reorder:** Hold and drag tiles to personalize your layout grid based on your daily workflow.</li>
-                    <li>🧩 **14+ Native Tools:** Pre-bundled with offline tools like Manga Grabber, VPN, Page Inspector, Force Zoom, and Dev Console.</li>
+                    <li>🚀 <strong>One-Tap Access:</strong> Swipe up or tap the header menu to display the tool sheet.</li>
+                    <li>🎛️ <strong>Drag-to-Reorder:</strong> Hold and drag tiles to personalize your layout grid based on your daily workflow.</li>
+                    <li>🧩 <strong>14+ Native Tools:</strong> Pre-bundled with offline tools like Manga Grabber, VPN, Page Inspector, Force Zoom, and Dev Console.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -350,9 +350,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     Extract entire chapters, webtoon panels, and manhua images directly from web pages into a clean, organized gallery grid.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>🖼️ **Bulk Chapter Extraction:** Automatically parses and extracts hundreds of high-res chapter pages (e.g. 200+ images) in one tap.</li>
-                    <li>🗑️ **Interactive Page Selector:** Interactively remove unwanted images, ads, or duplicate panels before saving.</li>
-                    <li>📦 **Images &amp; PDF Batch Export:** Download all extracted pages at once or export the complete chapter directly into a formatted PDF document.</li>
+                    <li>🖼️ <strong>Bulk Chapter Extraction:</strong> Automatically parses and extracts hundreds of high-res chapter pages (e.g. 200+ images) in one tap.</li>
+                    <li>🗑️ <strong>Interactive Page Selector:</strong> Interactively remove unwanted images, ads, or duplicate panels before saving.</li>
+                    <li>📦 <strong>Images &amp; PDF Batch Export:</strong> Download all extracted pages at once or export the complete chapter directly into a formatted PDF document.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -373,9 +373,9 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
                     Enjoy distraction-free reading of webtoons, manga, and graphic novels in an edge-to-edge full-screen reader.
                   </ShowcaseParagraph>
                   <ShowcaseList>
-                    <li>📚 **Distraction-Free Immersion:** Hides web chrome, floating banners, and sticky navigation for uninterrupted reading.</li>
-                    <li>📊 **Live Page Tracking:** Floating bottom pill toolbar displays active reading progress (e.g. Page 1 of 29).</li>
-                    <li>📥 **Quick Download &amp; PDF Export:** One-tap floating download button (📥) and PDF export (📄) built directly into the reader toolbar.</li>
+                    <li>📚 <strong>Distraction-Free Immersion:</strong> Hides web chrome, floating banners, and sticky navigation for uninterrupted reading.</li>
+                    <li>📊 <strong>Live Page Tracking:</strong> Floating bottom pill toolbar displays active reading progress (e.g. Page 1 of 29).</li>
+                    <li>📥 <strong>Quick Download &amp; PDF Export:</strong> One-tap floating download button (📥) and PDF export (📄) built directly into the reader toolbar.</li>
                   </ShowcaseList>
                 </ShowcaseTextSide>
               </ShowcaseBlock>
@@ -632,24 +632,24 @@ export default function OmniBrowserPage({ githubStars }: InferGetStaticPropsType
               <RoadmapColumn>
                 <h4>✅ Completed (v1.0 – v1.2.2)</h4>
                 <RoadmapList>
-                  <li>**GeckoView Engine:** Core multi-tab browsing & private modes.</li>
-                  <li>**WebExtension Integration:** Pre-packaged uBlock, Universal Copy, Media Grabber, and AI Blocker.</li>
-                  <li>**Notepad &amp; Vault:** Biometric AES-256 secure offline credentials keeper.</li>
-                  <li>**Omni Player:** Background audio ExoPlayer with swipe gesture volume/brightness.</li>
-                  <li>**ML Translator:** Offline Google ML translation packs.</li>
-                  <li>**QR Suite:** Camera barcode scanning, generator, and in-page scanner.</li>
-                  <li>**UX Enhancements:** Android 15 Edge-to-Edge UI & custom site style presets.</li>
+                  <li><strong>GeckoView Engine:</strong> Core multi-tab browsing &amp; private modes.</li>
+                  <li><strong>WebExtension Integration:</strong> Pre-packaged uBlock, Universal Copy, Media Grabber, and AI Blocker.</li>
+                  <li><strong>Notepad &amp; Vault:</strong> Biometric AES-256 secure offline credentials keeper.</li>
+                  <li><strong>Omni Player:</strong> Background audio ExoPlayer with swipe gesture volume/brightness.</li>
+                  <li><strong>ML Translator:</strong> Offline Google ML translation packs.</li>
+                  <li><strong>QR Suite:</strong> Camera barcode scanning, generator, and in-page scanner.</li>
+                  <li><strong>UX Enhancements:</strong> Android 15 Edge-to-Edge UI &amp; custom site style presets.</li>
                 </RoadmapList>
               </RoadmapColumn>
               <RoadmapColumn>
                 <h4>🔜 Planned (v1.3+)</h4>
                 <RoadmapList>
-                  <li>**Collapsible Tab Groups:** Group and collapse open tabs by custom folders.</li>
-                  <li>**Distraction-Free Reader Mode:** Dedicated page styling overrides for clean text reading.</li>
-                  <li>**Password Manager:** Local biometric credentials vault integration.</li>
-                  <li>**dApp Support:** Web3 client integration for MetaMask-compatible services.</li>
-                  <li>**Local CSS Injection:** Custom user stylesheet rules per domain.</li>
-                  <li>**Encrypted Sync:** Encrypted cloud backup for bookmarks and history.</li>
+                  <li><strong>Collapsible Tab Groups:</strong> Group and collapse open tabs by custom folders.</li>
+                  <li><strong>Distraction-Free Reader Mode:</strong> Dedicated page styling overrides for clean text reading.</li>
+                  <li><strong>Password Manager:</strong> Local biometric credentials vault integration.</li>
+                  <li><strong>dApp Support:</strong> Web3 client integration for MetaMask-compatible services.</li>
+                  <li><strong>Local CSS Injection:</strong> Custom user stylesheet rules per domain.</li>
+                  <li><strong>Encrypted Sync:</strong> Encrypted cloud backup for bookmarks and history.</li>
                 </RoadmapList>
               </RoadmapColumn>
             </RoadmapGrid>

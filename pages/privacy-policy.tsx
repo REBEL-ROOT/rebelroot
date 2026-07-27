@@ -9,7 +9,7 @@ export default function PrivacyPolicyPage() {
         <RichText>
           <h2>Our Commitment to Privacy</h2>
           <p>
-            RebelRoot is an independent, developer-led collective. We design all of our software around a core principle: **digital sovereignty**. We believe that your data belongs entirely to you. Consequently, we maintain a strict stance on user privacy.
+            RebelRoot is an independent, developer-led collective. We design all of our software around a core principle: <strong>digital sovereignty</strong>. We believe that your data belongs entirely to you. Consequently, we maintain a strict stance on user privacy.
           </p>
 
           <h3>1. Zero Telemetry & Tracking</h3>

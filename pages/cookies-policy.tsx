@@ -14,7 +14,7 @@ export default function CookiesPolicyPage() {
 
           <h3>1. Do We Use Cookies?</h3>
           <p>
-            **No.** RebelRoot does not write any tracking, advertising, profiling, or third-party cookies on your device when you visit our website.
+            <strong>No.</strong> RebelRoot does not write any tracking, advertising, profiling, or third-party cookies on your device when you visit our website.
           </p>
 
           <h3>2. Essential Local State</h3>
