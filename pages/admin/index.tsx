@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Button from 'components/Button';
 import Container from 'components/Container';
 import Page from 'components/Page';
 
@@ -369,13 +368,13 @@ export default function UnifiedAdminPage() {
                 {authSuccessMsg && <SuccessBanner>{authSuccessMsg}</SuccessBanner>}
                 {authErrorMsg && <ErrorBanner>{authErrorMsg}</ErrorBanner>}
 
-                <Button type="submit" disabled={isAuthLoading} style={{ width: '100%', marginTop: '1rem' }}>
+                <SubmitButton type="submit" disabled={isAuthLoading}>
                   {isAuthLoading
-                    ? 'Connecting to Turso DB...'
+                    ? '⏳ Signing in...'
                     : authMode === 'login'
-                    ? 'Sign In to Dashboard 🚀'
-                    : 'Save Password to Turso DB 🗄️'}
-                </Button>
+                    ? '🚀 Sign In to Dashboard'
+                    : '🗄️ Save Password to Turso DB'}
+                </SubmitButton>
               </Form>
             </LoginCard>
           </Container>
@@ -566,9 +565,9 @@ export default function UnifiedAdminPage() {
                   )}
 
                   <SubmitRow style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-                    <Button type="submit" disabled={isPublishing}>
+                    <SubmitButton type="submit" disabled={isPublishing}>
                       {isPublishing ? 'Publishing to LinkedIn...' : 'Publish to Company Page 🚀'}
-                    </Button>
+                    </SubmitButton>
                     <PresetBtn
                       type="button"
                       onClick={handleSaveToTurso}
@@ -825,6 +824,32 @@ const ErrorBanner = styled.div`
   padding: 1.2rem;
   border-radius: 0.8rem;
   text-align: center;
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  margin-top: 1rem;
+  background: rgb(var(--primary));
+  color: #ffffff;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 1.75rem 2.25rem;
+  font-size: 1.4rem;
+  font-family: var(--font);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+
+  &:hover:not(:disabled) {
+    transform: scale(1.02);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `;
 
 const AdminWrapper = styled.div`
