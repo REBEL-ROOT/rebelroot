@@ -16,7 +16,7 @@ export interface LinkedInPublishResult {
 }
 
 /**
- * Publishes a post to a LinkedIn Organization (Company Profile) via official REST API.
+ * Publishes a post to a LinkedIn Organization (Company Profile) or Member Profile via official REST API.
  */
 export async function publishToLinkedInCompany(payload: LinkedInPostPayload): Promise<LinkedInPublishResult> {
   const { organizationId, accessToken, commentary, articleUrl, articleTitle, articleDescription } = payload;
@@ -28,8 +28,13 @@ export async function publishToLinkedInCompany(payload: LinkedInPostPayload): Pr
     };
   }
 
-  const cleanOrgId = organizationId.trim().replace(/^urn:li:organization:/, '');
-  const authorUrn = `urn:li:organization:${cleanOrgId}`;
+  const rawId = organizationId.trim();
+  let authorUrn = rawId;
+
+  if (!rawId.startsWith('urn:li:')) {
+    // Default to organization URN if numeric ID
+    authorUrn = `urn:li:organization:${rawId}`;
+  }
 
   // Build REST API Post Payload
   const postData: Record<string, any> = {
