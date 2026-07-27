@@ -43,7 +43,8 @@ export default function UnifiedAdminPage() {
   const [isSavingTurso, setIsSavingTurso] = useState(false);
   const [tursoStatusMsg, setTursoStatusMsg] = useState('');
 
-  // Token verify logic
+  // Token verify logic — simply trust what's in localStorage on mount.
+  // If a token is stale, secureFetch will get a 401 and call handleLogoutAction() automatically.
   useEffect(() => {
     const token = localStorage.getItem('rr_admin_token');
     const storedUser = localStorage.getItem('rr_admin_user');
@@ -53,22 +54,8 @@ export default function UnifiedAdminPage() {
       if (storedUser) {
         try { setAdminUser(JSON.parse(storedUser)); } catch (e) {}
       }
-      // Verify token dynamically
-      fetch('/api/linkedin/articles', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((res) => {
-          if (res.ok) {
-            setIsLoggedIn(true);
-            fetchTursoArticlesDirectly(token);
-          } else {
-            handleLogoutAction();
-          }
-        })
-        .catch(() => {
-          // Fallback: trust token offline/local dev
-          setIsLoggedIn(true);
-        });
+      setIsLoggedIn(true);
+      fetchTursoArticlesDirectly(token);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
