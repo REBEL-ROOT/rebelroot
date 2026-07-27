@@ -7,19 +7,24 @@ import Container from 'components/Container';
 import Page from 'components/Page';
 
 export default function AdminLoginPage() {
+  const [mode, setMode] = useState<'login' | 'register'>('login');
   const [username, setUsername] = useState('rebelroot');
   const [password, setPassword] = useState('75057');
   const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMsg('');
+    setSuccessMsg('');
+
+    const endpoint = mode === 'login' ? '/api/admin/login' : '/api/admin/register';
 
     try {
-      const res = await fetch('/api/admin/login', {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -27,14 +32,19 @@ export default function AdminLoginPage() {
 
       const data = await res.json();
       if (res.ok && data.success) {
-        localStorage.setItem('rr_admin_token', data.token);
-        localStorage.setItem('rr_admin_user', JSON.stringify(data.user));
-        router.push('/admin/linkedin');
+        if (mode === 'login') {
+          localStorage.setItem('rr_admin_token', data.token);
+          localStorage.setItem('rr_admin_user', JSON.stringify(data.user));
+          router.push('/admin/linkedin');
+        } else {
+          setSuccessMsg(data.message || 'Password successfully saved in Turso DB! You can now sign in.');
+          setMode('login');
+        }
       } else {
-        setErrorMsg(data.error || 'Authentication failed');
+        setErrorMsg(data.error || 'Operation failed');
       }
     } catch (err: any) {
-      setErrorMsg(err.message || 'Error connecting to Turso DB authentication server.');
+      setErrorMsg(err.message || 'Error connecting to Turso DB server.');
     } finally {
       setIsLoading(false);
     }
@@ -42,11 +52,11 @@ export default function AdminLoginPage() {
 
   return (
     <Page
-      title="Admin Sign In"
+      title="Admin Portal"
       description="Secure Turso DB authentication portal for REBELROOT administration."
     >
       <Head>
-        <title>Sign In | REBELROOT Turso DB Portal</title>
+        <title>{mode === 'login' ? 'Sign In' : 'Set Turso DB Password'} | REBELROOT Admin</title>
       </Head>
 
       <LoginWrapper>
@@ -58,9 +68,18 @@ export default function AdminLoginPage() {
               <Badge>Turso DB Authentication</Badge>
             </LogoGroup>
 
-            <Form onSubmit={handleLogin}>
+            <TabGroup>
+              <TabBtn active={mode === 'login'} onClick={() => { setMode('login'); setErrorMsg(''); setSuccessMsg(''); }}>
+                🔒 Sign In
+              </TabBtn>
+              <TabBtn active={mode === 'register'} onClick={() => { setMode('register'); setErrorMsg(''); setSuccessMsg(''); }}>
+                ⚙️ Set Password in Turso DB
+              </TabBtn>
+            </TabGroup>
+
+            <Form onSubmit={handleSubmit}>
               <FormGroup>
-                <Label>Username</Label>
+                <Label>Admin Username</Label>
                 <Input
                   type="text"
                   value={username}
@@ -71,24 +90,25 @@ export default function AdminLoginPage() {
               </FormGroup>
 
               <FormGroup>
-                <Label>Password</Label>
+                <Label>{mode === 'login' ? 'Password' : 'New Admin Password'}</Label>
                 <Input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="75057"
+                  placeholder="Enter your password..."
                   required
                 />
               </FormGroup>
 
-              <HintNote>
-                Default credentials: <code>rebelroot</code> / <code>75057</code>
-              </HintNote>
-
+              {successMsg && <SuccessBanner>{successMsg}</SuccessBanner>}
               {errorMsg && <ErrorBanner>{errorMsg}</ErrorBanner>}
 
               <Button type="submit" disabled={isLoading} style={{ width: '100%', marginTop: '1rem' }}>
-                {isLoading ? 'Authenticating with Turso DB...' : 'Sign In to Dashboard 🔒'}
+                {isLoading
+                  ? 'Connecting to Turso DB...'
+                  : mode === 'login'
+                  ? 'Sign In to Dashboard 🚀'
+                  : 'Save Password to Turso DB 🗄️'}
               </Button>
             </Form>
           </LoginCard>
@@ -107,7 +127,7 @@ const LoginWrapper = styled.div`
 `;
 
 const LoginCard = styled.div`
-  max-width: 44rem;
+  max-width: 46rem;
   margin: 0 auto;
   background: rgb(var(--secondBackground));
   border: 1px solid rgba(var(--text), 0.1);
@@ -121,7 +141,7 @@ const LogoGroup = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
 
   h2 {
     font-size: 2.6rem;
@@ -145,6 +165,27 @@ const Badge = styled.span`
   font-weight: 700;
   padding: 0.4rem 1.2rem;
   border-radius: 2rem;
+`;
+
+const TabGroup = styled.div`
+  display: flex;
+  background: rgba(var(--text), 0.05);
+  padding: 0.4rem;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
+`;
+
+const TabBtn = styled.button<{ active: boolean }>`
+  flex: 1;
+  background: ${(p) => (p.active ? 'rgb(var(--primary))' : 'transparent')};
+  color: ${(p) => (p.active ? '#ffffff' : 'rgb(var(--text))')};
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 `;
 
 const Form = styled.form`
@@ -179,17 +220,15 @@ const Input = styled.input`
   }
 `;
 
-const HintNote = styled.p`
-  font-size: 1.2rem;
-  opacity: 0.65;
-  margin: -1rem 0 0 0;
+const SuccessBanner = styled.div`
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid #4caf50;
+  color: #4caf50;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
   text-align: center;
-
-  code {
-    background: rgba(var(--text), 0.08);
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.4rem;
-  }
 `;
 
 const ErrorBanner = styled.div`
