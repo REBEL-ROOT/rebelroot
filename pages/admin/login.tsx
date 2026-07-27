@@ -9,7 +9,7 @@ import Page from 'components/Page';
 export default function AdminLoginPage() {
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const [username, setUsername] = useState('rebelroot');
-  const [password, setPassword] = useState('75057');
+  const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
