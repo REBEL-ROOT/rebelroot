@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
 import Container from 'components/Container';
@@ -25,6 +25,62 @@ export default function LinkedInAdminPage() {
   const [incomingComment, setIncomingComment] = useState('Is Omni Browser fully open source on GitHub?');
   const [aiReplyText, setAiReplyText] = useState('');
   const [isAnalyzingComment, setIsAnalyzingComment] = useState(false);
+
+  /* Turso DB Saved Articles State */
+  const [savedArticles, setSavedArticles] = useState<any[]>([]);
+  const [isSavingTurso, setIsSavingTurso] = useState(false);
+  const [tursoStatusMsg, setTursoStatusMsg] = useState('');
+
+  const fetchTursoArticles = async () => {
+    try {
+      const res = await fetch('/api/linkedin/articles');
+      const data = await res.json();
+      if (data.success && data.articles) {
+        setSavedArticles(data.articles);
+      }
+    } catch (err) {
+      console.error('Failed to fetch articles from Turso DB:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTursoArticles();
+  }, []);
+
+  const handleSaveToTurso = async () => {
+    setIsSavingTurso(true);
+    setTursoStatusMsg('');
+    try {
+      const res = await fetch('/api/linkedin/articles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: articleTitle || 'REBELROOT Update',
+          commentary,
+          articleUrl,
+          productName: 'Omni Browser',
+          status: 'SAVED',
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setTursoStatusMsg('Saved to Turso DB successfully!');
+        fetchTursoArticles();
+      } else {
+        setTursoStatusMsg(data.error || 'Failed to save to Turso DB');
+      }
+    } catch (err: any) {
+      setTursoStatusMsg(err.message || 'Error connecting to Turso DB');
+    } finally {
+      setIsSavingTurso(false);
+    }
+  };
+
+  const handleLoadTursoArticle = (art: any) => {
+    setArticleTitle(art.title);
+    setCommentary(art.commentary);
+    if (art.articleUrl) setArticleUrl(art.articleUrl);
+  };
 
   const handleGeneratePreset = async (presetKey: string) => {
     setIsGenerating(true);
@@ -120,6 +176,20 @@ export default function LinkedInAdminPage() {
           message: 'Post successfully published to REBELROOT LinkedIn Company Page!',
           postUrl: data.postUrl,
         });
+
+        // Also save published record to Turso DB
+        fetch('/api/linkedin/articles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: articleTitle || 'Published LinkedIn Update',
+            commentary,
+            articleUrl,
+            status: 'PUBLISHED',
+            linkedinPostId: data.postId,
+          }),
+        }).then(() => fetchTursoArticles());
+
       } else {
         setPublishResult({
           success: false,
@@ -156,6 +226,7 @@ export default function LinkedInAdminPage() {
                 <CompanyTitleRow>
                   <h2>REBELROOT</h2>
                   <Badge>Company Page</Badge>
+                  <TursoBadge>🗄️ Turso DB Connected</TursoBadge>
                   <ModelBadge>⚡ Groq AI (Qwen 3.6 27B)</ModelBadge>
                 </CompanyTitleRow>
                 <CompanyMeta>
@@ -266,9 +337,9 @@ export default function LinkedInAdminPage() {
                     />
                   </FormGroup>
 
-                  <SectionDivider>API &amp; AI Credentials Configuration</SectionDivider>
+                  <SectionDivider>API &amp; Database Configuration</SectionDivider>
                   <ConfigNote>
-                    Leave blank to use environment variables (<code>LINKEDIN_ORGANIZATION_ID</code>, <code>LINKEDIN_ACCESS_TOKEN</code>, &amp; <code>GROQ_API_KEY</code>).
+                    Credentials pre-configured in environment variables (<code>TURSO_DATABASE_URL</code>, <code>LINKEDIN_ORGANIZATION_ID</code>, <code>LINKEDIN_ACCESS_TOKEN</code>).
                   </ConfigNote>
 
                   <FormGroup>
@@ -312,13 +383,41 @@ export default function LinkedInAdminPage() {
                     </StatusBanner>
                   )}
 
-                  <SubmitRow>
+                  <SubmitRow style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
                     <Button type="submit" disabled={isPublishing}>
                       {isPublishing ? 'Publishing to LinkedIn...' : 'Publish to Company Page 🚀'}
                     </Button>
+                    <PresetBtn
+                      type="button"
+                      onClick={handleSaveToTurso}
+                      disabled={isSavingTurso}
+                      style={{ background: 'rgba(255, 255, 255, 0.1)', color: '#fff', padding: '1.2rem 2rem', borderRadius: '3rem' }}
+                    >
+                      {isSavingTurso ? 'Saving...' : '💾 Save Article to Turso DB'}
+                    </PresetBtn>
                   </SubmitRow>
+                  {tursoStatusMsg && <p style={{ fontSize: '1.3rem', opacity: 0.8, marginTop: '0.5rem' }}>{tursoStatusMsg}</p>}
                 </Form>
               </Card>
+
+              {/* Turso DB Saved Articles Vault */}
+              {savedArticles.length > 0 && (
+                <Card>
+                  <CardTitle>🗄️ Turso DB Article Archives ({savedArticles.length})</CardTitle>
+                  <CardSub>Articles &amp; post drafts stored in your Turso DB libSQL instance:</CardSub>
+                  <ArticleVaultList>
+                    {savedArticles.map((art) => (
+                      <VaultItem key={art.id} onClick={() => handleLoadTursoArticle(art)}>
+                        <VaultTitle>{art.title}</VaultTitle>
+                        <VaultMeta>
+                          <VaultBadge status={art.status}>{art.status}</VaultBadge>
+                          <span>{new Date(art.createdAt || Date.now()).toLocaleDateString()}</span>
+                        </VaultMeta>
+                      </VaultItem>
+                    ))}
+                  </ArticleVaultList>
+                </Card>
+              )}
 
               {/* AI Comment Understanding & Reply Studio */}
               <Card>
@@ -488,6 +587,16 @@ const Badge = styled.span`
   letter-spacing: 0.05em;
 `;
 
+const TursoBadge = styled.span`
+  background: rgba(0, 230, 204, 0.15);
+  color: #00e6cc;
+  border: 1px solid rgba(0, 230, 204, 0.3);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+`;
+
 const ModelBadge = styled.span`
   background: rgba(138, 43, 226, 0.15);
   color: #a855f7;
@@ -585,6 +694,49 @@ const PresetBtn = styled.button`
     color: rgb(var(--primary));
     transform: translateY(-2px);
   }
+`;
+
+const ArticleVaultList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
+
+const VaultItem = styled.div`
+  background: rgba(var(--text), 0.04);
+  border: 1px solid rgba(var(--text), 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(var(--primary), 0.1);
+    border-color: rgb(var(--primary));
+  }
+`;
+
+const VaultTitle = styled.h4`
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem 0;
+`;
+
+const VaultMeta = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  opacity: 0.6;
+`;
+
+const VaultBadge = styled.span<{ status: string }>`
+  background: ${(p) => (p.status === 'PUBLISHED' ? 'rgba(76, 175, 80, 0.2)' : 'rgba(255, 193, 7, 0.2)')};
+  color: ${(p) => (p.status === 'PUBLISHED' ? '#4CAF50' : '#FFC107')};
+  font-weight: bold;
+  padding: 0.2rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 1.1rem;
 `;
 
 const Form = styled.form`
