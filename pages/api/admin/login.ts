@@ -1,6 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getTursoClient, initTursoSchema } from 'utils/tursoClient';
 import crypto from 'crypto';
+
+/**
+ * Stateless HMAC-based authentication.
+ * No database required — token is signed with ADMIN_PASSWORD as the secret.
+ * The auth middleware verifies it the same way.
+ */
+function signToken(username: string, secret: string): string {
+  const payload = `${username}:${Date.now()}`;
+  const sig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+  const encoded = Buffer.from(payload).toString('base64url');
+  return `rr.${encoded}.${sig}`;
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -13,69 +24,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Username and password are required' });
   }
 
-  // Ensure Turso DB schema is initialized
-  try {
-    await initTursoSchema();
-  } catch (e) {
-    console.warn('Schema init warning:', e);
+  const expectedUser = (process.env.ADMIN_USERNAME || 'rebelroot').toLowerCase();
+  const expectedPass = process.env.ADMIN_PASSWORD;
+
+  if (!expectedPass) {
+    return res.status(500).json({ error: 'Server auth not configured. Set ADMIN_PASSWORD in .env.local' });
   }
 
-  const client = getTursoClient();
   const cleanUser = username.trim().toLowerCase();
   const cleanPass = password.trim();
 
-  // 1. First check environment variable override (if configured)
-  const envUser = (process.env.ADMIN_USERNAME || 'rebelroot').toLowerCase();
-  const envPass = process.env.ADMIN_PASSWORD;
-
-  if (envPass && cleanUser === envUser && cleanPass === envPass) {
-    const token = `rr_session_${crypto.randomBytes(32).toString('hex')}`;
-    const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
-
-    if (client) {
-      await client.execute({
-        sql: 'INSERT INTO admin_sessions (token, username, expires_at) VALUES (?, ?, ?)',
-        args: [token, cleanUser, expiresAt],
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      token,
-      user: { username: cleanUser, role: 'superadmin' },
-    });
+  if (cleanUser !== expectedUser || cleanPass !== expectedPass) {
+    return res.status(401).json({ error: 'Invalid username or password.' });
   }
 
-  // 2. Query Turso DB `admin_users` table directly
-  if (client) {
-    try {
-      const result = await client.execute({
-        sql: 'SELECT * FROM admin_users WHERE LOWER(username) = LOWER(?) LIMIT 1',
-        args: [cleanUser],
-      });
+  // Sign a stateless token — no DB write needed
+  const token = signToken(cleanUser, expectedPass);
 
-      if (result.rows && result.rows.length > 0) {
-        const userRow = result.rows[0];
-        if (userRow.password_hash === cleanPass) {
-          const token = `rr_session_${crypto.randomBytes(32).toString('hex')}`;
-          const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
-          
-          await client.execute({
-            sql: 'INSERT INTO admin_sessions (token, username, expires_at) VALUES (?, ?, ?)',
-            args: [token, String(userRow.username), expiresAt],
-          });
-
-          return res.status(200).json({
-            success: true,
-            token,
-            user: { username: String(userRow.username), role: String(userRow.role) },
-          });
-        }
-      }
-    } catch (err) {
-      console.error('Turso DB Admin Login Error:', err);
-    }
-  }
-
-  return res.status(401).json({ error: 'Invalid username or password. If you haven\'t set a password in Turso DB yet, click "Set Password in Turso DB".' });
+  return res.status(200).json({
+    success: true,
+    token,
+    user: { username: cleanUser, role: 'superadmin' },
+  });
 }
