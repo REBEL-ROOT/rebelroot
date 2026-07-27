@@ -130,9 +130,10 @@ export default function UnifiedAdminPage() {
         if (authMode === 'login') {
           localStorage.setItem('rr_admin_token', data.token);
           localStorage.setItem('rr_admin_user', JSON.stringify(data.user));
-          setAdminUser(data.user);
-          setIsLoggedIn(true);
-          fetchTursoArticlesDirectly(data.token);
+          // Hard reload so the page starts fresh with the token in localStorage.
+          // This eliminates all React state race conditions.
+          window.location.reload();
+          return;
         } else {
           setAuthSuccessMsg(data.message || 'Password saved in Turso DB! You can now sign in.');
           setAuthMode('login');
@@ -385,11 +386,7 @@ export default function UnifiedAdminPage() {
 
   // Render Dashboard
   return (
-    <Page
-      title="LinkedIn Automation Dashboard"
-      description="Automate posts, announcements, and AI comment replies for the REBELROOT LinkedIn Company Page."
-      hideHeader={true}
-    >
+    <>
       <Head>
         <title>LinkedIn Post &amp; Comment Automation | REBELROOT Admin</title>
       </Head>
@@ -694,7 +691,7 @@ export default function UnifiedAdminPage() {
           </MainGrid>
         </Container>
       </AdminWrapper>
-    </Page>
+    </>
   );
 }
 
