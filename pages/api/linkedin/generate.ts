@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { generateGroqCompletion } from 'utils/groqClient';
+import { requireAuth } from 'utils/auth';
 
 const REBELROOT_PRESETS: Record<string, { title: string; link: string; description: string; commentary: string }> = {
   omnibrowser: {
@@ -96,6 +97,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  // Security: Require Admin Authentication
+  const isAuthenticated = await requireAuth(req, res);
+  if (!isAuthenticated) return;
 
   const { presetKey, customPrompt, groqApiKey } = req.body;
 

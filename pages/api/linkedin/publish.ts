@@ -1,10 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { publishToLinkedInCompany } from 'utils/linkedinPublisher';
+import { requireAuth } from 'utils/auth';
+import { getTursoClient } from 'utils/tursoClient';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  // Security: Require Admin Authentication
+  const isAuthenticated = await requireAuth(req, res);
+  if (!isAuthenticated) return;
+
 
   const { organizationId, accessToken, commentary, articleUrl, articleTitle, articleDescription } = req.body;
 
@@ -30,6 +37,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     articleTitle,
     articleDescription,
   });
+
+  // Log to Turso DB
+  const client = getTursoClient();
+  if (client) {
+    const logId = `log_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+    await client.execute({
+      sql: 'INSERT INTO linkedin_logs (id, action, org_id, post_id, status_code, payload_data) VALUES (?, ?, ?, ?, ?, ?)',
+      args: [logId, 'publish', finalOrgId, result.postId || null, result.success ? 200 : 500, JSON.stringify(result)],
+    });
+  }
 
   if (result.success) {
     return res.status(200).json(result);

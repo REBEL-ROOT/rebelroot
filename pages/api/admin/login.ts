@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getTursoClient, initTursoSchema } from 'utils/tursoClient';
+import crypto from 'crypto';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -28,9 +29,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const envPass = process.env.ADMIN_PASSWORD;
 
   if (envPass && cleanUser === envUser && cleanPass === envPass) {
+    const token = `rr_session_${crypto.randomBytes(32).toString('hex')}`;
+    const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
+
+    if (client) {
+      await client.execute({
+        sql: 'INSERT INTO admin_sessions (token, username, expires_at) VALUES (?, ?, ?)',
+        args: [token, cleanUser, expiresAt],
+      });
+    }
+
     return res.status(200).json({
       success: true,
-      token: `rr_session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      token,
       user: { username: cleanUser, role: 'superadmin' },
     });
   }
@@ -46,9 +57,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (result.rows && result.rows.length > 0) {
         const userRow = result.rows[0];
         if (userRow.password_hash === cleanPass) {
+          const token = `rr_session_${crypto.randomBytes(32).toString('hex')}`;
+          const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
+          
+          await client.execute({
+            sql: 'INSERT INTO admin_sessions (token, username, expires_at) VALUES (?, ?, ?)',
+            args: [token, String(userRow.username), expiresAt],
+          });
+
           return res.status(200).json({
             success: true,
-            token: `rr_session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+            token,
             user: { username: String(userRow.username), role: String(userRow.role) },
           });
         }

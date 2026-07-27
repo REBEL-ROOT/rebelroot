@@ -1,10 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { generateAICommentReply, replyToLinkedInComment } from 'utils/linkedinComments';
+import { requireAuth } from 'utils/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  // Security: Require Admin Authentication
+  const isAuthenticated = await requireAuth(req, res);
+  if (!isAuthenticated) return;
 
   const { action, commentText, organizationId, accessToken, postId, commentId, replyText, groqApiKey } = req.body;
 

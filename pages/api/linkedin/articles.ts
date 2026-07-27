@@ -1,7 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getTursoClient, initTursoSchema } from 'utils/tursoClient';
+import { requireAuth } from 'utils/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Security: Require Admin Authentication
+  const isAuthenticated = await requireAuth(req, res);
+  if (!isAuthenticated) return;
+
+  // Ensure tables exist
   await initTursoSchema();
   const client = getTursoClient();
 

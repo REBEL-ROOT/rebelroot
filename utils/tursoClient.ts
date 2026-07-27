@@ -44,6 +44,15 @@ export async function initTursoSchema(): Promise<{ success: boolean; error?: str
       );
     `);
 
+    // 1b. Admin Sessions Table for Secure Authentication
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS admin_sessions (
+        token TEXT PRIMARY KEY,
+        username TEXT NOT NULL,
+        expires_at INTEGER NOT NULL
+      );
+    `);
+
     // 2. Automation Articles & LinkedIn Posts Vault Table
     await client.execute(`
       CREATE TABLE IF NOT EXISTS rebelroot_articles (

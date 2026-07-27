@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
@@ -31,9 +32,25 @@ export default function LinkedInAdminPage() {
   const [isSavingTurso, setIsSavingTurso] = useState(false);
   const [tursoStatusMsg, setTursoStatusMsg] = useState('');
 
+  const router = useRouter();
+
+  const secureFetch = async (url: string, options: any = {}) => {
+    const token = localStorage.getItem('rr_admin_token') || '';
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      ...options.headers
+    };
+    const res = await fetch(url, { ...options, headers });
+    if (res.status === 401) {
+      router.push('/admin/login');
+    }
+    return res;
+  };
+
   const fetchTursoArticles = async () => {
     try {
-      const res = await fetch('/api/linkedin/articles');
+      const res = await secureFetch('/api/linkedin/articles');
       const data = await res.json();
       if (data.success && data.articles) {
         setSavedArticles(data.articles);
@@ -45,15 +62,15 @@ export default function LinkedInAdminPage() {
 
   useEffect(() => {
     fetchTursoArticles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSaveToTurso = async () => {
     setIsSavingTurso(true);
     setTursoStatusMsg('');
     try {
-      const res = await fetch('/api/linkedin/articles', {
+      const res = await secureFetch('/api/linkedin/articles', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: articleTitle || 'REBELROOT Update',
           commentary,
@@ -86,9 +103,8 @@ export default function LinkedInAdminPage() {
     setIsGenerating(true);
     setPublishResult(null);
     try {
-      const res = await fetch('/api/linkedin/generate', {
+      const res = await secureFetch('/api/linkedin/generate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ presetKey }),
       });
       const data = await res.json();
@@ -110,9 +126,8 @@ export default function LinkedInAdminPage() {
     setIsGenerating(true);
     setPublishResult(null);
     try {
-      const res = await fetch('/api/linkedin/generate', {
+      const res = await secureFetch('/api/linkedin/generate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ customPrompt, groqApiKey }),
       });
       const data = await res.json();
@@ -134,9 +149,8 @@ export default function LinkedInAdminPage() {
   const handleAnalyzeComment = async () => {
     setIsAnalyzingComment(true);
     try {
-      const res = await fetch('/api/linkedin/comments', {
+      const res = await secureFetch('/api/linkedin/comments', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'generate', commentText: incomingComment, groqApiKey }),
       });
       const data = await res.json();
@@ -156,9 +170,8 @@ export default function LinkedInAdminPage() {
     setPublishResult(null);
 
     try {
-      const res = await fetch('/api/linkedin/publish', {
+      const res = await secureFetch('/api/linkedin/publish', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           organizationId,
           accessToken,
@@ -178,9 +191,8 @@ export default function LinkedInAdminPage() {
         });
 
         // Also save published record to Turso DB
-        fetch('/api/linkedin/articles', {
+        secureFetch('/api/linkedin/articles', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             title: articleTitle || 'Published LinkedIn Update',
             commentary,
