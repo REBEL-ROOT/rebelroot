@@ -100,6 +100,15 @@ export default function UnifiedAdminPage() {
     if (token) fetchTursoArticlesDirectly(token);
   };
 
+  const getUrlDomain = (urlStr: string) => {
+    try {
+      return new URL(urlStr || 'https://www.rebelroot.xyz').hostname;
+    } catch (e) {
+      // Fallback if URL is relative or lacks protocol
+      return 'rebelroot.xyz';
+    }
+  };
+
   // Auth submission handler
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -661,7 +670,7 @@ export default function UnifiedAdminPage() {
                       <ArticleCardContent>
                         <h5>{articleTitle || articleUrl}</h5>
                         <p>{articleDescription || 'rebelroot.xyz'}</p>
-                        <ArticleDomain>{new URL(articleUrl || 'https://www.rebelroot.xyz').hostname}</ArticleDomain>
+                        <ArticleDomain>{getUrlDomain(articleUrl)}</ArticleDomain>
                       </ArticleCardContent>
                     </LinkedInArticleCard>
                   )}
