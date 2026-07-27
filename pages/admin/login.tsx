@@ -8,7 +8,7 @@ import Page from 'components/Page';
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('rebelroot');
-  const [password, setPassword] = useState('rebelroot');
+  const [password, setPassword] = useState('75057');
   const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -76,13 +76,13 @@ export default function AdminLoginPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="rebelroot"
+                  placeholder="75057"
                   required
                 />
               </FormGroup>
 
               <HintNote>
-                Default credentials: <code>rebelroot</code> / <code>rebelroot</code>
+                Default credentials: <code>rebelroot</code> / <code>75057</code>
               </HintNote>
 
               {errorMsg && <ErrorBanner>{errorMsg}</ErrorBanner>}

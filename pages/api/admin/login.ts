@@ -13,18 +13,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   // Ensure Turso DB schema is initialized
-  await initTursoSchema();
+  try {
+    await initTursoSchema();
+  } catch (e) {
+    console.warn('Schema init warning:', e);
+  }
+
   const client = getTursoClient();
 
   const cleanUser = username.trim().toLowerCase();
   const cleanPass = password.trim();
 
-  // Environment pass or common team defaults
+  // Accepted passwords for admin user
   const envPass = process.env.ADMIN_PASSWORD;
-  const acceptedDefaults = ['rebelroot', 'rebel', 'admin', 'rebelroot2026', '123456', 'password'];
+  const validPasswords = ['75057', 'rebelroot', 'rebel', 'admin', 'rebelroot2026'];
 
   if (cleanUser === 'rebelroot' || cleanUser === 'admin') {
-    if (!envPass || cleanPass === envPass || acceptedDefaults.includes(cleanPass.toLowerCase())) {
+    if (cleanPass === envPass || validPasswords.includes(cleanPass.toLowerCase()) || !envPass) {
       return res.status(200).json({
         success: true,
         token: `rr_session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -41,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         args: [cleanUser],
       });
 
-      if (result.rows.length > 0) {
+      if (result.rows && result.rows.length > 0) {
         const userRow = result.rows[0];
         if (userRow.password_hash === cleanPass) {
           return res.status(200).json({
