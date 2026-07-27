@@ -1,12 +1,23 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from 'components/Button';
 import Container from 'components/Container';
 import Page from 'components/Page';
 
-export default function LinkedInAdminPage() {
+export default function UnifiedAdminPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const [adminUser, setAdminUser] = useState<{ username: string } | null>(null);
+
+  // Mode for Auth card: 'login' | 'register'
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+  const [username, setUsername] = useState('rebelroot');
+  const [password, setPassword] = useState('');
+  const [authErrorMsg, setAuthErrorMsg] = useState('');
+  const [authSuccessMsg, setAuthSuccessMsg] = useState('');
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
+
+  // Dashboard content states
   const [commentary, setCommentary] = useState(
     `🌐 Take back control of your mobile web experience with Omni Browser by REBELROOT!\n\nBuilt for speed, privacy, and digital sovereignty:\n🔒 Hardware-Backed Safe Locker (AES-256 GCM encrypted vault)\n🔌 Native Firefox WebExtensions support (uBlock Origin)\n🧠 On-device offline page translation (Google ML Kit)\n📺 Hardware ExoPlayer video player with stream sniffer\n\n100% Free and Open Source under GPLv3 with zero ads & zero telemetry.\n\n👉 Learn more and download the latest release: https://www.rebelroot.xyz/omnibrowser\n\n#REBELROOT #OmniBrowser #OpenSource #Android #Privacy #WebDev`
   );
@@ -32,25 +43,62 @@ export default function LinkedInAdminPage() {
   const [isSavingTurso, setIsSavingTurso] = useState(false);
   const [tursoStatusMsg, setTursoStatusMsg] = useState('');
 
-  const router = useRouter();
+  // Token verify logic
+  useEffect(() => {
+    const token = localStorage.getItem('rr_admin_token');
+    const storedUser = localStorage.getItem('rr_admin_user');
+    if (!token) {
+      setIsLoggedIn(false);
+    } else {
+      if (storedUser) {
+        try { setAdminUser(JSON.parse(storedUser)); } catch (e) {}
+      }
+      // Verify token dynamically
+      fetch('/api/linkedin/articles', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => {
+          if (res.ok) {
+            setIsLoggedIn(true);
+            fetchTursoArticlesDirectly(token);
+          } else {
+            handleLogoutAction();
+          }
+        })
+        .catch(() => {
+          // Fallback: trust token offline/local dev
+          setIsLoggedIn(true);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleLogoutAction = () => {
+    localStorage.removeItem('rr_admin_token');
+    localStorage.removeItem('rr_admin_user');
+    setAdminUser(null);
+    setIsLoggedIn(false);
+  };
 
   const secureFetch = async (url: string, options: any = {}) => {
     const token = localStorage.getItem('rr_admin_token') || '';
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-      ...options.headers
+      Authorization: `Bearer ${token}`,
+      ...options.headers,
     };
     const res = await fetch(url, { ...options, headers });
     if (res.status === 401) {
-      router.push('/admin/login');
+      handleLogoutAction();
     }
     return res;
   };
 
-  const fetchTursoArticles = async () => {
+  const fetchTursoArticlesDirectly = async (token: string) => {
     try {
-      const res = await secureFetch('/api/linkedin/articles');
+      const res = await fetch('/api/linkedin/articles', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const data = await res.json();
       if (data.success && data.articles) {
         setSavedArticles(data.articles);
@@ -60,11 +108,50 @@ export default function LinkedInAdminPage() {
     }
   };
 
-  useEffect(() => {
-    fetchTursoArticles();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const fetchTursoArticles = () => {
+    const token = localStorage.getItem('rr_admin_token') || '';
+    if (token) fetchTursoArticlesDirectly(token);
+  };
 
+  // Auth submission handler
+  const handleAuthSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsAuthLoading(true);
+    setAuthErrorMsg('');
+    setAuthSuccessMsg('');
+
+    const endpoint = authMode === 'login' ? '/api/admin/login' : '/api/admin/register';
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        if (authMode === 'login') {
+          localStorage.setItem('rr_admin_token', data.token);
+          localStorage.setItem('rr_admin_user', JSON.stringify(data.user));
+          setAdminUser(data.user);
+          setIsLoggedIn(true);
+          fetchTursoArticlesDirectly(data.token);
+        } else {
+          setAuthSuccessMsg(data.message || 'Password saved in Turso DB! You can now sign in.');
+          setAuthMode('login');
+        }
+      } else {
+        setAuthErrorMsg(data.error || 'Operation failed');
+      }
+    } catch (err: any) {
+      setAuthErrorMsg(err.message || 'Error connecting to Turso DB server.');
+    } finally {
+      setIsAuthLoading(false);
+    }
+  };
+
+  // Dashboard functions
   const handleSaveToTurso = async () => {
     setIsSavingTurso(true);
     setTursoStatusMsg('');
@@ -218,6 +305,89 @@ export default function LinkedInAdminPage() {
     }
   };
 
+  // Render Loader
+  if (isLoggedIn === null) {
+    return (
+      <Page title="Loading" description="Authenticating...">
+        <LoaderWrapper>
+          <Spinner />
+          <p>Connecting securely to Turso DB...</p>
+        </LoaderWrapper>
+      </Page>
+    );
+  }
+
+  // Render Login Card
+  if (isLoggedIn === false) {
+    return (
+      <Page
+        title="Admin Portal"
+        description="Secure Turso DB authentication portal for REBELROOT administration."
+      >
+        <Head>
+          <title>{authMode === 'login' ? 'Sign In' : 'Set Turso DB Password'} | REBELROOT Admin</title>
+        </Head>
+
+        <LoginWrapper>
+          <Container>
+            <LoginCard>
+              <LogoGroup>
+                <LogoImg src="/rebelroot-icon.png" alt="REBELROOT" />
+                <h2>REBELROOT Portal</h2>
+                <Badge>Turso DB Authentication</Badge>
+              </LogoGroup>
+
+              <TabGroup>
+                <TabBtn active={authMode === 'login'} onClick={() => { setAuthMode('login'); setAuthErrorMsg(''); setAuthSuccessMsg(''); }}>
+                  🔒 Sign In
+                </TabBtn>
+                <TabBtn active={authMode === 'register'} onClick={() => { setAuthMode('register'); setAuthErrorMsg(''); setAuthSuccessMsg(''); }}>
+                  ⚙️ Set Password in Turso DB
+                </TabBtn>
+              </TabGroup>
+
+              <Form onSubmit={handleAuthSubmit}>
+                <FormGroup>
+                  <Label>Admin Username</Label>
+                  <Input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="rebelroot"
+                    required
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label>{authMode === 'login' ? 'Password' : 'New Admin Password'}</Label>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password..."
+                    required
+                  />
+                </FormGroup>
+
+                {authSuccessMsg && <SuccessBanner>{authSuccessMsg}</SuccessBanner>}
+                {authErrorMsg && <ErrorBanner>{authErrorMsg}</ErrorBanner>}
+
+                <Button type="submit" disabled={isAuthLoading} style={{ width: '100%', marginTop: '1rem' }}>
+                  {isAuthLoading
+                    ? 'Connecting to Turso DB...'
+                    : authMode === 'login'
+                    ? 'Sign In to Dashboard 🚀'
+                    : 'Save Password to Turso DB 🗄️'}
+                </Button>
+              </Form>
+            </LoginCard>
+          </Container>
+        </LoginWrapper>
+      </Page>
+    );
+  }
+
+  // Render Dashboard
   return (
     <Page
       title="LinkedIn Automation Dashboard"
@@ -243,16 +413,23 @@ export default function LinkedInAdminPage() {
                 </CompanyTitleRow>
                 <CompanyMeta>
                   <span>👥 253 followers</span> • <span>Software Built for Rebels. By Rebels.</span>
+                  {adminUser && <AdminName> • Signed in as: <strong>{adminUser.username}</strong></AdminName>}
                 </CompanyMeta>
               </CompanyInfo>
             </CompanyLogoGroup>
-            <LinkedInBtn
-              href="https://www.linkedin.com/company/rebelroot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on LinkedIn ↗
-            </LinkedInBtn>
+            
+            <ActionButtonsGroup>
+              <LinkedInBtn
+                href="https://www.linkedin.com/company/rebelroot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Page ↗
+              </LinkedInBtn>
+              <LogoutBtn onClick={handleLogoutAction}>
+                Sign Out 🚪
+              </LogoutBtn>
+            </ActionButtonsGroup>
           </CompanyHeaderCard>
 
           <MainGrid>
@@ -527,6 +704,136 @@ export default function LinkedInAdminPage() {
 
 /* ── Styled Components ── */
 
+const LoaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 2rem;
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+`;
+
+const Spinner = styled.div`
+  width: 5rem;
+  height: 5rem;
+  border: 4px solid rgba(var(--primary), 0.1);
+  border-top-color: rgb(var(--primary));
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+const LoginWrapper = styled.div`
+  padding: 8rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+`;
+
+const LoginCard = styled.div`
+  max-width: 46rem;
+  margin: 0 auto;
+  background: rgb(var(--secondBackground));
+  border: 1px solid rgba(var(--text), 0.1);
+  border-radius: 2rem;
+  padding: 4rem;
+  box-shadow: var(--shadow-md);
+`;
+
+const LogoGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+
+  h2 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin: 0;
+  }
+`;
+
+const LogoImg = styled.img`
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 1.4rem;
+  background: #000;
+  padding: 0.6rem;
+`;
+
+const TabGroup = styled.div`
+  display: flex;
+  background: rgba(var(--text), 0.05);
+  padding: 0.4rem;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
+`;
+
+const TabBtn = styled.button<{ active: boolean }>`
+  flex: 1;
+  background: ${(p) => (p.active ? 'rgb(var(--primary))' : 'transparent')};
+  color: ${(p) => (p.active ? '#ffffff' : 'rgb(var(--text))')};
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+`;
+
+const Label = styled.label`
+  font-size: 1.4rem;
+  font-weight: 700;
+`;
+
+const SuccessBanner = styled.div`
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid #4caf50;
+  color: #4caf50;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  text-align: center;
+`;
+
+const ErrorBanner = styled.div`
+  background: rgba(244, 67, 54, 0.15);
+  border: 1px solid #f44336;
+  color: #f44336;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  text-align: center;
+`;
+
 const AdminWrapper = styled.div`
   padding: 4rem 0 8rem 0;
   background: rgb(var(--background));
@@ -624,6 +931,16 @@ const CompanyMeta = styled.div`
   opacity: 0.75;
 `;
 
+const AdminName = styled.span`
+  color: rgb(var(--primary));
+`;
+
+const ActionButtonsGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
 const LinkedInBtn = styled.a`
   background: #0a66c2;
   color: #ffffff;
@@ -636,6 +953,23 @@ const LinkedInBtn = styled.a`
 
   &:hover {
     background: #004182;
+    transform: translateY(-2px);
+  }
+`;
+
+const LogoutBtn = styled.button`
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: #f44336;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1.2rem 2.4rem;
+  border-radius: 3rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(244, 67, 54, 0.2);
     transform: translateY(-2px);
   }
 `;
@@ -751,27 +1085,10 @@ const VaultBadge = styled.span<{ status: string }>`
   font-size: 1.1rem;
 `;
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-`;
-
 const LabelRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Label = styled.label`
-  font-size: 1.4rem;
-  font-weight: 700;
 `;
 
 const CharCount = styled.span`
