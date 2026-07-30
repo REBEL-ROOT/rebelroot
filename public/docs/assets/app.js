@@ -758,7 +758,7 @@
         '<span class="search-result__body">' +
           '<span class="search-result__title">' + highlightMatch(x.item.title, q) + '</span>' +
           '<span class="search-result__desc">' + escapeHtml(x.item.desc) + '</span>' +
-        '</span>' + I.right + '</div>';
+        '</span><span class="search-result__enter">' + I.right + '</span></div>';
     });
     res.innerHTML = html;
     searchActive = 0;
@@ -780,7 +780,7 @@
       html += '<div class="search-result" data-path="' + item.path + '">' +
         '<span class="search-result__icon">' + I.doc + '</span>' +
         '<span class="search-result__body"><span class="search-result__title">' + item.title + '</span>' +
-        '<span class="search-result__desc">' + escapeHtml(item.desc) + '</span></span>' + I.right + '</div>';
+        '<span class="search-result__desc">' + escapeHtml(item.desc) + '</span></span><span class="search-result__enter">' + I.right + '</span></div>';
     });
     return html;
   }
