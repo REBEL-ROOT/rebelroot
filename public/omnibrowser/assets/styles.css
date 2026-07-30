@@ -214,11 +214,11 @@ button {
 .nav__center {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .nav__link {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: var(--text-secondary);
   transition: color 0.2s ease;
@@ -663,6 +663,71 @@ button {
 }
 
 /* --------------------------------------------------------------------------
+   Quick Tools Breakdown Grid (16 Utilities)
+   -------------------------------------------------------------------------- */
+.quicktools {
+  padding: 120px 0;
+  border-top: 1px solid var(--border);
+}
+
+.quicktools__header {
+  margin-bottom: 56px;
+}
+
+.quicktools__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.qt-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: all 0.3s var(--ease-out);
+  display: flex;
+  flex-direction: column;
+}
+
+.qt-card:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.qt-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  display: grid;
+  place-items: center;
+  color: var(--accent-violet);
+  margin-bottom: 16px;
+}
+
+.qt-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.qt-card__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.qt-card__desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
    Capabilities / Feature Grid
    -------------------------------------------------------------------------- */
 .features {
@@ -1046,6 +1111,9 @@ button {
     grid-template-columns: 1fr;
   }
   .showcase__grid {
+    grid-template-columns: 1fr;
+  }
+  .quicktools__grid {
     grid-template-columns: 1fr;
   }
   .showcase-card__image {

@@ -164,7 +164,7 @@
   /* ------------------------------------------------------------------------
      7. Feature Cards Entrance (IntersectionObserver)
      ------------------------------------------------------------------------ */
-  var revealCards = document.querySelectorAll('.feat-card, .showcase-card');
+  var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card');
   if (revealCards.length && 'IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

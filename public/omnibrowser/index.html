@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/omnibrowser/">
   <title>Omni Browser (OmniBrowser) by RebelRoot | Fast & Private Android Web Browser</title>
-  <meta name="description" content="Omni Browser is a fast, privacy-first Android web browser by RebelRoot with desktop Firefox WebExtensions, uBlock Origin, offline translation, and hardware vaults.">
-  <meta name="keywords" content="Omni Browser, OmniBrowser, omni browser, omnibrowser, OMNI BROWSER, OMNIBROWSER, Omni Browser APK, Omni Browser Android, RebelRoot Omni Browser, GeckoView browser, uBlock Origin mobile, mobile webextensions, private browser Android">
+  <meta name="description" content="Omni Browser is a fast, privacy-first Android web browser by RebelRoot with Firefox WebExtensions, Tor Proxy Hub, uBlock Origin, Quick Tools, and hardware vaults.">
+  <meta name="keywords" content="Omni Browser, OmniBrowser, omni browser, omnibrowser, OMNI BROWSER, OMNIBROWSER, Omni Browser APK, Omni Browser Android, RebelRoot Omni Browser, GeckoView browser, uBlock Origin mobile, mobile webextensions, Tor browser Android, private browser Android">
   <link rel="canonical" href="https://www.rebelroot.xyz/omnibrowser">
   <meta name="theme-color" content="#050505">
   <link rel="icon" type="image/png" href="/favicon-32x32.png">
@@ -15,7 +15,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="RebelRoot">
   <meta property="og:title" content="Omni Browser by RebelRoot | Fast & Private Android Browser">
-  <meta property="og:description" content="Search, summarize, compare, and organize the web with AI built directly into your browser. Private by design. Fast by nature.">
+  <meta property="og:description" content="Search, summarize, compare, and organize the web with native Android performance. Private by design. Fast by nature.">
   <meta property="og:url" content="https://www.rebelroot.xyz/omnibrowser">
   <meta property="og:image" content="https://www.rebelroot.xyz/ic_omni_logo.webp">
 
@@ -68,7 +68,7 @@
       {
         "@type": "Question",
         "name": "What is Omni Browser (OmniBrowser) by RebelRoot?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser is an intelligent, privacy-first mobile web browser for Android developed by RebelRoot. Built on Mozilla GeckoView 145, it features Firefox WebExtensions support, built-in uBlock Origin ad blocking, hardware-encrypted vaults, and offline translation." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser is an intelligent, privacy-first mobile web browser for Android developed by RebelRoot. Built on Mozilla GeckoView 145, it features Firefox WebExtensions support, Proxy Hub with Tor routing, built-in uBlock Origin ad blocking, hardware-encrypted vaults, and 16+ power quick tools." }
       },
       {
         "@type": "Question",
@@ -78,7 +78,7 @@
       {
         "@type": "Question",
         "name": "How does Omni Browser protect user data and privacy?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser operates with zero telemetry, zero background tracking, local-first search processing, hardware-backed AES-256 Safe Locker vaults, and one-tap session incineration." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser operates with zero telemetry, zero background tracking, Tor proxy routing, hardware-backed AES-256 Safe Locker vaults, and real-time privacy reports." }
       },
       {
         "@type": "Question",
@@ -109,6 +109,7 @@
     <div class="nav__center">
       <a class="nav__link" href="#story">Product Story</a>
       <a class="nav__link" href="#showcase">Showcase</a>
+      <a class="nav__link" href="#quicktools">Quick Tools</a>
       <a class="nav__link" href="#features">Capabilities</a>
       <a class="nav__link" href="#compare">Compare</a>
       <a class="nav__link" href="#faq">FAQ</a>
@@ -181,29 +182,29 @@
               <div class="phone-frame__camera"></div>
               <div class="phone-screen">
                 <div class="morph-container">
-                  <!-- Chapter 1 Screen -->
+                  <!-- Chapter 1: News Feed -->
                   <div class="story-screen screen-ch1 active" data-chapter="0">
-                    <img src="../omni/extensions_menu.png" alt="Firefox WebExtensions Screen" class="screen-real-img">
+                    <img src="../omni/news_feed.png" alt="AI News Feed Screen" class="screen-real-img">
                   </div>
 
-                  <!-- Chapter 2 Screen -->
+                  <!-- Chapter 2: Proxy Hub -->
                   <div class="story-screen screen-ch2" data-chapter="1">
-                    <img src="../omni/quick_tools.png" alt="Quick Power Tools Drawer" class="screen-real-img">
+                    <img src="../omni/proxy_hub.png" alt="Proxy Hub & Tor Circuit Screen" class="screen-real-img">
                   </div>
 
-                  <!-- Chapter 3 Screen -->
+                  <!-- Chapter 3: Quick Tools Drawer -->
                   <div class="story-screen screen-ch3" data-chapter="2">
-                    <img src="../omni/native_player.png" alt="Native Media Player Stream Sniffer" class="screen-real-img">
+                    <img src="../omni/quick_tools_updated.png" alt="16+ Quick Tools Drawer Screen" class="screen-real-img">
                   </div>
 
-                  <!-- Chapter 4 Screen -->
+                  <!-- Chapter 4: QR Code Generator & Scanner -->
                   <div class="story-screen screen-ch4" data-chapter="3">
-                    <img src="../omni/customize_style.png" alt="Custom Site Style Editor" class="screen-real-img">
+                    <img src="../omni/qr_code_share.png" alt="Instant QR Generator Screen" class="screen-real-img">
                   </div>
 
-                  <!-- Chapter 5 Screen -->
+                  <!-- Chapter 5: Privacy Report -->
                   <div class="story-screen screen-ch5" data-chapter="4">
-                    <img src="../omni/safe_locker.png" alt="Hardware Safe Locker Vault" class="screen-real-img">
+                    <img src="../omni/privacy_report.png" alt="Real-time Privacy Report Screen" class="screen-real-img">
                   </div>
                 </div>
               </div>
@@ -213,33 +214,33 @@
           <!-- Right Column: Story Text Chapters -->
           <div class="story__copy-col">
             <div class="story-copy active" data-copy="0">
-              <div class="story__chapter-tag">CHAPTER 01</div>
-              <h2 class="story__title">Desktop WebExtensions on Mobile</h2>
-              <p class="story__desc">Run desktop Firefox add-ons like uBlock Origin, Dark Reader, and Violentmonkey directly on Android with complete WebExtension controller support.</p>
+              <div class="story__chapter-tag">CHAPTER 01 · NEWS FEED</div>
+              <h2 class="story__title">Curated AI News Feed</h2>
+              <p class="story__desc">Instant categorized news streams across Business, World, Sports, and Entertainment without clickbait, ad surveillance, or tracking algorithms.</p>
             </div>
 
             <div class="story-copy" data-copy="1">
-              <div class="story__chapter-tag">CHAPTER 02</div>
-              <h2 class="story__title">Power Tools Drawer</h2>
-              <p class="story__desc">One-tap session burning, universal text copy, QR generator, offline PDF save, and 14+ power utilities built directly into your browser chrome.</p>
+              <div class="story__chapter-tag">CHAPTER 02 · PRIVACY NETWORK</div>
+              <h2 class="story__title">Proxy Hub & Tor Circuit</h2>
+              <p class="story__desc">Direct connection, Tor circuit routing, Snowflake pluggable bridges, and custom proxy configurations integrated natively into your network stack.</p>
             </div>
 
             <div class="story-copy" data-copy="2">
-              <div class="story__chapter-tag">CHAPTER 03</div>
-              <h2 class="story__title">Native Media Sniffer & Player</h2>
-              <p class="story__desc">Extract video and audio streams directly from web pages with hardware-accelerated playback and background audio listening.</p>
+              <div class="story__chapter-tag">CHAPTER 03 · POWER UTILITIES</div>
+              <h2 class="story__title">16+ Instant Quick Tools</h2>
+              <p class="story__desc">Access QR Scanner, Safe Locker, Translator, Page Editor, Save PDF, Tor, Auto-Scroll, Dev Notes, Site Style, Image Grabber, and Inspector in one tap.</p>
             </div>
 
             <div class="story-copy" data-copy="3">
-              <div class="story__chapter-tag">CHAPTER 04</div>
-              <h2 class="story__title">Custom Site Styling & Reader</h2>
-              <p class="story__desc">Inject custom CSS rules, modify site fonts, strip ad clutter, and customize any web page's appearance locally for optimal reading.</p>
+              <div class="story__chapter-tag">CHAPTER 04 · QR UTILITY</div>
+              <h2 class="story__title">QR Generator & Camera Scanner</h2>
+              <p class="story__desc">Generate instant shareable QR codes for any URL or text snippet, and scan physical QR codes directly using your device camera.</p>
             </div>
 
             <div class="story-copy" data-copy="4">
-              <div class="story__chapter-tag">CHAPTER 05</div>
-              <h2 class="story__title">Hardware Safe Locker</h2>
-              <p class="story__desc">Protect private downloads, downloads, and sensitive notes inside an AES-256 biometric hardware-encrypted vault.</p>
+              <div class="story__chapter-tag">CHAPTER 05 · ZERO TELEMETRY</div>
+              <h2 class="story__title">Real-time Privacy Report</h2>
+              <p class="story__desc">Inspect blocked tracking domains, saved bandwidth, cookie isolation, HTTPS enforcement, and fingerprint shields live per browsing session.</p>
             </div>
           </div>
         </div>
@@ -261,8 +262,58 @@
               <img src="../omni/home.png" alt="Omni Browser Home Screen" loading="lazy">
             </div>
             <div class="showcase-card__body">
-              <h3 class="showcase-card__title">Minimalist Chrome</h3>
-              <p class="showcase-card__desc">Clean home dashboard with quick tiles, privacy metrics, and instant search.</p>
+              <h3 class="showcase-card__title">Minimalist Home Chrome</h3>
+              <p class="showcase-card__desc">Clean home dashboard with quick tiles, privacy metrics, and instant search bar.</p>
+            </div>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-card__image">
+              <img src="../omni/news_feed.png" alt="AI News Feed Screen" loading="lazy">
+            </div>
+            <div class="showcase-card__body">
+              <h3 class="showcase-card__title">Categorized News Feed</h3>
+              <p class="showcase-card__desc">Curated news categories for Business, World, Sports, and Entertainment.</p>
+            </div>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-card__image">
+              <img src="../omni/proxy_hub.png" alt="Proxy Hub & Tor Routing Screen" loading="lazy">
+            </div>
+            <div class="showcase-card__body">
+              <h3 class="showcase-card__title">Proxy Hub & Tor Circuit</h3>
+              <p class="showcase-card__desc">Multi-hop Tor routing, Snowflake bridges, WireGuard, and custom proxy configurations.</p>
+            </div>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-card__image">
+              <img src="../omni/quick_tools_updated.png" alt="Quick Power Tools Drawer" loading="lazy">
+            </div>
+            <div class="showcase-card__body">
+              <h3 class="showcase-card__title">16+ Quick Power Tools</h3>
+              <p class="showcase-card__desc">Reorderable quick tools drawer with developer utilities, scanner, and styling tools.</p>
+            </div>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-card__image">
+              <img src="../omni/qr_code_share.png" alt="QR Code Share Generator" loading="lazy">
+            </div>
+            <div class="showcase-card__body">
+              <h3 class="showcase-card__title">Share via QR Code</h3>
+              <p class="showcase-card__desc">Generate instant QR codes for web links or text snippets with one-tap saving.</p>
+            </div>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-card__image">
+              <img src="../omni/privacy_report.png" alt="Privacy Shield Report Screen" loading="lazy">
+            </div>
+            <div class="showcase-card__body">
+              <h3 class="showcase-card__title">Real-time Privacy Report</h3>
+              <p class="showcase-card__desc">Track blocked analytics domains, HTTPS upgrades, cookie isolation, and saved bandwidth.</p>
             </div>
           </div>
 
@@ -272,7 +323,7 @@
             </div>
             <div class="showcase-card__body">
               <h3 class="showcase-card__title">Hardware Safe Locker</h3>
-              <p class="showcase-card__desc">AES-256 biometric-protected vault for private downloads and files.</p>
+              <p class="showcase-card__desc">AES-256 biometric-protected hardware vault for private downloads and files.</p>
             </div>
           </div>
 
@@ -288,36 +339,6 @@
 
           <div class="showcase-card">
             <div class="showcase-card__image">
-              <img src="../omni/customize_style.png" alt="Custom Site Style Editor" loading="lazy">
-            </div>
-            <div class="showcase-card__body">
-              <h3 class="showcase-card__title">Custom CSS & Styling</h3>
-              <p class="showcase-card__desc">Inject custom styles, fonts, and dark mode rules into any website locally.</p>
-            </div>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-card__image">
-              <img src="../omni/native_player.png" alt="Native Media Player & Video Sniffer" loading="lazy">
-            </div>
-            <div class="showcase-card__body">
-              <h3 class="showcase-card__title">Media Sniffer & Player</h3>
-              <p class="showcase-card__desc">Extract video streams directly with hardware acceleration and background playback.</p>
-            </div>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-card__image">
-              <img src="../omni/quick_tools.png" alt="Power User Quick Tools Drawer" loading="lazy">
-            </div>
-            <div class="showcase-card__body">
-              <h3 class="showcase-card__title">Quick Tools Drawer</h3>
-              <p class="showcase-card__desc">Universal text copy, session burning, offline PDF save, and QR suite at your fingertips.</p>
-            </div>
-          </div>
-
-          <div class="showcase-card">
-            <div class="showcase-card__image">
               <img src="../omni/manga_grabber.png" alt="Manga & Image Batch Grabber" loading="lazy">
             </div>
             <div class="showcase-card__body">
@@ -328,12 +349,169 @@
 
           <div class="showcase-card">
             <div class="showcase-card__image">
-              <img src="../omni/notepad_vault.png" alt="Encrypted Notepad Vault" loading="lazy">
+              <img src="../omni/native_player.png" alt="Native Media Player & Stream Sniffer" loading="lazy">
             </div>
             <div class="showcase-card__body">
-              <h3 class="showcase-card__title">Encrypted Notepad</h3>
-              <p class="showcase-card__desc">Capture notes and web snippets securely inside an encrypted local notebook.</p>
+              <h3 class="showcase-card__title">Media Sniffer & Player</h3>
+              <p class="showcase-card__desc">Extract video streams directly with hardware acceleration and background playback.</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive Quick Tools Section -->
+    <section class="quicktools" id="quicktools" aria-label="16 Quick Tools Detailed Breakdown">
+      <div class="container">
+        <div class="quicktools__header">
+          <div class="section-tag">POWER UTILITIES</div>
+          <h2 class="section-title">16 Built-in Quick Tools.<br><span class="text-dim">Zero third-party apps needed.</span></h2>
+          <p class="section-sub">Long-press & drag to reorder your favorite browser utilities in the bottom drawer.</p>
+        </div>
+
+        <div class="quicktools__grid">
+          <!-- 1. QR Scanner -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 18h3v3h-3z"/></svg>
+            </div>
+            <h3 class="qt-card__title">QR Scanner</h3>
+            <p class="qt-card__desc">Scan physical QR codes directly using camera hardware with instant URL opening.</p>
+          </div>
+
+          <!-- 2. Safe Locker -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3 class="qt-card__title">Safe Locker</h3>
+            <p class="qt-card__desc">AES-256 encrypted hardware vault for private downloads, documents, and media.</p>
+          </div>
+
+          <!-- 3. Translator -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8l6 6M4 14l6-6M2 5h12M7 2v3M22 22l-5-10-5 10M14 18h6"/></svg>
+            </div>
+            <h3 class="qt-card__title">ML Translator</h3>
+            <p class="qt-card__desc">Offline machine-learning language translation for full web pages without cloud tracking.</p>
+          </div>
+
+          <!-- 4. Edit Page -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3 class="qt-card__title">Edit Page</h3>
+            <p class="qt-card__desc">Interactive design mode — edit text content, headers, and DOM elements live on any site.</p>
+          </div>
+
+          <!-- 5. Save PDF -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            </div>
+            <h3 class="qt-card__title">Save PDF</h3>
+            <p class="qt-card__desc">Convert active web pages into self-contained PDF documents for offline archiving.</p>
+          </div>
+
+          <!-- 6. Tor -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3 class="qt-card__title">Tor Circuit Toggle</h3>
+            <p class="qt-card__desc">One-tap switch to route active session traffic through multi-hop Tor onion relays.</p>
+          </div>
+
+          <!-- 7. Pin Web App -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </div>
+            <h3 class="qt-card__title">Pin Web App</h3>
+            <p class="qt-card__desc">Pin progressive web applications (PWAs) directly to your mobile home screen.</p>
+          </div>
+
+          <!-- 8. Auto-Scroll -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12l4 4 4-4"/></svg>
+            </div>
+            <h3 class="qt-card__title">Auto-Scroll</h3>
+            <p class="qt-card__desc">Hands-free smooth scrolling with adjustable speeds for continuous article reading.</p>
+          </div>
+
+          <!-- 9. QR Scan Page -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3M9 9h6v6H9z"/></svg>
+            </div>
+            <h3 class="qt-card__title">QR Scan Page</h3>
+            <p class="qt-card__desc">Scan and decode embedded QR code images on active web pages automatically.</p>
+          </div>
+
+          <!-- 10. QR Generator -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h7v7h-7z"/></svg>
+            </div>
+            <h3 class="qt-card__title">QR Generator</h3>
+            <p class="qt-card__desc">Generate custom high-resolution QR codes for web links or text snippets instantly.</p>
+          </div>
+
+          <!-- 11. Console Log -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <h3 class="qt-card__title">Console Log</h3>
+            <p class="qt-card__desc">Mobile web developer console — capture JavaScript exceptions, logs, and network events.</p>
+          </div>
+
+          <!-- 12. Dev Notes -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h3 class="qt-card__title">Encrypted Dev Notes</h3>
+            <p class="qt-card__desc">Encrypted local notebook for capturing web snippets, code blocks, and research notes.</p>
+          </div>
+
+          <!-- 13. Site Style -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            </div>
+            <h3 class="qt-card__title">Site Style Injector</h3>
+            <p class="qt-card__desc">Inject custom CSS styles, adjust layout spacing, and force custom dark mode color themes.</p>
+          </div>
+
+          <!-- 14. Image Grabber -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <h3 class="qt-card__title">Batch Image Grabber</h3>
+            <p class="qt-card__desc">Batch extract all full-resolution images, galleries, and manga chapters from any page.</p>
+          </div>
+
+          <!-- 15. Page Inspector -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 class="qt-card__title">DOM Inspector</h3>
+            <p class="qt-card__desc">Inspect HTML tree structure, CSS properties, asset paths, and element computed styles.</p>
+          </div>
+
+          <!-- 16. Force Zoom -->
+          <div class="qt-card">
+            <div class="qt-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </div>
+            <h3 class="qt-card__title">Force Zoom</h3>
+            <p class="qt-card__desc">Override non-scalable mobile viewports to enable pinch-to-zoom on restrictive websites.</p>
           </div>
         </div>
       </div>
@@ -480,6 +658,13 @@
                 <td><span class="pill-cross">None</span></td>
               </tr>
               <tr>
+                <td>Tor Proxy Hub Routing</td>
+                <td class="td-highlight"><span class="pill-check">Native</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span>Basic Private</span></td>
+                <td><span class="pill-cross">None</span></td>
+              </tr>
+              <tr>
                 <td>Media Stream Sniffer & Player</td>
                 <td class="td-highlight"><span class="pill-check">Native</span></td>
                 <td><span class="pill-cross">None</span></td>
@@ -488,6 +673,13 @@
               </tr>
               <tr>
                 <td>Manga & Batch Image Grabber</td>
+                <td class="td-highlight"><span class="pill-check">Native</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span class="pill-cross">None</span></td>
+              </tr>
+              <tr>
+                <td>16+ Reorderable Quick Tools</td>
                 <td class="td-highlight"><span class="pill-check">Native</span></td>
                 <td><span class="pill-cross">None</span></td>
                 <td><span class="pill-cross">None</span></td>
@@ -546,7 +738,7 @@
             </button>
             <div class="faq__a">
               <div class="faq__a-inner">
-                Omni Browser is built on Mozilla GeckoView rather than Chromium, providing true independence from Google's web rendering monolithic standards. It features desktop Firefox WebExtension compatibility, native media sniffer tools, AES-256 hardware vaults, and strict zero-telemetry privacy guarantees.
+                Omni Browser is built on Mozilla GeckoView rather than Chromium, providing true independence from Google's web rendering monolithic standards. It features desktop Firefox WebExtension compatibility, Tor Proxy Hub, native media sniffer tools, AES-256 hardware vaults, and 16+ built-in quick tools.
               </div>
             </div>
           </div>
