@@ -164,8 +164,8 @@
   /* ------------------------------------------------------------------------
      7. Feature Cards Entrance (IntersectionObserver)
      ------------------------------------------------------------------------ */
-  var featCards = document.querySelectorAll('.feat-card');
-  if (featCards.length && 'IntersectionObserver' in window) {
+  var revealCards = document.querySelectorAll('.feat-card, .showcase-card');
+  if (revealCards.length && 'IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -176,7 +176,7 @@
       });
     }, { threshold: 0.1 });
 
-    featCards.forEach(function (card) {
+    revealCards.forEach(function (card) {
       card.style.opacity = '0';
       card.style.transform = 'translateY(24px)';
       card.style.transition = 'opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out)';
