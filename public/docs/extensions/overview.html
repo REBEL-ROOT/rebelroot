@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extensions — Omni Browser Docs</title>
+  <meta name="description" content="Firefox WebExtension support in Omni Browser: real .xpi add-ons from addons.mozilla.org, powered by the Gecko engine.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/extensions/overview.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Extensions — Omni Browser">
+  <meta property="og:description" content="Firefox WebExtension support in Omni Browser: real .xpi add-ons from addons.mozilla.org, powered by the Gecko engine.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/extensions/overview.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="extensions/overview" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Extensions</h1>
+      <p class="lead">Because Omni runs the real Gecko engine, it supports genuine Firefox WebExtensions — the same .xpi add-ons you install on desktop Firefox.</p>
+
+      <h2>Why this matters</h2>
+
+      <p>Most “extension-capable” Android browsers have no extension support or a tiny curated store. Omni inherits GeckoView’s full WebExtension runtime:</p>
+
+      <ul>
+        <li>Install add-ons directly from <a href="https://addons.mozilla.org" target="_blank" rel="noopener">addons.mozilla.org</a>.</li>
+        <li>Run <strong>Manifest V2</strong> extensions with background scripts, content scripts and the standard <code>browser.*</code> APIs.</li>
+        <li>Use extensions in private browsing (per-extension opt-in).</li>
+      </ul>
+
+      <h2>The extension surface</h2>
+
+      <div class="card-grid">
+        <a class="card" href="../extensions/bundled.html"><span class="card__icon">📦</span><span class="card__title">Bundled extensions <span class="arrow">→</span></span><span class="card__desc">The three add-ons that ship inside the APK.</span></a>
+        <a class="card" href="../extensions/install.html"><span class="card__icon">⬇️</span><span class="card__title">Installing add-ons <span class="arrow">→</span></span><span class="card__desc">Step-by-step from addons.mozilla.org.</span></a>
+      </div>
+
+      <h2>How they’re managed</h2>
+
+      <p>Extension lifecycle lives in <code>browser/extensions/</code>. <code>BuiltInExtensionManager</code> installs the bundled set; runtime registration happens on the shared <code>GeckoRuntime</code>, so extensions persist across tabs and sessions.</p>
+
+      <h2>Limitations</h2>
+
+      <ul>
+        <li>Manifest V3 support follows GeckoView’s evolving implementation; MV2 is fully supported.</li>
+        <li>Extensions needing desktop-only APIs may degrade gracefully.</li>
+        <li>No auto-update store UI — bundled extensions update with app releases.</li>
+      </ul>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Extensions run with real permissions</span><p>A WebExtension can read and modify every page you visit. Only install add-ons you trust, and prefer well-known ones from AMO.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

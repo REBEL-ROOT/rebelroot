@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Tabs — Omni Browser Docs</title>
+  <meta name="description" content="Private browsing in Omni Browser: how incognito tabs use a genuinely isolated GeckoView private context, and what they do and don’t hide.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/tabs/private-tabs.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Private Tabs — Omni Browser">
+  <meta property="og:description" content="Private browsing in Omni Browser: how incognito tabs use a genuinely isolated GeckoView private context, and what they do and don’t hide.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/tabs/private-tabs.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="tabs/private-tabs" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Private Tabs</h1>
+      <p class="lead">Private tabs in Omni aren’t a label — they run in a separate GeckoView private context with real isolation.</p>
+
+      <h2>Open a private tab</h2>
+
+      <p>Tap <strong>+</strong> and choose <strong>New private tab</strong>, or press <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>N</kbd>. Private tabs are visually distinct and live in their own group in the switcher.</p>
+
+      <h2>What’s isolated</h2>
+
+      <ul>
+        <li><strong>Cookies &amp; site data</strong> — a separate, in-memory cookie jar.</li>
+        <li><strong>Cache</strong> — nothing is written to disk.</li>
+        <li><strong>History</strong> — private tabs don’t record history.</li>
+        <li><strong>Storage</strong> — localStorage/IndexedDB are ephemeral.</li>
+      </ul>
+
+      <p>When the last private tab closes, all of it is gone.</p>
+
+      <h2>Extensions in private tabs</h2>
+
+      <p>Bundled extensions (Media Grabber, AI Blocker, Universal Copy) are allowed in private browsing by design — they run locally and send nothing out. Third-party extensions follow their own per-extension setting.</p>
+
+      <h2>What private tabs do NOT hide</h2>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Private ≠ anonymous</span><p>Your ISP, your employer’s network, and the sites you visit can still see your traffic. For anonymity, route through <a href="../privacy/tor.html">Tor</a>; for encryption from your device, use the <a href="../privacy/vpn.html">VPN</a>.</p></div>
+      </div>
+
+      <div class="card-grid">
+        <a class="card" href="../privacy/fire-button.html"><span class="card__icon">🔥</span><span class="card__title">Fire Button <span class="arrow">→</span></span><span class="card__desc">Burn everything in one tap.</span></a>
+        <a class="card" href="../privacy/tor.html"><span class="card__icon">🧅</span><span class="card__title">Tor <span class="arrow">→</span></span><span class="card__desc">Real anonymity for when it matters.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

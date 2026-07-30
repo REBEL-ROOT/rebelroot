@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Themes &amp; Appearance — Omni Browser Docs</title>
+  <meta name="description" content="Customize Omni Browser’s look: light, dark and AMOLED modes, accent colors, dynamic color and UI scale.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/customization/themes.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Themes &amp; Appearance — Omni Browser">
+  <meta property="og:description" content="Customize Omni Browser’s look: light, dark and AMOLED modes, accent colors, dynamic color and UI scale.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/customization/themes.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="customization/themes" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Themes &amp; Appearance</h1>
+      <p class="lead">Omni’s theming goes well beyond a dark toggle — and it loads before the first frame, so there’s never a flash of the wrong theme.</p>
+
+      <h2>Theme modes</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Mode</th><th>Look</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Light</strong></td><td>Bright, high-contrast</td></tr>
+            <tr><td><strong>Dark</strong></td><td>The default — easy on the eyes</td></tr>
+            <tr><td><strong>AMOLED</strong></td><td>True black for OLED screens</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Accent colors</h2>
+
+      <p>Pick from six accent colors to tint buttons, links and highlights. Or enable <strong>Dynamic color</strong> (Material You) to pull an accent from your wallpaper.</p>
+
+      <h2>UI scale</h2>
+
+      <p>A navigation scaler (80–130%) lets you grow or shrink the toolbar and controls — useful on small screens or for accessibility. See <a href="../customization/accessibility.html">Accessibility</a>.</p>
+
+      <h2>Address bar position</h2>
+
+      <p>Move the address bar to the bottom for one-handed use (the default) or the top if you prefer the classic layout.</p>
+
+      <h2>Under the hood</h2>
+
+      <p>Your theme is persisted in DataStore and loaded into <code>ThemeStateHolder</code> by <code>OmniApplication</code> at startup — before any UI is drawn.</p>
+
+      <div class="card-grid">
+        <a class="card" href="../customization/wallpapers.html"><span class="card__icon">🖼️</span><span class="card__title">Wallpapers <span class="arrow">→</span></span><span class="card__desc">Give the home screen some personality.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

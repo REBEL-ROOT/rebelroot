@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bundled Extensions — Omni Browser Docs</title>
+  <meta name="description" content="The three WebExtensions that ship inside Omni Browser: Media Grabber, AI Blocker and Universal Copy.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/extensions/bundled.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bundled Extensions — Omni Browser">
+  <meta property="og:description" content="The three WebExtensions that ship inside Omni Browser: Media Grabber, AI Blocker and Universal Copy.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/extensions/bundled.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="extensions/bundled" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Bundled Extensions</h1>
+      <p class="lead">Three extensions are pre-installed from APK assets, each solving a specific problem. All are allowed in private browsing.</p>
+
+      <h2>The trio</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Extension</th><th>Version</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Omni Media Grabber</strong></td><td>2.1.0</td><td>Sniffs HLS/DASH/MSE streams and reports them to the app via native messaging.</td></tr>
+            <tr><td><strong>Omni AI Blocker</strong></td><td>1.1.0</td><td>Hides AI overviews on Google, Bing, DuckDuckGo, Brave, Yahoo and more.</td></tr>
+            <tr><td><strong>Omni Universal Copy</strong></td><td>1.0.0</td><td>Restores text selection on sites that block it.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Each has a stable GeckoView ID (e.g. <code>omni-media-grabber@omnibrowser.app</code>) so updates replace rather than duplicate them.</p>
+
+      <h2>Media Grabber</h2>
+
+      <p>The workhorse behind the <a href="../media/stream-sniffer.html">Stream Sniffer</a>. It watches network requests and hooks <code>MediaSource</code>/blob playback, then sends candidates to the app over the <code>omniApp</code> native-messaging channel.</p>
+
+      <h2>AI Blocker</h2>
+
+      <p>Hides AI-generated answer blocks on search engines via <code>override.css</code> plus a background script that catches dynamically injected blocks. Toggle it in Quick Tools or with <kbd>Ctrl</kbd> <kbd>B</kbd>. See <a href="../ai/ai-blocker.html">AI Blocker</a>.</p>
+
+      <h2>Universal Copy</h2>
+
+      <p>Defeats <code>user-select: none</code> and script traps that stop you copying text. Enable it once and selection works everywhere.</p>
+
+      <h2>Managing them</h2>
+
+      <p>Open the <strong>Extensions</strong> panel to toggle any bundled extension on or off. They’re updated automatically with app releases.</p>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

@@ -4,42 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browser Engine API — Omni Browser Docs</title>
-  <meta name="description" content="The runtime, session and navigation APIs exposed by Omni’s engine layer.">
+  <meta name="description" content="Reference for Omni Browser’s engine layer: the shared GeckoRuntime, GeckoSession creation, delegates and navigation.">
   <link rel="canonical" href="https://www.rebelroot.xyz/docs/api/browser-engine.html">
   <meta name="theme-color" content="#0B0F19">
   <link rel="icon" type="image/png" href="../../favicon-32x32.png">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Browser Engine API — Omni Browser">
-  <meta property="og:description" content="The runtime, session and navigation APIs exposed by Omni’s engine layer.">
+  <meta property="og:description" content="Reference for Omni Browser’s engine layer: the shared GeckoRuntime, GeckoSession creation, delegates and navigation.">
   <meta property="og:url" content="https://www.rebelroot.xyz/docs/api/browser-engine.html">
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
   <main id="content" data-nav="api/browser-engine" data-updated="Jul 2026">
     <article class="prose">
       <h1>Browser Engine API</h1>
-      <p class="lead">The runtime, session and navigation APIs exposed by Omni’s engine layer.</p>
+      <p class="lead">The Kotlin surface around GeckoView. Everything browser-engine related flows through these APIs.</p>
 
-      <div class="callout callout--experimental">
-        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
-        <div class="callout__body">
-          <span class="callout__title">Coming soon</span>
-          <p>This page is being written. The outline below describes what it will cover — check back soon, or help us draft it via the “Edit this page” link.</p>
-        </div>
+      <h2>Obtaining the runtime</h2>
+
+      <p>There is exactly one <code>GeckoRuntime</code> per process. Always obtain it via the shared accessor — never construct one directly.</p>
+
+      <pre><code class="language-kotlin" data-file="BrowserViewModel.kt" data-highlight="3,7">fun getGeckoRuntime(context: Context): GeckoRuntime {
+    return geckoRuntime ?: run {
+        val settings = GeckoRuntimeSettings.Builder()
+            .consoleOutput(true)
+            .extensionsProcess(true)
+            .build()
+        GeckoRuntime.getDefault(context, settings)
+            .also { geckoRuntime = it }
+    }
+}</code></pre>
+
+      <h2>Creating a session</h2>
+
+      <pre><code class="language-kotlin" data-file="TabFactory.kt">fun createSession(isPrivate: Boolean): GeckoSession {
+    val settings = GeckoSessionSettings.Builder()
+        .usePrivateMode(isPrivate)
+        .build()
+    return GeckoSession(settings)
+}</code></pre>
+
+      <h2>Key delegates</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Delegate</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>NavigationDelegate</code></td><td>Loads, redirects, popup blocking via <code>onNewSession</code></td></tr>
+            <tr><td><code>ContentDelegate</code></td><td>Title, meta, fullscreen requests</td></tr>
+            <tr><td><code>ProgressDelegate</code></td><td>Page load progress</td></tr>
+            <tr><td><code>PermissionDelegate</code></td><td>Camera/mic/location prompts</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h2>What this page will cover</h2>
-      <p>Reference for the Kotlin surface around GeckoView: obtaining the shared runtime, creating and configuring sessions, attaching delegates, and driving navigation programmatically. This page will document signatures, threading rules and examples.</p>
+      <h2>Threading</h2>
 
-      <h2>Related</h2>
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Main-thread callbacks</span><p>GeckoView invokes delegates on the main thread. Hop to a coroutine dispatcher for any real work, and never block the delegate callback.</p></div>
+      </div>
+
       <div class="card-grid">
-        <a class="card" href="../developer/geckoview.html"><span class="card__title">GeckoView Engine <span class="arrow">→</span></span></a>
-        <a class="card" href="../developer/architecture.html"><span class="card__title">Architecture <span class="arrow">→</span></span></a>
-        <a class="card" href="extension-api.html"><span class="card__title">Extension API <span class="arrow">→</span></span></a>
+        <a class="card" href="../developer/geckoview.html"><span class="card__icon">🦎</span><span class="card__title">GeckoView Engine <span class="arrow">→</span></span><span class="card__desc">Concepts behind these APIs.</span></a>
       </div>
     </article>
   </main>

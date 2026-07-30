@@ -3,43 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modules — Omni Browser Docs</title>
-  <meta name="description" content="Deep dives into Omni’s feature packages: adblock, extensions, media, privacy, tools and locker.">
+  <title>Modules &amp; Packages — Omni Browser Docs</title>
+  <meta name="description" content="A guided tour of Omni Browser’s feature packages: adblock, extensions, media, privacy, tools and the encrypted locker.">
   <link rel="canonical" href="https://www.rebelroot.xyz/docs/developer/modules.html">
   <meta name="theme-color" content="#0B0F19">
   <link rel="icon" type="image/png" href="../../favicon-32x32.png">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Modules — Omni Browser">
-  <meta property="og:description" content="Deep dives into Omni’s feature packages: adblock, extensions, media, privacy, tools and locker.">
+  <meta property="og:title" content="Modules &amp; Packages — Omni Browser">
+  <meta property="og:description" content="A guided tour of Omni Browser’s feature packages: adblock, extensions, media, privacy, tools and the encrypted locker.">
   <meta property="og:url" content="https://www.rebelroot.xyz/docs/developer/modules.html">
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
   <main id="content" data-nav="developer/modules" data-updated="Jul 2026">
     <article class="prose">
-      <h1>Modules</h1>
-      <p class="lead">Deep dives into Omni’s feature packages: adblock, extensions, media, privacy, tools and locker.</p>
+      <h1>Modules &amp; Packages</h1>
+      <p class="lead">Omni is a single Gradle module, but its code is organised into cohesive feature packages. Here’s what lives where.</p>
 
-      <div class="callout callout--experimental">
-        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
-        <div class="callout__body">
-          <span class="callout__title">Coming soon</span>
-          <p>This page is being written. The outline below describes what it will cover — check back soon, or help us draft it via the “Edit this page” link.</p>
-        </div>
+      <h2>Feature packages</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Package</th><th>Key classes</th><th>Responsibility</th></tr></thead>
+          <tbody>
+            <tr><td><code>browser/adblock/</code></td><td><code>AdBlockManager</code></td><td>Filter engine, providers, block counter</td></tr>
+            <tr><td><code>browser/extensions/</code></td><td><code>BuiltInExtensionManager</code>, <code>AiBlockerManager</code>, <code>UniversalCopyManager</code></td><td>WebExtension install/toggle/messaging</td></tr>
+            <tr><td><code>browser/tabs/</code></td><td><code>SmartTabManager</code></td><td>Domain-based tab auto-grouping</td></tr>
+            <tr><td><code>media/</code></td><td><code>MediaInterceptor</code>, <code>StreamDownloadEngine</code>, <code>FFmpegBridge</code></td><td>Stream detection, download, audio extraction</td></tr>
+            <tr><td><code>media/player/</code></td><td><code>VideoPlayerScreen</code>, <code>OmniMediaService</code></td><td>ExoPlayer UI + background audio</td></tr>
+            <tr><td><code>privacy/</code></td><td><code>FireButton</code>, <code>TorManager</code>, <code>VpnManager</code></td><td>Session burn, Tor, WireGuard</td></tr>
+            <tr><td><code>tools/locker/</code></td><td><code>LockerDatabase</code>, <code>LockerAuthManager</code></td><td>Encrypted vault (SQLCipher + biometric)</td></tr>
+            <tr><td><code>tools/qrcode/</code></td><td><code>BarcodeGenerator</code>, <code>QrCodeDecoder</code></td><td>ZXing QR scan/generate</td></tr>
+            <tr><td><code>ui/theme/</code></td><td><code>OmniTheme</code>, <code>OmniColors</code>, <code>UiScale</code></td><td>Material 3 theming</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h2>What this page will cover</h2>
-      <p>While Omni is a single Gradle module, its code is organized into cohesive feature packages. This page will give a guided tour of each — AdBlockManager, the extension managers, the media pipeline, the privacy services and the encrypted locker — with their key classes and extension points.</p>
+      <h2>How they connect</h2>
 
-      <h2>Related</h2>
-      <div class="card-grid">
-        <a class="card" href="code-structure.html"><span class="card__title">Code Structure <span class="arrow">→</span></span></a>
-        <a class="card" href="architecture.html"><span class="card__title">Architecture <span class="arrow">→</span></span></a>
-        <a class="card" href="geckoview.html"><span class="card__title">GeckoView Engine <span class="arrow">→</span></span></a>
+      <p>All feature packages hang off the central <code>BrowserViewModel</code> (see <a href="../developer/architecture.html">Architecture</a>). Each package exposes a focused API that the ViewModel orchestrates — so UI, logic and engine stay cleanly separated.</p>
+
+      <h2>Adding a feature</h2>
+
+      <ol>
+        <li>Create (or reuse) a feature package under <code>com.rebelroot.omni</code>.</li>
+        <li>Keep engine/state logic out of composables — expose it through the ViewModel.</li>
+        <li>Add any user-facing strings to <code>strings.xml</code>.</li>
+        <li>Wire the entry point into <code>BrowserScreen</code> or Quick Tools.</li>
+      </ol>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Single module, many packages</span><p>Omni deliberately stays one Gradle module — the package structure provides the modularity, without multi-module build overhead.</p></div>
       </div>
     </article>
   </main>

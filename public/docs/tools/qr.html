@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Scanner &amp; Generator — Omni Browser Docs</title>
+  <meta name="description" content="Scan and generate QR codes in Omni Browser with the pure-FOSS ZXing engine — no Play Services required.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/tools/qr.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="QR Scanner &amp; Generator — Omni Browser">
+  <meta property="og:description" content="Scan and generate QR codes in Omni Browser with the pure-FOSS ZXing engine — no Play Services required.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/tools/qr.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="tools/qr" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>QR Scanner &amp; Generator</h1>
+      <p class="lead">A full QR suite built on ZXing and CameraX: scan from the camera or a saved image, and generate codes from anything.</p>
+
+      <h2>Scan a code</h2>
+
+      <ol class="steps">
+        <li><h3>Open the scanner</h3><p>Quick Tools → <strong>QR Scanner</strong>.</p></li>
+        <li><h3>Point or pick</h3><p>Scan live with the camera, or choose an image from your gallery.</p></li>
+        <li><h3>Act on it</h3><p>Omni reads the payload — a URL opens, Wi-Fi creds offer to connect, text is shown for copying.</p></li>
+      </ol>
+
+      <h2>Generate a code</h2>
+
+      <p>Quick Tools → <strong>QR Generator</strong>. Enter text, a URL, or Wi-Fi credentials and Omni renders a scannable code you can share or save as an image.</p>
+
+      <h2>Pure FOSS</h2>
+
+      <p>Scanning uses <strong>ZXing</strong> — no Google Play Services. Earlier builds offered the Play Services code scanner as an option; that was removed for FOSS compliance, so the ZXing path is now the only one.</p>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Camera permission</span><p>The scanner needs the Camera permission. If it won’t start, check Android’s app permissions for Omni.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

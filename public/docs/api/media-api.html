@@ -4,42 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Media API — Omni Browser Docs</title>
-  <meta name="description" content="The interceptor, sniffer messaging and the player service.">
+  <meta name="description" content="Reference for Omni Browser’s media pipeline: the interceptor, sniffer messaging contract, and the player service.">
   <link rel="canonical" href="https://www.rebelroot.xyz/docs/api/media-api.html">
   <meta name="theme-color" content="#0B0F19">
   <link rel="icon" type="image/png" href="../../favicon-32x32.png">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Media API — Omni Browser">
-  <meta property="og:description" content="The interceptor, sniffer messaging and the player service.">
+  <meta property="og:description" content="Reference for Omni Browser’s media pipeline: the interceptor, sniffer messaging contract, and the player service.">
   <meta property="og:url" content="https://www.rebelroot.xyz/docs/api/media-api.html">
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
   <main id="content" data-nav="api/media-api" data-updated="Jul 2026">
     <article class="prose">
       <h1>Media API</h1>
-      <p class="lead">The interceptor, sniffer messaging and the player service.</p>
+      <p class="lead">How media flows from detection to playback, and the contracts between the pieces.</p>
 
-      <div class="callout callout--experimental">
-        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
-        <div class="callout__body">
-          <span class="callout__title">Coming soon</span>
-          <p>This page is being written. The outline below describes what it will cover — check back soon, or help us draft it via the “Edit this page” link.</p>
-        </div>
+      <h2>The interceptor</h2>
+
+      <pre><code class="language-kotlin" data-file="MediaInterceptor.kt">fun onResponse(url: String, mime: String) {
+    when {
+        isHls(url, mime)  -&gt; emit(StreamCandidate(url, Kind.HLS))
+        isDash(url, mime) -&gt; emit(StreamCandidate(url, Kind.DASH))
+    }
+}</code></pre>
+
+      <h2>Native messaging contract</h2>
+
+      <p>The Media Grabber extension reports candidates over the <code>omniApp</code> channel:</p>
+
+      <pre><code class="language-json" data-file="message schema">{
+  "type": "stream",
+  "url": "https://…/index.m3u8",
+  "kind": "hls",
+  "title": "Page title"
+}</code></pre>
+
+      <h2>The player service</h2>
+
+      <p><code>OmniMediaService</code> is a Media3 <code>MediaSessionService</code>. It owns playback for background audio and exposes standard media-session controls (lock screen, Bluetooth).</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Component</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>MediaInterceptor</code></td><td>Native-path detection</td></tr>
+            <tr><td><code>Media Grabber</code> (ext)</td><td>Extension-path detection</td></tr>
+            <tr><td><code>VideoPlayerScreen</code></td><td>ExoPlayer UI</td></tr>
+            <tr><td><code>OmniMediaService</code></td><td>Background/session playback</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h2>What this page will cover</h2>
-      <p>Reference for the media pipeline: how MediaInterceptor surfaces candidates, the native-messaging contract with the Media Grabber extension, and controlling OmniMediaService playback. This page will document the message schema and service API.</p>
-
-      <h2>Related</h2>
       <div class="card-grid">
-        <a class="card" href="../features/media-hub.html"><span class="card__title">Media Hub <span class="arrow">→</span></span></a>
-        <a class="card" href="download-api.html"><span class="card__title">Download API <span class="arrow">→</span></span></a>
-        <a class="card" href="extension-api.html"><span class="card__title">Extension API <span class="arrow">→</span></span></a>
+        <a class="card" href="../media/overview.html"><span class="card__icon">🎬</span><span class="card__title">Media Hub <span class="arrow">→</span></span><span class="card__desc">Overview of the whole pipeline.</span></a>
       </div>
     </article>
   </main>

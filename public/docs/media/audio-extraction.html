@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Extraction — Omni Browser Docs</title>
+  <meta name="description" content="Extract the audio track from any downloaded video in Omni Browser using on-demand FFmpeg.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/media/audio-extraction.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Audio Extraction — Omni Browser">
+  <meta property="og:description" content="Extract the audio track from any downloaded video in Omni Browser using on-demand FFmpeg.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/media/audio-extraction.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="media/audio-extraction" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Audio Extraction</h1>
+      <p class="lead">Want just the soundtrack, a lecture’s audio, or a podcast from a video? Omni extracts audio with FFmpeg — loaded on demand to keep the APK small.</p>
+
+      <h2>How it works</h2>
+
+      <p>FFmpeg isn’t bundled — <code>FFmpegLoader.kt</code> downloads and extracts the native <code>libav*</code> libraries the first time you use extraction, then caches them. <code>FFmpegBridge.kt</code> does the actual demux/transcode.</p>
+
+      <ol class="steps">
+        <li><h3>Download the video</h3><p>Grab the stream first (see Stream Sniffer).</p></li>
+        <li><h3>Tap Extract audio</h3><p>On the completed download, choose <strong>Extract audio</strong>.</p></li>
+        <li><h3>Pick a format</h3><p>Choose MP3 or AAC. FFmpeg runs locally.</p></li>
+        <li><h3>Find it in Downloads</h3><p>The audio file lands in your library, ready to play.</p></li>
+      </ol>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">One-time download</span><p>FFmpeg is fetched once over the network and cached. After that, extraction works fully offline.</p></div>
+      </div>
+
+      <h2>Why on-demand</h2>
+
+      <p>FFmpeg’s native libraries are tens of megabytes per ABI. Loading them on demand keeps the base APK lean for the majority who never extract audio.</p>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

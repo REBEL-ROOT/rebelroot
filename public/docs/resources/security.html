@@ -4,42 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security — Omni Browser Docs</title>
-  <meta name="description" content="Supported versions and how to responsibly disclose vulnerabilities.">
+  <meta name="description" content="Omni Browser security policy: supported versions, responsible disclosure, and notes on the security architecture.">
   <link rel="canonical" href="https://www.rebelroot.xyz/docs/resources/security.html">
   <meta name="theme-color" content="#0B0F19">
   <link rel="icon" type="image/png" href="../../favicon-32x32.png">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Security — Omni Browser">
-  <meta property="og:description" content="Supported versions and how to responsibly disclose vulnerabilities.">
+  <meta property="og:description" content="Omni Browser security policy: supported versions, responsible disclosure, and notes on the security architecture.">
   <meta property="og:url" content="https://www.rebelroot.xyz/docs/resources/security.html">
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
   <main id="content" data-nav="resources/security" data-updated="Jul 2026">
     <article class="prose">
       <h1>Security</h1>
-      <p class="lead">Supported versions and how to responsibly disclose vulnerabilities.</p>
+      <p class="lead">How Omni handles security — what’s supported, how to report a vulnerability, and the architecture that protects your data.</p>
 
-      <div class="callout callout--experimental">
-        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
-        <div class="callout__body">
-          <span class="callout__title">Coming soon</span>
-          <p>This page is being written. The outline below describes what it will cover — check back soon, or help us draft it via the “Edit this page” link.</p>
-        </div>
+      <h2>Supported versions</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Version</th><th>Supported</th></tr></thead>
+          <tbody>
+            <tr><td><strong>v1.2.x</strong></td><td><span class="yes">✓ Current — receives fixes</span></td></tr>
+            <tr><td><strong>v1.1.x</strong></td><td><span class="partial">Critical fixes only</span></td></tr>
+            <tr><td><strong>&lt; v1.1</strong></td><td><span class="no">✗ End of life</span></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h2>What this page will cover</h2>
-      <p>Omni’s security policy: which versions receive fixes, the private disclosure process (72-hour acknowledgement, 7-day assessment, 30-day fix target), and notes on the security architecture — AES-256-GCM vault, GeckoView private contexts and sandboxed extensions.</p>
+      <h2>Reporting a vulnerability</h2>
 
-      <h2>Related</h2>
-      <div class="card-grid">
-        <a class="card" href="../features/privacy.html"><span class="card__title">Privacy &amp; Security <span class="arrow">→</span></span></a>
-        <a class="card" href="troubleshooting.html"><span class="card__title">Troubleshooting <span class="arrow">→</span></span></a>
-        <a class="card" href="license.html"><span class="card__title">License <span class="arrow">→</span></span></a>
+      <p>Please disclose privately — don’t open a public issue. The process:</p>
+
+      <ol>
+        <li><strong>Acknowledgement</strong> within 72 hours.</li>
+        <li><strong>Assessment</strong> within 7 days.</li>
+        <li><strong>Fix target</strong> of 30 days for confirmed issues.</li>
+      </ol>
+
+      <p>Report via the security contact in the repository’s <code>SECURITY.md</code> / <code>docs/SECURITY.md</code>.</p>
+
+      <h2>Security architecture</h2>
+
+      <ul>
+        <li><strong>Encrypted vault</strong> — SQLCipher (AES-256) database + AES-256-GCM files, keys in the hardware Keystore.</li>
+        <li><strong>Private browsing</strong> — isolated GeckoView private contexts.</li>
+        <li><strong>Sandboxed extensions</strong> — WebExtensions run in a separate process (<code>extensionsProcess(true)</code>).</li>
+        <li><strong>No cleartext traffic</strong> — the app’s own requests refuse HTTP.</li>
+        <li><strong>Log stripping</strong> — R8 strips logs in release builds.</li>
+      </ul>
+
+      <div class="callout callout--danger">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4.4 0 8-3.6 8-8 0-5-4-8-5-11-2 2-3 4-3 6-1.5-1-2.5-2.5-3-4.5C6.5 7 4 10 4 14c0 4.4 3.6 8 8 8Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Security issues are private</span><p>Public disclosure before a fix puts every user at risk. Use the private channel.</p></div>
       </div>
     </article>
   </main>

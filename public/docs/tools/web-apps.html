@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Apps — Omni Browser Docs</title>
+  <meta name="description" content="Pin websites to your home screen as app-like shortcuts in Omni Browser.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/tools/web-apps.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Web Apps — Omni Browser">
+  <meta property="og:description" content="Pin websites to your home screen as app-like shortcuts in Omni Browser.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/tools/web-apps.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="tools/web-apps" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Web Apps</h1>
+      <p class="lead">Turn the sites you use every day into one-tap home-screen apps.</p>
+
+      <h2>Pin a web app</h2>
+
+      <ol class="steps">
+        <li><h3>Open the site</h3><p>Navigate to the web app (mail, docs, a dashboard).</p></li>
+        <li><h3>Pin it</h3><p>Menu → <strong>Add to Home screen</strong>.</p></li>
+        <li><h3>Launch like an app</h3><p>The shortcut opens in its own task, full-screen where the site supports it.</p></li>
+      </ol>
+
+      <h2>How it works</h2>
+
+      <p>Omni uses <code>ShortcutManagerCompat</code> to create a launcher shortcut that opens directly to that site. Sites with a web-app manifest get an icon and a more app-like presentation.</p>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Great for single-purpose browsing</span><p>Pin your budgeting tool or habit tracker and it stays out of your normal tab clutter.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

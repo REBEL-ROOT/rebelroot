@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad &amp; Tracker Blocking — Omni Browser Docs</title>
+  <meta name="description" content="How Omni Browser’s built-in ad and tracker blocker works: domain lists, cosmetic filtering, popup blocking, and how to manage filter lists.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/privacy/ad-blocking.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Ad &amp; Tracker Blocking — Omni Browser">
+  <meta property="og:description" content="How Omni Browser’s built-in ad and tracker blocker works: domain lists, cosmetic filtering, popup blocking, and how to manage filter lists.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/privacy/ad-blocking.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="privacy/ad-blocking" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Ad &amp; Tracker Blocking</h1>
+      <p class="lead">Omni ships a real blocking engine — not a WebView shim. It’s on by default and works at three levels.</p>
+
+      <h2>Three blocking techniques</h2>
+
+      <ul>
+        <li><strong>Network-level domain blocking</strong> — a bundled list of <strong>180+ ad and tracker domains</strong>, plus downloadable filter lists.</li>
+        <li><strong>Cosmetic filtering</strong> — a <code>MutationObserver</code> removes ad elements from the page as they appear.</li>
+        <li><strong>Popup interception</strong> — engine-level <code>onNewSession</code> blocking stops <code>window.open</code> popups before they render.</li>
+      </ul>
+
+      <h2>Filter list providers</h2>
+
+      <p>Beyond the bundled list, you can enable well-known providers in <strong>Settings → Privacy &amp; security → Ad blocking</strong>:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Provider</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td><strong>EasyList</strong></td><td>General advertising</td></tr>
+            <tr><td><strong>AdGuard Base</strong></td><td>Ads + annoyances</td></tr>
+            <tr><td><strong>Peter Lowe’s</strong></td><td>Trackers and analytics</td></tr>
+            <tr><td><strong>Steven Black</strong></td><td>Hosts-style combined blocklist</td></tr>
+            <tr><td><strong>Fanboy Social</strong></td><td>Social widgets and embeds</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Lists are downloaded and updated on device. A live counter shows how many requests have been blocked.</p>
+
+      <h2>When a site breaks</h2>
+
+      <p>Occasionally blocking interferes with a site (a login, a video, a payment). Before disabling anything globally:</p>
+
+      <ol class="steps">
+        <li><h3>Use the per-site toggle</h3><p>Tap the shield icon in the address bar to disable blocking just for that domain.</p></li>
+        <li><h3>Try a smaller list</h3><p>Switch from a combined list to EasyList-only.</p></li>
+        <li><h3>Report it</h3><p>If a popular site is broken, file an issue — it’s usually a fixable filter rule.</p></li>
+      </ol>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Blocking is per-profile</span><p>Each browser profile keeps its own blocking state, so a strict work profile and a relaxed personal profile don’t interfere.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

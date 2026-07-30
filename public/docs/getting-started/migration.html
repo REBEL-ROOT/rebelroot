@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switching from Another Browser — Omni Browser Docs</title>
+  <meta name="description" content="Moving to Omni Browser from Chrome, Firefox or Brave: what carries over, what’s different, and how to get comfortable fast.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/getting-started/migration.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Switching from Another Browser — Omni Browser">
+  <meta property="og:description" content="Moving to Omni Browser from Chrome, Firefox or Brave: what carries over, what’s different, and how to get comfortable fast.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/getting-started/migration.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="getting-started/migration" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Switching from Another Browser</h1>
+      <p class="lead">Omni is different by design. Here’s what to expect coming from a mainstream browser, and how to map your habits over.</p>
+
+      <h2>What you can bring</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>From</th><th>Bookmarks</th><th>Passwords</th><th>History</th><th>Extensions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Firefox / Gecko browsers</strong></td><td><span class="partial">Manual export/import</span></td><td><span class="no">Not yet</span></td><td><span class="no">No</span></td><td><span class="yes">Same .xpi add-ons</span></td></tr>
+            <tr><td><strong>Chrome</strong></td><td><span class="partial">Manual export/import</span></td><td><span class="no">Not yet</span></td><td><span class="no">No</span></td><td><span class="no">Chrome extensions don’t run</span></td></tr>
+            <tr><td><strong>Brave</strong></td><td><span class="partial">Manual export/import</span></td><td><span class="no">Not yet</span></td><td><span class="no">No</span></td><td><span class="no">Chrome extensions don’t run</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>There is no cloud sync (by design — Omni has no servers). Export bookmarks from your old browser as HTML and import them via <strong>Bookmarks → Import</strong>.</p>
+
+      <h2>Habit map</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>You’re used to…</th><th>In Omni…</th></tr></thead>
+          <tbody>
+            <tr><td>Chrome’s omnibox</td><td>The address bar — same idea, with an engine switcher inside</td></tr>
+            <tr><td>Incognito mode</td><td><a href="../tabs/private-tabs.html">Private tabs</a> (a real isolated GeckoView context)</td></tr>
+            <tr><td>Brave Shields</td><td><a href="../privacy/ad-blocking.html">Ad &amp; tracker blocking</a> — on by default</td></tr>
+            <tr><td>“Clear browsing data”</td><td>The <a href="../privacy/fire-button.html">Fire Button</a> — one tap</td></tr>
+            <tr><td>Chrome extensions</td><td><a href="../extensions/overview.html">Firefox WebExtensions</a> from addons.mozilla.org</td></tr>
+            <tr><td>Built-in translate</td><td><a href="../tools/translator.html">Translator</a> in Quick Tools</td></tr>
+            <tr><td>Reading list</td><td>Bookmarks + <a href="../tools/pdf.html">Save as PDF</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Things that will feel new</h2>
+
+      <ul>
+        <li>A <strong>stream sniffer</strong> that finds video the page hides — see <a href="../media/overview.html">Media Hub</a>.</li>
+        <li>An <strong>encrypted vault</strong> for sensitive pages and files.</li>
+        <li>A <strong>command palette</strong> (<kbd>Ctrl</kbd> <kbd>K</kbd>) that does almost everything.</li>
+        <li><strong>Tor and a WireGuard VPN</strong> built into the browser.</li>
+      </ul>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body"><span class="callout__title">One thing you can’t migrate</span><p>Omni deliberately has no account or sync. That’s the point — nothing about your browsing lives anywhere but your phone.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

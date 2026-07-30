@@ -6,7 +6,7 @@
   <title>FAQ — Omni Browser Docs</title>
   <meta name="description" content="Frequently asked questions about Omni Browser: privacy, extensions, media, licensing and more.">
   <link rel="canonical" href="https://www.rebelroot.xyz/docs/resources/faq.html">
-  <meta name="theme-color" content="#0B0F19">
+  <meta name="theme-color" content="#09090b">
   <link rel="icon" type="image/png" href="../../favicon-32x32.png">
   <meta property="og:type" content="article">
   <meta property="og:title" content="FAQ — Omni Browser">
@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -62,14 +62,14 @@
           <button class="accordion-trigger" aria-expanded="false">Does it support Firefox WebExtensions?
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="accordion-panel"><div class="accordion-panel__inner">
-            <p>Yes — real <code>.xpi</code> add-ons from addons.mozilla.org, because Omni runs the actual Gecko engine. Three are bundled: Media Grabber, AI Blocker and Universal Copy. See <a href="../features/extensions.html">Extensions</a>.</p>
+            <p>Yes — real <code>.xpi</code> add-ons from addons.mozilla.org, because Omni runs the actual Gecko engine. Three are bundled: Media Grabber, AI Blocker and Universal Copy. See <a href="../extensions/overview.html">Extensions</a>.</p>
           </div></div>
         </div>
         <div class="accordion-item">
           <button class="accordion-trigger" aria-expanded="false">How does the stream sniffer work?
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="accordion-panel"><div class="accordion-panel__inner">
-            <p>Two cooperating paths: the Media Grabber extension watches network requests and MSE/blob playback, and the native <code>MediaInterceptor</code> looks for HLS/DASH manifests. Detected streams can be played in the native player or downloaded. See <a href="../features/media-hub.html">Media Hub</a>.</p>
+            <p>Two cooperating paths: the Media Grabber extension watches network requests and MSE/blob playback, and the native <code>MediaInterceptor</code> looks for HLS/DASH manifests. Detected streams can be played in the native player or downloaded. See <a href="../media/overview.html">Media Hub</a>.</p>
           </div></div>
         </div>
         <div class="accordion-item">
@@ -83,7 +83,7 @@
           <button class="accordion-trigger" aria-expanded="false">What’s in the encrypted vault?
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="accordion-panel"><div class="accordion-panel__inner">
-            <p>The vault stores sensitive pages, images and notes behind biometric/PIN. The database is encrypted with SQLCipher (AES-256) and files with AES-256-GCM via the Android Keystore. See <a href="../features/privacy.html#the-encrypted-vault">Privacy &amp; Security</a>.</p>
+            <p>The vault stores sensitive pages, images and notes behind biometric/PIN. The database is encrypted with SQLCipher (AES-256) and files with AES-256-GCM via the Android Keystore. See <a href="../privacy/overview.html#the-encrypted-vault">Privacy &amp; Security</a>.</p>
           </div></div>
         </div>
       </div>
@@ -108,7 +108,7 @@
 
       <h2>Still stuck?</h2>
       <div class="card-grid">
-        <a class="card" href="troubleshooting.html"><span class="card__icon">🔧</span><span class="card__title">Troubleshooting <span class="arrow">→</span></span><span class="card__desc">Fix common problems.</span></a>
+        <a class="card" href="../getting-started/troubleshooting.html"><span class="card__icon">🔧</span><span class="card__title">Troubleshooting <span class="arrow">→</span></span><span class="card__desc">Fix common problems.</span></a>
         <a class="card" href="contributing.html"><span class="card__icon">🤝</span><span class="card__title">Contributing <span class="arrow">→</span></span><span class="card__desc">Ask questions and get involved.</span></a>
       </div>
     </article>

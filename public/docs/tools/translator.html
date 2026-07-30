@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translator — Omni Browser Docs</title>
+  <meta name="description" content="Translate pages and selected text in Omni Browser across many languages.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/tools/translator.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Translator — Omni Browser">
+  <meta property="og:description" content="Translate pages and selected text in Omni Browser across many languages.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/tools/translator.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="tools/translator" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Translator</h1>
+      <p class="lead">Select any text and translate it, or translate a whole page — without leaving Omni.</p>
+
+      <h2>Translate a selection</h2>
+
+      <p>Long-press to select text, then tap <strong>Translate</strong> in the selection menu. The translation appears in a sheet.</p>
+
+      <h2>Translate a page</h2>
+
+      <p>Open Quick Tools → <strong>Translator</strong> to translate the current page’s content across many languages.</p>
+
+      <h2>How it works today</h2>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Currently online</span><p>Earlier builds used on-device ML Kit translation, but that was removed for FOSS compliance. Translation now uses a free online endpoint, so translated text leaves your device. Avoid translating sensitive content.</p></div>
+      </div>
+
+      <p>The translation logic lives in <code>tools/TranslationManager.kt</code>.</p>
+
+      <h2>Related</h2>
+
+      <div class="card-grid">
+        <a class="card" href="../tools/read-aloud.html"><span class="card__icon">🔊</span><span class="card__title">Speak Aloud <span class="arrow">→</span></span><span class="card__desc">Hear text read out loud.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

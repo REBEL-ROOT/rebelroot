@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire Button — Omni Browser Docs</title>
+  <meta name="description" content="The Omni Browser Fire Button: burn your entire browsing session — tabs, cookies, cache and history — in one tap.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/privacy/fire-button.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Fire Button — Omni Browser">
+  <meta property="og:description" content="The Omni Browser Fire Button: burn your entire browsing session — tabs, cookies, cache and history — in one tap.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/privacy/fire-button.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="privacy/fire-button" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Fire Button</h1>
+      <p class="lead">The flame on your toolbar is a one-tap panic button. When you hit it, your session is gone — immediately and irreversibly.</p>
+
+      <h2>What it burns</h2>
+
+      <ul>
+        <li>Closes <strong>all open tabs</strong> (normal and private).</li>
+        <li>Clears <strong>cookies and site data</strong>.</li>
+        <li>Empties the <strong>cache</strong>.</li>
+        <li>Wipes <strong>browsing history</strong>.</li>
+      </ul>
+
+      <h2>How to use it</h2>
+
+      <p>Tap the <strong>flame icon</strong> in the toolbar, or press <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>Del</kbd> on a keyboard. There is no confirmation dialog — that’s deliberate.</p>
+
+      <div class="callout callout--danger">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4.4 0 8-3.6 8-8 0-5-4-8-5-11-2 2-3 4-3 6-1.5-1-2.5-2.5-3-4.5C6.5 7 4 10 4 14c0 4.4 3.6 8 8 8Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">It does not ask twice</span><p>Anything not saved to bookmarks or the vault is gone the moment you tap. The Fire Button is designed for speed, in case you need to hand your phone to someone <em>right now</em>.</p></div>
+      </div>
+
+      <h2>What it does NOT touch</h2>
+
+      <ul>
+        <li><strong>Bookmarks</strong> — kept.</li>
+        <li><strong>The encrypted vault</strong> — kept (it’s protected separately).</li>
+        <li><strong>Saved passwords</strong> — kept.</li>
+        <li><strong>Downloads</strong> — kept.</li>
+      </ul>
+
+      <h2>Under the hood</h2>
+
+      <p>The Fire Button is implemented in <code>privacy/FireButton.kt</code>. It calls into the GeckoRuntime to clear data and resets the tab list in the ViewModel — a single, atomic operation.</p>
+
+      <div class="card-grid">
+        <a class="card" href="../tabs/private-tabs.html"><span class="card__icon">🕶️</span><span class="card__title">Private tabs <span class="arrow">→</span></span><span class="card__desc">For browsing you’d rather not save at all.</span></a>
+        <a class="card" href="../privacy/private-vault.html"><span class="card__icon">🔐</span><span class="card__title">Encrypted vault <span class="arrow">→</span></span><span class="card__desc">What the Fire Button leaves behind.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

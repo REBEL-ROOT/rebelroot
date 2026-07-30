@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTTPS-Only Mode — Omni Browser Docs</title>
+  <meta name="description" content="Omni Browser’s HTTPS enforcement: upgrading connections and refusing cleartext traffic.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/privacy/https-only.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="HTTPS-Only Mode — Omni Browser">
+  <meta property="og:description" content="Omni Browser’s HTTPS enforcement: upgrading connections and refusing cleartext traffic.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/privacy/https-only.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="privacy/https-only" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>HTTPS-Only Mode</h1>
+      <p class="lead">Wherever a site supports it, Omni connects over encrypted HTTPS — and its own requests never go out in cleartext.</p>
+
+      <h2>What it does</h2>
+
+      <ul>
+        <li>Upgrades <code>http://</code> navigations to <code>https://</code> where the site supports it.</li>
+        <li>Warns before you proceed on a site with no HTTPS at all.</li>
+        <li>Omni’s own network calls (filter-list updates, FFmpeg download) refuse cleartext — <code>usesCleartextTraffic</code> is off.</li>
+      </ul>
+
+      <h2>Why it matters</h2>
+
+      <p>HTTPS encrypts the connection between you and the site, so your ISP or a network eavesdropper can’t see the specific pages you read or tamper with them.</p>
+
+      <h2>When a site is HTTP-only</h2>
+
+      <p>Some small or legacy sites have no HTTPS. Omni will show a warning and let you choose to proceed — but treat anything you send there as readable by anyone on the path.</p>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Pair with the VPN on open Wi-Fi</span><p>HTTPS protects the page; a <a href="../privacy/vpn.html">VPN</a> additionally hides which domains you visit from the local network.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

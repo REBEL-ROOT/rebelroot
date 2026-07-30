@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encrypted Vault — Omni Browser Docs</title>
+  <meta name="description" content="The Omni Browser private vault: biometric-protected, AES-256 encrypted storage for sensitive pages, images and notes.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/privacy/private-vault.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Encrypted Vault — Omni Browser">
+  <meta property="og:description" content="The Omni Browser private vault: biometric-protected, AES-256 encrypted storage for sensitive pages, images and notes.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/privacy/private-vault.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="privacy/private-vault" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Encrypted Vault</h1>
+      <p class="lead">The vault is a locked room inside Omni for the things you don’t want lying around — encrypted at rest, opened only by you.</p>
+
+      <h2>What lives in the vault</h2>
+
+      <ul>
+        <li><strong>Saved pages</strong> — keep a private copy of a web page.</li>
+        <li><strong>Images</strong> — save downloads straight to the vault.</li>
+        <li><strong>Dev Notes</strong> — an offline scratchpad for sensitive text.</li>
+      </ul>
+
+      <h2>Open it</h2>
+
+      <p>Quick Tools → <strong>Vault</strong>, or navigate to it from the menu. You’ll authenticate with your <strong>fingerprint, face or PIN</strong>. The vault locks again when you leave it.</p>
+
+      <h2>How it’s encrypted</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Mechanism</th><th>Key storage</th></tr></thead>
+          <tbody>
+            <tr><td>Vault database</td><td>SQLCipher (AES-256)</td><td>Derived, Keystore-backed</td></tr>
+            <tr><td>Vault files</td><td>EncryptedFile (AES-256-GCM)</td><td>Android Keystore (hardware)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Nothing is ever written to disk in plaintext. Even with physical access to your phone’s storage, the vault is unreadable without your biometric.</p>
+
+      <h2>Saving to the vault</h2>
+
+      <p>When you download an image or save a page as PDF, the dialog offers two destinations: <strong>Downloads</strong> (public, visible to other apps) or <strong>Private Vault</strong> (encrypted). Choose the vault for anything sensitive.</p>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Set up a screen lock first</span><p>The vault relies on Android’s biometric/PIN. If your device has no screen lock, set one up — the vault is only as strong as your lock screen.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

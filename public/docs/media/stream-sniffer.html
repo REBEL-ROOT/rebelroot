@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Sniffer — Omni Browser Docs</title>
+  <meta name="description" content="How Omni Browser detects video and audio streams using a dual-path system: a WebExtension network sniffer and a native engine interceptor.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/media/stream-sniffer.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Stream Sniffer — Omni Browser">
+  <meta property="og:description" content="How Omni Browser detects video and audio streams using a dual-path system: a WebExtension network sniffer and a native engine interceptor.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/media/stream-sniffer.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="media/stream-sniffer" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Stream Sniffer</h1>
+      <p class="lead">Sites increasingly hide their video behind blobs and encrypted players. Omni finds the real stream with a dual-path detection system.</p>
+
+      <h2>Two cooperating paths</h2>
+
+      <ul>
+        <li><strong>Extension path</strong> — the bundled <em>Omni Media Grabber</em> WebExtension watches network requests and hooks <code>MediaSource</code>/blob playback, then reports candidates to the app over native messaging.</li>
+        <li><strong>Native path</strong> — <code>media/MediaInterceptor.kt</code> inspects engine-level traffic for HLS (<code>.m3u8</code>) and DASH (<code>.mpd</code>) manifests.</li>
+      </ul>
+
+      <p>Both converge on the ViewModel, which surfaces a <strong>grabber chip</strong> when a stream is found.</p>
+
+      <h2>Using it</h2>
+
+      <ol class="steps">
+        <li><h3>Play the media</h3><p>Start the video or audio on the page.</p></li>
+        <li><h3>Watch for the chip</h3><p>When a stream is detected, a grabber affordance appears.</p></li>
+        <li><h3>Choose an action</h3><p>Tap it to play in the native player, download, or extract audio.</p></li>
+      </ol>
+
+      <h2>What it can’t grab</h2>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">DRM is out of scope</span><p>Widevine/FairPlay-protected streams (most Netflix/Disney+/Prime video) are encrypted end-to-end. Omni will not and cannot strip DRM — and won’t try.</p></div>
+      </div>
+
+      <p>Some sites also use heavily obfuscated or proprietary transports that the sniffer doesn’t recognise yet. Detection coverage improves over releases.</p>
+
+      <h2>Under the hood</h2>
+
+      <pre><code class="language-kotlin" data-file="MediaInterceptor.kt" data-highlight="3,5">// Simplified: surface a candidate when a manifest is seen
+fun onResponse(url: String, mime: String) {
+    if (url.endsWith(".m3u8") || mime == "application/vnd.apple.mpegurl")
+        emit(StreamCandidate(url, Kind.HLS))
+    else if (url.endsWith(".mpd") || mime == "application/dash+xml")
+        emit(StreamCandidate(url, Kind.DASH))
+}</code></pre>
+
+      <div class="card-grid">
+        <a class="card" href="../media/video-player.html"><span class="card__icon">🎬</span><span class="card__title">Video Player <span class="arrow">→</span></span><span class="card__desc">What happens after detection.</span></a>
+        <a class="card" href="../media/overview.html"><span class="card__icon">📥</span><span class="card__title">Media Capture guide <span class="arrow">→</span></span><span class="card__desc">End-to-end walkthrough.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

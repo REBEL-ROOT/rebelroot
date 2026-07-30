@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads Manager — Omni Browser Docs</title>
+  <meta name="description" content="The Omni Browser downloads manager: queue, pause and resume downloads, save to the vault, and manage your library.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/media/downloads.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Downloads Manager — Omni Browser">
+  <meta property="og:description" content="The Omni Browser downloads manager: queue, pause and resume downloads, save to the vault, and manage your library.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/media/downloads.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="media/downloads" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Downloads Manager</h1>
+      <p class="lead">Omni ships a real download manager — not the bare system downloader. Queue, pause and resume anything, and route sensitive files to the vault.</p>
+
+      <h2>Open it</h2>
+
+      <p>Menu → Downloads, Quick Tools → Downloads, or <kbd>Ctrl</kbd> <kbd>J</kbd>.</p>
+
+      <h2>What it handles</h2>
+
+      <ul>
+        <li><strong>Standard files</strong> — anything served as a download (PDFs, APKs, archives, images).</li>
+        <li><strong>Streams</strong> — HLS/DASH video and audio from the sniffer.</li>
+        <li><strong>Images &amp; pages</strong> — long-press to save images; save pages as clean PDF.</li>
+        <li><strong>Batch media</strong> — multi-select images or manga chapters.</li>
+      </ul>
+
+      <h2>The library</h2>
+
+      <ul>
+        <li>Live per-file progress, speed and size.</li>
+        <li><strong>Pause / resume / cancel</strong> per item — resume survives app restarts.</li>
+        <li>Filter by type: video, audio, image, document, other.</li>
+        <li>Open-with and share once complete.</li>
+      </ul>
+
+      <h2>Two destinations</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Destination</th><th>Where</th><th>Protection</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Downloads</strong></td><td>Public <code>Downloads/</code></td><td>None — visible to other apps</td></tr>
+            <tr><td><strong>Private Vault</strong></td><td>Encrypted app storage</td><td>AES-256-GCM + biometric</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Choose the vault for anything sensitive. See <a href="../privacy/private-vault.html">Encrypted Vault</a>.</p>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Background-safe</span><p>Active downloads run on a foreground service, so you can switch apps or lock the screen without losing progress.</p></div>
+      </div>
+
+      <div class="card-grid">
+        <a class="card" href="../media/batch-manga.html"><span class="card__icon">📚</span><span class="card__title">Batch Media &amp; Manga <span class="arrow">→</span></span><span class="card__desc">Grab whole galleries and chapters.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

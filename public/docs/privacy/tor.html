@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tor — Omni Browser Docs</title>
+  <meta name="description" content="Route Omni Browser traffic through the Tor network: bootstrap, bridges and Snowflake, .onion support, and what Tor does and doesn’t protect.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/privacy/tor.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Tor — Omni Browser">
+  <meta property="og:description" content="Route Omni Browser traffic through the Tor network: bootstrap, bridges and Snowflake, .onion support, and what Tor does and doesn’t protect.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/privacy/tor.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="privacy/tor" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Tor</h1>
+      <p class="lead">Omni includes a real Tor client. When anonymity matters more than speed, route your browsing through the Tor network.</p>
+
+      <h2>Enable Tor</h2>
+
+      <p>Turn it on in <strong>Settings → Privacy &amp; security → Tor</strong>. Omni bootstraps a Tor circuit — you’ll see live progress as it connects to the network.</p>
+
+      <h2>What you get</h2>
+
+      <ul>
+        <li>Traffic routed through three Tor relays — your ISP sees Tor, not your destinations.</li>
+        <li>Access to <strong>.onion</strong> addresses.</li>
+        <li><strong>Bridges and Snowflake</strong> for networks that block Tor.</li>
+      </ul>
+
+      <h2>Circumventing censorship</h2>
+
+      <p>If your network blocks Tor, enable a <strong>bridge</strong> (obfuscated entry node) or <strong>Snowflake</strong> (WebRTC-based pluggable transport) in the Tor settings. Both are built into <code>privacy/TorManager.kt</code>.</p>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Tor is slower by design</span><p>Expect noticeably higher latency. Tor is for when anonymity matters — combine it with the ad blocker for the cleanest experience, and avoid logging into personal accounts over it.</p></div>
+      </div>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Tor vs VPN</span><p>Tor anonymises (hides <em>who</em> you are, even from the network). A <a href="../privacy/vpn.html">VPN</a> encrypts (hides your traffic from your ISP, but the VPN provider sees it). Use Tor for anonymity, VPN for a fast private tunnel.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

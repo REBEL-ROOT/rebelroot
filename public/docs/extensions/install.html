@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Installing Add-ons — Omni Browser Docs</title>
+  <meta name="description" content="How to install Firefox WebExtensions from addons.mozilla.org in Omni Browser, grant permissions, and manage them.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/extensions/install.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Installing Add-ons — Omni Browser">
+  <meta property="og:description" content="How to install Firefox WebExtensions from addons.mozilla.org in Omni Browser, grant permissions, and manage them.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/extensions/install.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="extensions/install" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Installing Add-ons</h1>
+      <p class="lead">Installing an extension in Omni is just like desktop Firefox — because under the hood, it is.</p>
+
+      <h2>Step by step</h2>
+
+      <ol class="steps">
+        <li><h3>Open the extensions panel</h3><p>Menu → <strong>Extensions</strong>, or Quick Tools → Extensions.</p></li>
+        <li><h3>Browse addons.mozilla.org</h3><p>Navigate to AMO in a normal tab. Find an add-on and tap <strong>Add to Firefox</strong> — GeckoView intercepts the install.</p></li>
+        <li><h3>Grant permissions</h3><p>Review the requested permissions and confirm.</p></li>
+        <li><h3>Manage it</h3><p>Toggle, update or remove it from the Extensions panel. Options pages open in a tab.</p></li>
+      </ol>
+
+      <h2>Good first add-ons</h2>
+
+      <ul>
+        <li><strong>uBlock Origin</strong> — if you want blocking beyond the built-in engine.</li>
+        <li><strong>Dark Reader</strong> — force dark mode on any site.</li>
+        <li><strong>Privacy Badger</strong> — heuristic tracker learning.</li>
+        <li><strong>Violentmonkey</strong> — run userscripts.</li>
+      </ul>
+
+      <h2>Private browsing</h2>
+
+      <p>By default, third-party extensions are <em>not</em> allowed in private tabs. You can opt an extension in from its entry in the Extensions panel. Bundled extensions are allowed by default.</p>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body"><span class="callout__title">Audit before you install</span><p>Check an add-on’s ratings, user count and last-updated date. An extension with broad permissions can see everything you browse.</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

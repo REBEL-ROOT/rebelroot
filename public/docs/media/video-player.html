@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Player — Omni Browser Docs</title>
+  <meta name="description" content="The Omni Browser native video player: ExoPlayer-powered playback with PiP, gesture controls, playback speed and background audio.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/media/video-player.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Video Player — Omni Browser">
+  <meta property="og:description" content="The Omni Browser native video player: ExoPlayer-powered playback with PiP, gesture controls, playback speed and background audio.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/media/video-player.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="media/video-player" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Video Player</h1>
+      <p class="lead">Streams open in a full native player built on AndroidX Media3 — not a web player. It’s the difference between watching and buffering.</p>
+
+      <h2>Gesture controls</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Gesture</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>Swipe left half ↑↓</td><td>Brightness</td></tr>
+            <tr><td>Swipe right half ↑↓</td><td>Volume</td></tr>
+            <tr><td>Double-tap left / right</td><td>Seek −10s / +10s</td></tr>
+            <tr><td>Pinch</td><td>Zoom (where supported)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Playback features</h2>
+
+      <ul>
+        <li><strong>Speed</strong> — 0.25× to 3×.</li>
+        <li><strong>Picture-in-picture</strong> — keep watching while you browse other tabs.</li>
+        <li><strong>Background audio</strong> — via <code>OmniMediaService</code>, audio keeps playing with the screen off.</li>
+        <li><strong>Fullscreen</strong> — immersive playback with system bars hidden.</li>
+      </ul>
+
+      <h2>Keyboard shortcuts</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Key</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Space</kbd></td><td>Play / pause</td></tr>
+            <tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>Seek 10 seconds</td></tr>
+            <tr><td><kbd>F</kbd></td><td>Fullscreen</td></tr>
+            <tr><td><kbd>P</kbd></td><td>Picture-in-picture</td></tr>
+            <tr><td><kbd>S</kbd></td><td>Cycle speed</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Under the hood</h2>
+
+      <p>The player is <code>media/player/VideoPlayerScreen.kt</code> on Media3 ExoPlayer, with HLS and DASH modules. Taking over from the web player is what the changelog calls the “premium player” takeover — it’s just branding for the native handoff.</p>
+
+      <div class="card-grid">
+        <a class="card" href="../media/audio-extraction.html"><span class="card__icon">🎧</span><span class="card__title">Audio Extraction <span class="arrow">→</span></span><span class="card__desc">Keep just the soundtrack.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>
