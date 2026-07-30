@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Vercel serves this page at /omnibrowser (no trailing slash) and 308s the
+       slash form back to it, so the browser treats "omnibrowser" as a file and
+       relative asset paths would resolve against the site root and 404. Anchor
+       every relative URL to /omnibrowser/ so CSS/JS/images resolve either way. -->
+  <base href="/omnibrowser/">
   <title>Omni Browser (OmniBrowser) by RebelRoot | Fast & Private Android Web Browser</title>
   <meta name="description" content="Omni Browser is a fast, privacy-first Android web browser by RebelRoot with built-in uBlock Origin, Firefox WebExtensions, and offline ML translation.">
   <meta name="keywords" content="Omni Browser, OmniBrowser, omni browser, omnibrowser, OMNI BROWSER, OMNIBROWSER, Omni Browser APK, Omni Browser Android, Omni Browser RebelRoot, RebelRoot Omni Browser, Rebel Root Omni Browser, GeckoView browser, uBlock Origin mobile, mobile webextensions, private browser Android, RebelRoot, Rebel Root, rebelroot, rebel root">
