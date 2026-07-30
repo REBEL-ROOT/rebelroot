@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build System — Omni Browser Docs</title>
+  <meta name="description" content="Building Omni Browser from source: Gradle Kotlin DSL, ABI product flavors, R8, signing, and the CI release pipeline.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/developer/build-system.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Build System — Omni Browser">
+  <meta property="og:description" content="From clone to signed APK.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/developer/build-system.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="developer/build-system" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Build System</h1>
+      <p class="lead">Omni builds with the <strong>Gradle Kotlin DSL</strong>, Android Gradle Plugin 9.1 and Kotlin 2.2. This page takes you from a fresh clone to a signed APK.</p>
+
+      <h2>Prerequisites</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tool</th><th>Version</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Android Studio</strong></td><td>Ladybug or newer</td></tr>
+            <tr><td><strong>JDK</strong></td><td>17</td></tr>
+            <tr><td><strong>Android SDK</strong></td><td>compileSdk 36, minSdk 26</td></tr>
+            <tr><td><strong>Device / emulator</strong></td><td>Android 8.0+ (API 26)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Build and run</h2>
+      <pre><code class="language-bash" data-file="terminal"># Clone
+git clone https://github.com/REBEL-ROOT/omni-browser.git
+cd omni-browser
+
+# Debug build (runs on connected device / emulator)
+./gradlew :app:installUniversalDebug
+
+# Release APKs for all ABIs
+./gradlew :app:assembleRelease</code></pre>
+
+      <h2>ABI product flavors</h2>
+      <p>GeckoView ships per-ABI native libraries, so Omni defines three flavors in a single <code>abi</code> dimension. Each gets a <code>versionCode</code> offset so the Play Store can serve the right one:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Flavor</th><th>ABI</th><th>versionCode offset</th></tr></thead>
+          <tbody>
+            <tr><td><code>universal</code></td><td>all</td><td>+1,000,000</td></tr>
+            <tr><td><code>arm</code></td><td>armeabi-v7a</td><td>+2,000,000</td></tr>
+            <tr><td><code>aarch64</code></td><td>arm64-v8a</td><td>+3,000,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>With a base <code>versionCode</code> of <code>2030</code>, the aarch64 release of v1.2.6.4 is <code>3002030</code>.</p>
+
+      <h2>Release configuration</h2>
+      <pre><code class="language-groovy" data-file="app/build.gradle.kts" data-highlight="4-7">buildTypes {
+    release {
+        isMinifyEnabled = true
+        isShrinkResources = true          // R8 full mode
+        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+        signingConfig = signingConfigs.getByName("release")
+        // Native debug symbols for Play Console
+        ndk { debugSymbolLevel = "SYMBOL_TABLE" }
+    }
+}</code></pre>
+      <ul>
+        <li><strong>R8 full mode</strong> + resource shrinking keep the executable lean.</li>
+        <li><strong>Native debug symbols</strong> are exported for crash symbolication without shipping them in the APK.</li>
+        <li>Signing uses <code>release-new.keystore</code>; credentials come from <code>local.properties</code> or environment variables (CI uses GitHub Secrets — the keystore was purged from history).</li>
+      </ul>
+
+      <h2>The GeckoView dependency</h2>
+      <p>GeckoView comes from Mozilla’s content-filtered Maven repository, pinned per ABI:</p>
+      <pre><code class="language-groovy" data-file="repositories">maven {
+    url = uri("https://maven.mozilla.org/maven2")
+    content { includeGroupByRegex("org\\.mozilla\\.geckoview.*") }
+}
+
+// per-ABI artifacts + a universal artifact
+implementation("org.mozilla.geckoview:geckoview-omni:145.0.20251124145406")</code></pre>
+      <p>The build also explicitly <strong>excludes <code>io.opencensus</code></strong> to avoid pulling in a telemetry-flagged dependency (relevant for F-Droid).</p>
+
+      <h2>Continuous integration</h2>
+      <p>Two GitHub Actions workflows drive quality and releases:</p>
+      <ul>
+        <li><strong><code>pr_check.yml</code></strong> — builds and lints every pull request.</li>
+        <li><strong><code>release.yml</code></strong> — triggered by a <code>v*</code> tag. It verifies <code>versionCode</code> monotonicity, builds and signs all three APKs, and uploads them to a draft GitHub Release.</li>
+      </ul>
+
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">16 KB page alignment</span>
+          <p>Native libraries must be built with 16 KB memory-page alignment (an NDK requirement for newer devices). See <code>CONTRIBUTING.md</code> for the exact flags.</p>
+        </div>
+      </div>
+
+      <h2>F-Droid</h2>
+      <p><code>com.rebelroot.omni.yml</code> at the repo root is the F-Droid build metadata, using <code>AutoUpdateMode</code> by tag. F-Droid builds are reproducible and signed with the F-Droid key.</p>
+
+      <h2>Related</h2>
+      <div class="card-grid">
+        <a class="card" href="../resources/contributing.html"><span class="card__icon">🤝</span><span class="card__title">Contributing <span class="arrow">→</span></span><span class="card__desc">Dev setup, code style and PR process.</span></a>
+        <a class="card" href="../getting-started/installation.html"><span class="card__icon">📦</span><span class="card__title">Installation <span class="arrow">→</span></span><span class="card__desc">Install prebuilt APKs instead.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

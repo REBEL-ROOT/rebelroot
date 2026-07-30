@@ -47,7 +47,11 @@ function NavItemsList({ items }: NavigationDrawerProps) {
       {items.map((singleItem, idx) => {
         return (
           <NavItem key={idx}>
-            <NextLink href={singleItem.href}>{singleItem.title}</NextLink>
+            {singleItem.external ? (
+              <a href={singleItem.href}>{singleItem.title}</a>
+            ) : (
+              <NextLink href={singleItem.href}>{singleItem.title}</NextLink>
+            )}
           </NavItem>
         )
       })}

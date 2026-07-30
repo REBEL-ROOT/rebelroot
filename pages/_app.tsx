@@ -19,6 +19,7 @@ import { NavItems } from 'types';
 
 const navItems: NavItems = [
   { title: 'Products', href: '/features' },
+  { title: 'Omni Docs', href: '/docs/', external: true },
   { title: 'About', href: '/about' },
   { title: 'Support & Feedback', href: '/support' },
   { title: 'Contact', href: '/contact' },

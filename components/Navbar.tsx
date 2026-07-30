@@ -88,7 +88,7 @@ export default function Navbar({ items }: NavbarProps) {
   );
 }
 
-function NavItem({ href, title, outlined }: SingleNavItem) {
+function NavItem({ href, title, outlined, external }: SingleNavItem) {
   const { setIsModalOpened } = useNewsletterModalContext();
 
   function showNewsletterModal() {
@@ -97,6 +97,16 @@ function NavItem({ href, title, outlined }: SingleNavItem) {
 
   if (outlined) {
     return <CustomButton onClick={showNewsletterModal}>{title}</CustomButton>;
+  }
+
+  // Static routes (e.g. the /docs/ site) are served as plain files, so use a
+  // full navigation instead of client-side routing.
+  if (external) {
+    return (
+      <NavItemWrapper outlined={outlined}>
+        <a href={href}>{title}</a>
+      </NavItemWrapper>
+    );
   }
 
   return (

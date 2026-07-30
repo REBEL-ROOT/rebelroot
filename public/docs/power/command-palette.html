@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Palette — Omni Browser Docs</title>
+  <meta name="description" content="The Omni Browser command palette: fuzzy-search every action, tab and setting from a single prompt.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/power/command-palette.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Command Palette — Omni Browser">
+  <meta property="og:description" content="One prompt to rule the whole browser.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/power/command-palette.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="power/command-palette" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Command Palette</h1>
+      <p class="lead">The command palette is the fastest way to drive Omni. One prompt, fuzzy-matched against every action, open tab and setting — no menu diving.</p>
+
+      <h2>Open it</h2>
+      <ul>
+        <li><strong>Keyboard:</strong> <kbd>Ctrl</kbd> <kbd>K</kbd> (or <kbd>⌘</kbd> <kbd>K</kbd>).</li>
+        <li><strong>Touch:</strong> Quick Tools → <strong>Command Palette</strong>, or from the overflow menu.</li>
+      </ul>
+
+      <h2>What you can do</h2>
+      <p>Start typing and the palette ranks matches across three domains:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Domain</th><th>Examples</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Actions</strong></td><td>“new private tab”, “burn session”, “toggle AI blocker”, “save as PDF”, “translate page”</td></tr>
+            <tr><td><strong>Tabs</strong></td><td>Jump to any open tab by title or URL — “github”, “inbox”, “youtube”</td></tr>
+            <tr><td><strong>Settings</strong></td><td>Deep-link into any settings screen — “dark mode”, “ad blocking”, “default browser”</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Fuzzy matching</h2>
+      <p>You don’t need exact wording. The matcher scores substring and subsequence matches, so <code>privtab</code> finds <em>New private tab</em> and <code>aiblock</code> finds <em>Toggle AI Blocker</em>. Recent commands are boosted to the top.</p>
+      <pre><code class="language-kotlin" data-file="CommandPalette.kt" data-highlight="4">// Rank candidates for the typed query
+fun rank(query: String, commands: List&lt;Command&gt;): List&lt;Command&gt; =
+    commands
+        .map { it to fuzzyScore(query, it.title) }   // substring + subsequence
+        .filter { it.second &gt; 0 }
+        .sortedByDescending { it.second + recencyBoost(it.first) }
+        .map { it.first }</code></pre>
+
+      <h2>Keyboard navigation</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Key</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Move through results</td></tr>
+            <tr><td><kbd>Enter</kbd></td><td>Run the highlighted command</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>Dismiss the palette</td></tr>
+            <tr><td><kbd>Tab</kbd></td><td>Autocomplete the top result into the field</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Run URLs and searches too</span>
+          <p>If nothing matches, hitting <kbd>Enter</kbd> treats your query as a search or URL — the palette doubles as a launcher.</p>
+        </div>
+      </div>
+
+      <h2>Related</h2>
+      <div class="card-grid">
+        <a class="card" href="../getting-started/keyboard-shortcuts.html"><span class="card__icon">⌨️</span><span class="card__title">Keyboard shortcuts <span class="arrow">→</span></span><span class="card__desc">The full binding reference.</span></a>
+        <a class="card" href="../power/experimental-flags.html"><span class="card__icon">🧪</span><span class="card__title">Experimental flags <span class="arrow">→</span></span><span class="card__desc">Palette commands for bleeding-edge features.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

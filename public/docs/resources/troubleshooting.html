@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Troubleshooting — Omni Browser Docs</title>
+  <meta name="description" content="Fix common Omni Browser problems: crashes, video playback, extension conflicts, download failures and performance.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/resources/troubleshooting.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Troubleshooting — Omni Browser">
+  <meta property="og:description" content="Fix common problems.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/resources/troubleshooting.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="resources/troubleshooting" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Troubleshooting</h1>
+      <p class="lead">Solutions to the problems users hit most often. If yours isn’t here, grab logs and file an issue — that’s how the browser gets better.</p>
+
+      <h2>First steps for any problem</h2>
+      <ol class="steps">
+        <li><h3>Reproduce in a private tab</h3><p>Extensions and site data cause many issues. If it disappears in private mode, an extension or cached state is the culprit.</p></li>
+        <li><h3>Toggle extensions off</h3><p>Disable all extensions, then re-enable one at a time.</p></li>
+        <li><h3>Clear site data</h3><p>Settings → Privacy → Clear data for the affected site.</p></li>
+        <li><h3>Check for an update</h3><p>Many bugs are already fixed in the latest release.</p></li>
+      </ol>
+
+      <h2>Video won’t play or download</h2>
+      <ul>
+        <li><strong>Grabber chip doesn’t appear</strong> — the stream may be DRM-protected (Omni won’t and can’t strip DRM) or the site uses a transport the sniffer doesn’t recognize yet.</li>
+        <li><strong>Playback stutters</strong> — lower the quality in the player, or disable other extensions that hook media.</li>
+        <li><strong>Download stalls at a percentage</strong> — HLS segment downloads resume automatically; if it’s truly stuck, cancel and restart. Check free storage.</li>
+        <li><strong>No audio extraction</strong> — FFmpeg downloads on first use. Make sure you were online the first time you tapped “Extract audio”.</li>
+      </ul>
+
+      <h2>An extension broke a site</h2>
+      <p>Content blockers and script extensions can over-block. To isolate:</p>
+      <pre><code class="language-bash" data-file="diagnose"># In Omni:
+# 1. Open the Extensions panel
+# 2. Toggle off the suspect extension
+# 3. Hard-reload the page (Ctrl+Shift+R)
+# 4. If fixed, report the site to the extension author
+#    and/or file an Omni issue with the URL</code></pre>
+      <div class="callout callout--tip">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Per-site disable</span>
+          <p>For a blocker that breaks one site, disable it just for that domain from the shield icon in the address bar rather than turning it off globally.</p>
+        </div>
+      </div>
+
+      <h2>Crashes on launch</h2>
+      <ul>
+        <li><strong>After an update</strong> — a corrupted session restore can crash on start. Clear Omni’s cache (Android Settings → Apps → Omni → Storage → Clear cache), which preserves your data but resets the restore point.</li>
+        <li><strong>On a specific device</strong> — GeckoView needs a reasonably modern GPU driver. Very old or heavily modified ROMs may not be supported.</li>
+        <li><strong>Repeated crashes</strong> — Omni has a crash-loop guard that resets the last session after repeated failures. If you’re stuck, clear cache as above.</li>
+      </ul>
+
+      <h2>Downloads fail</h2>
+      <ul>
+        <li><strong>Permission denied</strong> — grant Storage/Files access in Android Settings → Apps → Omni → Permissions.</li>
+        <li><strong>Vault save fails</strong> — the vault needs biometric/PIN enrolled. Set one up in Settings → Privacy → Vault.</li>
+        <li><strong>“Insufficient space”</strong> — streams need headroom for segment assembly; keep at least 2× the file size free.</li>
+      </ul>
+
+      <h2>Slow performance</h2>
+      <ul>
+        <li>Too many open tabs — enable smart tab grouping or close old ones.</li>
+        <li>A heavy extension (some ad-blockers with huge lists) — try Omni’s built-in blocker instead.</li>
+        <li>Low-end device — disable dynamic color and reduce the UI scale in Settings → Appearance.</li>
+      </ul>
+
+      <h2>Filing a great bug report</h2>
+      <p>Open an issue at <a href="https://github.com/REBEL-ROOT/omni-browser/issues" target="_blank" rel="noopener">github.com/REBEL-ROOT/omni-browser/issues</a> using the bug template. Include:</p>
+      <ul>
+        <li>Omni version (Settings → About) and Android version</li>
+        <li>Device model and ABI</li>
+        <li>Steps to reproduce, and what you expected vs. what happened</li>
+        <li>The URL (if not sensitive) and which extensions are active</li>
+      </ul>
+
+      <div class="callout callout--danger">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4.4 0 8-3.6 8-8 0-5-4-8-5-11-2 2-3 4-3 6-1.5-1-2.5-2.5-3-4.5C6.5 7 4 10 4 14c0 4.4 3.6 8 8 8Z"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Security issues are private</span>
+          <p>Don’t post vulnerabilities publicly. Follow the responsible-disclosure process in <a href="security.html">Security</a>.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy &amp; Security — Omni Browser Docs</title>
+  <meta name="description" content="Ad and tracker blocking, Tor, WireGuard VPN, the encrypted vault, incognito mode and the Fire Button in Omni Browser.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/features/privacy.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Privacy &amp; Security — Omni Browser">
+  <meta property="og:description" content="Blocking, Tor, VPN, the vault and the Fire Button.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/features/privacy.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="features/privacy" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Privacy &amp; Security</h1>
+      <p class="lead">Privacy in Omni isn’t a mode you turn on — it’s the default state of the browser. This page walks through every layer of protection and how to tune it.</p>
+
+      <h2>The protection stack</h2>
+      <p>Omni defends you at five distinct layers, from the network up to the UI:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Layer</th><th>What it does</th><th>Default</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Content blocking</strong></td><td>Custom filter engine blocks ads, trackers and popups</td><td><span class="yes">On</span></td></tr>
+            <tr><td><strong>Engine isolation</strong></td><td>Private tabs run in a separate GeckoView context</td><td><span class="yes">On</span></td></tr>
+            <tr><td><strong>Transport</strong></td><td>Tor routing and WireGuard VPN tunnel</td><td><span class="partial">Off</span></td></tr>
+            <tr><td><strong>Storage</strong></td><td>AES-256-GCM encrypted vault for sensitive data</td><td><span class="partial">Opt-in</span></td></tr>
+            <tr><td><strong>Session control</strong></td><td>Fire Button burns everything in one tap</td><td><span class="yes">Ready</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Ad &amp; tracker blocking</h2>
+      <p>Omni ships a <strong>custom blocking engine</strong> — not a WebView shim. It combines three techniques:</p>
+      <ul>
+        <li><strong>Network-level domain blocking</strong> — a bundled list of 180+ ad and tracker domains, plus downloadable filter lists (EasyList, AdGuard Base, Peter Lowe’s, Steven Black hosts, Fanboy Social).</li>
+        <li><strong>Cosmetic filtering</strong> — a <code>MutationObserver</code> removes ad elements from the page as they appear.</li>
+        <li><strong>Popup interception</strong> — engine-level <code>onNewSession</code> blocking stops <code>window.open</code> popups before they render.</li>
+      </ul>
+      <p>A live counter tracks how many requests have been blocked, so you can see the engine working.</p>
+
+      <h3>Managing filter lists</h3>
+      <p>Open <strong>Settings → Privacy &amp; security → Ad blocking</strong> to see your providers, update lists and view the block counter.</p>
+      <pre><code class="language-kotlin" data-file="AdBlockManager.kt">// Preset filter providers you can enable
+val providers = listOf(
+    "EasyList",          // general ads
+    "AdGuard Base",      // ads + annoyances
+    "Peter Lowe's",      // trackers
+    "Steven Black",      // hosts-style blocklist
+    "Fanboy Social"      // social widgets
+)</code></pre>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Blocking is per-profile</span>
+          <p>Each browser profile keeps its own blocking state, so a strict work profile and a relaxed personal profile don’t interfere.</p>
+        </div>
+      </div>
+
+      <h2>Incognito &amp; private browsing</h2>
+      <p>Incognito tabs in Omni are genuinely private: they run in a <strong>separate GeckoView private context</strong>, so cookies, cache and storage are isolated from your normal session and discarded when the tab group closes. Bundled extensions are allowed in private browsing by design (they run locally and send nothing out).</p>
+
+      <h2>The Fire Button</h2>
+      <p>The flame on your toolbar is a one-tap panic button. It:</p>
+      <ul>
+        <li>Closes all open tabs</li>
+        <li>Clears cookies and site data</li>
+        <li>Empties the cache</li>
+        <li>Wipes browsing history</li>
+      </ul>
+      <p>It’s implemented in <code>privacy/FireButton.kt</code> and is intentionally irreversible — that’s the point.</p>
+
+      <h2>Tor</h2>
+      <p>Omni includes a Tor client (<code>privacy/TorManager.kt</code>) that routes your traffic through the Tor network. It supports:</p>
+      <ul>
+        <li>Bootstrap progress with live status</li>
+        <li>Bridges and Snowflake for censored networks</li>
+        <li><code>.onion</code> addresses</li>
+      </ul>
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Tor is slower by design</span>
+          <p>Expect higher latency. Tor is for when anonymity matters more than speed — combine it with the ad blocker for the cleanest experience.</p>
+        </div>
+      </div>
+
+      <h2>WireGuard VPN</h2>
+      <p>Omni can run a <strong>WireGuard tunnel</strong> (<code>privacy/VpnManager.kt</code>) using the official WireGuard Android library. Import a <code>.conf</code> file from any WireGuard provider and all browser traffic flows through the tunnel.</p>
+      <ol class="steps">
+        <li><h3>Get a config</h3><p>Export a <code>.conf</code> from your VPN provider or self-hosted WireGuard server.</p></li>
+        <li><h3>Import it</h3><p>Settings → Privacy &amp; security → VPN → Import config.</p></li>
+        <li><h3>Connect</h3><p>Toggle the tunnel on. A key icon appears in the toolbar while active.</p></li>
+      </ol>
+
+      <h2>The encrypted vault</h2>
+      <p>The vault (<code>tools/locker/</code>) is a biometric- and PIN-protected space for sensitive pages, images and notes. Under the hood:</p>
+      <ul>
+        <li><strong>SQLCipher</strong> encrypts the Room database (AES-256).</li>
+        <li><strong>AndroidX security-crypto</strong> <code>EncryptedFile</code> stores vault files with AES-256-GCM, keys in the hardware-backed Keystore.</li>
+        <li>Nothing is ever written to disk in plaintext.</li>
+      </ul>
+      <p>When you download an image or save a page as PDF, Omni offers “Save to Private Vault” alongside the normal download.</p>
+
+      <h2>Other protections</h2>
+      <ul>
+        <li><strong>HTTPS enforcement</strong> — upgrades to HTTPS where possible.</li>
+        <li><strong>Site permissions</strong> — per-site control of camera, mic, location and notifications.</li>
+        <li><strong>No cleartext traffic</strong> — the app refuses plaintext HTTP for its own requests.</li>
+        <li><strong>No telemetry</strong> — no analytics SDKs, no Firebase, no crash reporting to a server.</li>
+      </ul>
+
+      <h2>Configure for your threat model</h2>
+      <div class="card-grid">
+        <a class="card" href="../guides/privacy-settings.html"><span class="card__icon">🎚️</span><span class="card__title">Privacy settings guide <span class="arrow">→</span></span><span class="card__desc">Step-by-step hardening for your use case.</span></a>
+        <a class="card" href="../resources/security.html"><span class="card__icon">🔐</span><span class="card__title">Security policy <span class="arrow">→</span></span><span class="card__desc">Supported versions and vulnerability disclosure.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

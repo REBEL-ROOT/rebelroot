@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contributing — Omni Browser Docs</title>
+  <meta name="description" content="How to contribute to Omni Browser: dev environment setup, code style for Kotlin/Compose/GeckoView, and the pull request process.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/resources/contributing.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Contributing — Omni Browser">
+  <meta property="og:description" content="Help build the browser.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/resources/contributing.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="resources/contributing" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Contributing</h1>
+      <p class="lead">Omni is built in the open and welcomes contributions — code, translations, bug reports and docs. Here’s how to get set up and get your change merged.</p>
+
+      <h2>Ways to contribute</h2>
+      <div class="card-grid">
+        <div class="card"><span class="card__icon">🐛</span><span class="card__title">Report bugs</span><span class="card__desc">A precise issue is worth a thousand vague ones. Use the bug template.</span></div>
+        <div class="card"><span class="card__icon">💻</span><span class="card__title">Write code</span><span class="card__desc">Kotlin + Compose. Pick an issue labelled <code>good first issue</code>.</span></div>
+        <div class="card"><span class="card__icon">🌍</span><span class="card__title">Translate</span><span class="card__desc">Nine locales are bundled; help us add or improve more.</span></div>
+        <div class="card"><span class="card__icon">📚</span><span class="card__title">Improve docs</span><span class="card__desc">This site lives in the website repo — every page has an “Edit” link.</span></div>
+      </div>
+
+      <h2>Development environment</h2>
+      <ol class="steps">
+        <li><h3>Install the toolchain</h3><p>Android Studio Ladybug+, JDK 17, and an API 26+ device or emulator.</p></li>
+        <li><h3>Fork &amp; clone</h3><pre><code class="language-bash" data-file="terminal">git clone https://github.com/YOUR-USER/omni-browser.git
+cd omni-browser</code></pre></li>
+        <li><h3>Sync and run</h3><p>Open in Android Studio, let Gradle sync, then run <code>:app:installUniversalDebug</code>.</p></li>
+        <li><h3>Branch</h3><p>Create a feature branch off <code>main</code>.</p></li>
+      </ol>
+
+      <h2>Code style</h2>
+      <p>Follow the conventions already in the codebase. The highlights:</p>
+      <ul>
+        <li><strong>Kotlin</strong> — idiomatic, prefer <code>val</code>, use extension functions to split large classes (see the <code>BrowserViewModel_*.kt</code> pattern).</li>
+        <li><strong>Compose</strong> — keep composables stateless where possible; hoist state into the ViewModel.</li>
+        <li><strong>GeckoView interop</strong> — treat <code>GeckoSession</code> as a live handle; never serialize it. Run engine work through the shared runtime.</li>
+        <li><strong>Strings</strong> — all user-facing text goes in <code>strings.xml</code>, never hardcoded.</li>
+        <li><strong>NDK</strong> — native libraries must be 16 KB page-aligned.</li>
+      </ul>
+      <pre><code class="language-kotlin" data-file="Example.kt" data-highlight="3">// Prefer: small, focused extension files by concern
+// BrowserViewModel_Downloads.kt
+fun BrowserViewModel.startDownload(url: String, toVault: Boolean) {
+    viewModelScope.launch {
+        val request = DownloadRequest(url, destination = if (toVault) Vault else Public)
+        downloadRepository.enqueue(request)
+    }
+}</code></pre>
+
+      <h2>Pull request process</h2>
+      <ol class="steps">
+        <li><h3>Open a PR against <code>main</code></h3><p>Use the PR template. Link the issue you’re fixing.</p></li>
+        <li><h3>CI must pass</h3><p><code>pr_check.yml</code> builds and lints your branch.</p></li>
+        <li><h3>Review</h3><p>A maintainer reviews for correctness, style and privacy impact. Privacy regressions are a hard no.</p></li>
+        <li><h3>Merge</h3><p>Squash-merged with a conventional-commit message.</p></li>
+      </ol>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Privacy is a design constraint</span>
+          <p>Any change that adds a network call, dependency or permission needs explicit justification. We will ask you to remove telemetry, analytics and non-FOSS dependencies.</p>
+        </div>
+      </div>
+
+      <h2>Licensing your contribution</h2>
+      <p>Contributions are made under the project’s <strong>GPLv3</strong> license. By submitting a PR you agree your code can be distributed under those terms. Remember the trademark rules if you’re building a derivative you plan to publish — see <a href="license.html">License</a>.</p>
+
+      <h2>Related</h2>
+      <div class="card-grid">
+        <a class="card" href="../developer/build-system.html"><span class="card__icon">🏗️</span><span class="card__title">Build system <span class="arrow">→</span></span><span class="card__desc">Flavors, signing and CI.</span></a>
+        <a class="card" href="../developer/code-structure.html"><span class="card__icon">🗂️</span><span class="card__title">Code structure <span class="arrow">→</span></span><span class="card__desc">Find your way around the source.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

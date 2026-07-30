@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeckoView Engine — Omni Browser Docs</title>
+  <meta name="description" content="How Omni Browser uses Mozilla GeckoView: the GeckoRuntime singleton, GeckoSession lifecycle, private browsing and WebExtension interop.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/developer/geckoview.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="GeckoView Engine — Omni Browser">
+  <meta property="og:description" content="The real Firefox engine, embedded.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/developer/geckoview.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="developer/geckoview" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>GeckoView Engine</h1>
+      <p class="lead">Omni renders the web with <strong>Mozilla GeckoView v145</strong> — the same engine that powers Firefox. This page covers how the runtime is managed and how the app talks to it.</p>
+
+      <h2>Why GeckoView, not WebView</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>GeckoView</th><th>Android WebView</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Engine version</strong></td><td>Bundled &amp; pinned (v145)</td><td>Whatever the OS ships</td></tr>
+            <tr><td><strong>WebExtensions</strong></td><td><span class="yes">✓ Full</span></td><td><span class="no">✗</span></td></tr>
+            <tr><td><strong>Private context</strong></td><td><span class="yes">✓ Real isolation</span></td><td><span class="partial">Limited</span></td></tr>
+            <tr><td><strong>Modern web platform</strong></td><td><span class="yes">✓</span></td><td><span class="partial">Varies by OEM</span></td></tr>
+            <tr><td><strong>APK cost</strong></td><td>Larger (~tens of MB)</td><td>~0 (system)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The trade-off is APK size, which Omni manages with per-ABI splits (see <a href="build-system.html">Build System</a>).</p>
+
+      <h2>The runtime singleton</h2>
+      <p>A <code>GeckoRuntime</code> is expensive — it boots the whole engine. Omni creates exactly one, lazily, and shares it across every tab:</p>
+      <pre><code class="language-kotlin" data-file="BrowserViewModel.kt" data-highlight="6-9">private var geckoRuntime: GeckoRuntime? = null
+
+fun getGeckoRuntime(context: Context): GeckoRuntime {
+    return geckoRuntime ?: run {
+        val settings = GeckoRuntimeSettings.Builder()
+            .consoleOutput(true)          // feed the dev console
+            .extensionsProcess(true)      // isolate extension code
+            .build()
+        GeckoRuntime.getDefault(context, settings).also {
+            geckoRuntime = it
+            installBuiltInExtensions(it)  // register bundled .xpi
+        }
+    }
+}</code></pre>
+
+      <h2>Sessions and tabs</h2>
+      <p>Each tab owns a <code>GeckoSession</code>. Sessions are configured per tab — most importantly the <strong>private-browsing context</strong>:</p>
+      <pre><code class="language-kotlin" data-file="TabFactory.kt">fun createSession(isPrivate: Boolean): GeckoSession {
+    val settings = GeckoSessionSettings.Builder()
+        .usePrivateMode(isPrivate)        // isolated cookie jar + no disk cache
+        .useTrackingProtection(
+            if (isPrivate) GeckoSessionSettings.TRACKING_PROTECTION_DEFAULT
+            else GeckoSessionSettings.TRACKING_PROTECTION_NONE
+        )
+        .build()
+    return GeckoSession(settings)
+}</code></pre>
+      <p>Private sessions get a fully isolated context: cookies, cache and storage are in-memory only and vanish when the session closes.</p>
+
+      <h2>Delegates</h2>
+      <p>GeckoView communicates through <em>delegates</em> — interfaces the app implements and attaches to a session. Omni wires up (among others):</p>
+      <ul>
+        <li><code>NavigationDelegate</code> — URL loads, redirects, and <code>onNewSession</code> for popup blocking.</li>
+        <li><code>ContentDelegate</code> — title, meta, fullscreen requests.</li>
+        <li><code>ProgressDelegate</code> — page load progress for the toolbar.</li>
+        <li><code>PermissionDelegate</code> — camera/mic/location prompts.</li>
+        <li><code>SessionFinder</code> — find-in-page.</li>
+      </ul>
+
+      <h2>Popup blocking at the engine</h2>
+      <p>Rather than closing popups after they appear, Omni rejects them at creation. <code>NavigationDelegate.onNewSession</code> inspects the opener and returns <code>null</code> for unwanted popups, so the window never renders.</p>
+
+      <h2>WebExtension interop</h2>
+      <p>Extensions register on the shared runtime via <code>webExtensionController</code>. Bundled extensions use <strong>native messaging</strong> (<code>omniApp</code>) to push data to Kotlin — this is how the Media Grabber reports stream URLs to <code>MediaInterceptor</code>.</p>
+      <pre><code class="language-kotlin" data-file="NativeMessaging.kt">// Receive a message from an extension's content script
+runtime.webExtensionController.setNativeMessagingDelegate(
+    "omniApp",
+    object : WebExtension.MessageDelegate {
+        override fun onMessage(msg: Any, sender: WebExtension.MessageSender): GeckoResult&lt;Any&gt; {
+            handleStreamCandidate(msg as Map&lt;*, *&gt;)
+            return GeckoResult.fromValue(null)
+        }
+    }
+)</code></pre>
+
+      <h2>Error handling</h2>
+      <p>When a page fails to load, Omni shows a native <code>GeckoErrorScreen</code> (defined in <code>MainActivity</code>) with retry and offline-cache options instead of the engine’s default error page.</p>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Version pinning</span>
+          <p>GeckoView is pinned to <code>145.0.20251124145406</code> from Mozilla’s content-filtered Maven repo. Engine upgrades are a deliberate, tested step — never a floating dependency.</p>
+        </div>
+      </div>
+
+      <h2>Related</h2>
+      <div class="card-grid">
+        <a class="card" href="architecture.html"><span class="card__icon">🏛️</span><span class="card__title">Architecture <span class="arrow">→</span></span><span class="card__desc">Where the engine sits in the app.</span></a>
+        <a class="card" href="../api/browser-engine.html"><span class="card__icon">🔌</span><span class="card__title">Browser Engine API <span class="arrow">→</span></span><span class="card__desc">Runtime and session reference.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

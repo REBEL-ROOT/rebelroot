@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Omni Browser Docs</title>
+  <meta name="description" content="Frequently asked questions about Omni Browser: privacy, extensions, media, licensing and more.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/resources/faq.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FAQ — Omni Browser">
+  <meta property="og:description" content="Answers to the most common questions.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/resources/faq.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="resources/faq" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>FAQ</h1>
+      <p class="lead">The questions we hear most, answered. Can’t find yours? Open a discussion on GitHub.</p>
+
+      <h2>General</h2>
+      <div class="accordion">
+        <div class="accordion-item open">
+          <button class="accordion-trigger" aria-expanded="true">What is Omni Browser?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel" style="max-height:400px"><div class="accordion-panel__inner">
+            <p>Omni is a free, open-source Android browser built on Mozilla’s GeckoView engine (the one in Firefox) with a 100% native Jetpack Compose interface. It combines strong privacy defaults — ad/tracker blocking, Tor, a WireGuard VPN, an encrypted vault — with power tools like a stream sniffer, native video player and Firefox extension support.</p>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Is Omni really open source?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>Yes. The app is licensed <strong>GPLv3</strong> and the full source is on GitHub. Note that the <em>names</em> “Omni Browser” and “RebelRoot” are trademarks — if you fork and distribute, you must rebrand (see the trademark policy).</p>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Does Omni collect any data?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>No. There are no analytics SDKs, no crash reporters, no accounts and no telemetry. Your history, bookmarks and vault never leave your device. The only network calls Omni makes are the ones <em>you</em> initiate (loading pages, updating filter lists, downloading FFmpeg on demand).</p>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Is it stable enough for daily use?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>Omni is marked <strong>experimental</strong>. It’s actively developed and many people use it daily, but expect rough edges and breaking changes between releases. Keep your important data backed up and report issues.</p>
+          </div></div>
+        </div>
+      </div>
+
+      <h2>Features</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Does it support Firefox WebExtensions?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>Yes — real <code>.xpi</code> add-ons from addons.mozilla.org, because Omni runs the actual Gecko engine. Three are bundled: Media Grabber, AI Blocker and Universal Copy. See <a href="../features/extensions.html">Extensions</a>.</p>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">How does the stream sniffer work?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>Two cooperating paths: the Media Grabber extension watches network requests and MSE/blob playback, and the native <code>MediaInterceptor</code> looks for HLS/DASH manifests. Detected streams can be played in the native player or downloaded. See <a href="../features/media-hub.html">Media Hub</a>.</p>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Is translation offline?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>Not currently. Earlier builds used on-device ML Kit, but that was removed for FOSS compliance. Translation now uses a free online endpoint, so translated text leaves your device. Don’t translate sensitive content.</p>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">What’s in the encrypted vault?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>The vault stores sensitive pages, images and notes behind biometric/PIN. The database is encrypted with SQLCipher (AES-256) and files with AES-256-GCM via the Android Keystore. See <a href="../features/privacy.html#the-encrypted-vault">Privacy &amp; Security</a>.</p>
+          </div></div>
+        </div>
+      </div>
+
+      <h2>Licensing &amp; distribution</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Can I fork Omni and publish my own version?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>The code is GPLv3, so yes — but you must <strong>rename and rebrand</strong>. “Omni Browser” and “RebelRoot” are trademarks, and GPLv3 §7(b) requires attribution (repo link, in-app credit, preserved copyright headers). Read <a href="license.html">License</a>.</p>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">Where do I download it?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="accordion-panel"><div class="accordion-panel__inner">
+            <p>Only from the official GitHub Releases or F-Droid. Avoid third-party APK mirrors. See <a href="../getting-started/installation.html">Installation</a>.</p>
+          </div></div>
+        </div>
+      </div>
+
+      <h2>Still stuck?</h2>
+      <div class="card-grid">
+        <a class="card" href="troubleshooting.html"><span class="card__icon">🔧</span><span class="card__title">Troubleshooting <span class="arrow">→</span></span><span class="card__desc">Fix common problems.</span></a>
+        <a class="card" href="contributing.html"><span class="card__icon">🤝</span><span class="card__title">Contributing <span class="arrow">→</span></span><span class="card__desc">Ask questions and get involved.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

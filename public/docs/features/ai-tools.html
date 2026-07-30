@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tools — Omni Browser Docs</title>
+  <meta name="description" content="The Omni AI Blocker that hides AI overviews on search engines, plus translation and on-device assistance.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/features/ai-tools.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Tools — Omni Browser">
+  <meta property="og:description" content="Take back your search results.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/features/ai-tools.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="features/ai-tools" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>AI Tools</h1>
+      <p class="lead">Omni’s AI story is simple: give you control over where AI shows up. The headline tool is the <strong>AI Blocker</strong>, which strips AI-generated overviews out of your search results.</p>
+
+      <h2>The AI Blocker</h2>
+      <p>Search engines now inject large AI-generated answer blocks above organic results. If you’d rather see the actual web, the bundled <strong>Omni AI Blocker</strong> extension hides them.</p>
+      <p>It works with a content script plus an <code>override.css</code> stylesheet, targeting the AI overview containers on:</p>
+      <ul>
+        <li>Google</li>
+        <li>Bing</li>
+        <li>DuckDuckGo</li>
+        <li>Brave Search</li>
+        <li>Yahoo</li>
+        <li>…and other engines as they add AI blocks</li>
+      </ul>
+
+      <h3>Toggle it</h3>
+      <p>The AI Blocker is on by default. Control it from:</p>
+      <ul>
+        <li><strong>Quick Tools → AI Blocker</strong> for a one-tap toggle.</li>
+        <li><strong>Extensions panel</strong> to disable it entirely.</li>
+        <li>The keyboard shortcut <kbd>Ctrl</kbd> <kbd>B</kbd> (with an external keyboard).</li>
+      </ul>
+
+      <div class="callout callout--note">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">It’s local, not a filter service</span>
+          <p>The blocker runs entirely on your device as a content script. Nothing about your searches is sent anywhere — there is no server involved.</p>
+        </div>
+      </div>
+
+      <h2>How it works under the hood</h2>
+      <p>The extension is a Manifest V2 WebExtension with two moving parts:</p>
+      <pre><code class="language-json" data-file="ai_blocker/manifest.json">{
+  "manifest_version": 2,
+  "name": "Omni AI Blocker",
+  "version": "1.1.0",
+  "content_scripts": [
+    {
+      "matches": ["*://*.google.com/*", "*://*.bing.com/*", "*://duckduckgo.com/*"],
+      "css": ["override.css"],
+      "js": ["background.js"],
+      "run_at": "document_start"
+    }
+  ]
+}</code></pre>
+      <p><code>override.css</code> hides the known AI-overview selectors immediately, and <code>background.js</code> watches for dynamically injected blocks so they’re removed even on single-page search UIs.</p>
+
+      <h2>Translation</h2>
+      <p>Omni also includes a <strong>translator</strong> (<code>tools/TranslationManager.kt</code>) for pages and selected text across many languages. Select any text and choose <strong>Translate</strong> from the selection menu.</p>
+      <div class="callout callout--warning">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Translation is currently online</span>
+          <p>Earlier builds used on-device ML Kit translation; that was removed for FOSS compliance. Translation now uses a free online endpoint, so translated text leaves your device. Don’t translate sensitive content.</p>
+        </div>
+      </div>
+
+      <h2>Speak Aloud</h2>
+      <p>The selection menu also offers <strong>Speak Aloud</strong>, which reads selected text using the system text-to-speech engine — handy for accessibility and long-form reading.</p>
+
+      <h2>The philosophy</h2>
+      <p>Omni deliberately keeps AI <em>optional and local</em>. There is no always-on assistant listening to your browsing, no cloud profile being built from your queries. The AI that is present exists to be turned <strong>off</strong> — and the rest runs on your terms.</p>
+
+      <h2>Guides</h2>
+      <div class="card-grid">
+        <a class="card" href="../guides/ai-features.html"><span class="card__icon">🤖</span><span class="card__title">AI features guide <span class="arrow">→</span></span><span class="card__desc">Tune the blocker and translation to taste.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>

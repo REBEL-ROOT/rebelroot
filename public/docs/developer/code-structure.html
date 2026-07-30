@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Structure — Omni Browser Docs</title>
+  <meta name="description" content="A tour of the Omni Browser source tree: the com.rebelroot.omni package layout, key files and where things live.">
+  <link rel="canonical" href="https://www.rebelroot.xyz/docs/developer/code-structure.html">
+  <meta name="theme-color" content="#0B0F19">
+  <link rel="icon" type="image/png" href="../../favicon-32x32.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Code Structure — Omni Browser">
+  <meta property="og:description" content="Where everything lives in the source tree.">
+  <meta property="og:url" content="https://www.rebelroot.xyz/docs/developer/code-structure.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main id="content" data-nav="developer/code-structure" data-updated="Jul 2026">
+    <article class="prose">
+      <h1>Code Structure</h1>
+      <p class="lead">Omni is a single Gradle module (<code>:app</code>) with one package root, <code>com.rebelroot.omni</code>, organized into feature sub-packages. Here’s the map.</p>
+
+      <h2>Repository layout</h2>
+      <pre><code class="language-bash" data-file="repository">omni-browser/
+├── app/                        # the single Android module
+│   ├── build.gradle.kts        # flavors, deps, signing
+│   └── src/main/
+│       ├── AndroidManifest.xml
+│       ├── assets/web_extensions/   # 3 bundled .xpi sources
+│       ├── java/com/rebelroot/omni/ # ~75 Kotlin files
+│       └── res/                     # values + 9 locales
+├── docs/                       # ARCHITECTURE.md, SECURITY.md
+├── worker/                     # Cloudflare Workers backend
+├── fastlane/                   # store metadata
+└── .github/workflows/          # release + PR CI</code></pre>
+
+      <h2>Package map</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Package</th><th>Contents</th></tr></thead>
+          <tbody>
+            <tr><td><code>(root)</code></td><td><code>MainActivity</code> (single activity + NavHost), <code>OmniApplication</code> (theme bootstrap)</td></tr>
+            <tr><td><code>browser/</code></td><td><code>BrowserScreen</code> (7.3k lines), <code>BrowserViewModel</code> + 8 split files, sheets, dialogs, address bar, home content, models</td></tr>
+            <tr><td><code>browser/adblock/</code></td><td><code>AdBlockManager</code> — filter engine + providers</td></tr>
+            <tr><td><code>browser/extensions/</code></td><td><code>BuiltInExtensionManager</code>, <code>AiBlockerManager</code>, <code>UniversalCopyManager</code></td></tr>
+            <tr><td><code>browser/tabs/</code></td><td><code>SmartTabManager</code> — domain-based auto-grouping</td></tr>
+            <tr><td><code>media/</code></td><td><code>MediaInterceptor</code>, <code>StreamDownloadEngine</code>, <code>FFmpegBridge</code>, <code>FFmpegLoader</code></td></tr>
+            <tr><td><code>media/player/</code></td><td><code>VideoPlayerScreen</code> (ExoPlayer), <code>OmniMediaService</code></td></tr>
+            <tr><td><code>privacy/</code></td><td><code>FireButton</code>, <code>TorManager</code>, <code>VpnManager</code></td></tr>
+            <tr><td><code>tools/</code></td><td><code>TranslationManager</code>; <code>tools/locker/</code> (vault), <code>tools/qrcode/</code> (ZXing)</td></tr>
+            <tr><td><code>settings/</code></td><td>8 settings screens (appearance, privacy, adblock, tabs, a11y, site, wallpapers)</td></tr>
+            <tr><td><code>onboarding/</code></td><td>Language selection + onboarding slides</td></tr>
+            <tr><td><code>bookmarks/</code>, <code>history/</code>, <code>news/ui/</code></td><td>Standalone screens</td></tr>
+            <tr><td><code>ui/theme/</code></td><td><code>OmniColors</code>, <code>OmniShapes</code>, <code>OmniTheme</code>, <code>OmniTypography</code>, <code>UiScale</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Entry points</h2>
+      <h3>OmniApplication</h3>
+      <p>Loads the persisted theme (dark/AMOLED/accent/dynamic color) from DataStore into <code>ThemeStateHolder</code> before any UI is drawn, so the first frame is already themed.</p>
+
+      <h3>MainActivity</h3>
+      <p>A single <code>FragmentActivity</code> (Fragment is needed for the biometric prompt). It handles:</p>
+      <ul>
+        <li>Per-locale context wrapping in <code>attachBaseContext</code></li>
+        <li>A crash-loop-protected uncaught-exception handler</li>
+        <li>Edge-to-edge insets and PiP support</li>
+        <li>The Compose <code>NavHost</code> with all screen routes</li>
+        <li><code>http</code>/<code>https</code>/<code>WEB_SEARCH</code> intents (default-browser capable) and direct video intents</li>
+      </ul>
+
+      <h2>The big files</h2>
+      <p>Three files carry most of the product surface. If you’re contributing, start here:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>File</th><th>Lines</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><code>browser/BrowserScreen.kt</code></td><td>~7,300</td><td>Main UI: address bar, tab strip, menus, bottom sheets, Quick Tools</td></tr>
+            <tr><td><code>browser/BrowserViewModel.kt</code></td><td>~6,000</td><td>Central state holder and orchestrator</td></tr>
+            <tr><td><code>browser/BrowserSheets.kt</code></td><td>~3,750</td><td>Bottom sheets incl. DevTools inspector and download dialogs</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--tip">
+        <div class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.4 1 2.3h6c0-.9.4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></div>
+        <div class="callout__body">
+          <span class="callout__title">Prefer the split files</span>
+          <p>New ViewModel logic should go into a <code>BrowserViewModel_*.kt</code> extension file by concern, not the main file.</p>
+        </div>
+      </div>
+
+      <h2>Resources &amp; localization</h2>
+      <p>Strings live in <code>res/values/strings.xml</code> (~204 entries) with translations in nine <code>values-*</code> directories: Hindi, Spanish, French, German, Portuguese, Russian, Japanese, Chinese and Arabic. The manifest declares four launcher activity-aliases for alternate app icons (Default, Dark, AuraDark, AuraLight).</p>
+
+      <h2>Related</h2>
+      <div class="card-grid">
+        <a class="card" href="architecture.html"><span class="card__icon">🏛️</span><span class="card__title">Architecture <span class="arrow">→</span></span><span class="card__desc">How the pieces interact.</span></a>
+        <a class="card" href="modules.html"><span class="card__icon">📦</span><span class="card__title">Modules <span class="arrow">→</span></span><span class="card__desc">Feature-module deep dives.</span></a>
+      </div>
+    </article>
+  </main>
+  <script src="../assets/app.js" defer></script>
+</body>
+</html>
