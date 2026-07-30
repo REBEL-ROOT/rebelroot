@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Vercel serves this page at /omnibrowser (no trailing slash) and 308s the
-       slash form back to it, so the browser treats "omnibrowser" as a file and
-       relative asset paths would resolve against the site root and 404. Anchor
-       every relative URL to /omnibrowser/ so CSS/JS/images resolve either way. -->
+       slash form back to it, so relative asset paths must resolve against /omnibrowser/. -->
   <base href="/omnibrowser/">
-  <title>Omni Browser (OmniBrowser) by RebelRoot | Fast & Private Android Web Browser</title>
-  <meta name="description" content="Omni Browser is a fast, privacy-first Android web browser by RebelRoot with built-in uBlock Origin, Firefox WebExtensions, and offline ML translation.">
-  <meta name="keywords" content="Omni Browser, OmniBrowser, omni browser, omnibrowser, OMNI BROWSER, OMNIBROWSER, Omni Browser APK, Omni Browser Android, Omni Browser RebelRoot, RebelRoot Omni Browser, Rebel Root Omni Browser, GeckoView browser, uBlock Origin mobile, mobile webextensions, private browser Android, RebelRoot, Rebel Root, rebelroot, rebel root">
+  <title>Omni Browser (OmniBrowser) by RebelRoot | The browser that thinks before you click</title>
+  <meta name="description" content="Omni Browser is an award-winning, privacy-first Android web browser by RebelRoot with AI search, tab synthesis, Firefox WebExtensions, and uBlock Origin.">
+  <meta name="keywords" content="Omni Browser, OmniBrowser, omni browser, omnibrowser, OMNI BROWSER, OMNIBROWSER, Omni Browser APK, Omni Browser Android, RebelRoot Omni Browser, GeckoView browser, uBlock Origin mobile, mobile webextensions, private browser Android">
   <link rel="canonical" href="https://www.rebelroot.xyz/omnibrowser">
   <meta name="theme-color" content="#050505">
   <link rel="icon" type="image/png" href="/favicon-32x32.png">
@@ -18,10 +16,11 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="RebelRoot">
-  <meta property="og:title" content="Omni Browser (OmniBrowser) by RebelRoot | Fast & Private Android Web Browser">
-  <meta property="og:description" content="Omni Browser is a fast, privacy-first Android web browser by RebelRoot with built-in uBlock Origin, Firefox WebExtensions, and offline ML translation.">
+  <meta property="og:title" content="Omni Browser by RebelRoot | The browser that thinks before you click">
+  <meta property="og:description" content="Search, summarize, compare, and organize the web with AI built directly into your browser. Private by design. Fast by nature.">
   <meta property="og:url" content="https://www.rebelroot.xyz/omnibrowser">
   <meta property="og:image" content="https://www.rebelroot.xyz/ic_omni_logo.webp">
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Omni Browser by RebelRoot">
@@ -31,7 +30,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/styles.css">
 
@@ -41,11 +40,11 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Omni Browser",
-    "alternateName": ["OmniBrowser", "Omni Mobile Browser", "RebelRoot Omni Browser", "Rebel Root Omni Browser", "OMNI BROWSER", "omnibrowser", "omni browser"],
+    "alternateName": ["OmniBrowser", "Omni Mobile Browser", "RebelRoot Omni Browser", "OMNI BROWSER"],
     "operatingSystem": "Android",
     "applicationCategory": "BrowserApplication",
     "offers": { "@type": "Offer", "price": "0.00", "priceCurrency": "USD" },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1200" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "1420" },
     "url": "https://www.rebelroot.xyz/omnibrowser",
     "downloadUrl": "https://github.com/REBEL-ROOT/omni-browser/releases"
   }
@@ -71,22 +70,22 @@
       {
         "@type": "Question",
         "name": "What is Omni Browser (OmniBrowser) by RebelRoot?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser (also known as OmniBrowser or Rebel Root Omni Browser) is a fast, privacy-first mobile web browser for Android developed by RebelRoot. Built on Mozilla GeckoView, it provides desktop-grade WebExtensions, built-in uBlock Origin ad blocking, hardware-encrypted vaults, and offline translation." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser is an intelligent, privacy-first mobile web browser for Android developed by RebelRoot. Built on Mozilla GeckoView 145, it features AI-powered search synthesis, tab aggregation, Firefox WebExtensions support, and uBlock Origin ad blocking." }
       },
       {
         "@type": "Question",
         "name": "Does Omni Browser support desktop Firefox WebExtensions?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, Omni Browser includes full Mozilla WebExtension controller integration, allowing users to directly install and run Firefox .xpi add-ons like uBlock Origin, Dark Reader, and Violentmonkey on Android." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, Omni Browser includes full WebExtension controller integration, allowing users to directly install and run Firefox .xpi add-ons on Android." }
       },
       {
         "@type": "Question",
         "name": "How does Omni Browser protect user data and privacy?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser operates with zero telemetry, includes a one-tap session incineration 'Burn' button to purge history and cookies, isolates private browsing sessions, and features an AES-256 encrypted hardware Safe Locker vault for private downloads." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Omni Browser operates with zero telemetry, zero background tracking, local-first search processing, hardware-backed AES-256 Safe Locker vaults, and one-tap session incineration." }
       },
       {
         "@type": "Question",
         "name": "Is Omni Browser free and open source?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, Omni Browser is 100% free software released under the GPLv3 license without ads, paywalls, or data tracking." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, Omni Browser is 100% free open-source software released under the GPLv3 license." }
       }
     ]
   }
@@ -95,265 +94,591 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="grain" aria-hidden="true"></div>
-  <canvas class="aurora-canvas" aria-hidden="true"></canvas>
+  <div class="ambient-glow" aria-hidden="true"></div>
 
   <!-- Navigation -->
   <nav class="nav" aria-label="Main navigation">
     <a class="nav__brand" href="/">
-      <span class="nav__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><path d="M12 3v18"/></svg></span>
-      Omni Browser
+      <div class="nav__logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 3a9 9 0 0 1 9 9M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+        </svg>
+      </div>
+      <span class="nav__title">Omni<span class="nav__title-dim">Browser</span></span>
     </a>
-    <div class="nav__links">
-      <a class="nav__link" href="/docs/">Docs</a>
-      <a class="nav__link" href="https://github.com/REBEL-ROOT/omni-browser" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;vertical-align:-2px"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+    
+    <div class="nav__center">
+      <a class="nav__link" href="#story">Living Intelligence</a>
+      <a class="nav__link" href="#features">Capabilities</a>
+      <a class="nav__link" href="#compare">Compare</a>
+      <a class="nav__link" href="#faq">FAQ</a>
+    </div>
+
+    <div class="nav__actions">
+      <a class="nav__gh" href="https://github.com/REBEL-ROOT/omni-browser" target="_blank" rel="noopener" aria-label="GitHub Repository">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
         <span class="nav__stars" data-stars>—</span>
       </a>
-      <a class="nav__link nav__link--cta" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">Download</a>
+      <a class="btn btn--nav" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
+        <span>Download APK</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v9.5M4 8.5l4 4 4-4"/></svg>
+      </a>
     </div>
   </nav>
 
   <main id="main">
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero" aria-label="Hero">
-      <div class="hero__eyebrow"><span class="dot"></span> OPEN SOURCE · GECKOVIEW 145 · GPLv3</div>
-      <h1>The browser that thinks before you click.</h1>
-      <p class="hero__sub">Search, summarize, compare, and organize the web with AI built directly into your browser. Private by design. Fast by nature.</p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
+      <div class="hero__badge">
+        <span class="badge__pulse"></span>
+        <span class="badge__text">OPEN SOURCE · GECKOVIEW 145 · GPLv3</span>
+      </div>
+
+      <h1 class="hero__headline">
+        The browser that thinks <br><span class="hero__headline-glow">before you click.</span>
+      </h1>
+
+      <p class="hero__subhead">
+        Search, summarize, compare, and organize the web with AI built directly into your browser. Private by design. Fast by nature.
+      </p>
+
+      <div class="hero__cta-group">
+        <a class="btn btn--primary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Download for Android
+          <span>Download for Android</span>
         </a>
-        <a class="btn btn--secondary" href="#story">
+        <a class="btn btn--secondary btn--hero" href="#story">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Watch Demo
+          <span>Watch Story</span>
         </a>
       </div>
-      <div class="phone" data-tilt>
-        <div class="phone__notch"></div>
-        <div class="phone__screen">
-          <img src="../omni/home.png" alt="Omni Browser home screen" loading="eager">
+
+      <!-- Hero Phone Frame -->
+      <div class="hero__phone-wrap" data-tilt>
+        <div class="phone-frame">
+          <div class="phone-frame__speaker"></div>
+          <div class="phone-frame__camera"></div>
+          <div class="phone-screen">
+            <!-- Simulated Live UI -->
+            <div class="ui-header">
+              <div class="ui-time">09:41</div>
+              <div class="ui-icons">
+                <svg viewBox="0 0 16 16" fill="currentColor" width="12"><path d="M1 11h2v3H1zM4 9h2v5H4zM7 6h2v8H7zM10 3h2v11h-2zM13 1h2v13h-2z"/></svg>
+                <svg viewBox="0 0 16 16" fill="currentColor" width="12"><path d="M12 3.5a2.5 2.5 0 012.5 2.5v4a2.5 2.5 0 01-2.5 2.5H4A2.5 2.5 0 011.5 10V6A2.5 2.5 0 014 3.5h8zM15 6.5h1v3h-1z"/></svg>
+              </div>
+            </div>
+            
+            <div class="ui-content">
+              <div class="ui-omni-bar">
+                <div class="ui-sparkle">✦</div>
+                <div class="ui-prompt">Ask Omni: "Synthesize latest quantum battery breakthroughs..."</div>
+              </div>
+
+              <div class="ui-card ui-card--main">
+                <div class="ui-card__tag">LIVING INTELLIGENCE</div>
+                <div class="ui-card__title">3 Key Breakthroughs Analyzed</div>
+                <div class="ui-card__text">Solid-state battery cost lowered by 34% with lithium-iron phosphate matrices. Charging times reduced to 6 minutes.</div>
+                <div class="ui-sources">
+                  <span class="ui-pill">nature.com</span>
+                  <span class="ui-pill">arxiv.org</span>
+                  <span class="ui-pill">mit.edu</span>
+                </div>
+              </div>
+
+              <div class="ui-grid-mini">
+                <div class="ui-mini-box">
+                  <div class="ui-mini-box__label">Tab Count</div>
+                  <div class="ui-mini-box__val">14 Synthesized</div>
+                </div>
+                <div class="ui-mini-box">
+                  <div class="ui-mini-box__label">Privacy</div>
+                  <div class="ui-mini-box__val">182 Trackers Blocked</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hero__scroll" aria-hidden="true">
+
+      <div class="hero__scroll-indicator">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-        Scroll to explore
+        <span>Scroll to experience Living Intelligence</span>
       </div>
     </section>
 
-    <!-- Pinned Scroll Story -->
+    <!-- Signature Scroll Story -->
     <section class="story" id="story" aria-label="Product story">
       <div class="story__pin">
-        <div class="story__phone">
-          <div class="story__phone-notch"></div>
-          <div class="story__screen">
-            <!-- Ch1: Search → conversation -->
-            <div class="screen-layer" data-screen="0">
-              <div class="s-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Ask Omni anything…</div>
-              <div class="s-card"><div class="s-card__title">AI Answer</div><div class="s-card__text">Quantum batteries use quantum entanglement to charge faster than classical batteries. Recent research shows 3× speed improvements.</div></div>
-              <div class="s-card"><div class="s-card__title">Sources</div><div class="s-card__text">nature.com · arxiv.org · techcrunch.com</div></div>
-            </div>
-            <!-- Ch2: Browse for Me -->
-            <div class="screen-layer" data-screen="1">
-              <div class="s-tabs"><span class="s-tab active">Summary</span><span class="s-tab">Tab 1</span><span class="s-tab">Tab 2</span><span class="s-tab">Tab 3</span></div>
-              <div class="s-card"><div class="s-card__title">Synthesized from 3 tabs</div><div class="s-card__text">All three articles agree: solid-state batteries will reach mass production by 2028. Key differences are in electrolyte materials and cost projections.</div></div>
-              <div class="s-card"><div class="s-card__text">Key takeaways extracted and compared automatically.</div></div>
-            </div>
-            <!-- Ch3: Compare -->
-            <div class="screen-layer" data-screen="2">
-              <div class="s-bar" style="font-size:0.6rem">Comparing: Product A vs Product B</div>
-              <div class="s-split">
-                <div class="s-split__pane"><strong style="color:var(--text)">Product A</strong><br>Price: $299<br>Battery: 5000mAh<br><span class="hl">✓ Better camera</span></div>
-                <div class="s-split__pane"><strong style="color:var(--text)">Product B</strong><br>Price: $249<br>Battery: 6000mAh<br><span class="hl">✓ Better battery</span></div>
+        <div class="story__viewport">
+          <!-- Left Column: Morphing Screen Frame -->
+          <div class="story__mockup-col">
+            <div class="phone-frame phone-frame--story">
+              <div class="phone-frame__speaker"></div>
+              <div class="phone-frame__camera"></div>
+              <div class="phone-screen">
+                <div class="ui-header">
+                  <div class="ui-time">09:41</div>
+                  <div class="ui-icons">
+                    <span class="ui-badge-live">OMNI OS</span>
+                  </div>
+                </div>
+
+                <div class="morph-container">
+                  <!-- Chapter 1: Search -->
+                  <div class="story-screen screen-ch1 active" data-chapter="0">
+                    <div class="ch-search-bar">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                      <span>Ask Omni what you need...</span>
+                    </div>
+                    <div class="ch-card ch-card--ai">
+                      <div class="ch-ai-head">
+                        <span class="ch-ai-sparkle">✦</span>
+                        <span>AI Answer Engine</span>
+                      </div>
+                      <p class="ch-ai-body">Quantum entanglement charging achieves 3x higher capacity efficiency without thermal degradation in standard lithium-ion architectures.</p>
+                      <div class="ch-sources">
+                        <span class="ch-source-pill">nature.com</span>
+                        <span class="ch-source-pill">arxiv.org</span>
+                        <span class="ch-source-pill">techcrunch.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Chapter 2: Browse for Me -->
+                  <div class="story-screen screen-ch2" data-chapter="1">
+                    <div class="ch-tabs-bar">
+                      <span class="ch-tab active">Synthesized</span>
+                      <span class="ch-tab">Nature Paper</span>
+                      <span class="ch-tab">ArXiv Draft</span>
+                      <span class="ch-tab">TechCrunch</span>
+                    </div>
+                    <div class="ch-scan-line"></div>
+                    <div class="ch-card">
+                      <div class="ch-card__label">Synthesized from 4 open tabs</div>
+                      <div class="ch-card__title">Solid-State Production Timeline</div>
+                      <p class="ch-card__body">All sources agree: mass commercialization is projected for 2028. Primary bottleneck remains electrolyte membrane scalability.</p>
+                    </div>
+                  </div>
+
+                  <!-- Chapter 3: Compare Everything -->
+                  <div class="story-screen screen-ch3" data-chapter="2">
+                    <div class="ch-split-header">
+                      <span>SPLIT COMPARISON</span>
+                    </div>
+                    <div class="ch-split-grid">
+                      <div class="ch-split-col">
+                        <div class="ch-col-title">Solid-State</div>
+                        <div class="ch-col-spec">$290 / kWh</div>
+                        <div class="ch-col-spec ch-highlight">✓ High Safety</div>
+                      </div>
+                      <div class="ch-split-col">
+                        <div class="ch-col-title">Quantum Entangled</div>
+                        <div class="ch-col-spec">$180 / kWh</div>
+                        <div class="ch-col-spec ch-highlight">✓ 3x Charge Speed</div>
+                      </div>
+                    </div>
+                    <div class="ch-verdict-box">
+                      <span class="ch-verdict-tag">AI Verdict</span>
+                      <span>Quantum entangled leads on charge density; solid-state leads on durability.</span>
+                    </div>
+                  </div>
+
+                  <!-- Chapter 4: Remember Everything -->
+                  <div class="story-screen screen-ch4" data-chapter="3">
+                    <div class="ch-query-bar">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                      <span>"that article about quantum batteries"</span>
+                    </div>
+                    <div class="ch-timeline">
+                      <div class="ch-tl-item">
+                        <div class="ch-tl-dot"></div>
+                        <div class="ch-tl-content">
+                          <div class="ch-tl-title">Nature Physics — Quantum Entanglement</div>
+                          <div class="ch-tl-meta">Visited 3 days ago · 98% semantic match</div>
+                        </div>
+                      </div>
+                      <div class="ch-tl-item">
+                        <div class="ch-tl-dot"></div>
+                        <div class="ch-tl-content">
+                          <div class="ch-tl-title">ArXiv pre-print #2026.089</div>
+                          <div class="ch-tl-meta">Visited 1 week ago · 91% semantic match</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Chapter 5: Private by Design -->
+                  <div class="story-screen screen-ch5" data-chapter="4">
+                    <div class="ch-mono-shield">
+                      <div class="ch-shield-ring"></div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+                      <div class="ch-mono-title">PRIVACY SHIELD ACTIVE</div>
+                      <div class="ch-mono-stats">0 Trackers · 0 Cookies · Encrypted Vault</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="s-card"><div class="s-card__text">AI verdict: Product B wins on value. Product A wins on photography.</div></div>
-            </div>
-            <!-- Ch4: Memory -->
-            <div class="screen-layer" data-screen="3">
-              <div class="s-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> "that article about quantum batteries"</div>
-              <div class="s-timeline">
-                <div class="s-timeline__item"><span class="s-timeline__dot"></span> Nature — Quantum battery breakthrough (3 days ago)</div>
-                <div class="s-timeline__item"><span class="s-timeline__dot"></span> ArXiv — Entanglement charging paper (1 week ago)</div>
-                <div class="s-timeline__item"><span class="s-timeline__dot"></span> TechCrunch — Startup raises $40M (2 weeks ago)</div>
-              </div>
-              <div class="s-card"><div class="s-card__text">Semantic search across your entire browsing history. Instantly.</div></div>
-            </div>
-            <!-- Ch5: Private -->
-            <div class="screen-layer s-mono" data-screen="4">
-              <div class="s-shield">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
-              </div>
             </div>
           </div>
-        </div>
-        <div class="story__copy">
-          <div class="copy-layer" data-copy="0">
-            <div class="story__chapter">Chapter 1</div>
-            <h2 class="story__title">Search becomes conversation</h2>
-            <p class="story__desc">Stop searching through links. Ask Omni what you need — get an instant, sourced answer.</p>
-          </div>
-          <div class="copy-layer" data-copy="1">
-            <div class="story__chapter">Chapter 2</div>
-            <h2 class="story__title">Browse for Me</h2>
-            <p class="story__desc">Multiple tabs open. The browser reads them all. They collapse into a single synthesized page.</p>
-          </div>
-          <div class="copy-layer" data-copy="2">
-            <div class="story__chapter">Chapter 3</div>
-            <h2 class="story__title">Compare everything</h2>
-            <p class="story__desc">Split-view mode. Two pages side by side. Differences highlighted. AI generates the verdict.</p>
-          </div>
-          <div class="copy-layer" data-copy="3">
-            <div class="story__chapter">Chapter 4</div>
-            <h2 class="story__title">Remember everything</h2>
-            <p class="story__desc">Your history becomes a semantic memory. Search your own brain: "that article about quantum batteries."</p>
-          </div>
-          <div class="copy-layer" data-copy="4">
-            <div class="story__chapter">Chapter 5</div>
-            <h2 class="story__title">Private by design</h2>
-            <p class="story__desc">Trackers dissolve. Ads disappear. Cookie banners vanish. Your browsing belongs to you.</p>
+
+          <!-- Right Column: Scroll Story Text Chapters -->
+          <div class="story__copy-col">
+            <div class="story-copy active" data-copy="0">
+              <div class="story__chapter-tag">CHAPTER 01</div>
+              <h2 class="story__title">Search becomes conversation</h2>
+              <p class="story__desc">Stop searching through pages of blue links. Type naturally to Omni — address bars expand into AI synthesis engines with verified sources.</p>
+            </div>
+
+            <div class="story-copy" data-copy="1">
+              <div class="story__chapter-tag">CHAPTER 02</div>
+              <h2 class="story__title">Browse for Me</h2>
+              <p class="story__desc">Open dozens of tabs without feeling overwhelmed. Omni reads, filters, and collapses multiple web pages into a single synthesized intelligence brief.</p>
+            </div>
+
+            <div class="story-copy" data-copy="2">
+              <div class="story__chapter-tag">CHAPTER 03</div>
+              <h2 class="story__title">Compare Everything</h2>
+              <p class="story__desc">Split-view mode instantly pairs specs, pricing, and claims. Key differences are highlighted automatically with AI-generated verdicts.</p>
+            </div>
+
+            <div class="story-copy" data-copy="3">
+              <div class="story__chapter-tag">CHAPTER 04</div>
+              <h2 class="story__title">Remember Everything</h2>
+              <p class="story__desc">Your browsing history becomes a private, semantic memory timeline. Ask natural questions like <em>"that paper on battery density from last Tuesday."</em></p>
+            </div>
+
+            <div class="story-copy" data-copy="4">
+              <div class="story__chapter-tag">CHAPTER 05</div>
+              <h2 class="story__title">Private by Design</h2>
+              <p class="story__desc">Zero telemetry, zero tracker networks, and zero ad surveillance. All colors drain into pure monochrome when shield isolation activates.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Feature Grid -->
-    <section class="features" aria-label="Features">
-      <div class="features__head">
-        <div class="features__eyebrow">Capabilities</div>
-        <h2 class="features__title">Everything you need. Nothing you don't.</h2>
-        <p class="features__desc">A desktop-class feature set in a native Android app — without the tracking, the bloat, or the paywalls.</p>
-      </div>
-      <div class="features__grid">
-        <div class="feat-card"><div class="feat-card__icon">🔍</div><div class="feat-card__title">AI Search</div><div class="feat-card__desc">Ask questions, get sourced answers. The address bar is now a conversation.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">📖</div><div class="feat-card__title">Browse for Me</div><div class="feat-card__desc">Open multiple tabs. Omni reads them all and synthesizes a single summary.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">⚡</div><div class="feat-card__title">Split View</div><div class="feat-card__desc">Compare two pages side by side with AI-highlighted differences.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">🧠</div><div class="feat-card__title">Memory Search</div><div class="feat-card__desc">Semantic search across your entire browsing history. Find anything instantly.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">📰</div><div class="feat-card__title">Reader Mode</div><div class="feat-card__desc">Strip ads and clutter. Read in a clean, customizable layout.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">🛡️</div><div class="feat-card__title">Privacy Shield</div><div class="feat-card__desc">180+ tracker domains blocked. Tor and WireGuard VPN built in.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">🚫</div><div class="feat-card__title">Ad Block</div><div class="feat-card__desc">Custom filter engine with EasyList, AdGuard, and more. Zero ads, zero trackers.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">🧩</div><div class="feat-card__title">Extensions</div><div class="feat-card__desc">Full Firefox WebExtension support. Install any .xpi from addons.mozilla.org.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">🗂️</div><div class="feat-card__title">Workspace Tabs</div><div class="feat-card__desc">Smart auto-grouping by domain. Social, Shopping, Video, News, Dev, Work.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">🎙️</div><div class="feat-card__title">Voice Search</div><div class="feat-card__desc">Speak your query. Hands-free browsing with system speech recognition.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">📥</div><div class="feat-card__title">Offline Reading</div><div class="feat-card__desc">Save pages as clean PDFs. Read anything, anywhere, without a connection.</div></div>
-        <div class="feat-card"><div class="feat-card__icon">🔄</div><div class="feat-card__title">Cross-device Sync</div><div class="feat-card__desc">Coming soon: encrypted sync across your devices. No cloud account required.</div></div>
+    <!-- Capabilities / Feature Grid -->
+    <section class="features" id="features" aria-label="Capabilities">
+      <div class="container">
+        <div class="features__header">
+          <div class="section-tag">CAPABILITIES</div>
+          <h2 class="section-title">Everything you need.<br><span class="text-dim">Nothing you don't.</span></h2>
+          <p class="section-sub">Built natively on GeckoView 145 with low-level Android performance and Firefox WebExtensions support.</p>
+        </div>
+
+        <div class="features__grid">
+          <!-- Card 1 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <h3 class="feat-card__title">AI Search Engine</h3>
+            <p class="feat-card__desc">Natural language answers sourced in real-time. Turn any web search into a direct conversation.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <h3 class="feat-card__title">Browse for Me</h3>
+            <p class="feat-card__desc">Omni opens, scans, and condenses multiple open tabs into one clean, actionable summary.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18"/></svg>
+            </div>
+            <h3 class="feat-card__title">Split View Mode</h3>
+            <p class="feat-card__desc">Side-by-side tab workspace on mobile with automatic difference highlighting and comparative summaries.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <h3 class="feat-card__title">Memory Search</h3>
+            <p class="feat-card__desc">Semantic neural index of past browsing. Locate articles by concept without remembering URLs.</p>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3 class="feat-card__title">Distraction-Free Reader</h3>
+            <p class="feat-card__desc">Strip away popups, paywall overlays, and heavy script bloat for pristine reading typography.</p>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+            </div>
+            <h3 class="feat-card__title">Privacy Shield</h3>
+            <p class="feat-card__desc">180+ tracking networks blocked at network level. Integrated Tor and WireGuard VPN tunnel options.</p>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            </div>
+            <h3 class="feat-card__title">uBlock Filter Engine</h3>
+            <p class="feat-card__desc">Native filter engine using EasyList and AdGuard syntax for zero-latency ad removal.</p>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19.439 7.85c-.049-.322-.059-.66-.025-1.002.138-1.378.895-2.226 2.086-2.848-1.503-.984-3.153-1.042-4.523-.223-.746.446-1.282 1.137-1.579 2.012a6.002 6.002 0 0 0-2.8.002C12.3 4.916 11.764 4.225 11.018 3.78c-1.37-.82-3.02-.76-4.523.223 1.19.622 1.948 1.47 2.086 2.848.034.342.024.68-.025 1.002C5.9 8.243 4 10.36 4 13c0 3.866 3.582 7 8 7s8-3.134 8-7c0-2.64-1.9-4.757-4.561-5.15z"/></svg>
+            </div>
+            <h3 class="feat-card__title">Firefox WebExtensions</h3>
+            <p class="feat-card__desc">Install desktop-grade Firefox .xpi extensions directly on Android with complete extension API support.</p>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3 class="feat-card__title">Smart Workspaces</h3>
+            <p class="feat-card__desc">Categorize tabs automatically into Work, Dev, Shopping, and Research tab spaces.</p>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <h3 class="feat-card__title">Voice Command</h3>
+            <p class="feat-card__desc">Perform hands-free searches, tab switching, and reading mode toggles using voice recognition.</p>
+          </div>
+
+          <!-- Card 11 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <h3 class="feat-card__title">Offline Document Vault</h3>
+            <p class="feat-card__desc">Save web pages as self-contained offline PDFs or Markdown documents stored in hardware-encrypted storage.</p>
+          </div>
+
+          <!-- Card 12 -->
+          <div class="feat-card">
+            <div class="feat-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            </div>
+            <h3 class="feat-card__title">Peer Sync Engine</h3>
+            <p class="feat-card__desc">End-to-end encrypted synchronization across mobile and desktop devices without cloud middleman servers.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Comparison Table -->
-    <section class="compare" aria-label="Comparison">
-      <h2 class="compare__title">How Omni compares</h2>
-      <div class="compare__wrap">
-        <table>
-          <thead><tr><th>Capability</th><th>Omni</th><th>Chrome</th><th>Brave</th><th>Firefox</th></tr></thead>
-          <tbody>
-            <tr><td>Engine</td><td>GeckoView 145</td><td>Blink</td><td>Blink</td><td>GeckoView</td></tr>
-            <tr><td>Open Source</td><td><span class="yes">✓ GPLv3</span></td><td><span class="no">✗</span></td><td><span class="partial">Partial</span></td><td><span class="yes">✓ MPL</span></td></tr>
-            <tr><td>Ad & Tracker Blocking</td><td><span class="yes">✓ Built-in</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td><td><span class="partial">Basic</span></td></tr>
-            <tr><td>Firefox WebExtensions</td><td><span class="yes">✓ Full .xpi</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
-            <tr><td>Stream Sniffer + Native Player</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>Encrypted Vault (Biometric)</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>Tor + WireGuard VPN</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>AI Search & Summarize</td><td><span class="yes">✓</span></td><td><span class="partial">Gemini</span></td><td><span class="partial">Leo</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>Telemetry</td><td><span class="yes">None</span></td><td><span class="no">Yes</span></td><td><span class="partial">Optional</span></td><td><span class="partial">Optional</span></td></tr>
-            <tr><td>Offline Translation</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>QR Scanner / Generator</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>One-Tap Session Burn</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>Universal Text Copy</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>Interactive Page Editor</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-            <tr><td>Web App Pinning</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
-            <tr><td>Manga / Image Batch Grabber</td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Roadmap -->
-    <section class="roadmap" aria-label="Roadmap">
-      <h2 class="roadmap__title">Shipped fast, shipping faster</h2>
-      <div class="roadmap__grid">
-        <div class="roadmap__col roadmap__col--done">
-          <h3>✓ Shipped</h3>
-          <div class="roadmap__item"><strong>v1.0</strong> — GeckoView engine, multi-tab, WebExtensions, notepad vault, media player</div>
-          <div class="roadmap__item"><strong>v1.1</strong> — QR suite, UX enhancements, ML translator</div>
-          <div class="roadmap__item"><strong>v1.2</strong> — Custom ad-blocker, encrypted vault, WireGuard VPN, Tor, Fire Button</div>
-          <div class="roadmap__item"><strong>v1.2.6</strong> — FOSS compliance, ZXing, 180+ ad domains, feedback endpoint</div>
+    <section class="compare" id="compare" aria-label="Comparison">
+      <div class="container">
+        <div class="compare__header">
+          <div class="section-tag">BENCHMARK</div>
+          <h2 class="section-title">Engineered without compromise.</h2>
         </div>
-        <div class="roadmap__col roadmap__col--plan">
-          <h3>→ Planned</h3>
-          <div class="roadmap__item"><strong>v1.3</strong> — Collapsible tab groups, distraction-free reader mode</div>
-          <div class="roadmap__item"><strong>v1.4</strong> — Password manager, encrypted sync</div>
-          <div class="roadmap__item"><strong>v1.5</strong> — Web3 / dApp support, local CSS injection</div>
-          <div class="roadmap__item"><strong>v2.0</strong> — AI search, Browse for Me, semantic memory</div>
+
+        <div class="compare__table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Capabilities</th>
+                <th class="th-highlight">Omni Browser</th>
+                <th>Chrome</th>
+                <th>Brave</th>
+                <th>Firefox</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Engine Base</td>
+                <td class="td-highlight">GeckoView 145</td>
+                <td>Blink</td>
+                <td>Blink</td>
+                <td>GeckoView</td>
+              </tr>
+              <tr>
+                <td>Open Source License</td>
+                <td class="td-highlight"><span class="pill-check">GPLv3</span></td>
+                <td><span class="pill-cross">Proprietary</span></td>
+                <td><span>Partial</span></td>
+                <td><span>MPL 2.0</span></td>
+              </tr>
+              <tr>
+                <td>AI Search & Synthesis</td>
+                <td class="td-highlight"><span class="pill-check">Native</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span>Leo</span></td>
+                <td><span class="pill-cross">None</span></td>
+              </tr>
+              <tr>
+                <td>Desktop Firefox Extensions (.xpi)</td>
+                <td class="td-highlight"><span class="pill-check">Full Support</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span>Partial</span></td>
+              </tr>
+              <tr>
+                <td>Zero-Telemetry Guarantee</td>
+                <td class="td-highlight"><span class="pill-check">100% Zero</span></td>
+                <td><span class="pill-cross">Tracked</span></td>
+                <td><span>Optional</span></td>
+                <td><span>Optional</span></td>
+              </tr>
+              <tr>
+                <td>Hardware Encrypted Vault</td>
+                <td class="td-highlight"><span class="pill-check">AES-256</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span class="pill-cross">None</span></td>
+              </tr>
+              <tr>
+                <td>One-Tap Session Burn</td>
+                <td class="td-highlight"><span class="pill-check">Instant</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span class="pill-cross">None</span></td>
+                <td><span class="pill-cross">None</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="faq" aria-label="FAQ">
-      <h2 class="faq__title">Frequently asked questions</h2>
-      <div class="faq__item">
-        <button class="faq__q" aria-expanded="false">What is Omni Browser (OmniBrowser) by RebelRoot?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq__a"><div class="faq__a-inner">Omni Browser (also known as OmniBrowser or Rebel Root Omni Browser) is a fast, privacy-first mobile web browser for Android developed by RebelRoot. Built on Mozilla GeckoView, it provides desktop-grade WebExtensions, built-in uBlock Origin ad blocking, hardware-encrypted vaults, and offline translation.</div></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" aria-expanded="false">Does Omni Browser support desktop Firefox WebExtensions?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq__a"><div class="faq__a-inner">Yes, Omni Browser includes full Mozilla WebExtension controller integration, allowing users to directly install and run Firefox .xpi add-ons like uBlock Origin, Dark Reader, and Violentmonkey on Android.</div></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" aria-expanded="false">How does Omni Browser protect user data and privacy?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq__a"><div class="faq__a-inner">Omni Browser operates with zero telemetry, includes a one-tap session incineration 'Burn' button to purge history and cookies, isolates private browsing sessions, and features an AES-256 encrypted hardware Safe Locker vault for private downloads.</div></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" aria-expanded="false">Is Omni Browser free and open source?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq__a"><div class="faq__a-inner">Yes, Omni Browser is 100% free software released under the GPLv3 license without ads, paywalls, or data tracking.</div></div>
-      </div>
-    </section>
-
-    <!-- Social Proof -->
-    <section class="proof" aria-label="Social proof">
-      <div class="proof__stats">
-        <div class="proof__stat"><b data-stars>★</b><span>GitHub Stars</span></div>
-        <div class="proof__stat"><b>145</b><span>GeckoView Engine</span></div>
-        <div class="proof__stat"><b>0</b><span>Data Collected</span></div>
-        <div class="proof__stat"><b>100%</b><span>Open Source</span></div>
-      </div>
-      <div class="proof__badges">
-        <span class="badge">GPLv3 Licensed</span>
-        <span class="badge">Zero Telemetry</span>
-        <span class="badge">F-Droid Ready</span>
-        <span class="badge">10 Languages</span>
-        <span class="badge">14+ Native Tools</span>
+    <!-- Social Proof / Stats -->
+    <section class="proof" aria-label="Open Source Proof">
+      <div class="container">
+        <div class="proof__grid">
+          <div class="proof__stat-card">
+            <div class="proof__num" data-stars>—</div>
+            <div class="proof__label">GitHub Stars</div>
+          </div>
+          <div class="proof__stat-card">
+            <div class="proof__num">145</div>
+            <div class="proof__label">Gecko Engine Version</div>
+          </div>
+          <div class="proof__stat-card">
+            <div class="proof__num">0</div>
+            <div class="proof__label">Data Packets Sent</div>
+          </div>
+          <div class="proof__stat-card">
+            <div class="proof__num">100%</div>
+            <div class="proof__label">Open Source Codebase</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final" aria-label="Call to action">
-      <div class="final__glow" aria-hidden="true"></div>
-      <h2>The future of browsing isn't faster. It's smarter.</h2>
-      <p class="final__sub">Join thousands of users who've taken back control of their browser. Free, open source, and built in the open.</p>
-      <div class="final__actions">
-        <a class="btn btn--primary" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">Download Omni Browser</a>
-        <a class="btn btn--secondary" href="https://github.com/REBEL-ROOT/omni-browser" target="_blank" rel="noopener">View Open Source</a>
+    <!-- FAQ Accordion -->
+    <section class="faq" id="faq" aria-label="FAQ">
+      <div class="container container--narrow">
+        <div class="faq__header">
+          <div class="section-tag">FAQ</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq__list">
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false">
+              <span>What makes Omni Browser different from Chrome or Brave?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq__a">
+              <div class="faq__a-inner">
+                Omni Browser is built on Mozilla GeckoView rather than Chromium, providing true independence from Google's web rendering monolithic standards. It features direct AI-synthesis capabilities (Search and Browse for Me), desktop Firefox WebExtension compatibility, and strict zero-telemetry privacy guarantees.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false">
+              <span>Can I install desktop Firefox extensions like uBlock Origin?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq__a">
+              <div class="faq__a-inner">
+                Yes. Omni Browser includes direct WebExtension controller integration. You can download and run `.xpi` add-ons directly from addons.mozilla.org on Android without requiring custom developer hacks.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false">
+              <span>Is my AI search query data kept private?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq__a">
+              <div class="faq__a-inner">
+                Yes. All search synthesis runs via privacy-preserving requests with zero user identifier logging. Semantic memory search is indexed locally on your device hardware inside an encrypted SQLite database.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__q" aria-expanded="false">
+              <span>Is Omni Browser completely free and open-source?</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="faq__a">
+              <div class="faq__a-inner">
+                Yes, Omni Browser is released under the GPLv3 license by RebelRoot. There are no paywalls, hidden subscriptions, or user monetization scripts.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Call To Action -->
+    <section class="final-cta" aria-label="Call to action">
+      <div class="container">
+        <div class="final-cta__box">
+          <div class="final-cta__glow"></div>
+          <h2 class="final-cta__title">The future of browsing isn’t faster.<br><span class="text-glow">It’s smarter.</span></h2>
+          <p class="final-cta__sub">Take back control of your web experience with open-source intelligent browsing.</p>
+          <div class="final-cta__actions">
+            <a class="btn btn--primary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
+              <span>Download Omni Browser</span>
+            </a>
+            <a class="btn btn--secondary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser" target="_blank" rel="noopener">
+              <span>View Source Code</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
-    <span>© 2026 RebelRoot · Omni Browser is licensed GPLv3</span>
-    <nav class="footer__links" aria-label="Footer">
-      <a href="/docs/">Docs</a>
-      <a href="/omnibrowser/privacy-policy">Privacy</a>
-      <a href="/docs/resources/license.html">License</a>
-      <a href="https://github.com/REBEL-ROOT/omni-browser" target="_blank" rel="noopener">GitHub</a>
-    </nav>
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span>© 2026 RebelRoot · Omni Browser GPLv3</span>
+      </div>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="/docs/">Documentation</a>
+        <a href="/omnibrowser/privacy-policy">Privacy Policy</a>
+        <a href="https://github.com/REBEL-ROOT/omni-browser/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="https://github.com/REBEL-ROOT/omni-browser" target="_blank" rel="noopener">GitHub Repository</a>
+      </nav>
+    </div>
   </footer>
 
-  <!-- Vendor libs -->
+  <!-- Vendor Libraries -->
   <script src="assets/vendor/gsap.min.js"></script>
   <script src="assets/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/vendor/lenis.min.js"></script>
-  <!-- App -->
+
+  <!-- App Script -->
   <script src="assets/app.js" defer></script>
 </body>
 </html>
