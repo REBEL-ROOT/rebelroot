@@ -57,9 +57,12 @@
      4. Aurora canvas
      ------------------------------------------------------------------------ */
   var canvas = document.querySelector('.aurora-canvas');
-  if (canvas && !reducedMotion) {
-    var ctx = canvas.getContext('2d');
-    if (!ctx) return; // canvas not supported (e.g. jsdom)
+  // Acquire the 2D context up front and fold it into the guard. We must NOT
+  // use an early `return` when the context is missing (e.g. jsdom, or a
+  // browser/extension that blocks canvas) — that would abort the entire IIFE
+  // and silently disable the scroll story, reveals and FAQ accordion below.
+  var ctx = canvas ? canvas.getContext('2d') : null;
+  if (canvas && ctx && !reducedMotion) {
     var blobs = [
       { x: 0.3, y: 0.3, r: 0.4, color: [59, 130, 246], vx: 0.0003, vy: 0.0002 },
       { x: 0.7, y: 0.5, r: 0.35, color: [139, 92, 246], vx: -0.0002, vy: 0.0003 },
