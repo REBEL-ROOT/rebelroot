@@ -1,26 +1,22 @@
 /* ==========================================================================
-   Omni Browser — "Living Intelligence" Motion & Story Engine
+   Omni Browser — Living Intelligence Script
+   GSAP ScrollTrigger + Lenis Smooth Scroll + AI Typewriter Auto-Writing + GitHub Star Fetcher
    ========================================================================== */
 
 (function () {
   'use strict';
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   /* ------------------------------------------------------------------------
-     1. Lenis Smooth Scroll
+     1. Initialize Lenis Smooth Scroll (if available and motion allowed)
      ------------------------------------------------------------------------ */
-  var lenis = null;
-  if (!reducedMotion && typeof Lenis !== 'undefined') {
-    lenis = new Lenis({
+  if (typeof Lenis !== 'undefined' && !reducedMotion) {
+    var lenis = new Lenis({
       duration: 1.2,
       easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
       touchMultiplier: 1.5
-    });
-
-    lenis.on('scroll', function () {
-      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.update();
     });
 
     function raf(time) {
@@ -31,42 +27,47 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. Nav Scroll State
+     2. GitHub Star Counter Fetcher
+     ------------------------------------------------------------------------ */
+  var starElements = document.querySelectorAll('[data-stars]');
+  if (starElements.length) {
+    fetch('https://api.github.com/repos/REBEL-ROOT/omni-browser')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data && typeof data.stargazers_count === 'number') {
+          var count = data.stargazers_count > 999 
+            ? (data.stargazers_count / 1000).toFixed(1) + 'k' 
+            : data.stargazers_count.toString();
+          starElements.forEach(function (el) {
+            el.textContent = count;
+          });
+        }
+      })
+      .catch(function () {
+        starElements.forEach(function (el) { el.textContent = '100+'; });
+      });
+  }
+
+  /* ------------------------------------------------------------------------
+     3. Solid Nav on Scroll
      ------------------------------------------------------------------------ */
   var nav = document.querySelector('.nav');
   if (nav) {
     window.addEventListener('scroll', function () {
-      nav.classList.toggle('solid', window.scrollY > 60);
+      if (window.scrollY > 40) {
+        nav.classList.add('solid');
+      } else {
+        nav.classList.remove('solid');
+      }
     }, { passive: true });
   }
 
   /* ------------------------------------------------------------------------
-     3. GitHub Stargazers Counter
+     4. Hero 3D Card Tilt Effect (Disabled on touch & reduced motion)
      ------------------------------------------------------------------------ */
-  var starNodes = document.querySelectorAll('[data-stars]');
-  if (starNodes.length) {
-    fetch('https://api.github.com/repos/REBEL-ROOT/omni-browser')
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) {
-        if (d && typeof d.stargazers_count === 'number') {
-          var txt = d.stargazers_count >= 1000
-            ? (d.stargazers_count / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
-            : String(d.stargazers_count);
-          starNodes.forEach(function (n) { n.textContent = txt; });
-        }
-      })
-      .catch(function () {});
-  }
-
-  /* ------------------------------------------------------------------------
-     4. Cursor Tilt on Hero Phone Mockup
-     ------------------------------------------------------------------------ */
-  var heroPhone = document.querySelector('.hero__phone-wrap[data-tilt]');
-  if (heroPhone && !isTouch && !reducedMotion) {
-    document.addEventListener('pointermove', function (e) {
-      var rect = heroPhone.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-
+  var heroPhone = document.querySelector('.hero__phone-wrap');
+  if (heroPhone && !reducedMotion && window.innerWidth > 768) {
+    window.addEventListener('mousemove', function (e) {
       var cx = window.innerWidth / 2;
       var cy = window.innerHeight / 2;
       var dx = (e.clientX - cx) / cx;
@@ -77,7 +78,38 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. GSAP ScrollTrigger — Pinned 5-Chapter Story
+     5. AI Typewriter Auto-Writing Animation Engine
+     ------------------------------------------------------------------------ */
+  var currentChapterIdx = -1;
+  var typewriterTimer = null;
+
+  function runAITypewriter(descElement) {
+    if (!descElement) return;
+    var fullText = descElement.getAttribute('data-full-text') || descElement.textContent;
+    if (!fullText) return;
+
+    if (typewriterTimer) clearInterval(typewriterTimer);
+    descElement.innerHTML = '';
+    
+    var charIdx = 0;
+    var cursorSpan = document.createElement('span');
+    cursorSpan.className = 'ai-cursor';
+    cursorSpan.textContent = '▌';
+    descElement.appendChild(cursorSpan);
+
+    typewriterTimer = setInterval(function () {
+      if (charIdx < fullText.length) {
+        descElement.textContent = fullText.substring(0, charIdx + 1);
+        descElement.appendChild(cursorSpan);
+        charIdx++;
+      } else {
+        clearInterval(typewriterTimer);
+      }
+    }, 12);
+  }
+
+  /* ------------------------------------------------------------------------
+     6. GSAP ScrollTrigger — Story Mode with Auto-Writing AI Descriptions
      ------------------------------------------------------------------------ */
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reducedMotion) {
     gsap.registerPlugin(ScrollTrigger);
@@ -101,21 +133,27 @@
             var progress = self.progress;
             var activeIdx = Math.min(chapterCount - 1, Math.floor(progress * chapterCount));
 
-            screens.forEach(function (scr, idx) {
-              if (idx === activeIdx) {
-                scr.classList.add('active');
-              } else {
-                scr.classList.remove('active');
-              }
-            });
+            if (activeIdx !== currentChapterIdx) {
+              currentChapterIdx = activeIdx;
 
-            copies.forEach(function (cpy, idx) {
-              if (idx === activeIdx) {
-                cpy.classList.add('active');
-              } else {
-                cpy.classList.remove('active');
-              }
-            });
+              screens.forEach(function (scr, idx) {
+                if (idx === activeIdx) {
+                  scr.classList.add('active');
+                } else {
+                  scr.classList.remove('active');
+                }
+              });
+
+              copies.forEach(function (cpy, idx) {
+                if (idx === activeIdx) {
+                  cpy.classList.add('active');
+                  var descEl = cpy.querySelector('.story__desc');
+                  runAITypewriter(descEl);
+                } else {
+                  cpy.classList.remove('active');
+                }
+              });
+            }
           }
         }
       });
@@ -125,44 +163,46 @@
     var defaultScreen = document.querySelector('.story-screen[data-chapter="0"]');
     var defaultCopy = document.querySelector('.story-copy[data-copy="0"]');
     if (defaultScreen) defaultScreen.classList.add('active');
-    if (defaultCopy) defaultCopy.classList.add('active');
+    if (defaultCopy) {
+      defaultCopy.classList.add('active');
+      var descEl = defaultCopy.querySelector('.story__desc');
+      runAITypewriter(descEl);
+    }
   }
 
   /* ------------------------------------------------------------------------
-     6. FAQ Accordion Logic
+     7. FAQ Accordion Toggle
      ------------------------------------------------------------------------ */
-  var faqQuestions = document.querySelectorAll('.faq__q');
-  faqQuestions.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var item = btn.closest('.faq__item');
-      var panel = item.querySelector('.faq__a');
-      var isOpen = item.classList.contains('open');
+  var faqItems = document.querySelectorAll('.faq__item');
+  faqItems.forEach(function (item) {
+    var btn = item.querySelector('.faq__q');
+    var ans = item.querySelector('.faq__a');
 
-      // Close other accordion items
-      document.querySelectorAll('.faq__item.open').forEach(function (other) {
-        if (other !== item) {
+    if (btn && ans) {
+      btn.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+
+        // Close all
+        faqItems.forEach(function (other) {
           other.classList.remove('open');
+          var otherAns = other.querySelector('.faq__a');
+          if (otherAns) otherAns.style.maxHeight = '0';
           var otherBtn = other.querySelector('.faq__q');
-          var otherPanel = other.querySelector('.faq__a');
           if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
-          if (otherPanel) otherPanel.style.maxHeight = '0';
+        });
+
+        // Open clicked if was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          ans.style.maxHeight = ans.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
         }
       });
-
-      if (isOpen) {
-        item.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        panel.style.maxHeight = '0';
-      } else {
-        item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-      }
-    });
+    }
   });
 
   /* ------------------------------------------------------------------------
-     7. Feature Cards Entrance (IntersectionObserver)
+     8. Feature Cards Entrance (IntersectionObserver)
      ------------------------------------------------------------------------ */
   var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card');
   if (revealCards.length && 'IntersectionObserver' in window) {
