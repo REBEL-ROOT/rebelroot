@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Omni Browser — High-Performance Native Scroll Script
-   GSAP ScrollTrigger + Instant Scrubbing + AI Typewriter + Native Hardware Acceleration
+   Omni Browser — High-Performance Native & Mobile Compatibility Script
+   GSAP ScrollTrigger + Mobile Drawer + AI Typewriter + Robust Fallbacks
    ========================================================================== */
 
 (function () {
@@ -9,58 +9,104 @@
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------------------------------
-     1. GitHub Star Counter Fetcher
+     1. Mobile Navigation Menu Toggle Drawer
      ------------------------------------------------------------------------ */
-  var starElements = document.querySelectorAll('[data-stars]');
-  if (starElements.length) {
-    fetch('https://api.github.com/repos/REBEL-ROOT/omni-browser')
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        if (data && typeof data.stargazers_count === 'number') {
-          var count = data.stargazers_count > 999 
-            ? (data.stargazers_count / 1000).toFixed(1) + 'k' 
-            : data.stargazers_count.toString();
-          starElements.forEach(function (el) {
-            el.textContent = count;
-          });
+  try {
+    var navToggle = document.querySelector('.nav__toggle');
+    var navDrawer = document.querySelector('.nav__mobile-drawer');
+    var navDrawerLinks = document.querySelectorAll('.nav__mobile-drawer a');
+
+    if (navToggle && navDrawer) {
+      navToggle.addEventListener('click', function () {
+        var isOpen = navDrawer.classList.contains('active');
+        if (isOpen) {
+          navDrawer.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        } else {
+          navDrawer.classList.add('active');
+          navToggle.setAttribute('aria-expanded', 'true');
+          document.body.style.overflow = 'hidden';
         }
-      })
-      .catch(function () {
-        starElements.forEach(function (el) { el.textContent = '100+'; });
       });
+
+      navDrawerLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          navDrawer.classList.remove('active');
+          if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  } catch (e) {
+    console.warn('Nav drawer error:', e);
   }
 
   /* ------------------------------------------------------------------------
-     2. Optimized Solid Nav on Native Scroll
+     2. GitHub Star Counter Fetcher
      ------------------------------------------------------------------------ */
-  var nav = document.querySelector('.nav');
-  if (nav) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 40) {
-        nav.classList.add('solid');
-      } else {
-        nav.classList.remove('solid');
-      }
-    }, { passive: true });
+  try {
+    var starElements = document.querySelectorAll('[data-stars]');
+    if (starElements.length) {
+      fetch('https://api.github.com/repos/REBEL-ROOT/omni-browser')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data && typeof data.stargazers_count === 'number') {
+            var count = data.stargazers_count > 999 
+              ? (data.stargazers_count / 1000).toFixed(1) + 'k' 
+              : data.stargazers_count.toString();
+            starElements.forEach(function (el) {
+              el.textContent = count;
+            });
+          }
+        })
+        .catch(function () {
+          starElements.forEach(function (el) { el.textContent = '100+'; });
+        });
+    }
+  } catch (e) {
+    console.warn('Star fetch error:', e);
   }
 
   /* ------------------------------------------------------------------------
-     3. Hero 3D Card Tilt Effect (Disabled on touch & reduced motion)
+     3. Solid Nav on Scroll
      ------------------------------------------------------------------------ */
-  var heroPhone = document.querySelector('.hero__phone-wrap');
-  if (heroPhone && !reducedMotion && window.innerWidth >= 1024) {
-    window.addEventListener('mousemove', function (e) {
-      var cx = window.innerWidth / 2;
-      var cy = window.innerHeight / 2;
-      var dx = (e.clientX - cx) / cx;
-      var dy = (e.clientY - cy) / cy;
-
-      heroPhone.style.transform = 'rotateY(' + (dx * 10) + 'deg) rotateX(' + (-dy * 8) + 'deg)';
-    }, { passive: true });
+  try {
+    var nav = document.querySelector('.nav');
+    if (nav) {
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 40) {
+          nav.classList.add('solid');
+        } else {
+          nav.classList.remove('solid');
+        }
+      }, { passive: true });
+    }
+  } catch (e) {
+    console.warn('Nav scroll error:', e);
   }
 
   /* ------------------------------------------------------------------------
-     4. AI Typewriter Auto-Writing Animation Engine
+     4. Hero 3D Card Tilt Effect (Disabled on touch & desktop < 1024px)
+     ------------------------------------------------------------------------ */
+  try {
+    var heroPhone = document.querySelector('.hero__phone-wrap');
+    if (heroPhone && !reducedMotion && window.innerWidth >= 1024) {
+      window.addEventListener('mousemove', function (e) {
+        var cx = window.innerWidth / 2;
+        var cy = window.innerHeight / 2;
+        var dx = (e.clientX - cx) / cx;
+        var dy = (e.clientY - cy) / cy;
+
+        heroPhone.style.transform = 'rotateY(' + (dx * 10) + 'deg) rotateX(' + (-dy * 8) + 'deg)';
+      }, { passive: true });
+    }
+  } catch (e) {
+    console.warn('3D Tilt error:', e);
+  }
+
+  /* ------------------------------------------------------------------------
+     5. AI Typewriter Auto-Writing Animation Engine
      ------------------------------------------------------------------------ */
   var currentChapterIdx = -1;
   var typewriterTimer = null;
@@ -91,109 +137,127 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. GSAP ScrollTrigger — Instant Scrubbing Pinned Desktop Story (>= 1024px)
+     6. GSAP ScrollTrigger — Pinned Desktop Story (>= 1024px)
      ------------------------------------------------------------------------ */
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reducedMotion && window.innerWidth >= 1024) {
-    gsap.registerPlugin(ScrollTrigger);
+  try {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reducedMotion && window.innerWidth >= 1024) {
+      gsap.registerPlugin(ScrollTrigger);
 
-    var storyPin = document.querySelector('.story__pin');
-    var screens = document.querySelectorAll('.story-screen');
-    var copies = document.querySelectorAll('.story-copy');
+      var storyPin = document.querySelector('.story__pin');
+      var screens = document.querySelectorAll('.story-screen');
+      var copies = document.querySelectorAll('.story-copy');
 
-    if (storyPin && screens.length && copies.length) {
-      var chapterCount = screens.length;
+      if (storyPin && screens.length && copies.length) {
+        var chapterCount = screens.length;
 
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '.story',
-          start: 'top top',
-          end: '+=' + (chapterCount * 80) + '%',
-          pin: true,
-          scrub: 0.1, // Ultra-fast 0.1s instant scrubbing (no lag delay)
-          anticipatePin: 1,
-          onUpdate: function (self) {
-            var progress = self.progress;
-            var activeIdx = Math.min(chapterCount - 1, Math.floor(progress * chapterCount));
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: '.story',
+            start: 'top top',
+            end: '+=' + (chapterCount * 80) + '%',
+            pin: true,
+            scrub: 0.1,
+            anticipatePin: 1,
+            onUpdate: function (self) {
+              var progress = self.progress;
+              var activeIdx = Math.min(chapterCount - 1, Math.floor(progress * chapterCount));
 
-            if (activeIdx !== currentChapterIdx) {
-              currentChapterIdx = activeIdx;
+              if (activeIdx !== currentChapterIdx) {
+                currentChapterIdx = activeIdx;
 
-              screens.forEach(function (scr, idx) {
-                if (idx === activeIdx) {
-                  scr.classList.add('active');
-                } else {
-                  scr.classList.remove('active');
-                }
-              });
+                screens.forEach(function (scr, idx) {
+                  if (idx === activeIdx) {
+                    scr.classList.add('active');
+                  } else {
+                    scr.classList.remove('active');
+                  }
+                });
 
-              copies.forEach(function (cpy, idx) {
-                if (idx === activeIdx) {
-                  cpy.classList.add('active');
-                  var descEl = cpy.querySelector('.story__desc');
-                  runAITypewriter(descEl);
-                } else {
-                  cpy.classList.remove('active');
-                }
-              });
+                copies.forEach(function (cpy, idx) {
+                  if (idx === activeIdx) {
+                    cpy.classList.add('active');
+                    var descEl = cpy.querySelector('.story__desc');
+                    runAITypewriter(descEl);
+                  } else {
+                    cpy.classList.remove('active');
+                  }
+                });
+              }
             }
           }
-        }
-      });
+        });
+      }
     }
+  } catch (e) {
+    console.warn('GSAP ScrollTrigger error:', e);
   }
 
   /* ------------------------------------------------------------------------
-     6. FAQ Accordion Toggle
+     7. FAQ Accordion Toggle
      ------------------------------------------------------------------------ */
-  var faqItems = document.querySelectorAll('.faq__item');
-  faqItems.forEach(function (item) {
-    var btn = item.querySelector('.faq__q');
-    var ans = item.querySelector('.faq__a');
+  try {
+    var faqItems = document.querySelectorAll('.faq__item');
+    faqItems.forEach(function (item) {
+      var btn = item.querySelector('.faq__q');
+      var ans = item.querySelector('.faq__a');
 
-    if (btn && ans) {
-      btn.addEventListener('click', function () {
-        var isOpen = item.classList.contains('open');
+      if (btn && ans) {
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('open');
 
-        // Close all
-        faqItems.forEach(function (other) {
-          other.classList.remove('open');
-          var otherAns = other.querySelector('.faq__a');
-          if (otherAns) otherAns.style.maxHeight = '0';
-          var otherBtn = other.querySelector('.faq__q');
-          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          faqItems.forEach(function (other) {
+            other.classList.remove('open');
+            var otherAns = other.querySelector('.faq__a');
+            if (otherAns) otherAns.style.maxHeight = '0';
+            var otherBtn = other.querySelector('.faq__q');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          });
+
+          if (!isOpen) {
+            item.classList.add('open');
+            ans.style.maxHeight = ans.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
         });
-
-        // Open clicked if was closed
-        if (!isOpen) {
-          item.classList.add('open');
-          ans.style.maxHeight = ans.scrollHeight + 'px';
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    }
-  });
+      }
+    });
+  } catch (e) {
+    console.warn('FAQ accordion error:', e);
+  }
 
   /* ------------------------------------------------------------------------
-     7. Feature Cards Entrance (IntersectionObserver)
+     8. Feature Cards Entrance (IntersectionObserver with 100% Fallback)
      ------------------------------------------------------------------------ */
-  var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card, .story-mobile__card');
-  if (revealCards.length && 'IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+  try {
+    var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card, .story-mobile__card');
+    if (revealCards.length) {
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05 });
 
-    revealCards.forEach(function (card) {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(24px)';
-      card.style.transition = 'opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out)';
-      observer.observe(card);
-    });
+        revealCards.forEach(function (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          card.style.transition = 'opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out)';
+          observer.observe(card);
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        revealCards.forEach(function (card) {
+          card.style.opacity = '1';
+          card.style.transform = 'none';
+        });
+      }
+    }
+  } catch (e) {
+    console.warn('Card observer error:', e);
   }
 
 })();
