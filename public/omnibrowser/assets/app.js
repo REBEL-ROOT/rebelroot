@@ -1,44 +1,15 @@
 /* ==========================================================================
-   Omni Browser — Living Intelligence Script
-   GSAP ScrollTrigger + Lenis Smooth Scroll + AI Typewriter Auto-Writing + GitHub Star Fetcher
+   Omni Browser — High-Performance Native Scroll Script
+   GSAP ScrollTrigger + Instant Scrubbing + AI Typewriter + Native Hardware Acceleration
    ========================================================================== */
 
 (function () {
   'use strict';
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  var isDesktop = window.innerWidth >= 1024 && !isTouchDevice;
 
   /* ------------------------------------------------------------------------
-     1. Initialize Lenis Smooth Scroll (Desktop Only, non-touch)
-     ------------------------------------------------------------------------ */
-  var lenis = null;
-  if (typeof Lenis !== 'undefined' && !reducedMotion && isDesktop) {
-    lenis = new Lenis({
-      duration: 1.2,
-      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-      smoothWheel: true,
-      touchMultiplier: 0
-    });
-
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add(function (time) {
-        lenis.raf(time * 1000);
-      });
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    }
-  }
-
-  /* ------------------------------------------------------------------------
-     2. GitHub Star Counter Fetcher
+     1. GitHub Star Counter Fetcher
      ------------------------------------------------------------------------ */
   var starElements = document.querySelectorAll('[data-stars]');
   if (starElements.length) {
@@ -60,7 +31,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     3. Solid Nav on Scroll
+     2. Optimized Solid Nav on Native Scroll
      ------------------------------------------------------------------------ */
   var nav = document.querySelector('.nav');
   if (nav) {
@@ -74,10 +45,10 @@
   }
 
   /* ------------------------------------------------------------------------
-     4. Hero 3D Card Tilt Effect (Disabled on touch & reduced motion)
+     3. Hero 3D Card Tilt Effect (Disabled on touch & reduced motion)
      ------------------------------------------------------------------------ */
   var heroPhone = document.querySelector('.hero__phone-wrap');
-  if (heroPhone && !reducedMotion && isDesktop) {
+  if (heroPhone && !reducedMotion && window.innerWidth >= 1024) {
     window.addEventListener('mousemove', function (e) {
       var cx = window.innerWidth / 2;
       var cy = window.innerHeight / 2;
@@ -85,11 +56,11 @@
       var dy = (e.clientY - cy) / cy;
 
       heroPhone.style.transform = 'rotateY(' + (dx * 10) + 'deg) rotateX(' + (-dy * 8) + 'deg)';
-    });
+    }, { passive: true });
   }
 
   /* ------------------------------------------------------------------------
-     5. AI Typewriter Auto-Writing Animation Engine (Desktop Story)
+     4. AI Typewriter Auto-Writing Animation Engine
      ------------------------------------------------------------------------ */
   var currentChapterIdx = -1;
   var typewriterTimer = null;
@@ -116,11 +87,11 @@
       } else {
         clearInterval(typewriterTimer);
       }
-    }, 12);
+    }, 10);
   }
 
   /* ------------------------------------------------------------------------
-     6. GSAP ScrollTrigger — Pinned Desktop Story Mode (>= 1024px)
+     5. GSAP ScrollTrigger — Instant Scrubbing Pinned Desktop Story (>= 1024px)
      ------------------------------------------------------------------------ */
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reducedMotion && window.innerWidth >= 1024) {
     gsap.registerPlugin(ScrollTrigger);
@@ -132,13 +103,13 @@
     if (storyPin && screens.length && copies.length) {
       var chapterCount = screens.length;
 
-      var tl = gsap.timeline({
+      gsap.timeline({
         scrollTrigger: {
           trigger: '.story',
           start: 'top top',
-          end: '+=' + (chapterCount * 100) + '%',
+          end: '+=' + (chapterCount * 80) + '%',
           pin: true,
-          scrub: 0.8,
+          scrub: 0.1, // Ultra-fast 0.1s instant scrubbing (no lag delay)
           anticipatePin: 1,
           onUpdate: function (self) {
             var progress = self.progress;
@@ -172,7 +143,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     7. FAQ Accordion Toggle
+     6. FAQ Accordion Toggle
      ------------------------------------------------------------------------ */
   var faqItems = document.querySelectorAll('.faq__item');
   faqItems.forEach(function (item) {
@@ -203,7 +174,7 @@
   });
 
   /* ------------------------------------------------------------------------
-     8. Feature Cards Entrance (IntersectionObserver)
+     7. Feature Cards Entrance (IntersectionObserver)
      ------------------------------------------------------------------------ */
   var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card, .story-mobile__card');
   if (revealCards.length && 'IntersectionObserver' in window) {
@@ -220,7 +191,7 @@
     revealCards.forEach(function (card) {
       card.style.opacity = '0';
       card.style.transform = 'translateY(24px)';
-      card.style.transition = 'opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out)';
+      card.style.transition = 'opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out)';
       observer.observe(card);
     });
   }
