@@ -696,19 +696,6 @@ button {
   min-height: 80px;
 }
 
-.ai-cursor {
-  display: inline-block;
-  color: var(--accent-red);
-  font-weight: 700;
-  margin-left: 2px;
-  animation: cursorBlink 0.8s infinite;
-}
-
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 .story-doc-link {
   display: inline-flex;
   align-items: center;

@@ -1,6 +1,6 @@
 /* ==========================================================================
    Omni Browser — High-Performance Native & Mobile Compatibility Script
-   GSAP ScrollTrigger + Mobile Drawer + AI Typewriter + Robust Fallbacks
+   GSAP ScrollTrigger + Mobile Drawer + Clean Readable Text + Robust Fallbacks
    ========================================================================== */
 
 (function () {
@@ -106,39 +106,9 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. AI Typewriter Auto-Writing Animation Engine
+     5. GSAP ScrollTrigger — Pinned Desktop Story (>= 1024px)
      ------------------------------------------------------------------------ */
   var currentChapterIdx = -1;
-  var typewriterTimer = null;
-
-  function runAITypewriter(descElement) {
-    if (!descElement) return;
-    var fullText = descElement.getAttribute('data-full-text') || descElement.textContent;
-    if (!fullText) return;
-
-    if (typewriterTimer) clearInterval(typewriterTimer);
-    descElement.innerHTML = '';
-    
-    var charIdx = 0;
-    var cursorSpan = document.createElement('span');
-    cursorSpan.className = 'ai-cursor';
-    cursorSpan.textContent = '▌';
-    descElement.appendChild(cursorSpan);
-
-    typewriterTimer = setInterval(function () {
-      if (charIdx < fullText.length) {
-        descElement.textContent = fullText.substring(0, charIdx + 1);
-        descElement.appendChild(cursorSpan);
-        charIdx++;
-      } else {
-        clearInterval(typewriterTimer);
-      }
-    }, 10);
-  }
-
-  /* ------------------------------------------------------------------------
-     6. GSAP ScrollTrigger — Pinned Desktop Story (>= 1024px)
-     ------------------------------------------------------------------------ */
   try {
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reducedMotion && window.innerWidth >= 1024) {
       gsap.registerPlugin(ScrollTrigger);
@@ -176,8 +146,6 @@
                 copies.forEach(function (cpy, idx) {
                   if (idx === activeIdx) {
                     cpy.classList.add('active');
-                    var descEl = cpy.querySelector('.story__desc');
-                    runAITypewriter(descEl);
                   } else {
                     cpy.classList.remove('active');
                   }
@@ -193,7 +161,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     7. FAQ Accordion Toggle
+     6. FAQ Accordion Toggle
      ------------------------------------------------------------------------ */
   try {
     var faqItems = document.querySelectorAll('.faq__item');
@@ -226,7 +194,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     8. Feature Cards Entrance (Desktop Only — Instant Render on Mobile)
+     7. Feature Cards Entrance (Desktop Only — Instant Render on Mobile)
      ------------------------------------------------------------------------ */
   try {
     var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card, .story-mobile__card');
