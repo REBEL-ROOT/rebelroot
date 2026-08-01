@@ -440,12 +440,14 @@ button {
 .hero {
   min-height: 100vh;
   padding-top: calc(var(--nav-h) + 40px);
-  padding-bottom: 60px;
+  padding-bottom: 120px;
+  margin-bottom: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   position: relative;
+  z-index: 1;
 }
 
 .hero__badge {
@@ -515,15 +517,15 @@ button {
 /* Phone Mockup Frame */
 .hero__phone-wrap {
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   perspective: 1200px;
-  margin-bottom: 36px;
+  margin-bottom: 48px;
 }
 
 .phone-frame {
   width: 100%;
   aspect-ratio: 9 / 18.5;
-  max-height: calc(100vh - var(--nav-h) - 100px);
+  max-height: 540px;
   background: #0d0d12;
   border-radius: 40px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -578,6 +580,8 @@ button {
 .story {
   position: relative;
   width: 100%;
+  z-index: 2;
+  margin-top: 40px;
 }
 
 .story__desktop-only {
@@ -591,9 +595,9 @@ button {
 }
 
 .story__pin {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  padding-top: calc(var(--nav-h) + 20px);
+  padding-top: calc(var(--nav-h) + 40px);
   box-sizing: border-box;
 }
 
