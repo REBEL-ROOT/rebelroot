@@ -226,12 +226,14 @@
   }
 
   /* ------------------------------------------------------------------------
-     8. Feature Cards Entrance (IntersectionObserver with 100% Fallback)
+     8. Feature Cards Entrance (Desktop Only — Instant Render on Mobile)
      ------------------------------------------------------------------------ */
   try {
     var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card, .story-mobile__card');
     if (revealCards.length) {
-      if ('IntersectionObserver' in window) {
+      var isMobileView = window.innerWidth < 1024 || ('ontouchstart' in window);
+      
+      if (!isMobileView && 'IntersectionObserver' in window && !reducedMotion) {
         var observer = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
@@ -249,7 +251,7 @@
           observer.observe(card);
         });
       } else {
-        // Fallback for browsers without IntersectionObserver
+        // Instant render for mobile and fallback environments
         revealCards.forEach(function (card) {
           card.style.opacity = '1';
           card.style.transform = 'none';
