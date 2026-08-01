@@ -500,19 +500,26 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   Signature Scroll Story — REBELROOT RED BRANDING
+   Product Story Mode — DESKTOP PINNED / MOBILE RESPONSIVE STACK
    -------------------------------------------------------------------------- */
 .story {
   position: relative;
   width: 100%;
 }
 
-.story__pin {
-  height: 100vh;
-  width: 100%;
+.story__desktop-only {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.story__mobile-only {
+  display: none;
+}
+
+.story__pin {
+  height: 100vh;
+  width: 100%;
   padding-top: calc(var(--nav-h) + 20px);
   box-sizing: border-box;
 }
@@ -638,6 +645,74 @@ button {
 .story-doc-link:hover {
   color: #ffffff;
   text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Tablet Story Cards (< 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .story__desktop-only {
+    display: none !important;
+  }
+  .story__mobile-only {
+    display: block !important;
+    padding: 80px 20px;
+  }
+
+  .story-mobile__header {
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .story-mobile__list {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .story-mobile__card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: border-color 0.3s ease;
+  }
+
+  .story-mobile__card:hover {
+    border-color: var(--accent-red-border);
+  }
+
+  .story-mobile__frame {
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 28px;
+  }
+
+  .story-mobile__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .story-mobile__title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .story-mobile__desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 500px;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1190,7 +1265,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   Responsive Media Queries — COMPLETE MOBILE POLISH
+   Responsive Media Queries — COMPLETE MOBILE & TABLET POLISH
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
   .nav {
@@ -1198,16 +1273,6 @@ button {
   }
   .nav__center {
     display: none;
-  }
-  .story__viewport {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    height: auto;
-    max-height: none;
-  }
-  .story__pin {
-    height: auto;
-    padding: 60px 0;
   }
   .proof__grid {
     grid-template-columns: repeat(2, 1fr);

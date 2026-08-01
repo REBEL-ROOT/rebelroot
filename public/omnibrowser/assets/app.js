@@ -7,23 +7,34 @@
   'use strict';
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  var isDesktop = window.innerWidth >= 1024 && !isTouchDevice;
 
   /* ------------------------------------------------------------------------
-     1. Initialize Lenis Smooth Scroll (if available and motion allowed)
+     1. Initialize Lenis Smooth Scroll (Desktop Only, non-touch)
      ------------------------------------------------------------------------ */
-  if (typeof Lenis !== 'undefined' && !reducedMotion) {
-    var lenis = new Lenis({
+  var lenis = null;
+  if (typeof Lenis !== 'undefined' && !reducedMotion && isDesktop) {
+    lenis = new Lenis({
       duration: 1.2,
       easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
       smoothWheel: true,
-      touchMultiplier: 1.5
+      touchMultiplier: 0
     });
 
-    function raf(time) {
-      lenis.raf(time);
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (time) {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
   }
 
   /* ------------------------------------------------------------------------
@@ -66,7 +77,7 @@
      4. Hero 3D Card Tilt Effect (Disabled on touch & reduced motion)
      ------------------------------------------------------------------------ */
   var heroPhone = document.querySelector('.hero__phone-wrap');
-  if (heroPhone && !reducedMotion && window.innerWidth > 768) {
+  if (heroPhone && !reducedMotion && isDesktop) {
     window.addEventListener('mousemove', function (e) {
       var cx = window.innerWidth / 2;
       var cy = window.innerHeight / 2;
@@ -78,7 +89,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. AI Typewriter Auto-Writing Animation Engine
+     5. AI Typewriter Auto-Writing Animation Engine (Desktop Story)
      ------------------------------------------------------------------------ */
   var currentChapterIdx = -1;
   var typewriterTimer = null;
@@ -109,9 +120,9 @@
   }
 
   /* ------------------------------------------------------------------------
-     6. GSAP ScrollTrigger — Story Mode with Auto-Writing AI Descriptions
+     6. GSAP ScrollTrigger — Pinned Desktop Story Mode (>= 1024px)
      ------------------------------------------------------------------------ */
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reducedMotion) {
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reducedMotion && window.innerWidth >= 1024) {
     gsap.registerPlugin(ScrollTrigger);
 
     var storyPin = document.querySelector('.story__pin');
@@ -158,16 +169,6 @@
         }
       });
     }
-  } else {
-    // Fallback for no GSAP or reduced motion: show chapter 0 by default
-    var defaultScreen = document.querySelector('.story-screen[data-chapter="0"]');
-    var defaultCopy = document.querySelector('.story-copy[data-copy="0"]');
-    if (defaultScreen) defaultScreen.classList.add('active');
-    if (defaultCopy) {
-      defaultCopy.classList.add('active');
-      var descEl = defaultCopy.querySelector('.story__desc');
-      runAITypewriter(descEl);
-    }
   }
 
   /* ------------------------------------------------------------------------
@@ -204,7 +205,7 @@
   /* ------------------------------------------------------------------------
      8. Feature Cards Entrance (IntersectionObserver)
      ------------------------------------------------------------------------ */
-  var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card');
+  var revealCards = document.querySelectorAll('.feat-card, .showcase-card, .qt-card, .story-mobile__card');
   if (revealCards.length && 'IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

@@ -172,73 +172,51 @@
       </div>
     </section>
 
-    <!-- Signature Story Mode with Auto-Writing AI Descriptions -->
+    <!-- Product Story Section — Desktop Pinned Scroll / Mobile Responsive Stack -->
     <section class="story" id="story" aria-label="Product story">
-      <div class="story__pin">
+      
+      <!-- DESKTOP MODE (>= 1024px): Pinned Morphing Phone + AI Typewriter -->
+      <div class="story__pin story__desktop-only">
         <div class="story__viewport">
-          <!-- Left Column: Phone Frame displaying Real App Screenshots -->
           <div class="story__mockup-col">
             <div class="phone-frame phone-frame--story">
               <div class="phone-frame__speaker"></div>
               <div class="phone-frame__camera"></div>
               <div class="phone-screen">
                 <div class="morph-container">
-                  <!-- Chapter 1 Screen: Home Search -->
                   <div class="story-screen screen-ch1 active" data-chapter="0">
                     <img src="../omni/home.png" alt="Omni Browser Home Search Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 2 Screen: WebExtensions -->
                   <div class="story-screen screen-ch2" data-chapter="1">
                     <img src="../omni/extensions_menu.png" alt="Firefox WebExtensions Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 3 Screen: Quick Tools -->
                   <div class="story-screen screen-ch3" data-chapter="2">
                     <img src="../omni/quick_tools_updated.png" alt="Quick Power Tools Drawer" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 4 Screen: Media Sniffer -->
                   <div class="story-screen screen-ch4" data-chapter="3">
                     <img src="../omni/native_player.png" alt="Native Media Player Stream Sniffer" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 5 Screen: Manga Grabber -->
                   <div class="story-screen screen-ch5" data-chapter="4">
                     <img src="../omni/manga_grabber.png" alt="Batch Image & Manga Grabber Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 6 Screen: Incognito Mode -->
                   <div class="story-screen screen-ch6" data-chapter="5">
                     <img src="../omni/incognito_mode.png" alt="Incognito Private Browsing Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 7 Screen: Site Style -->
                   <div class="story-screen screen-ch7" data-chapter="6">
                     <img src="../omni/customize_style.png" alt="Custom Site Style Editor" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 8 Screen: Curated News Feed -->
                   <div class="story-screen screen-ch8" data-chapter="7">
                     <img src="../omni/news_feed.png" alt="Categorized News Feed Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 9 Screen: Proxy Hub -->
                   <div class="story-screen screen-ch9" data-chapter="8">
                     <img src="../omni/proxy_hub.png" alt="Proxy Hub & Tor Circuit Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 10 Screen: Share via QR Code -->
                   <div class="story-screen screen-ch10" data-chapter="9">
                     <img src="../omni/qr_code_share.png" alt="Instant QR Generator Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 11 Screen: Privacy Report -->
                   <div class="story-screen screen-ch11" data-chapter="10">
                     <img src="../omni/privacy_report.png" alt="Real-time Privacy Report Screen" class="screen-real-img">
                   </div>
-
-                  <!-- Chapter 12 Screen: Safe Locker -->
                   <div class="story-screen screen-ch12" data-chapter="11">
                     <img src="../omni/safe_locker.png" alt="Hardware Safe Locker Vault" class="screen-real-img">
                   </div>
@@ -247,7 +225,6 @@
             </div>
           </div>
 
-          <!-- Right Column: Story Text with Auto-Writing Animation (Chapter tags removed) -->
           <div class="story__copy-col">
             <div class="story-copy active" data-copy="0">
               <h2 class="story__title">Search becomes conversation</h2>
@@ -321,6 +298,232 @@
               <a href="/docs/privacy/private-vault.html" class="story-doc-link">Safe Locker Docs →</a>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- MOBILE & TABLET MODE (< 1024px): Responsive Stacked Feature Cards -->
+      <div class="story__mobile-only container">
+        <div class="story-mobile__header">
+          <div class="section-tag">PRODUCT EXPERIENCE</div>
+          <h2 class="section-title">Living Intelligence.<br><span class="text-dim">In the palm of your hand.</span></h2>
+        </div>
+
+        <div class="story-mobile__list">
+          <!-- Item 1 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/home.png" alt="Search becomes conversation" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Search becomes conversation</h3>
+              <p class="story-mobile__desc">Stop sifting through pages of ad-infested blue links. Type naturally to Omni — the address bar transforms into a direct conversational synthesis engine that pulls verified citations, breaks down complex topics into key takeaways, and summarizes multi-tab web research in real time.</p>
+              <a href="/docs/getting-started/quick-start.html" class="card-doc-link">Read Search Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 2 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/extensions_menu.png" alt="Desktop WebExtensions on Mobile" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Desktop WebExtensions on Mobile</h3>
+              <p class="story-mobile__desc">Unleash the full desktop ecosystem on Android. Built natively on GeckoView 145, Omni Browser gives you direct access to install and manage desktop Firefox .xpi extensions including uBlock Origin, Dark Reader, Violentmonkey, and SponsorBlock.</p>
+              <a href="/docs/extensions/overview.html" class="card-doc-link">Extension Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 3 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/quick_tools_updated.png" alt="16+ Instant Power Tools" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">16+ Instant Power Tools</h3>
+              <p class="story-mobile__desc">A customizable bottom drawer packed with 16 hardware-accelerated utilities — one-tap session burning, universal text copy, QR scanning and generation, offline PDF archiving, DOM element editing, and custom CSS injection.</p>
+              <a href="/docs/tools/overview.html" class="card-doc-link">Quick Tools Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 4 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/native_player.png" alt="Native Media Sniffer & Player" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Native Media Sniffer & Player</h3>
+              <p class="story-mobile__desc">Automatically inspect, detect, and extract video and audio streams from any web page. Features hardware-accelerated playback, background audio listening while lockscreened, speed adjustments, and direct stream downloading.</p>
+              <a href="/docs/media/stream-sniffer.html" class="card-doc-link">Media Sniffer Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 5 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/manga_grabber.png" alt="Batch Image & Manga Grabber" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Batch Image & Manga Grabber</h3>
+              <p class="story-mobile__desc">Effortlessly extract full-resolution image galleries, artwork portfolios, and complete multi-page manga chapters with a single tap. High-res batch harvesting without right-click barriers or layout paywalls.</p>
+              <a href="/docs/media/batch-manga.html" class="card-doc-link">Manga Grabber Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 6 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/incognito_mode.png" alt="You've Gone Incognito" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">You've Gone Incognito</h3>
+              <p class="story-mobile__desc">Absolute session isolation. In Incognito Mode, browsing history, search telemetry, cookies, and cache are instantly destroyed upon tab closure, while keeping downloaded files and biometric hardware vaults completely isolated.</p>
+              <a href="/docs/privacy/private-vault.html" class="card-doc-link">Incognito Vault Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 7 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/customize_style.png" alt="Custom Site Styling & Reader" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Custom Site Styling & Reader</h3>
+              <p class="story-mobile__desc">Take back control of how the web renders. Inject custom CSS stylesheets, adjust font family and line heights, force custom OLED dark themes, and strip intrusive popups for pristine typography.</p>
+              <a href="/docs/tools/site-styles.html" class="card-doc-link">Custom CSS Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 8 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/news_feed.png" alt="Curated AI News Feed" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Curated AI News Feed</h3>
+              <p class="story-mobile__desc">Access curated, real-time news streams across Business, World, Technology, Sports, and Entertainment. Completely free from clickbait algorithms, intrusive tracking scripts, or targeted ad profiling.</p>
+              <a href="/docs/home/discover.html" class="card-doc-link">News Feed Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 9 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/proxy_hub.png" alt="Proxy Hub & Tor Circuit" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Proxy Hub & Tor Circuit</h3>
+              <p class="story-mobile__desc">Route your network traffic through multi-hop Tor onion circuits, Snowflake pluggable bridges, WireGuard tunnels, or custom SOCKS5/HTTP proxies with real-time IP rotation and latency monitoring.</p>
+              <a href="/docs/privacy/tor.html" class="card-doc-link">Tor & Proxy Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 10 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/qr_code_share.png" alt="QR Generator & Camera Scanner" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">QR Generator & Camera Scanner</h3>
+              <p class="story-mobile__desc">Generate high-resolution shareable QR codes for any web page or custom text block in milliseconds, or use your device camera to scan and decode physical QR codes instantly.</p>
+              <a href="/docs/tools/qr.html" class="card-doc-link">QR Suite Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 11 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/privacy_report.png" alt="Real-time Privacy Report" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Real-time Privacy Report</h3>
+              <p class="story-mobile__desc">Gain full transparency into your active session. Inspect live counters for blocked tracking domains, HTTPS security upgrades, cookie sandbox isolation, and saved network bandwidth per site.</p>
+              <a href="/docs/privacy/overview.html" class="card-doc-link">Privacy Shield Docs →</a>
+            </div>
+          </article>
+
+          <!-- Item 12 -->
+          <article class="story-mobile__card">
+            <div class="story-mobile__frame">
+              <div class="phone-frame">
+                <div class="phone-frame__speaker"></div>
+                <div class="phone-frame__camera"></div>
+                <div class="phone-screen">
+                  <img src="../omni/safe_locker.png" alt="Hardware Safe Locker" class="screen-real-img" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="story-mobile__content">
+              <h3 class="story-mobile__title">Hardware Safe Locker</h3>
+              <p class="story-mobile__desc">Store sensitive documents, private downloads, and research notes inside an AES-256 hardware-encrypted vault protected by Android biometric authentication (Fingerprint / Face Unlock).</p>
+              <a href="/docs/privacy/private-vault.html" class="card-doc-link">Safe Locker Docs →</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
