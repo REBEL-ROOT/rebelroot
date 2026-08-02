@@ -118,9 +118,9 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
         <span class="nav__stars" data-stars>—</span>
       </a>
-      <a class="btn btn--nav" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
-        <span>Download APK</span>
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v9.5M4 8.5l4 4 4-4"/></svg>
+      <a class="btn btn--nav" href="https://play.google.com/store/apps/details?id=com.rebelroot.omni" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M3.6 2.3A1.4 1.4 0 0 0 3 3.5v17a1.4 1.4 0 0 0 .6 1.2l.1.1 9.5-9.5v-.2L3.7 2.2l-.1.1zm12.3 8.3L13 7.7l-9.3 9.3 12.2-6.4zM17.4 11l-3 3 3 3 3.4-1.8c1-.5 1-1.4 0-1.9L17.4 11zM13 16.3l2.9 2.9-12.2-6.4L13 16.3z"/></svg>
+        <span>Google Play</span>
       </a>
       <button class="nav__toggle" aria-label="Toggle mobile menu" aria-expanded="false">
         <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -138,9 +138,14 @@
         <a class="nav__mobile-link" href="#features">🛡️ Capabilities</a>
         <a class="nav__mobile-link" href="#compare">📊 Benchmark</a>
         <a class="nav__mobile-link" href="#faq">❓ FAQ</a>
-        <div class="nav__mobile-cta">
-          <a class="btn btn--primary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
-            <span>Download APK for Android</span>
+        <div class="nav__mobile-cta" style="display:flex;flex-direction:column;gap:10px;">
+          <a class="btn btn--primary btn--hero" href="https://play.google.com/store/apps/details?id=com.rebelroot.omni" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3A1.4 1.4 0 0 0 3 3.5v17a1.4 1.4 0 0 0 .6 1.2l.1.1 9.5-9.5v-.2L3.7 2.2l-.1.1zm12.3 8.3L13 7.7l-9.3 9.3 12.2-6.4zM17.4 11l-3 3 3 3 3.4-1.8c1-.5 1-1.4 0-1.9L17.4 11zM13 16.3l2.9 2.9-12.2-6.4L13 16.3z"/></svg>
+            <span>Get on Google Play</span>
+          </a>
+          <a class="btn btn--secondary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            <span>Download APK</span>
           </a>
         </div>
       </div>
@@ -150,10 +155,10 @@
   <main id="main">
     <!-- Hero Section -->
     <section class="hero" aria-label="Hero">
-      <div class="hero__badge">
-        <span class="badge__pulse"></span>
+      <a class="hero__badge" href="https://play.google.com/store/apps/details?id=com.rebelroot.omni" target="_blank" rel="noopener" title="View Omni Browser on Google Play Store">
+        <img src="../ic_omni_logo.webp" alt="Omni Browser Aura Light App Icon" class="badge__app-icon">
         <span class="badge__text">OPEN SOURCE · GECKOVIEW 145 · GPLv3</span>
-      </div>
+      </a>
 
       <h1 class="hero__headline">
         Fast. Private. Built for <br><span class="hero__headline-glow">power users.</span>
@@ -164,13 +169,13 @@
       </p>
 
       <div class="hero__cta-group">
-        <a class="btn btn--primary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          <span>Download for Android</span>
+        <a class="btn btn--primary btn--hero" href="https://play.google.com/store/apps/details?id=com.rebelroot.omni" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3A1.4 1.4 0 0 0 3 3.5v17a1.4 1.4 0 0 0 .6 1.2l.1.1 9.5-9.5v-.2L3.7 2.2l-.1.1zm12.3 8.3L13 7.7l-9.3 9.3 12.2-6.4zM17.4 11l-3 3 3 3 3.4-1.8c1-.5 1-1.4 0-1.9L17.4 11zM13 16.3l2.9 2.9-12.2-6.4L13 16.3z"/></svg>
+          <span>Get it on Google Play</span>
         </a>
-        <a class="btn btn--secondary btn--hero" href="/docs/getting-started/introduction.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          <span>Explore Docs</span>
+        <a class="btn btn--secondary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span>Download APK</span>
         </a>
       </div>
 
@@ -1139,11 +1144,13 @@
           <h2 class="final-cta__title">The future of mobile browsing.<br><span class="text-glow">Private. Fast. Open.</span></h2>
           <p class="final-cta__sub">Take back control of your web experience with open-source GeckoView performance.</p>
           <div class="final-cta__actions">
-            <a class="btn btn--primary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
-              <span>Download Omni Browser</span>
+            <a class="btn btn--primary btn--hero" href="https://play.google.com/store/apps/details?id=com.rebelroot.omni" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3A1.4 1.4 0 0 0 3 3.5v17a1.4 1.4 0 0 0 .6 1.2l.1.1 9.5-9.5v-.2L3.7 2.2l-.1.1zm12.3 8.3L13 7.7l-9.3 9.3 12.2-6.4zM17.4 11l-3 3 3 3 3.4-1.8c1-.5 1-1.4 0-1.9L17.4 11zM13 16.3l2.9 2.9-12.2-6.4L13 16.3z"/></svg>
+              <span>Get it on Google Play</span>
             </a>
-            <a class="btn btn--secondary btn--hero" href="/docs/getting-started/introduction.html">
-              <span>Read Full Documentation</span>
+            <a class="btn btn--secondary btn--hero" href="https://github.com/REBEL-ROOT/omni-browser/releases" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <span>Download APK</span>
             </a>
           </div>
         </div>
