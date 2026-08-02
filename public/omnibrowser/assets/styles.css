@@ -198,6 +198,14 @@ button {
   border-color: var(--accent-red);
 }
 
+.nav__logo img,
+.nav__logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .nav__logo svg {
   width: 18px;
   height: 18px;
