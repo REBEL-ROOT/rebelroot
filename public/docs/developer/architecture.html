@@ -25,14 +25,18 @@
       <p class="lead">Omni is a single-module Android app built on <strong>MVVM with unidirectional data flow</strong>: Compose renders state, the <code>BrowserViewModel</code> owns and orchestrates it, and GeckoView does the actual browsing.</p>
 
       <h2>The layer map</h2>
-      <div class="arch">
-        <div class="arch__node"><div class="arch__node-icon">🎨</div><h4>Compose UI</h4><p>Stateless screens</p></div>
-        <div class="arch__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        <div class="arch__node"><div class="arch__node-icon">🧠</div><h4>BrowserViewModel</h4><p>State + orchestration</p></div>
-        <div class="arch__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        <div class="arch__node"><div class="arch__node-icon">🦎</div><h4>GeckoSession</h4><p>Web engine</p></div>
-        <div class="arch__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        <div class="arch__node"><div class="arch__node-icon">📡</div><h4>MediaInterceptor</h4><p>Stream detection</p></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Component</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>UI Layer</td><td>Compose UI</td><td>Stateless screen rendering & event dispatching</td></tr>
+            <tr><td>ViewModel Layer</td><td>BrowserViewModel</td><td>State orchestration & business logic</td></tr>
+            <tr><td>Engine Layer</td><td>GeckoSession</td><td>Mozilla GeckoView web rendering engine</td></tr>
+            <tr><td>Network / Media Layer</td><td>MediaInterceptor</td><td>Stream sniffing & network traffic inspection</td></tr>
+          </tbody>
+        </table>
       </div>
       <p>Data flows <strong>down</strong> as immutable state and <strong>up</strong> as events. Compose screens never mutate engine objects directly — they call intent methods on the ViewModel, which updates state, which recomposes the UI.</p>
 
@@ -114,8 +118,8 @@
 
       <h2>Go deeper</h2>
       <div class="card-grid">
-        <a class="card" href="code-structure.html"><span class="card__icon">🗂️</span><span class="card__title">Code structure <span class="arrow">→</span></span><span class="card__desc">A tour of the package tree.</span></a>
-        <a class="card" href="geckoview.html"><span class="card__icon">🦎</span><span class="card__title">GeckoView engine <span class="arrow">→</span></span><span class="card__desc">Runtime, sessions and interop.</span></a>
+        <a class="card" href="code-structure.html"><span class="card__icon">️</span><span class="card__title">Code structure <span class="arrow">→</span></span><span class="card__desc">A tour of the package tree.</span></a>
+        <a class="card" href="geckoview.html"><span class="card__title">GeckoView engine <span class="arrow">→</span></span><span class="card__desc">Runtime, sessions and interop.</span></a>
       </div>
     </article>
   </main>
