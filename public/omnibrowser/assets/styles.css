@@ -282,7 +282,6 @@ button {
 }
 
 .nav__mobile-drawer {
-  display: none;
   position: fixed;
   top: var(--nav-h);
   left: 0;
@@ -292,12 +291,15 @@ button {
   z-index: 999;
   padding: 32px 24px;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow-y: auto;
 }
 
 .nav__mobile-drawer.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
@@ -340,9 +342,7 @@ button {
   .nav__toggle {
     display: flex;
   }
-  .nav__mobile-drawer {
-    display: block;
-  }
+  /* drawer visibility controlled via .active class */
   .nav__mobile-drawer.active + .nav__actions .nav__toggle .icon-menu {
     display: none;
   }
