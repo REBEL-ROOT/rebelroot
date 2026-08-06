@@ -32,9 +32,6 @@ export default function PrivacyPolicyPage() {
             Since all of our codebases are open source under permissive licenses, you can inspect the compile scripts, review network call configurations, and verify these claims independently.
           </p>
 
-          <p>
-            If you have questions about our privacy practices or security audits, contact us at <strong>contact@rebelroot.org</strong>.
-          </p>
         </RichText>
       </PrivacyPolicyContainer>
     </Page>
