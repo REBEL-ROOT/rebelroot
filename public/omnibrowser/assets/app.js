@@ -69,17 +69,32 @@
   }
 
   /* ------------------------------------------------------------------------
-     3. Solid Nav on Scroll
+     3. Hide Nav on Scroll Down / Reveal on Scroll Up
      ------------------------------------------------------------------------ */
   try {
     var nav = document.querySelector('.nav');
+    var lastScrollY = window.scrollY;
+
     if (nav) {
       window.addEventListener('scroll', function () {
-        if (window.scrollY > 40) {
+        var currentScrollY = window.scrollY;
+        var navDrawer = document.querySelector('.nav__mobile-drawer');
+        var isDrawerOpen = navDrawer && navDrawer.classList.contains('active');
+
+        if (currentScrollY > 40) {
           nav.classList.add('solid');
         } else {
           nav.classList.remove('solid');
         }
+
+        // Hide when scrolling down past 80px, show when scrolling up or at top
+        if (!isDrawerOpen && currentScrollY > 80 && currentScrollY > lastScrollY) {
+          nav.classList.add('hidden');
+        } else {
+          nav.classList.remove('hidden');
+        }
+
+        lastScrollY = Math.max(0, currentScrollY);
       }, { passive: true });
     }
   } catch (e) {

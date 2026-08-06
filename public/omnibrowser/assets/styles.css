@@ -165,12 +165,18 @@ button {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
 }
 
 .nav.solid {
   background: rgba(5, 5, 5, 0.95);
   border-bottom-color: var(--border-strong);
+}
+
+.nav.hidden,
+.nav.nav--hidden {
+  transform: translateY(-100%);
 }
 
 .nav__brand {
