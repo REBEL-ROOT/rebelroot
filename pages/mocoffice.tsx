@@ -199,12 +199,13 @@ export default function MocOfficePage() {
 
               <FeatureCard>
                 <CardIcon>🔒</CardIcon>
-                <CardTitle>Security & Privacy</CardTitle>
+                <CardTitle>Security &amp; Privacy</CardTitle>
                 <CardList>
                   <li><strong>Lock / Unlock PDFs:</strong> Encrypt documents with passwords using iText + Bouncy Castle cryptographic providers.</li>
                   <li><strong>Remember Passwords:</strong> Encrypted DataStore securely saves passwords — auto-submitted on reopen.</li>
                   <li><strong>100% Offline:</strong> All tools run entirely on-device. No cloud upload, no network requests except optional update checks.</li>
-                  <li><strong>No Telemetry:</strong> Zero trackers, zero analytics, zero ads — GPL-3.0 licensed and fully auditable.</li>
+                  <li><strong>No Telemetry:</strong> Zero trackers, zero analytics, zero ads — fully auditable.</li>
+                  <li><a href="/mocoffice/privacy-policy" style={{ color: 'rgb(var(--primary))', textDecoration: 'underline', marginTop: '0.5rem', display: 'inline-block' }}>Privacy Policy &amp; Data Safety &rarr;</a></li>
                 </CardList>
               </FeatureCard>
 
