@@ -35,4 +35,12 @@ module.exports = withBundleAnalyzer({
 
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/app-ads.txt',
+        destination: '/api/app-ads',
+      },
+    ];
+  },
 });
