@@ -36,7 +36,7 @@ const FEATURES = [
   },
   {
     imageUrl: '/grid-icons/asset-6.svg',
-    title: 'MOC Office — In Development (Release: 18 August)',
+    title: 'MOC Office — In Development',
     description:
       'A modern, privacy-first PDF reader and editing suite for Android. 12 built-in tools including merge, split, compress, lock/unlock — 100% offline, zero trackers.',
     href: '/mocoffice',

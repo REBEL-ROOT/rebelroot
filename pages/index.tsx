@@ -251,7 +251,7 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>Full-text search, bookmarks, auto-scroll, and table of contents</li>
             </ul>
             <div style={{ display: 'inline-block', background: 'rgba(255,100,100,0.1)', border: '1px solid rgba(255,100,100,0.4)', borderRadius: '2rem', padding: '0.4rem 1.4rem', marginTop: '1.5rem', marginBottom: '0.5rem', fontSize: '1.3rem', fontWeight: 700, color: '#FF6464' }}>
-              🛠️ In Development — Release: 18 August
+              🛠️ In Development
             </div>
             <NextLink href="/mocoffice" passHref>
               <Button style={{ marginTop: '1.5rem' }}>
