@@ -104,9 +104,14 @@ export default function MocOfficePage() {
             <Title>Your Documents. Your Device. Your Rules.</Title>
 
             {/* Status Badge */}
-            <div style={{ display: 'inline-block', background: 'rgba(255,100,100,0.12)', border: '1px solid rgba(255,100,100,0.45)', borderRadius: '2rem', padding: '0.5rem 1.6rem', marginBottom: '2rem', fontSize: '1.4rem', fontWeight: 700, color: '#FF6464', letterSpacing: '0.04em' }}>
-              🛠️ In Development
-            </div>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.rebelroot.mocoffice&hl=en&pli=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'inline-block', background: 'rgba(76,175,80,0.12)', border: '1px solid rgba(76,175,80,0.45)', borderRadius: '2rem', padding: '0.5rem 1.6rem', marginBottom: '2rem', fontSize: '1.4rem', fontWeight: 700, color: '#4CAF50', letterSpacing: '0.04em', textDecoration: 'none' }}
+            >
+              🚀 Available on Google Play &rarr;
+            </a>
 
             {/* Tech Badges */}
             <BadgeContainer>
@@ -122,11 +127,14 @@ export default function MocOfficePage() {
             </Subtitle>
 
             <CTAWrapper>
-              <Button href="https://github.com/rebelroot/MocOffice" target="_blank" rel="noopener noreferrer">
-                View on GitHub <span>&rarr;</span>
+              <Button href="https://play.google.com/store/apps/details?id=com.rebelroot.mocoffice&hl=en&pli=1" target="_blank" rel="noopener noreferrer">
+                Get on Google Play <span>&rarr;</span>
               </Button>
               <Button href="https://github.com/rebelroot/MocOffice/releases" target="_blank" rel="noopener noreferrer" transparent>
                 Download APK <span>&rarr;</span>
+              </Button>
+              <Button href="https://github.com/rebelroot/MocOffice" target="_blank" rel="noopener noreferrer" transparent>
+                View on GitHub <span>&rarr;</span>
               </Button>
             </CTAWrapper>
           </IntroContent>
@@ -330,8 +338,11 @@ export default function MocOfficePage() {
               <h3>Get MOC Office Free</h3>
               <p>Open-source, offline-first, and built for people who care about their documents and their privacy.</p>
               <CTAWrapper>
-                <Button href="https://github.com/rebelroot/MocOffice/releases" target="_blank" rel="noopener noreferrer">
-                  Download Latest Release <span>&rarr;</span>
+                <Button href="https://play.google.com/store/apps/details?id=com.rebelroot.mocoffice&hl=en&pli=1" target="_blank" rel="noopener noreferrer">
+                  Get on Google Play <span>&rarr;</span>
+                </Button>
+                <Button href="https://github.com/rebelroot/MocOffice/releases" target="_blank" rel="noopener noreferrer" transparent>
+                  Download APK <span>&rarr;</span>
                 </Button>
                 <Button href="https://github.com/rebelroot/MocOffice" target="_blank" rel="noopener noreferrer" transparent>
                   Explore Source Code <span>&rarr;</span>

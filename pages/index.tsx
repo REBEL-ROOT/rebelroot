@@ -250,14 +250,19 @@ export default function Homepage({ posts }: InferGetStaticPropsType<typeof getSt
               <li>AMOLED black theme and Material You dynamic color support</li>
               <li>Full-text search, bookmarks, auto-scroll, and table of contents</li>
             </ul>
-            <div style={{ display: 'inline-block', background: 'rgba(255,100,100,0.1)', border: '1px solid rgba(255,100,100,0.4)', borderRadius: '2rem', padding: '0.4rem 1.4rem', marginTop: '1.5rem', marginBottom: '0.5rem', fontSize: '1.3rem', fontWeight: 700, color: '#FF6464' }}>
-              🛠️ In Development
+            <div style={{ display: 'inline-block', background: 'rgba(76,175,80,0.1)', border: '1px solid rgba(76,175,80,0.4)', borderRadius: '2rem', padding: '0.4rem 1.4rem', marginTop: '1.5rem', marginBottom: '0.5rem', fontSize: '1.3rem', fontWeight: 700, color: '#4CAF50' }}>
+              🚀 Available on Google Play
             </div>
-            <NextLink href="/mocoffice" passHref>
-              <Button style={{ marginTop: '1.5rem' }}>
-                Explore MOC Office <span>&rarr;</span>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+              <NextLink href="/mocoffice" passHref>
+                <Button>
+                  Explore MOC Office <span>&rarr;</span>
+                </Button>
+              </NextLink>
+              <Button href="https://play.google.com/store/apps/details?id=com.rebelroot.mocoffice&hl=en&pli=1" target="_blank" rel="noopener noreferrer" transparent>
+                Google Play <span>&rarr;</span>
               </Button>
-            </NextLink>
+            </div>
           </BasicSection>
           <BasicSection imageUrl="/grid-icons/asset-4.svg" title="RootLock: Hardware-Hardened Per-App Privacy Locker" overTitle="NATIVE SECURITY ENCLAVE" reversed>
             <p>
